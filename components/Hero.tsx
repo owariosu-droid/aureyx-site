@@ -206,9 +206,9 @@ export default function Hero() {
                   mt-5
                   text-center
                   text-white
-                  uppercase
                   tracking-[0.18em]
-                  text-sm
+                  text-xs
+                  break-words
                 "
               >
                 {album.title}
