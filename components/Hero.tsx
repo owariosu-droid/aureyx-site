@@ -19,7 +19,7 @@ const albums = [
   {
     title: "Ouroboros",
     image: "/ouroboros.png"
-    https://open.spotify.com/album/6W9618MAoMyOgYcWgx6glU
+    link: https://open.spotify.com/album/6W9618MAoMyOgYcWgx6glU
   },
   {
     title: "Oblivion",
