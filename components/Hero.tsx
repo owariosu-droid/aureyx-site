@@ -159,7 +159,7 @@ export default function Hero() {
           Releases
         </h2>
 
-        <div className="flex flex-wrap justify-center gap-10">
+        <div className="flex flex-wrap justify-center gap-16">
 
           {albums.map((album, index) => (
             <motion.a
