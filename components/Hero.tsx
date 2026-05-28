@@ -159,8 +159,7 @@ export default function Hero() {
           Releases
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-20 justify-items-center">
-          {albums.map((album, index) => (
+        <div className="grid grid-cols-4 gap-20 justify-items-center">          {albums.map((album, index) => (
             <motion.a
               key={index}
               href={album.link}
