@@ -13,18 +13,18 @@ import {
 const albums = [
   {
     title: "Devourer",
-    image: "/devourer.png"
-    link: "https://dystofuturemusic.bandcamp.com/album/devourer"
+    image: "/devourer.png",
+    link: "https://dystofuturemusic.bandcamp.com/album/devourer",
   },
   {
     title: "Ouroboros",
-    image: "/ouroboros.png"
-    link: https://open.spotify.com/album/6W9618MAoMyOgYcWgx6glU
+    image: "/ouroboros.png",
+    link: "https://open.spotify.com/album/6W9618MAoMyOgYcWgx6glU",
   },
   {
     title: "Oblivion",
-    image: "/oblivion.png"
-    link: "https://dystofuturemusic.bandcamp.com/album/oblivion"
+    image: "/oblivion.png",
+    link: "https://dystofuturemusic.bandcamp.com/album/oblivion",
   }
 ];
 
