@@ -159,8 +159,7 @@ export default function Hero() {
           Releases
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 justify-center">
-
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-20 justify-items-center">
           {albums.map((album, index) => (
             <motion.a
               key={index}
@@ -174,7 +173,7 @@ export default function Hero() {
               {/* Album Cover */}
               <div
                 className="
-                  w-[200px]
+                  w-[170px]
                   overflow-hidden
                   rounded-2xl
                   border border-white/10
@@ -189,8 +188,8 @@ export default function Hero() {
                 <Image
                   src={album.image}
                   alt={album.title}
-                  width={200}
-                  height={200}
+                  width={170}
+                  height={170}
                   className="
                     object-cover
                     transition-transform
@@ -206,7 +205,7 @@ export default function Hero() {
                   mt-5
                   text-center
                   text-white
-                  tracking-[0.18em]
+                  tracking-[0.08em]
                   text-xs
                   break-words
                 "
