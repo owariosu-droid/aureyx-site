@@ -180,7 +180,9 @@ export default function Hero() {
           {albums.map((album, index) => (
             <motion.a
               key={index}
-              href="#"
+              href={album.link}
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ y: -8 }}
               className="group"
             >
