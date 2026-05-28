@@ -26,6 +26,7 @@ const albums = [
     image: "/oblivion.png",
     link: "https://dystofuturemusic.bandcamp.com/album/oblivion",
   },
+  {
     title: "夢の結界 ~ Dream Barrier",
     image: "/dream-barrier.png",
     link: "https://dystofuturemusic.bandcamp.com/track/dream-barrier",
