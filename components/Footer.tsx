@@ -4,7 +4,7 @@ export default function Footer() {
         id="links"
         className="py-20 border-t border-white/10"
       >
-        <div className="flex justify-center gap-8 text-white/60">
+        <div className="flex justify-center gap-16 text-white/60">
           <a
             href="https://open.spotify.com/artist/1IwiBlGpQaMr8dV7u5LtjI"
             target="_blank"
