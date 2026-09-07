@@ -1,33 +1,28 @@
-// app/page.tsx
-
-import Hero from "@/components/Hero";
-import Archive from "@/components/Archive";
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import ExploreGrid from "@/components/ExploreGrid";
+import MemberGrid from "@/components/MemberGrid";
+import Releases from "@/components/Releases";
 import BackgroundEffects from "@/components/BackgroundEffects";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="scanlines relative overflow-hidden">
-
-      {/* Film grain */}
-      <div className="grain" />
-
-      {/* Ambient background */}
+    <>
       <BackgroundEffects />
-
-      {/* Navbar */}
       <Navbar />
 
-      {/* Main content */}
-      <Hero />
+      <main className="relative z-10">
+        <Hero />
 
-      {/* Archive */}
-      <Archive />
+        <ExploreGrid />
 
-      {/* Footer */}
+        <MemberGrid />
+
+        <Releases />
+      </main>
+
       <Footer />
-
-    </main>
+    </>
   );
 }

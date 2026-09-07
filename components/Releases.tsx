@@ -1,79 +1,223 @@
-import Image from "next/image";
+"use client";
 
-const releases = [
-  {
-    title: "Devourer",
-    image: "/devourer.png",
-    link: "https://open.spotify.com/artist/1IwiBlGpQaMr8dV7u5LtjI",
-  },
-  {
-    title: "Ouroboros",
-    image: "/ouroboros.png",
-    link: "https://dystofuturemusic.bandcamp.com/",
-  },
-  {
-    title: "Oblivion",
-    image: "/oblivion.png",
-    link: "https://linktr.ee/dystofuturemusic",
-  },
-];
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+
+import { albums } from "@/data/albums";
 
 export default function Releases() {
   return (
     <section
       id="releases"
-      className="relative z-10 px-6 py-32 max-w-5xl mx-auto"
+      className="
+        relative
+        z-10
+        max-w-7xl
+        mx-auto
+        px-6
+        py-32
+      "
     >
-      {/* Section heading */}
-      <div className="mb-20 text-center">
-        <p className="uppercase tracking-[0.4em] text-[#39ff14] text-sm mb-4">
-          Archive
+      {/* Heading */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+        className="mb-20"
+      >
+        <p
+          className="
+            text-xs
+            uppercase
+            tracking-[0.4em]
+            text-zinc-600
+            mb-5
+          "
+        >
+          Aureyx Archive
         </p>
 
-        <h2 className="text-5xl md:text-6xl font-black uppercase tracking-[0.15em]">
-          Releases
-        </h2>
+        <div
+          className="
+            flex
+            flex-col
+            md:flex-row
+            md:items-end
+            md:justify-between
+            gap-6
+          "
+        >
+          <h2
+            className="
+              text-4xl
+              md:text-6xl
+              font-black
+              tracking-tight
+              text-white
+            "
+          >
+            Releases
+          </h2>
 
-        <div className="w-32 h-[2px] bg-[#39ff14] mx-auto mt-6 shadow-[0_0_20px_#39ff14]" />
-      </div>
+          <p
+            className="
+              max-w-md
+              text-sm
+              leading-7
+              text-zinc-600
+            "
+          >
+            Music released through Aureyx and its connected artists.
+          </p>
+        </div>
+
+        <div className="mt-8 h-px w-full bg-white/10" />
+      </motion.div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 place-items-center">
-
-        {releases.map((release) => (
-          <a
-            key={release.title}
-            href={release.link}
+      <div
+        className="
+          grid
+          grid-cols-2
+          md:grid-cols-3
+          lg:grid-cols-4
+          gap-x-6
+          gap-y-14
+          md:gap-10
+        "
+      >
+        {albums.map((album, index) => (
+          <motion.a
+            key={album.title}
+            href={album.link}
             target="_blank"
-            className="group"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.6,
+              delay: Math.min(index * 0.06, 0.3),
+            }}
+            whileHover={{ y: -6 }}
+            className="group block"
           >
-            <div className="relative w-[240px] h-[240px] overflow-hidden rounded-2xl border border-zinc-800 bg-black/60 transition-all duration-500 hover:scale-105 hover:border-[#39ff14]/50 hover:shadow-[0_0_40px_rgba(57,255,20,0.25)]">
+            {/* Album artwork */}
+            <div
+              className="
+                relative
+                aspect-square
+                overflow-hidden
+                rounded-2xl
+                border
+                border-white/10
+                bg-zinc-900
+                transition-all
+                duration-500
 
-              {/* Cover */}
+                group-hover:border-white/25
+                group-hover:shadow-[0_20px_60px_rgba(255,255,255,0.06)]
+              "
+            >
               <Image
-                src={release.image}
-                alt={release.title}
+                src={album.image}
+                alt={album.title}
                 fill
-                className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                sizes="
+                  (max-width: 768px) 50vw,
+                  (max-width: 1024px) 33vw,
+                  25vw
+                "
+                className="
+                  object-cover
+                  transition-all
+                  duration-700
+                  group-hover:scale-105
+                "
               />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+              {/* dark overlay */}
+              <div
+                className="
+                  absolute
+                  inset-0
+                  bg-gradient-to-t
+                  from-black/80
+                  via-black/10
+                  to-transparent
+                  opacity-40
+                  transition-opacity
+                  duration-500
+                  group-hover:opacity-70
+                "
+              />
 
-              {/* Glow */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[#39ff14]/10 transition-opacity duration-500" />
+              {/* hover indicator */}
+              <div
+                className="
+                  absolute
+                  bottom-4
+                  left-4
+                  right-4
+                  flex
+                  items-center
+                  justify-between
+                  opacity-0
+                  translate-y-2
+                  transition-all
+                  duration-300
 
-              {/* Title */}
-              <div className="absolute bottom-0 left-0 p-5">
-                <h3 className="text-xl font-bold uppercase tracking-[0.18em] text-white">
-                  {release.title}
-                </h3>
+                  group-hover:opacity-100
+                  group-hover:translate-y-0
+                "
+              >
+                <span
+                  className="
+                    text-[10px]
+                    uppercase
+                    tracking-[0.25em]
+                    text-white/70
+                  "
+                >
+                  Open release
+                </span>
+
+                <ArrowUpRight className="w-4 h-4 text-white/70" />
               </div>
-
             </div>
-          </a>
-        ))}
 
+            {/* Release information */}
+            <div className="mt-5">
+              <h3
+                className="
+                  text-sm
+                  md:text-base
+                  text-zinc-300
+                  tracking-[0.06em]
+                  transition-colors
+                  duration-300
+                  group-hover:text-white
+                "
+              >
+                {album.title}
+              </h3>
+
+              <p
+                className="
+                  mt-2
+                  text-[10px]
+                  uppercase
+                  tracking-[0.25em]
+                  text-zinc-700
+                "
+              >
+                Aureyx
+              </p>
+            </div>
+          </motion.a>
+        ))}
       </div>
     </section>
   );
