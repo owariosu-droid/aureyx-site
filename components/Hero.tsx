@@ -34,8 +34,7 @@ const platforms = [
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden text-white">
-
+      <section className="hero-section relative min-h-screen overflow-hidden text-white">
       {/* HERO */}
       <div className="relative z-10 flex flex-col items-center justify-center px-6 pt-32 pb-20 text-center">
 

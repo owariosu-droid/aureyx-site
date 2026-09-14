@@ -30,14 +30,8 @@ export default async function ArtistPage({
       <Navbar />
 
       <main
-        className="
-          min-h-screen
-          max-w-6xl
-          mx-auto
-          px-6
-          py-28
-        "
-      >
+          className="artist-page">
+      
         <BackHome/>
         
         <div
@@ -62,7 +56,7 @@ export default async function ArtistPage({
             "
           >
             <Image
-              src={member.image}
+              src={member.profileImage || member.image}
               alt={member.name}
               fill
               priority

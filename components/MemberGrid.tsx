@@ -16,97 +16,72 @@ export default function MemberGrid({
 }: MemberGridProps) {
   return (
     <section
-      className="
-        max-w-7xl
-        mx-auto
-        px-6
-        py-24
-      "
+      style={{
+        maxWidth: "1280px",
+        margin: "0 auto",
+        padding: "80px 24px",
+        boxSizing: "border-box",
+      }}
     >
-      {/* Heading */}
       {showHeader && (
-        <div className="mb-16 text-center">
+        <div
+          style={{
+            marginBottom: "48px",
+            textAlign: "center",
+          }}
+        >
           <p
-            className="
-              text-xs
-              uppercase
-              tracking-[0.4em]
-              text-white/50
-              mb-4
-            "
+            className="text-white/50"
+            style={{
+              margin: "0 0 16px",
+              fontSize: "12px",
+              lineHeight: 1.6,
+              textTransform: "uppercase",
+              letterSpacing: "0.3em",
+            }}
           >
             Aureyx Collective
           </p>
 
           <h2
-            className="
-              text-4xl
-              md:text-5xl
-              font-black
-              text-white
-            "
+            className="text-white"
+            style={{
+              margin: 0,
+              fontSize: "clamp(32px, 5vw, 48px)",
+              fontWeight: 900,
+              lineHeight: 1.2,
+            }}
           >
             Collaborators
           </h2>
 
           <p
-            className="
-              max-w-xl
-              mx-auto
-              mt-5
-              text-sm
-              leading-7
-              text-white/60
-            "
+            className="text-white/60"
+            style={{
+              maxWidth: "560px",
+              margin: "20px auto 0",
+              fontSize: "14px",
+              lineHeight: 1.8,
+            }}
           >
             Artists and creatives contributing to the growing Aureyx
             collective.
           </p>
-
-          <Link
-            href="/artists"
-            className="
-              group
-              inline-flex
-              items-center
-              gap-2
-              mt-7
-              text-xs
-              uppercase
-              tracking-[0.2em]
-              text-white/60
-              no-underline
-              hover:text-white
-              transition-colors
-            "
-          >
-            View collective
-
-            <ArrowUpRight
-              className="
-                w-4
-                h-4
-                transition-transform
-                group-hover:translate-x-1
-                group-hover:-translate-y-1
-              "
-            />
-          </Link>
         </div>
       )}
 
       {/* Members */}
       <div
-        className="
-          grid
-          grid-cols-1
-          sm:grid-cols-2
-          lg:grid-cols-4
-          gap-7
-          max-w-6xl
-          mx-auto
-          justify-items-center
-        "
+        style={{
+          display: "grid",
+          gridTemplateColumns:
+            "repeat(auto-fit, minmax(min(100%, 230px), 1fr))",
+          gap: "48px",
+          maxWidth: "1100px",
+          margin: "0 auto",
+          justifyItems: "center",
+          alignItems: "start",
+        }}
       >
         {members.map((member, index) => (
           <motion.div
@@ -118,102 +93,111 @@ export default function MemberGrid({
               duration: 0.5,
               delay: index * 0.06,
             }}
-            className="
-              w-full
-              max-w-[230px]
-            "
+            style={{
+              width: "100%",
+              maxWidth: "230px",
+              minWidth: 0,
+            }}
           >
             <Link
               href={`/artists/${member.slug}`}
               className="
-                group
-                block
-                h-full
-                overflow-hidden
-                rounded-2xl
-                border
-                border-white/10
-                bg-white/[0.035]
-                text-white
-                no-underline
-                transition-all
-                duration-300
-                hover:border-white/25
+                group transition-colors duration-300
                 hover:bg-white/[0.065]
-                hover:-translate-y-1
               "
+              style={{
+                display: "block",
+                overflow: "hidden",
+                borderRadius: "16px",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                backgroundColor: "rgba(255, 255, 255, 0.035)",
+                color: "white",
+                textDecoration: "none",
+                boxSizing: "border-box",
+              }}
             >
               {/* Portrait */}
               <div
-                className="
-                  relative
-                  w-full
-                  h-[230px]
-                  overflow-hidden
-                  bg-zinc-800
-                "
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  aspectRatio: "1 / 1",
+                  overflow: "hidden",
+                  backgroundColor: "#27272a",
+                }}
               >
                 <Image
                   src={member.image}
                   alt={member.name}
                   fill
                   sizes="230px"
+                  style={{ objectFit: "cover" }}
                   className="
-                    object-cover
-                    grayscale
-                    transition-all
-                    duration-500
-                    group-hover:scale-105
-                    group-hover:grayscale-0
+                    grayscale transition-all duration-500
+                    group-hover:scale-105 group-hover:grayscale-0
                   "
                 />
 
                 <div
-                  className="
-                    absolute
-                    inset-0
-                    bg-gradient-to-t
-                    from-black/55
-                    via-transparent
-                    to-transparent
-                  "
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    pointerEvents: "none",
+                    background:
+                      "linear-gradient(to top, rgba(0,0,0,0.55), transparent 65%)",
+                  }}
                 />
               </div>
 
               {/* Info */}
-              <div className="p-5">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
+              <div style={{ padding: "24px 20px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    justifyContent: "space-between",
+                    gap: "12px",
+                  }}
+                >
+                  <div style={{ minWidth: 0 }}>
                     <h3
-                      className="
-                        text-lg
-                        font-semibold
-                        text-white
-                      "
+                      style={{
+                        margin: 0,
+                        fontSize: "18px",
+                        fontWeight: 600,
+                        lineHeight: 1.4,
+                        overflowWrap: "anywhere",
+                      }}
                     >
                       {member.name}
                     </h3>
 
                     <p
-                      className="
-                        mt-1
-                        text-[10px]
-                        uppercase
-                        tracking-[0.2em]
-                        text-white/55
-                      "
+                      style={{
+                        margin: "10px 0 0",
+                        fontSize: "10px",
+                        lineHeight: 1.8,
+                        letterSpacing: "0.15em",
+                        textTransform: "uppercase",
+                        color: "rgba(255, 255, 255, 0.55)",
+                      }}
                     >
                       {member.role}
                     </p>
                   </div>
 
                   <ArrowUpRight
+                    aria-hidden="true"
+                    style={{
+                      width: "16px",
+                      height: "16px",
+                      flexShrink: 0,
+                      marginTop: "4px",
+                      color: "rgba(255, 255, 255, 0.4)",
+                    }}
                     className="
-                      w-4
-                      h-4
-                      text-white/40
-                      transition-all
-                      group-hover:text-white
+                      transition-transform
                       group-hover:translate-x-1
                       group-hover:-translate-y-1
                     "
@@ -221,13 +205,13 @@ export default function MemberGrid({
                 </div>
 
                 <p
-                  className="
-                    mt-4
-                    text-sm
-                    leading-6
-                    text-white/70
-                    line-clamp-4
-                  "
+                  style={{
+                    margin: "20px 0 0",
+                    fontSize: "14px",
+                    lineHeight: 1.75,
+                    overflowWrap: "anywhere",
+                    color: "rgba(255, 255, 255, 0.7)",
+                  }}
                 >
                   {member.description}
                 </p>

@@ -1,157 +1,42 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
 
 const links = [
-  {
-    name: "Home",
-    href: "/",
-  },
-  {
-    name: "Artists",
-    href: "/artists",
-  },
-  {
-    name: "osu!",
-    href: "/gaming/osu",
-  },
-  {
-    name: "Releases",
-    href: "/#releases",
-  },
+  { name: "Artists", href: "/artists" },
+  { name: "osu!", href: "/gaming/osu" },
+  { name: "Releases", href: "/#releases" },
 ];
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
-
   return (
     <nav
-      className="
-        sticky
-        top-0
-        z-50
-        w-full
-        border-b
-        border-white/10
-        bg-[#242424]/90
-        backdrop-blur-xl
-      "
+      aria-label="Main navigation"
+      className="aureyx-nav sticky top-0 z-50 w-full border-b border-white/10 bg-[#242424]/90 backdrop-blur-xl"
     >
-      <div
-        className="
-          max-w-7xl
-          mx-auto
-          flex
-          items-center
-          justify-between
-          px-6
-          md:px-8
-          py-5
-        "
-      >
-        {/* Logo - always returns home */}
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 pt-5 pb-7 sm:px-6 md:px-8">
         <Link
           href="/"
-          className="
-            text-xl
-            md:text-2xl
-            font-black
-            tracking-[0.3em]
-            text-white
-            no-underline
-            transition-colors
-            hover:text-white/70
-          "
+          aria-label="Aureyx home"
+          className="shrink-0 text-base font-black tracking-[0.2em] text-white no-underline transition-colors hover:text-white/70 md:text-2xl"
         >
           AUREYX
         </Link>
 
-        {/* Desktop menu */}
-        <div
-          className="
-            hidden
-            md:flex
-            items-center
-            gap-10
-            text-xs
-            uppercase
-            tracking-[0.18em]
-          "
+        <ul
+          style={{ columnGap: "48px" }}
+          className="m-0 ml-auto flex list-none flex-wrap items-center justify-end gap-y-3 p-0 text-xs uppercase tracking-[0.15em]"
         >
           {links.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="
-                text-white/60
-                no-underline
-                transition-colors
-                duration-300
-                hover:text-white
-              "
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
-
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="
-            md:hidden
-            flex
-            items-center
-            justify-center
-            text-white/70
-            hover:text-white
-          "
-          aria-label="Toggle navigation"
-        >
-          {open ? (
-            <X className="w-6 h-6" />
-          ) : (
-            <Menu className="w-6 h-6" />
-          )}
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {open && (
-        <div
-          className="
-            md:hidden
-            border-t
-            border-white/10
-            bg-[#242424]
-            px-6
-            py-6
-          "
-        >
-          <div className="flex flex-col gap-6">
-            {links.map((link) => (
+            <li key={link.href}>
               <Link
-                key={link.name}
                 href={link.href}
-                onClick={() => setOpen(false)}
-                className="
-                  text-sm
-                  uppercase
-                  tracking-[0.18em]
-                  text-white/65
-                  no-underline
-                  hover:text-white
-                  transition-colors
-                "
+                className="inline-block py-2 text-white/60 no-underline transition-colors hover:text-white"
               >
                 {link.name}
               </Link>
-            ))}
-          </div>
-        </div>
-      )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </nav>
   );
 }

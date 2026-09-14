@@ -47,14 +47,8 @@ const sections = [
 
 export default function ExploreGrid() {
   return (
-    <section
-      className="
-        max-w-6xl
-        mx-auto
-        px-6
-        py-28
-      "
-    >
+  <section className="explore-section">
+    
       {/* Centered heading */}
       <div className="text-center mb-16">
         <p

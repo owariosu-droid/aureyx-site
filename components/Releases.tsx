@@ -26,6 +26,7 @@ export default function Releases() {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
         className="mb-20"
+        style={{ textAlign: "center" }}
       >
         <p
           className="
@@ -59,6 +60,7 @@ export default function Releases() {
             "
           >
             Releases
+
           </h2>
 
           <p
@@ -77,16 +79,13 @@ export default function Releases() {
       </motion.div>
 
       {/* Grid */}
-      <div
-        className="
-          grid
-          grid-cols-2
-          md:grid-cols-3
-          lg:grid-cols-4
-          gap-x-6
-          gap-y-14
-          md:gap-10
-        "
+        <div
+          style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(0, 260px))",
+          justifyContent: "center",
+          gap: "48px 32px",
+        }}
       >
         {albums.map((album, index) => (
           <motion.a
@@ -102,6 +101,12 @@ export default function Releases() {
               delay: Math.min(index * 0.06, 0.3),
             }}
             whileHover={{ y: -6 }}
+            style={{
+            display: "block",
+            width: "100%",
+            maxWidth: "260px",
+            minWidth: 0,
+            }}
             className="group block"
           >
             {/* Album artwork */}

@@ -1,36 +1,45 @@
 export default function Footer() {
     return (
-      <footer
-        id="links"
-        className="py-20 border-t border-white/10"
+        <footer
+          id="links"
+          style={{ marginTop: "48px", padding: "32px 24px" }}
+          className="border-t border-white/10"
       >
-        <div className="flex justify-center gap-16 text-white/60">
+        <div
+          style={{
+          display: "flex",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          gap: "24px 48px",
+      }}
+          className="text-white/60"
+>
           <a
             href="https://open.spotify.com/artist/1IwiBlGpQaMr8dV7u5LtjI"
             target="_blank"
           >
-            spotify
+            Spotify
           </a>
   
           <a
             href="https://dystofuturemusic.bandcamp.com/"
             target="_blank"
           >
-            bandcamp
+            Bandcamp
           </a>
   
           <a
             href="https://linktr.ee/dystofuturemusic"
             target="_blank"
           >
-            linktree
+            Linktree
           </a>
   
           <a
             href="https://www.youtube.com/watch?v=AcfS40ARYEc"
             target="_blank"
           >
-            youtube
+            Youtube
           </a>
         </div>
   
