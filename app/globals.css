@@ -529,3 +529,96 @@ a:active {
     padding: 28px 20px;
   }
 }
+
+/* osu! page theme — approximate colors from your screenshot */
+.osu-theme {
+  --osu-accent: #6664ff;
+  --osu-accent-soft: #b9b8ef;
+  --osu-border: #48485c;
+
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  background: #17171c;
+  color: #f4f4fa;
+}
+
+/* Indigo navigation */
+.osu-theme .aureyx-nav {
+  background: #403eaa;
+  border-bottom-color: #6461da;
+}
+
+/* Profile header */
+.osu-theme main > header {
+  background: #393945;
+  border-color: var(--osu-border);
+}
+
+/* Main content panels */
+.osu-theme main section {
+  background: #24242e;
+  border-color: var(--osu-border);
+}
+
+/* Mapping cards */
+.osu-theme main article {
+  background: #30303c;
+  border-color: var(--osu-border);
+}
+
+.osu-theme main article:hover {
+  border-color: var(--osu-accent);
+}
+
+/* Equipment, goals, mapping details, and buttons */
+.osu-theme main .rounded-xl,
+.osu-theme main .rounded-2xl:not(img) {
+  border-color: var(--osu-border);
+}
+
+/* Equipment and goals */
+.osu-theme main dl > div,
+.osu-theme main ul > li {
+  background: #30303c;
+}
+
+/* Difficulty information inside mapping cards */
+.osu-theme main article > div:last-child > div {
+  background: #252530;
+}
+
+/* Replace the mapping section's pink accents */
+.osu-theme main [class*="text-pink-"] {
+  color: var(--osu-accent-soft);
+}
+
+.osu-theme main [class*="bg-pink-"] {
+  background-color: rgb(102 100 255 / 10%);
+}
+
+.osu-theme main [class*="border-pink-"] {
+  border-color: rgb(102 100 255 / 25%);
+}
+
+/* Heading accents */
+.osu-theme main h2 {
+  color: #d3d2ff;
+}
+
+/* Buttons and links */
+.osu-theme main a:hover {
+  border-color: var(--osu-accent);
+}
+
+.osu-theme a:focus-visible {
+  outline: 2px solid var(--osu-accent-soft);
+  outline-offset: 4px;
+}
+
+/* Footer */
+.osu-theme footer {
+  position: relative;
+  background: #1c1c24;
+  border-top-color: var(--osu-border);
+}

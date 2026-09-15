@@ -124,8 +124,9 @@ export default function Hero() {
             leading-relaxed
           "
         >
-          fragmented transmissions from forgotten timelines
-        </motion.p>
+          Aureyx is an electronic music label for growing artists.        
+          
+          </motion.p>
 
         {/* tiny identifier */}
         <motion.p
