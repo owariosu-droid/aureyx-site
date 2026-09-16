@@ -10,6 +10,7 @@ export const members = [
       spotify: "https://open.spotify.com/artist/1rrhBuwyg1lxQpoQDqDUr0",
       youtube: "https://www.youtube.com/@lyrlvst",
       soundcloud: "https://soundcloud.com/user-738144184",
+      linktree: "https://linktr.ee/lyrlvst",
     },
   },
 
