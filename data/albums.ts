@@ -1,21 +1,21 @@
 export const albums = [
     {
-      title: "Devourer",
+      title: "GRiMVEX - Devourer",
       image: "/devourer.png",
       link: "https://dystofuturemusic.bandcamp.com/album/devourer",
     },
     {
-      title: "Ouroboros",
+      title: "iyune - Ouroboros",
       image: "/ouroboros.png",
       link: "https://open.spotify.com/album/6W9618MAoMyOgYcWgx6glU",
     },
     {
-      title: "Oblivion",
+      title: "iyune - Oblivion",
       image: "/oblivion.png",
       link: "https://dystofuturemusic.bandcamp.com/album/oblivion",
     },
     {
-      title: "夢の結界 ~ Dream Barrier",
+      title: "lyrlvst - 夢の結界 ~ Dream Barrier",
       image: "/dream-barrier.png",
       link: "https://dystofuturemusic.bandcamp.com/track/dream-barrier",
     },
