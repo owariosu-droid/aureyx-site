@@ -38,7 +38,7 @@ const projects = [
   {
     title: "Cynthoni of Flames",
     difficulty: "Watch my Skin Erupt in a Cynthoni of Flames",
-    description: "Cynthoni · 6.66 star single diff",
+    description: "Cynthoni · 6.92 star single diff",
     href: "https://osu.ppy.sh/beatmapsets/2575406#osu/5735879",
   },
   {
@@ -50,8 +50,13 @@ const projects = [
   {
     title: "Augoeides",
     difficulty: "Fantasia",
-    description: "Fixing it up rn.",
+    description: "Currently fixing it up rn.",
     href: "https://osu.ppy.sh/beatmapsets/2521751#osu/5567029",
+  },
+  { 
+    title: "Death of the Endless",
+    difficulty: "Impossible · hell · Extreme · Extra · Insane · Hard · Normal · Easy",
+    description: "A song that I've wanted to map for a very long time. Because of the drain time I want to make it a full set."
   },
 ];
 
@@ -141,8 +146,8 @@ export default function OsuPage() {
           </h1>
 
           <p className="mx-auto mt-5 max-w-lg text-sm leading-7 text-white/65">
-            Maps I love, scores I&apos;m working toward, and things
-            I&apos;m creating along the way.
+            This page is for my osu projects and goals. I want to get better at mapping so the only way
+            to improve is to keep mapping.
           </p>
 
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
@@ -241,12 +246,11 @@ export default function OsuPage() {
             <figure>
               <figcaption className="mx-auto max-w-2xl text-center">
                 <h3 className="text-lg font-semibold text-white">
-                  Sev-26 Practice diff — Full map
+                  Sev-26 Ranked play | Full map + Hidden
                 </h3>
 
                 <p className="mt-3 text-sm leading-7 text-white/65">
-                  The name is inaccurate. Highest acc I ever gotten
-                  on this map.
+                  Highest acc I have ever gotten on this map, and with hidden too.
                 </p>
               </figcaption>
 

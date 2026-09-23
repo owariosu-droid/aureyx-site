@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "AUREYX",
-  description: "fragmented transmissions from forgotten timelines",
+  description: "Music label that features a bunch of small aspiring artists and producers",
 };
 
 export default function RootLayout({
