@@ -26,7 +26,7 @@ const projects: MappingProject[] = [
     artist: "Cynthoni",
     difficulty: "Watch my Skin Erupt in a Cynthoni of Flames",
     status: "Started",
-    details: "6.66★ · Single difficulty",
+    details: "6.92★ · Single difficulty",
     description:
       "A single-difficulty mapping project for Cynthoni of Flames.",
     image: "/osu/cynthoni-art.jpg",
@@ -39,7 +39,7 @@ const projects: MappingProject[] = [
     status: "Started",
     details: "Low 8★ + high 5★ · Two difficulties",
     description:
-      "Two difficulties exploring the same song at different intensity levels.",
+      "Very cool song that I want to finish mapping.",
     image: "/osu/cynthoni-art.jpg",
     href: "https://osu.ppy.sh/beatmapsets/2611691#osu/5850023",
   },
@@ -47,8 +47,8 @@ const projects: MappingProject[] = [
     title: "Augoeides",
     difficulty: "Fantasia",
     status: "Revising",
-    details: "Existing difficulty · Revisions",
-    description: "Fixing up the existing map.",
+    details: "8.61★ | Existing difficulty · Revisions",
+    description: "Fixed up some parts, other parts need to be updated eventually.",
     image: "/osu/augoeides.jpg",
     imagePosition: "35% 50%",
     href: "https://osu.ppy.sh/beatmapsets/2521751#osu/5567029",
@@ -69,7 +69,7 @@ const projects: MappingProject[] = [
     status: "Started",
     details: "Target: mid-to-high 7★ · Single difficulty",
     description:
-      "Probably want this to be a mid-to-high seven-star single difficulty.",
+      "Very heavy alt and aim intensive map.",
     image: "/osu/dork-after-dark.png",
     imagePosition: "50% 50%",
   },
