@@ -13,7 +13,7 @@ export const artists: Artist[] = [
     name: "Lyrlvst",
     role: "Artist · Producer",
     bio: "Music and projects from Lyrlvst. More about this artist coming soon.",
-    image: "/lyrlvst.png",
+    image: "/members/lyrlvst.png",
     links: [{ label: "YouTube", href: "https://www.youtube.com/@lyrlvst" }],
   },
   {
