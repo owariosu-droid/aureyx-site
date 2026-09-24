@@ -84,6 +84,17 @@ const projects: MappingProject[] = [
        image: "/osu/mousou-happy-end.jpg",
        imagePosition: "50% 50%",
   },
+  {
+    title: "iliveinagony",
+    artist: "Lyrlvst",
+    difficulty: "Undecided",
+    status: "Idea",
+    details: "Mid 6 star forecasted, not too hard, it is 10 mins long so bc of drain time, it'll be a single diff.",
+    description: 
+     "Aiming for mid 6 star. It will be the first song that I map that is of my songs.",
+     image: "/osu/iliveinagony.jpg",
+     imagePosition: "50% 50%",
+  }
 ];
 
 function MappingCard({ project }: { project: MappingProject }) {

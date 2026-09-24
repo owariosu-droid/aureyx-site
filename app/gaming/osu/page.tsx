@@ -58,6 +58,11 @@ const projects = [
     difficulty: "Impossible · hell · Extreme · Extra · Insane · Hard · Normal · Easy",
     description: "A song that I've wanted to map for a very long time. Because of the drain time I want to make it a full set."
   },
+  { 
+    title: "iliveinagony",
+    difficulty: "silencethenoise",
+    description: "One of the first maps that I will be mapping from the Aureyx collective."
+  },
 ];
 
 function Card({
