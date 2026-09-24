@@ -56,7 +56,7 @@ const projects: MappingProject[] = [
   {
     title: "Death of the Endless",
     difficulty: "Impossible · hell · Extreme · Extra · Insane · Hard · Normal · Easy",
-    status: "Not submitted, but I am working on it.",
+    status: "Started",
     details: "Low 10★ to high 1★ set",
     description: "Working on it (probably around 24% done).",
     image: "/osu/deathoftheendless.png",
@@ -66,7 +66,7 @@ const projects: MappingProject[] = [
     title: "Dork After Dark",
     artist: "Cynthoni",
     difficulty: "kizuki's Unbridled Despair",
-    status: "Not submitted, but I am working on it.",
+    status: "Started",
     details: "Target: mid-to-high 7★ · Single difficulty",
     description:
       "Probably want this to be a mid-to-high seven-star single difficulty.",
@@ -177,7 +177,7 @@ function MappingCard({ project }: { project: MappingProject }) {
         ) : (
           <p className="mt-auto flex items-center gap-2 text-xs text-white/45">
             <Lightbulb aria-hidden="true" className="h-4 w-4" />
-            Still an idea
+            {project.status === "Idea" ? "Still an idea" : "Not submitted yet"}          
           </p>
         )}
       </div>
