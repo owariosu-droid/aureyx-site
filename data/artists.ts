@@ -21,7 +21,7 @@ export const artists: Artist[] = [
     name: "iyune",
     role: "Artist",
     bio: "Music and projects from iyune. More about this artist coming soon.",
-    image: "/iyune.png",
+    image: "/members/iyune.png",
   },
   {
     slug: "dysto",
