@@ -1,4 +1,4 @@
-export type Artist = {
+export const Artist = {
   slug: string;
   name: string;
   role: string;
