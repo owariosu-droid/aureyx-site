@@ -1,174 +1,88 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ExternalLink } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackgroundEffects from "@/components/BackgroundEffects";
-import BackHome from "@/components/BackHome";
+import { artists } from "@/data/artists";
 
-import { members } from "@/data/members";
+export function generateStaticParams() {
+  return artists.map((artist) => ({ slug: artist.slug }));
+}
 
-export default async function ArtistPage({
+export default async function ArtistProfilePage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const artist = artists.find((item) => item.slug === slug);
 
-  const member = members.find(
-    (member) => member.slug === slug
-  );
-
-  if (!member) {
-    notFound();
-  }
+  if (!artist) notFound();
 
   return (
-    <>
+    <div className="relative min-h-screen">
       <BackgroundEffects />
       <Navbar />
 
-      <main
-          className="artist-page">
-      
-        <BackHome/>
-        
-        <div
-          className="
-            grid
-            md:grid-cols-[380px_1fr]
-            gap-12
-            md:gap-20
-            items-start
-          "
+      <main className="relative z-10 mx-auto min-h-screen max-w-5xl px-6 py-16 sm:py-24">
+        <Link
+          href="/artists"
+          className="text-sm text-white/60 transition hover:text-white"
         >
-          {/* Portrait */}
-          <div
-            className="
-              relative
-              aspect-square
-              overflow-hidden
-              rounded-3xl
-              border
-              border-white/10
-              bg-zinc-900
-            "
-          >
-            <Image
-              src={member.profileImage || member.image}
-              alt={member.name}
-              fill
-              priority
-              className="object-cover"
-            />
-          </div>
+          ← All artists
+        </Link>
 
-          {/* Information */}
-          <div>
-            <p
-              className="
-                text-xs
-                uppercase
-                tracking-[0.35em]
-                text-zinc-600
-              "
-            >
-              {member.role}
-            </p>
-
-            <h1
-              className="
-                mt-5
-                text-5xl
-                md:text-7xl
-                font-black
-              "
-            >
-              {member.name}
-            </h1>
-
-            <div
-              className="
-                w-20
-                h-px
-                bg-zinc-700
-                mt-8
-              "
-            />
-
-            <p
-              className="
-                mt-8
-                text-zinc-400
-                leading-8
-                max-w-xl
-              "
-            >
-              {member.description}
-            </p>
-
-            {/* Links */}
-            <div className="flex flex-wrap gap-3 mt-10">
-
-              {member.links.spotify && (
-                <a
-                  href={member.links.spotify}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    inline-flex
-                    items-center
-                    gap-2
-                    border
-                    border-white/10
-                    rounded-xl
-                    px-5
-                    py-3
-                    text-sm
-                    text-zinc-400
-                    hover:text-white
-                    hover:bg-white/[0.05]
-                    transition-all
-                  "
-                >
-                  Spotify
-                  <ExternalLink className="w-3 h-3" />
-                </a>
+        <article className="mt-8 overflow-hidden rounded-3xl border border-white/10 bg-[#292929]">
+          <div className="grid md:grid-cols-2">
+            <div className="relative aspect-square bg-gradient-to-br from-purple-950 via-[#35303d] to-[#202020]">
+              {artist.image ? (
+                <Image
+                  src={artist.image}
+                  alt={`${artist.name} artwork`}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              ) : (
+                <span className="absolute inset-0 flex items-center justify-center text-9xl font-black text-white/15">
+                  {artist.name.charAt(0)}
+                </span>
               )}
+            </div>
 
-              {member.links.youtube && (
-                <a
-                  href={member.links.youtube}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    inline-flex
-                    items-center
-                    gap-2
-                    border
-                    border-white/10
-                    rounded-xl
-                    px-5
-                    py-3
-                    text-sm
-                    text-zinc-400
-                    hover:text-white
-                    hover:bg-white/[0.05]
-                    transition-all
-                  "
-                >
-                  YouTube
-                  <ExternalLink className="w-3 h-3" />
-                </a>
+            <div className="flex flex-col justify-center p-8 sm:p-12">
+              <p className="text-xs uppercase tracking-[0.25em] text-white/50">
+                {artist.role}
+              </p>
+              <h1 className="mt-4 text-5xl font-bold text-white">
+                {artist.name}
+              </h1>
+              <p className="mt-6 leading-8 text-white/70">{artist.bio}</p>
+
+              {artist.links && artist.links.length > 0 && (
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {artist.links.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-xl border border-white/20 px-5 py-3 text-sm text-white transition hover:bg-white/10"
+                    >
+                      {link.label} ↗
+                    </a>
+                  ))}
+                </div>
               )}
-
             </div>
           </div>
-        </div>
+        </article>
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 }
