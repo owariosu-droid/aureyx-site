@@ -1,4 +1,4 @@
-export const Artist = {
+export type Artist = {
   slug: string;
   name: string;
   role: string;
@@ -22,12 +22,16 @@ export const artists: Artist[] = [
     role: "Artist",
     bio: "Music and projects from iyune. More about this artist coming soon.",
     image: "/members/iyune.png",
+    links: [{ label: "YouTube", href: "https://www.youtube.com/@iyuneofficial" }],
+
   },
   {
     slug: "dysto",
     name: "Dysto",
     role: "Artist · Producer",
     bio: "Cyberpunk-inspired music and collaborations with Aureyx.",
+    image: "/members/dysto.png",
+
   },
   {
     slug: "yoru-zenaku",

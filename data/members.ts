@@ -35,7 +35,7 @@ export const members = [
     role: "Artist / Producer",
     description:
       "iyune is an electronic artist currently making music under the rhythm game and gothic genre.",
-    image: "/members/iyune-v2.png",
+    image: "/members/iyune.png",
     links: {
       spotify: "",
       youtube: "",
