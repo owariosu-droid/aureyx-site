@@ -1,5 +1,5 @@
 .osu-theme { min-height: 100vh; position: relative; isolation: isolate; background: #09090b; }
-.osu-page-art { position: fixed; z-index: -2; inset: 0; background-image: linear-gradient(180deg,rgba(8,8,11,.38),rgba(8,8,11,.8) 40%,#09090b 94%),linear-gradient(90deg,rgba(8,8,11,.86),rgba(8,8,11,.22) 55%,rgba(8,8,11,.72)),url('/osu/in-game-background-ariisha.png'); background-size: cover; background-position: center top; }
+.osu-page-art { position: fixed; z-index: -2; inset: 0; background-image: linear-gradient(180deg,rgba(8,8,11,.18),rgba(8,8,11,.62) 48%,#09090bd9 100%),linear-gradient(90deg,rgba(8,8,11,.66),rgba(8,8,11,.08) 55%,rgba(8,8,11,.54)),url('/osu/in-game-background-ariisha.png'); background-size: cover; background-position: center top; filter: brightness(1.16) saturate(1.08); }
 .osu-page-art::after { content: ''; position: absolute; inset: 0; opacity: .11; background-image: repeating-linear-gradient(0deg,transparent 0 3px,#fff 4px); mix-blend-mode: overlay; pointer-events: none; }
 .osu-theme main { padding-top: 48px; }
 .osu-header { position: relative; overflow: hidden; border: 1px solid #ffffff22; margin-bottom: 40px; padding: 35px 36px 0; background: linear-gradient(120deg,#0b0b0ee8,#121014d4 68%,#7d193032); box-shadow: 0 35px 90px #0009; backdrop-filter: blur(13px); }
@@ -7,10 +7,16 @@
 .osu-profile-row h1 { font-size: clamp(64px,9vw,110px); line-height: 1; font-weight: 800; letter-spacing: -.07em; }
 .osu-profile-row p { color: #b9aaa7; margin-top: 16px; font-size: 14px; }
 .osu-avatar { border: 1px solid #ff292f55; object-fit: cover; box-shadow: 0 10px 40px #ff292f15; }
-.osu-badge { margin-left: auto; filter: grayscale(1); opacity: .65; }
+.osu-badge { margin-left: auto; filter: brightness(0) saturate(100%) invert(48%) sepia(93%) saturate(1877%) hue-rotate(309deg) brightness(105%) contrast(101%) drop-shadow(0 0 14px #ff5b9388); opacity: .92; }
 .osu-profile-links { display: flex; align-items: center; flex-wrap: wrap; gap: 25px; margin-bottom: 40px; }
 .osu-profile-links > span { font-size: 12px; color: #ae9f9c; }
 .osu-profile-links strong { margin-left: 12px; font-weight: 400; color: #eee; }
+.osu-mod-key { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: -18px 0 24px; }
+.osu-mod-key > span:first-child { margin-right: 4px; color: #8f8588; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; }
+.osu-mod { display: inline-flex; align-items: center; gap: 5px; color: #cfc7c9; font-size: 10px; }
+.osu-mod img { width: 30px; height: 29px; object-fit: contain; filter: drop-shadow(0 3px 7px #0009); }
+.osu-mod.is-compact { display: inline-flex; vertical-align: middle; margin: -7px 0 -6px 2px; }
+.osu-mod.is-compact img { width: 28px; height: 27px; }
 .osu-overview { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1px; margin: 0 0 26px; background: #ffffff1c; border: 1px solid #ffffff1c; }
 .osu-overview a { display: flex; align-items: center; gap: 14px; min-width: 0; padding: 17px 18px; background: #0c0c0fbd; transition: background .2s,color .2s; }
 .osu-overview a:hover { background: #ff4b6921; }
@@ -48,6 +54,8 @@
 .osu-goal { position: relative; transition: border-color .2s,background .2s,transform .2s; }
 .osu-goal:hover { border-color: #ff5f7c70; background: #ff3b5d0d; transform: translateX(3px); }
 .osu-goal > svg { width: 17px; height: 17px; margin-top: 5px; color: #ff6b86; flex: none; }
+.osu-goal-copy { min-width: 0; flex: 1; }
+.osu-goal-mods { display: flex; gap: 1px; margin-top: 7px; }
 .osu-art-credit { margin: 28px 0 0; color: #ffffff57; text-align: right; font-size: 10px; letter-spacing: .08em; }
 .osu-art-credit a { color: #ffffff9c; }
 @media(max-width:700px) { .osu-theme main { padding: 25px 20px 50px; } .osu-header { padding: 28px 20px 0; } .osu-profile-row { gap: 20px; } .osu-avatar { width: 76px; height: 76px; } .osu-badge { display: none; } .osu-overview { grid-template-columns: 1fr; } .osu-theme .osu-panel { padding: 22px 18px; } .osu-sections { gap: 20px; } .osu-sections a { font-size: 11px; } .osu-section-heading { align-items: start; flex-direction: column; gap: 10px; } .osu-filters { width: 100%; } }

@@ -19,14 +19,16 @@ const profileUrl = "https://osu.ppy.sh/users/37255712";
 */
 const highlightImage: string | null = "/osu/sev26-practice.jpg";
 
-const goals = [
-  "Mr. Kill Myself (Darkness) — HDHR FC",
-  "Higher's High (Counterattack) — FC",
-  "Hades the Rise (Hardest) — HDHR FC",
-  "L'erisia (Roll_Pan's Special) — HDHR FC",
-  "Cyberia Lyr3 (present day present time hahaha) — FC (This would be so firetrucking cool)",
-  "Seclusion (Isolation) — FC",
-  "Shadow Corps (Undead Empress of a Fairy Empire) — HD FC (This is probably the only endgame score that I want genuinely)",
+type OsuMod = "HD" | "HR" | "DT";
+
+const goals: { text: string; mods?: OsuMod[] }[] = [
+  { text: "Mr. Kill Myself (Darkness) — FC", mods: ["HD", "HR"] },
+  { text: "Higher's High (Counterattack) — FC" },
+  { text: "Hades the Rise (Hardest) — FC", mods: ["HD", "HR"] },
+  { text: "L'erisia (Roll_Pan's Special) — FC", mods: ["HD", "HR"] },
+  { text: "Cyberia Lyr3 (present day present time hahaha) — FC (This would be so firetrucking cool)" },
+  { text: "Seclusion (Isolation) — FC" },
+  { text: "Shadow Corps (Undead Empress of a Fairy Empire) — FC (This is probably the only endgame score that I want genuinely)", mods: ["HD"] },
 ];
 
 const equipment = [
@@ -40,6 +42,21 @@ const overview = [
   { label: "Goals", value: "7 targets", icon: Flag, href: "#goals" },
   { label: "Score highlight", value: "HD full map", icon: Trophy, href: "#scores" },
 ];
+
+const modNames: Record<OsuMod, string> = {
+  HD: "Hidden",
+  HR: "Hard Rock",
+  DT: "Double Time",
+};
+
+function ModIcon({ mod, compact = false }: { mod: OsuMod; compact?: boolean }) {
+  return (
+    <span className={`osu-mod ${compact ? "is-compact" : ""}`} title={modNames[mod]}>
+      <Image src={`/osu/mods/${mod}.png`} alt={`${modNames[mod]} (${mod})`} width={68} height={66} />
+      {!compact && <span>{modNames[mod]}</span>}
+    </span>
+  );
+}
 
 function Card({
   title,
@@ -96,6 +113,12 @@ export default function OsuPage() {
             <Image src="/osu/osu-logo.png" alt="" width={80} height={80} className="osu-badge" />
           </div>
           <div className="osu-profile-links"><ExternalButton href={profileUrl}>View osu! profile</ExternalButton><span>Discord <strong className="select-all">owari2323</strong></span></div>
+          <div className="osu-mod-key" aria-label="Featured osu! mods">
+            <span>Mods</span>
+            <ModIcon mod="HD" />
+            <ModIcon mod="HR" />
+            <ModIcon mod="DT" />
+          </div>
           <div className="osu-overview" aria-label="osu! page highlights">
             {overview.map(({ label, value, icon: Icon, href }) => (
               <a href={href} key={label}>
@@ -162,13 +185,14 @@ export default function OsuPage() {
             <ul className="grid list-none gap-3 p-0 sm:grid-cols-2">
               {goals.map((goal) => (
                 <li
-                  key={goal}
+                  key={goal.text}
                   className="osu-goal flex items-start gap-3 rounded-2xl border border-white/10 bg-black/10 p-5"
                 >
                   <Crosshair aria-hidden="true" />
-                  <span className="text-sm leading-7 text-white/80">
-                    {goal}
-                  </span>
+                  <div className="osu-goal-copy">
+                    <span className="text-sm leading-7 text-white/80">{goal.text}</span>
+                    {goal.mods && <span className="osu-goal-mods">{goal.mods.map((mod) => <ModIcon mod={mod} compact key={mod} />)}</span>}
+                  </div>
                 </li>
               ))}
             </ul>
@@ -186,7 +210,7 @@ export default function OsuPage() {
             <figure>
               <figcaption className="mx-auto max-w-2xl text-center">
                 <h3 className="text-lg font-semibold text-white">
-                  Sev-26 Ranked play | Full map + Hidden
+                  Sev-26 Ranked play | Full map <ModIcon mod="HD" compact />
                 </h3>
 
                 <p className="mt-3 text-sm leading-7 text-white/65">

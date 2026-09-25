@@ -7,8 +7,8 @@
 .transmission-home .aureyx-nav li a::after { content: ''; position: absolute; bottom: 0; left: 0; height: 1px; width: 0; background: var(--signal); transition: width .25s; }
 .transmission-home .aureyx-nav li a:hover::after { width: 100%; }
 .transmission-hero { min-height: min(850px, 92svh); position: relative; isolation: isolate; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 28px 5%; border-bottom: 1px solid #ffffff1c; }
-.transmission-backdrop { object-fit: cover; object-position: center 35%; filter: grayscale(1) brightness(.25); opacity: .48; z-index: -3; }
-.transmission-hero::before { content: ''; position: absolute; inset: 0; z-index: -2; background: radial-gradient(ellipse at 50% 45%, #c700001c, transparent 65%), linear-gradient(0deg,#101011 0%,transparent 45%,#10101170 100%); }
+.transmission-backdrop { object-fit: cover; object-position: center 50%; filter: saturate(.72) brightness(.48); opacity: .78; z-index: -3; }
+.transmission-hero::before { content: ''; position: absolute; inset: 0; z-index: -2; background: radial-gradient(ellipse at 50% 45%, #c7000014, transparent 62%), linear-gradient(0deg,#101011 0%,transparent 42%,#08090d8f 100%),linear-gradient(90deg,#090a0f80,transparent 38%,#090a0f55); }
 .transmission-texture { position: absolute; inset: 0; pointer-events: none; z-index: -1; opacity: .4; background: repeating-linear-gradient(0deg, transparent 0px, transparent 3px, #0006 4px), repeating-linear-gradient(90deg, transparent 0px, transparent 89px, #ff23230c 90px); }
 .transmission-topline,.transmission-bottomline { display: flex; justify-content: space-between; align-items: center; gap: 20px; font-family: var(--font-geist-mono),monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .14em; color: #a39b9b; }
 .transmission-topline i { display: inline-block; width: 5px; height: 5px; background: var(--signal); margin-right: 9px; }
@@ -96,8 +96,9 @@
 .nocturna-moon { display: block; width: 76px; height: 76px; margin-top: 26px; background: #fff; mask-image: url('/nocturna-cover.png'); mask-mode: luminance; mask-size: 1005px 1005px; mask-position: -466px -151px; mask-repeat: no-repeat; filter: drop-shadow(0 0 16px #ffffff20); transition: filter .3s,transform .3s; }
 .transmission-explore-card:hover .nocturna-moon { filter: drop-shadow(0 0 22px #ffffff70); transform: rotate(-12deg); }
 .transmission-explore-card:has(.nocturna-moon) h2 { margin-top: 12px; }
-.transmission-signoff { position: relative; isolation: isolate; overflow: hidden; padding: 75px 5% 65px; background: radial-gradient(ellipse at center,#aa00001c,transparent 65%); border-top: 1px solid #ff292f33; }
-.transmission-signoff::before { content: ''; position: absolute; inset: 0; z-index: -1; opacity: .25; background: repeating-linear-gradient(0deg, transparent 0 3px,#000 4px); }
+.transmission-signoff { position: relative; isolation: isolate; overflow: hidden; width: min(90%,1200px); margin: 45px auto 75px; padding: 75px 5% 65px; background: #0d1017; border: 1px solid #ffffff28; box-shadow: 0 28px 90px #000a; }
+.transmission-signoff::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg,#08090edb,#090a0f86 50%,#08090ec9),repeating-linear-gradient(0deg, transparent 0 3px,#0007 4px); }
+.transmission-signoff-art { object-fit: cover; object-position: center; z-index: -2; filter: saturate(.65) brightness(.58); }
 .transmission-signoff .transmission-signoff-label { color: #c0a09a; text-transform: uppercase; font: 9px/1.8 var(--font-geist-mono),monospace; letter-spacing: .22em; }
 .transmission-endmark { display: inline-block; position: relative; margin: 24px 0; font-size: clamp(68px,17vw,240px); line-height: 1.15; letter-spacing: -.035em; color: #ff292f; text-shadow: 3px 5px 0 #610a11,0 0 55px #ff000033; transition: text-shadow .3s; }
 .transmission-endmark::after { content: attr(data-text); position: absolute; inset: 0; color: #ffb9a7; clip-path: inset(38% 0 54% 0); transform: translateX(-4px); opacity: .8; }
@@ -133,3 +134,23 @@
 /* Keep the hero mark prominent without filling the entire page width. */
 .transmission-wordmark.aureyx-animated-logo { width: min(78%, 760px); }
 .transmission-endmark.aureyx-animated-logo { width: min(58%, 440px); }
+
+/* Separate each major block while keeping the homepage easy to scan. */
+.transmission-section + .transmission-section { border-top: 1px solid #ffffff16; }
+.transmission-videos { max-width: 1440px; }
+.home-video-channels { border-top: 1px solid #ffffff26; }
+.home-video-channel { display: grid; grid-template-columns: minmax(170px,.42fr) 1.58fr; gap: 35px; padding: 34px 0; border-bottom: 1px solid #ffffff20; }
+.home-video-channel > header { display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.home-video-channel h3 { font-size: clamp(25px,3vw,38px); letter-spacing: -.04em; }
+.home-video-channel header span { display: block; margin-top: 8px; color: #8f8583; font: 9px var(--font-geist-mono),monospace; letter-spacing: .1em; }
+.home-video-channel header > a { padding-bottom: 7px; border-bottom: 1px solid #784d4f; color: #cfc5c2; font-size: 11px; }
+.home-video-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.home-video-card { overflow: hidden; min-width: 0; border: 1px solid #ffffff18; background: #151416; transition: border-color .25s,transform .25s; }
+.home-video-card:hover { border-color: #ff3f5075; transform: translateY(-3px); }
+.home-video-card > div:last-child { padding: 16px; }
+.home-video-card h4 { overflow: hidden; display: -webkit-box; min-height: 42px; color: #e9e4e1; font-size: 12px; line-height: 1.65; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.home-video-card time { display: block; margin-top: 10px; color: #8f8583; font: 9px var(--font-geist-mono),monospace; letter-spacing: .08em; text-transform: uppercase; }
+.home-video-empty { align-self: center; color: #938a88; font-size: 13px; }
+.home-video-empty a { color: #d4ccca; }
+@media(max-width:800px) { .home-video-channel { grid-template-columns: 1fr; gap: 22px; } .home-video-channel > header { flex-direction: row; align-items: end; } }
+@media(max-width:560px) { .home-video-grid { grid-template-columns: 1fr; } }
