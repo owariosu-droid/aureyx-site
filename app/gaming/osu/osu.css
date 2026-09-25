@@ -30,6 +30,8 @@
 .osu-theme .osu-panel::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 2px; background: linear-gradient(180deg,#ff4b69,transparent 70%); opacity: .8; }
 .osu-theme .osu-panel h2 { text-align: left; font-size: 28px; font-weight: 500; letter-spacing: -.035em; }
 .osu-theme .osu-panel .rounded-2xl,.osu-theme .osu-panel .rounded-xl,.osu-theme .osu-profile-links a { border-radius: 2px; }
+.osu-theme .osu-panel dd a { text-decoration: underline; text-decoration-color: #ff6b865c; text-underline-offset: 5px; }
+.osu-theme .osu-panel dd a:hover { color: #ff9aae; }
 .osu-theme .osu-profile-links a { border-color: #ff292f60; }
 .osu-theme a:hover { border-color: #ff292f80; }
 .osu-map-card { border-radius: 0; background: #191617; transition: border-color .3s,transform .3s,box-shadow .3s; }

@@ -5,7 +5,7 @@ const links = [
   { name: "Artists", href: "/artists" },
   { name: "Music", href: "/#releases" },
   { name: "Videos", href: "/#videos" },
-  { name: "osu!", href: "/gaming/osu" },
+  { name: "For Fun", href: "/for-fun" },
   { name: "Nocturna", href: "https://nocturnakits.gumroad.com/l/oeveok", external: true },
 ];
 

@@ -1,11 +1,12 @@
+import Image from "next/image";
 import YouTubePlayer from "@/components/YouTubePlayer";
 import { getYouTubeVideos } from "@/lib/youtube-feed";
 
 const channels = [
-  { name: "Aureyx", handle: "@Aureyx-u6c", id: "UC2qP_-I9kcrSazQNUWNd6ag" },
-  { name: "Lyrlvst", handle: "@lyrlvst", id: "UC7xSxOfYmUlZ8jIp_567M6w" },
-  { name: "iyune", handle: "@iyuneofficial", id: "UCrNekfYIdOYln8PP1AcGWvA" },
-  { name: "Dysto", handle: "@dystoftmusic23", id: "UCcKq5OXoC-guJU9hBcZjC3w" },
+  { name: "Aureyx", handle: "@Aureyx-u6c", id: "UC2qP_-I9kcrSazQNUWNd6ag", avatar: "/members/youtube-aureyx.jpg" },
+  { name: "Lyrlvst", handle: "@lyrlvst", id: "UC7xSxOfYmUlZ8jIp_567M6w", avatar: "/members/youtube-lyrlvst.jpg" },
+  { name: "iyune", handle: "@iyuneofficial", id: "UCrNekfYIdOYln8PP1AcGWvA", avatar: "/members/youtube-iyune.jpg" },
+  { name: "Dysto", handle: "@dystoftmusic23", id: "UCcKq5OXoC-guJU9hBcZjC3w", avatar: "/members/youtube-dysto.jpg" },
 ];
 
 export default async function HomeVideoFeeds() {
@@ -22,7 +23,7 @@ export default async function HomeVideoFeeds() {
         <section className="home-video-channel" key={channel.id} aria-labelledby={`channel-${channel.id}`}>
           <header>
             <div>
-              <h3 id={`channel-${channel.id}`}>{channel.name}</h3>
+              <div className="home-video-identity"><Image src={channel.avatar} alt={`${channel.name} YouTube profile picture`} width={58} height={58} /><h3 id={`channel-${channel.id}`}>{channel.name}</h3></div>
               <span>{channel.handle}</span>
             </div>
             <a href={`https://www.youtube.com/${channel.handle}`} target="_blank" rel="noopener noreferrer">Channel ↗</a>

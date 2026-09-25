@@ -5,7 +5,29 @@ import Image from "next/image";
 import { ArrowUpRight, AudioLines, ChevronLeft, ChevronRight } from "lucide-react";
 import { albums } from "@/data/albums";
 
-const pageSize = 8;
+const pageSize = 6;
+const releasePrices: Record<string, string> = {
+  "https://dystofuturemusic.bandcamp.com/album/devourer": "$9.99",
+  "https://open.spotify.com/album/6W9618MAoMyOgYcWgx6glU": "Streaming",
+  "https://dystofuturemusic.bandcamp.com/album/oblivion": "$5.99",
+  "https://dystofuturemusic.bandcamp.com/track/dream-barrier": "$0.99",
+  "https://dystofuturemusic.bandcamp.com/album/grimvex-prod-jxzz-hollow-zero-echoes-from-the-void-ft-prod-jxzz-album-mini-preview": "$5",
+  "https://dystofuturemusic.bandcamp.com/album/iyune-lyrlvst-reverent-blade-original-and-remastered-pack": "$5",
+  "https://dystofuturemusic.bandcamp.com/track/iyune-scarlet-oasis-lyrlvst-remix": "$0.99",
+  "https://dystofuturemusic.bandcamp.com/track/lyrlvst-nerv-failure-ft-dysto": "$0.99",
+  "https://dystofuturemusic.bandcamp.com/track/dysto-reverie-sonic-night-ii-daybreak-track-2": "$0.50",
+  "https://dystofuturemusic.bandcamp.com/track/reboot-ft-lyrlvst-0kami-replaced-track-3-for-kyouki-001": "Name your price",
+  "https://dystofuturemusic.bandcamp.com/track/dysto-retroverse-sonic-night-ii-daybreak-track-1": "$0.50",
+  "https://dystofuturemusic.bandcamp.com/track/dysto-2070-deluxe-edition-voxblade-opening-track": "Name your price",
+  "https://dystofuturemusic.bandcamp.com/track/iyune-ultimate-magic": "$0.50",
+  "https://dystofuturemusic.bandcamp.com/track/iyune-ultimate-magic-mythic-edition": "$0.50",
+  "https://dystofuturemusic.bandcamp.com/album/iyune-lyrlvst-dysto-nocturne-midnight": "Name your price",
+  "https://dystofuturemusic.bandcamp.com/track/iyune-empyrean": "$0.50",
+  "https://dystofuturemusic.bandcamp.com/track/disassociation-lyrlvsts-kataklysm-remake-ft-dysto-from-voxblade": "$0.99",
+  "https://dystofuturemusic.bandcamp.com/album/dysto-voxblade": "$9",
+  "https://dystofuturemusic.bandcamp.com/track/iyune-lyrlvst-0kami-dyschronia": "$0.50",
+  "https://dystofuturemusic.bandcamp.com/track/lyrlvst-chasm-of-eternity": "$0.50",
+};
 
 export default function HomeReleases() {
   const [page, setPage] = useState(0);
@@ -27,7 +49,7 @@ export default function HomeReleases() {
               <span className="transmission-release-play"><AudioLines size={24} /> Listen now <ArrowUpRight size={18} /></span>
             </div>
             <div className="transmission-release-title"><h3>{album.title}</h3><ArrowUpRight size={18} /></div>
-            <p>AX / {String(start + index + 1).padStart(3, "0")} <span>Release</span></p>
+            <p>AX / {String(start + index + 1).padStart(3, "0")} <span>{releasePrices[album.link] ?? "Listen"}</span></p>
           </a>
         ))}
       </div>

@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HomeReleases from "@/components/HomeReleases";
 import HomeVideoFeeds from "@/components/HomeVideoFeeds";
+import HomeLinks from "@/components/HomeLinks";
 import { artists } from "@/data/artists";
 import { albums } from "@/data/albums";
 import "./home.css";
@@ -52,7 +53,12 @@ export default function Home() {
           <HomeVideoFeeds />
         </section>
 
-        <section className="transmission-section transmission-explore" aria-label="More from Aureyx"><a className="transmission-explore-card" href="https://nocturnakits.gumroad.com/l/oeveok" target="_blank" rel="noopener noreferrer"><p className="transmission-eyebrow">05 / For the creators</p><ArrowUpRight className="transmission-explore-arrow" /><span className="nocturna-moon" role="img" aria-label="Nocturna crescent moon logo from the cover" /><h2>Nocturna</h2><p>Sounds created by iyune, used interchangeably throughout Aureyx.</p><span>Explore sound kits ↗</span></a><Link className="transmission-explore-card" href="/artists"><p className="transmission-eyebrow">06 / Updates</p><ArrowUpRight className="transmission-explore-arrow" /><h2>Artist<br /><em>journals.</em></h2><p>Updates and new work from Aureyx artists.</p><span>Explore artist updates ↗</span></Link></section>
+        <section id="links" className="transmission-section transmission-links" aria-labelledby="links-heading">
+          <div className="transmission-section-heading"><div><p className="transmission-eyebrow">05 / Links</p><h2 id="links-heading">Find everyone</h2></div><p>Verified Linktrees and direct artist channels.</p></div>
+          <HomeLinks />
+        </section>
+
+        <section className="transmission-section transmission-explore" aria-label="More from Aureyx"><a className="transmission-explore-card nocturna-card" href="https://nocturnakits.gumroad.com/l/oeveok" target="_blank" rel="noopener noreferrer"><Image src="/nocturna-cover.png" alt="" fill sizes="(max-width: 700px) 92vw, 45vw" className="nocturna-card-art" /><span className="nocturna-card-shade" /><div><p className="transmission-eyebrow">06 / For the creators</p><ArrowUpRight className="transmission-explore-arrow" /><span className="nocturna-moon" role="img" aria-label="Nocturna crescent moon logo from the cover" /><h2>Nocturna</h2><p>Sounds created by iyune, used interchangeably throughout Aureyx.</p><strong>$2</strong><span>Explore sound kits ↗</span></div></a><Link className="transmission-explore-card" href="/artists"><p className="transmission-eyebrow">07 / Updates</p><ArrowUpRight className="transmission-explore-arrow" /><h2>Artist<br /><em>journals.</em></h2><p>Updates and new work from Aureyx artists.</p><span>Explore artist updates ↗</span></Link></section>
         <div className="transmission-signoff"><Image src="/aureyx-space-background.jpg" alt="" fill sizes="(max-width: 1200px) 100vw, 1200px" className="transmission-signoff-art" /><h2 aria-label="Aureyx" className="transmission-endmark aureyx-animated-logo"><span className="aureyx-gothic-mark" aria-hidden="true" /></h2><p>Independent electronic music.</p><div><a href="https://open.spotify.com/artist/1IwiBlGpQaMr8dV7u5LtjI" target="_blank" rel="noopener noreferrer">Spotify ↗</a><a href="https://dystofuturemusic.bandcamp.com/" target="_blank" rel="noopener noreferrer">Bandcamp ↗</a><a href="https://linktr.ee/dystofuturemusic" target="_blank" rel="noopener noreferrer">Connect ↗</a></div></div>
       </main>
       <Footer />

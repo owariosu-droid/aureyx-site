@@ -32,9 +32,9 @@ const goals: { text: string; mods?: OsuMod[] }[] = [
 ];
 
 const equipment = [
-  { label: "Keyboard", value: "Yuki Aim Polar75 8K (Oni 2.0)" },
-  { label: "Tablet", value: "Gaomon S620" },
-  { label: "Mouse", value: "GravaStar Mercury M2 Wireless" },
+  { label: "Keyboard", value: "Yuki Aim Polar75 8K (Oni 2.0)", href: "https://arbiterstudio.com/collections/yuki-aim-collection/products/yuki-aim-polar75-8k-dragon-edition-oni-2-0-collection" },
+  { label: "Tablet", value: "Gaomon S620", href: "https://gaomon.net/products/s620-pen-tablet" },
+  { label: "Mouse", value: "GravaStar Mercury M2 Wireless", href: "https://www.gravastar.com/products/mercury-m2-wireless-gaming-mouse" },
 ];
 
 const overview = [
@@ -106,10 +106,10 @@ export default function OsuPage() {
 
       <main className="relative z-10 mx-auto min-h-screen max-w-6xl px-6 py-16 sm:py-24">
         <header className="osu-header">
-          <p className="transmission-eyebrow">Aureyx / osu!</p>
+          <p className="transmission-eyebrow">For fun / osu!</p>
           <div className="osu-profile-row">
             <Image src="https://a.ppy.sh/37255712" alt="osu! profile avatar" width={112} height={112} unoptimized className="osu-avatar" />
-            <div><h1>osu!</h1><p>Mapping projects, scores, and goals.</p></div>
+            <div><h1>osu!</h1><p>A personal page for mapping projects, scores, and goals. This is separate from Aureyx.</p></div>
             <Image src="/osu/osu-logo.png" alt="" width={80} height={80} className="osu-badge" />
           </div>
           <div className="osu-profile-links"><ExternalButton href={profileUrl}>View osu! profile</ExternalButton><span>Discord <strong className="select-all">owari2323</strong></span></div>
@@ -166,9 +166,7 @@ export default function OsuPage() {
                   <dt className="text-[10px] uppercase tracking-[0.2em] text-white/45">
                     {item.label}
                   </dt>
-                  <dd className="mt-3 text-sm leading-6 text-white/85">
-                    {item.value}
-                  </dd>
+                  <dd className="mt-3 text-sm leading-6 text-white/85"><a href={item.href} target="_blank" rel="noopener noreferrer">{item.value} ↗</a></dd>
                 </div>
               ))}
             </dl>
