@@ -38,6 +38,8 @@ export const artists: Artist[] = [
     name: "Yoru Zenaku",
     role: "Artist",
     bio: "Music and projects from Yoru Zenaku. More about this artist coming soon.",
+    image: "/members/yoru-zenaku-pfp.png",
+
   },
   {
     slug: "grimvex",

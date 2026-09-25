@@ -38,7 +38,7 @@ export const members = [
     image: "/members/iyune.png",
     links: {
       spotify: "",
-      youtube: "",
+      youtube: "https://www.youtube.com/@iyuneofficial",
       soundcloud: "",
     },
   },
