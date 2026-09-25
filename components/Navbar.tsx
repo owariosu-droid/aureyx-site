@@ -1,9 +1,11 @@
 import Link from "next/link";
 
 const links = [
+  { name: "Home", href: "/" },
   { name: "Artists", href: "/artists" },
+  { name: "Music", href: "/#releases" },
   { name: "osu!", href: "/gaming/osu" },
-  { name: "Releases", href: "/#releases" },
+  { name: "Nocturna", href: "https://nocturnakits.gumroad.com/l/oeveok", external: true },
 ];
 
 export default function Navbar() {
@@ -27,12 +29,23 @@ export default function Navbar() {
         >
           {links.map((link) => (
             <li key={link.href}>
-              <Link
-                href={link.href}
-                className="inline-block py-2 text-white/60 no-underline transition-colors hover:text-white"
-              >
-                {link.name}
-              </Link>
+              {link.external ? (
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block py-2 text-white/60 no-underline transition-colors hover:text-white"
+                >
+                  {link.name} ↗
+                </a>
+              ) : (
+                <Link
+                  href={link.href}
+                  className="inline-block py-2 text-white/60 no-underline transition-colors hover:text-white"
+                >
+                  {link.name}
+                </Link>
+              )}
             </li>
           ))}
         </ul>

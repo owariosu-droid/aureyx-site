@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
-import { ExternalLink } from "lucide-react";
+import { Crosshair, ExternalLink, Flag, Map, Trophy } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
 import OsuMapping from "@/components/OsuMapping";
@@ -33,6 +33,12 @@ const equipment = [
   { label: "Keyboard", value: "Yuki Aim Polar75 8K (Oni 2.0)" },
   { label: "Tablet", value: "Gaomon S620" },
   { label: "Mouse", value: "GravaStar Mercury M2 Wireless" },
+];
+
+const overview = [
+  { label: "Mapping", value: "7 projects", icon: Map, href: "#mapping" },
+  { label: "Goals", value: "7 targets", icon: Flag, href: "#goals" },
+  { label: "Score highlight", value: "HD full map", icon: Trophy, href: "#scores" },
 ];
 
 function Card({
@@ -79,6 +85,8 @@ export default function OsuPage() {
     <div className="transmission-home osu-theme">
       <Navbar />
 
+      <div className="osu-page-art" aria-hidden="true" />
+
       <main className="relative z-10 mx-auto min-h-screen max-w-6xl px-6 py-16 sm:py-24">
         <header className="osu-header">
           <p className="transmission-eyebrow">Aureyx / osu!</p>
@@ -88,6 +96,14 @@ export default function OsuPage() {
             <Image src="/osu/osu-logo.png" alt="" width={80} height={80} className="osu-badge" />
           </div>
           <div className="osu-profile-links"><ExternalButton href={profileUrl}>View osu! profile</ExternalButton><span>Discord <strong className="select-all">owari2323</strong></span></div>
+          <div className="osu-overview" aria-label="osu! page highlights">
+            {overview.map(({ label, value, icon: Icon, href }) => (
+              <a href={href} key={label}>
+                <Icon aria-hidden="true" />
+                <span>{label}<strong>{value}</strong></span>
+              </a>
+            ))}
+          </div>
           <nav className="osu-sections" aria-label="osu! page sections"><a href="#mapping">Mapping</a><a href="#goals">Goals</a><a href="#scores">Scores</a><a href="#about">About & equipment</a></nav>
         </header>
 
@@ -147,12 +163,9 @@ export default function OsuPage() {
               {goals.map((goal) => (
                 <li
                   key={goal}
-                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/10 p-5"
+                  className="osu-goal flex items-start gap-3 rounded-2xl border border-white/10 bg-black/10 p-5"
                 >
-                  <span
-                    aria-hidden="true"
-                    className="mt-2 h-2 w-2 shrink-0 rounded-full bg-white/40"
-                  />
+                  <Crosshair aria-hidden="true" />
                   <span className="text-sm leading-7 text-white/80">
                     {goal}
                   </span>
@@ -199,6 +212,7 @@ export default function OsuPage() {
             </figure>
           </Card>
         </div>
+        <p className="osu-art-credit">In-game seasonal artwork by <a href="https://osu.ppy.sh/community/forums/topics/641984" target="_blank" rel="noopener noreferrer">Ariisha ↗</a></p>
       </main>
 
       <Footer />
