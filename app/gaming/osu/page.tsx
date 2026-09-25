@@ -5,7 +5,8 @@ import { ExternalLink } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import OsuMapping from "@/components/OsuMapping";
 import Footer from "@/components/Footer";
-import BackgroundEffects from "@/components/BackgroundEffects";
+import "@/app/home.css";
+import "./osu.css";
 
 const profileUrl = "https://osu.ppy.sh/users/37255712";
 
@@ -34,46 +35,17 @@ const equipment = [
   { label: "Mouse", value: "GravaStar Mercury M2 Wireless" },
 ];
 
-const projects = [
-  {
-    title: "Cynthoni of Flames",
-    difficulty: "Watch my Skin Erupt in a Cynthoni of Flames",
-    description: "Cynthoni · 6.92 star single diff",
-    href: "https://osu.ppy.sh/beatmapsets/2575406#osu/5735879",
-  },
-  {
-    title: "Yandere Era",
-    difficulty: "overmapped ULTRA | heartburst extreme",
-    description: "Cynthoni · Low 8 star and high 5 star diffs",
-    href: "https://osu.ppy.sh/beatmapsets/2611691#osu/5850023",
-  },
-  {
-    title: "Augoeides",
-    difficulty: "Fantasia",
-    description: "Currently fixing it up rn.",
-    href: "https://osu.ppy.sh/beatmapsets/2521751#osu/5567029",
-  },
-  { 
-    title: "Death of the Endless",
-    difficulty: "Impossible · hell · Extreme · Extra · Insane · Hard · Normal · Easy",
-    description: "A song that I've wanted to map for a very long time. Because of the drain time I want to make it a full set."
-  },
-  { 
-    title: "iliveinagony",
-    difficulty: "silencethenoise",
-    description: "One of the first maps that I will be mapping from the Aureyx collective."
-  },
-];
-
 function Card({
   title,
+  id,
   children,
 }: {
   title: string;
+  id?: string;
   children: ReactNode;
 }) {
   return (
-    <section className="min-w-0 rounded-3xl border border-white/10 bg-white/[0.035] p-6 sm:p-8">
+    <section id={id} className="osu-panel min-w-0 rounded-3xl border border-white/10 bg-white/[0.035] p-6 sm:p-8">
       <h2 className="mb-6 text-center text-2xl font-semibold text-white">
         {title}
       </h2>
@@ -104,74 +76,24 @@ function ExternalButton({
 
 export default function OsuPage() {
   return (
-    <div className="osu-theme">
-      <BackgroundEffects />
+    <div className="transmission-home osu-theme">
       <Navbar />
 
       <main className="relative z-10 mx-auto min-h-screen max-w-6xl px-6 py-16 sm:py-24">
-        {/* Profile */}
-            <header className="relative isolate mx-auto mb-10 max-w-3xl overflow-hidden rounded-3xl border border-white/10 bg-[#282428] px-6 py-10 text-center sm:p-12"> 
-            <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-            >
-            <Image
-                src="/osu/osu-logo.png"
-                alt=""
-                fill
-                sizes="768px"
-                className="object-cover opacity-[0.07]"
-              />
-            </div>
-
-{/* Visible osu! badge */}
-            <Image
-              src="/osu/osu-logo.png"
-              alt="osu!"
-              width={56}
-              height={56}
-              className="mx-auto mb-5 rounded-full"
-          />
-        
-        <p className="mb-7 text-xs uppercase tracking-[0.3em] text-white/50">
-            Gaming Archive
-        </p>
-
-          <Image
-            src="https://a.ppy.sh/37255712"
-            alt="My osu! profile avatar"
-            width={112}
-            height={112}
-            unoptimized
-            className="mx-auto h-28 w-28 rounded-2xl border border-white/15 object-cover"
-          />
-
-          <h1 className="mt-6 text-5xl font-black text-white sm:text-6xl">
-            osu!
-          </h1>
-
-          <p className="mx-auto mt-5 max-w-lg text-sm leading-7 text-white/65">
-            This page is for my osu projects and goals. I want to get better at mapping so the only way
-            to improve is to keep mapping.
-          </p>
-
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-            <ExternalButton href={profileUrl}>
-              View osu! profile
-            </ExternalButton>
-
-            <span className="inline-flex flex-wrap items-center justify-center gap-2 rounded-xl border border-white/10 px-5 py-3 text-sm">
-              <span className="text-white/50">Discord</span>
-              <span className="select-all font-medium text-white">
-                owari2323
-              </span>
-            </span>
+        <header className="osu-header">
+          <p className="transmission-eyebrow">Aureyx / osu!</p>
+          <div className="osu-profile-row">
+            <Image src="https://a.ppy.sh/37255712" alt="osu! profile avatar" width={112} height={112} unoptimized className="osu-avatar" />
+            <div><h1>osu!</h1><p>Mapping projects, scores, and goals.</p></div>
+            <Image src="/osu/osu-logo.png" alt="" width={80} height={80} className="osu-badge" />
           </div>
+          <div className="osu-profile-links"><ExternalButton href={profileUrl}>View osu! profile</ExternalButton><span>Discord <strong className="select-all">owari2323</strong></span></div>
+          <nav className="osu-sections" aria-label="osu! page sections"><a href="#mapping">Mapping</a><a href="#goals">Goals</a><a href="#scores">Scores</a><a href="#about">About & equipment</a></nav>
         </header>
 
         <div className="space-y-8">
           {/* About me */}
-          <Card title="About me">
+          <Card id="about" title="About & equipment">
             <div className="mx-auto max-w-2xl space-y-5 text-center text-sm leading-8 text-white/70 sm:text-base">
               <p>
                 Hi, I also make music alongside playing osu! Feel free
@@ -214,7 +136,7 @@ export default function OsuPage() {
           </Card>
 
           {/* Goals */}
-          <Card title="Goals">
+          <Card id="goals" title="Goals">
             <p className="mx-auto mb-7 max-w-2xl text-center text-sm italic leading-7 text-white/60">
               I don&apos;t intend to have a time constraint on any of
               these, been only playing when I really want to recently.
@@ -247,7 +169,7 @@ export default function OsuPage() {
           {/* Mapping projects */}
           <OsuMapping />
           {/* Personal highlight */}
-          <Card title="Unranked scores that I think are cool">
+          <Card id="scores" title="Scores">
             <figure>
               <figcaption className="mx-auto max-w-2xl text-center">
                 <h3 className="text-lg font-semibold text-white">
@@ -260,11 +182,8 @@ export default function OsuPage() {
               </figcaption>
 
               {highlightImage && (
-                <a
-                  href={highlightImage}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open full-size Sev-26 score screenshot"
+                <div
+                  data-protected-image
                   className="mt-6 block overflow-hidden rounded-2xl border border-white/10"
                 >
                   <Image
@@ -275,7 +194,7 @@ export default function OsuPage() {
                     sizes="(max-width: 1152px) 100vw, 1000px"
                     className="h-auto w-full"
                   />
-                </a>
+                </div>
               )}
             </figure>
           </Card>

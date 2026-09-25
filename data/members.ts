@@ -4,7 +4,7 @@ export const members = [
     slug: "lyrlvst",
     role: "Artist / Producer",
     description:
-      "Breakcore, trance, ambient and emotional electronic music. Does most of the visuals and cover art for Aureyx",
+      "Lyrlvst is a producer who makes breakcore and neo trance/house music.",
     image: "/members/lyrlvst.png",
     links: {
       spotify: "https://open.spotify.com/artist/1rrhBuwyg1lxQpoQDqDUr0",
@@ -32,9 +32,9 @@ export const members = [
   {
     name: "iyune",
     slug: "iyune",
-    role: "Artist / Producer",
+    role: "Founder / Artist / Producer",
     description:
-      "iyune is an electronic artist currently making music under the rhythm game and gothic genre.",
+      "iyune is the founder of Aureyx and an electronic artist making music inspired by rhythm games and gothic atmospheres.",
     image: "/members/iyune.png",
     links: {
       spotify: "",

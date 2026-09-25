@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import {
   ExternalLink,
@@ -106,9 +109,9 @@ function MappingCard({ project }: { project: MappingProject }) {
         : Map;
 
   return (
-    <article className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#292929] transition-colors hover:border-pink-300/30">
+    <article className="osu-map-card group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#292929] transition-colors hover:border-pink-300/30">
       {/* All artwork uses the same square frame */}
-      <div className="relative aspect-square w-full overflow-hidden bg-[#222]">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#222]">
         {project.image ? (
           <Image
             src={project.image}
@@ -197,57 +200,23 @@ function MappingCard({ project }: { project: MappingProject }) {
 }
 
 export default function OsuMapping() {
-  const started = projects.filter((project) => project.status !== "Idea");
-  const ideas = projects.filter((project) => project.status === "Idea");
+  const [filter, setFilter] = useState("All");
+  const [query, setQuery] = useState("");
+  const visible = projects.filter((project) =>
+    (filter === "All" || project.status === filter) &&
+    `${project.title} ${project.artist || ""} ${project.difficulty}`.toLowerCase().includes(query.toLowerCase())
+  );
 
   return (
-    <section
-      aria-labelledby="mapping-heading"
-      className="rounded-3xl border border-white/10 bg-white/[0.025] p-5 sm:p-8"
-    >
-      <div className="mx-auto mb-9 max-w-2xl text-center">
-        <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-pink-200/15 bg-pink-300/5">
-          <Map aria-hidden="true" className="h-5 w-5 text-pink-200/80" />
-        </div>
-
-        <p className="text-[10px] uppercase tracking-[0.25em] text-white/45">
-          From listening to mapping
-        </p>
-
-        <h2
-          id="mapping-heading"
-          className="mt-3 text-3xl font-semibold text-white"
-        >
-          Mapping projects
-        </h2>
-
-        <p className="mt-4 text-sm leading-7 text-white/60">
-          Maps I&apos;ve started, maps I&apos;m revisiting, and songs
-          I&apos;m thinking about mapping.
-        </p>
+    <section id="mapping" className="osu-panel" aria-labelledby="mapping-heading">
+      <div className="osu-section-heading"><div><p className="transmission-eyebrow">Beatmaps</p><h2 id="mapping-heading">Mapping projects</h2></div><p>{projects.length} projects</p></div>
+      <div className="osu-map-tools">
+        <label className="osu-search">Search maps<input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Title, artist, or difficulty" /></label>
+        <div className="osu-filters" aria-label="Filter mapping projects">{["All", "Started", "Revising", "Idea"].map((status) => <button type="button" key={status} aria-pressed={filter === status} onClick={() => setFilter(status)}>{status === "Started" ? "In progress" : status === "Idea" ? "Ideas" : status}</button>)}</div>
       </div>
-
-      <h3 className="mb-5 flex items-center gap-2 text-xs uppercase tracking-[0.15em] text-white/60">
-        <Wrench aria-hidden="true" className="h-4 w-4" />
-        In progress
-      </h3>
-
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {started.map((project) => (
-          <MappingCard key={project.title} project={project} />
-        ))}
-      </div>
-
-      <h3 className="mb-5 mt-10 flex items-center gap-2 text-xs uppercase tracking-[0.15em] text-white/60">
-        <Lightbulb aria-hidden="true" className="h-4 w-4" />
-        Thinking of mapping
-      </h3>
-
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {ideas.map((project) => (
-          <MappingCard key={project.title} project={project} />
-        ))}
-      </div>
+      <p className="osu-results" role="status">{visible.length} {visible.length === 1 ? "project" : "projects"}</p>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{visible.map((project) => <MappingCard key={project.title} project={project} />)}</div>
+      {!visible.length && <div className="osu-empty"><p>No projects match your search.</p><button type="button" onClick={() => { setQuery(""); setFilter("All"); }}>Clear filters</button></div>}
     </section>
   );
 }

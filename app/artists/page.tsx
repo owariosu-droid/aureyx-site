@@ -3,13 +3,13 @@ import Link from "next/link";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import BackgroundEffects from "@/components/BackgroundEffects";
+import "@/app/home.css";
+import "@/app/artists/artists.css";
 import { artists } from "@/data/artists";
 
 export default function ArtistsPage() {
   return (
-    <div className="relative min-h-screen">
-      <BackgroundEffects />
+    <div className="transmission-home artists-theme relative min-h-screen">
       <Navbar />
 
       <main className="relative z-10 mx-auto min-h-screen max-w-6xl px-6 py-16 sm:py-24">
@@ -30,7 +30,7 @@ export default function ArtistsPage() {
             <Link
               key={artist.slug}
               href={`/artists/${artist.slug}`}
-              className="group overflow-hidden rounded-3xl border border-white/10 bg-[#292929] transition hover:border-white/30 hover:bg-[#333]"
+              className="artist-directory-card group overflow-hidden rounded-3xl border border-white/10 bg-[#292929] transition hover:border-white/30 hover:bg-[#333]"
             >
               <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-purple-950 via-[#35303d] to-[#202020]">
                 {artist.image ? (

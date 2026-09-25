@@ -1,0 +1,19 @@
+.artists-theme { min-height: 100vh; }
+.artists-theme main > header { text-align: left; border-bottom: 1px solid #ffffff20; padding-bottom: 32px; }
+.artists-theme main > header > p { margin-left: 0; }
+.artists-theme main > header > p:first-child { color: #ef888c; }
+.artists-theme .artist-directory-card { background: #171516; border-radius: 2px; transition: border-color .3s, transform .3s,box-shadow .3s; }
+.artists-theme .artist-directory-card:hover { background: #21191b; border-color: #ff292f80; transform: translateY(-4px); box-shadow: 0 15px 40px #ff292f0c; }
+.artists-theme .artist-directory-card > div:first-child { background: linear-gradient(145deg,#32181c,#151415); }
+.artists-theme .artist-profile-card { background: #171516; border-radius: 2px; }
+.artists-theme .artist-profile-card > div:first-child { background: linear-gradient(145deg,#32181c,#151415); }
+.artists-theme .artist-profile-card > div:first-child > div { background: linear-gradient(to top,#171516,transparent); }
+.artists-theme .artist-profile-card .border-4 { border-color: #171516; border-radius: 2px; }
+.artists-theme .artist-profile-card a { border-radius: 2px; }
+.artists-theme .artist-profile-card a:hover { background: #ff292f15; border-color: #ff292f80; }
+.artists-theme main section { scroll-margin-top: 140px; }
+.artists-theme main section article { background: #171516; border-radius: 2px; }
+.artists-theme main section > div > div.rounded-2xl { border-radius: 2px; }
+.artists-theme #updates a.rounded-full { border-radius: 2px; }
+.artists-theme #updates a.rounded-full:hover { border-color: #ff292f80; }
+@media(prefers-reduced-motion:reduce) { .artists-theme .artist-directory-card:hover { transform: none; } }
