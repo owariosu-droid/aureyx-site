@@ -60,5 +60,5 @@
 .osu-goal-mods { display: flex; gap: 1px; margin-top: 7px; }
 .osu-art-credit { margin: 28px 0 0; color: #ffffff57; text-align: right; font-size: 10px; letter-spacing: .08em; }
 .osu-art-credit a { color: #ffffff9c; }
-@media(max-width:700px) { .osu-theme main { padding: 25px 20px 50px; } .osu-header { padding: 28px 20px 0; } .osu-profile-row { gap: 20px; } .osu-avatar { width: 76px; height: 76px; } .osu-badge { display: none; } .osu-overview { grid-template-columns: 1fr; } .osu-theme .osu-panel { padding: 22px 18px; } .osu-sections { gap: 20px; } .osu-sections a { font-size: 11px; } .osu-section-heading { align-items: start; flex-direction: column; gap: 10px; } .osu-filters { width: 100%; } }
+@media(max-width:700px) { .osu-theme main { padding: 25px 20px 50px; } .osu-header { padding: 28px 20px 0; } .osu-profile-row { gap: 14px; } .osu-profile-row h1 { font-size: clamp(52px,18vw,76px); } .osu-avatar { width: 68px; height: 68px; } .osu-badge { display: block; width: 48px; height: 48px; } .osu-overview { grid-template-columns: 1fr; } .osu-theme .osu-panel { padding: 22px 18px; } .osu-sections { gap: 20px; } .osu-sections a { font-size: 11px; } .osu-section-heading { align-items: start; flex-direction: column; gap: 10px; } .osu-filters { width: 100%; } }
 @media(prefers-reduced-motion:reduce) { .osu-map-card:hover { transform: none; } }

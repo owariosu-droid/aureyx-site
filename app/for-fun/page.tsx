@@ -20,6 +20,7 @@ export default function ForFunPage() {
           <Link href="/gaming/osu" className="fun-card">
             <Image src="/osu/in-game-background-ariisha.png" alt="osu! seasonal artwork" fill sizes="(max-width: 800px) 92vw, 650px" />
             <span className="fun-card-shade" />
+            <Image src="/osu/osu-logo.png" alt="osu!" width={64} height={64} className="fun-osu-logo" />
             <div><Gamepad2 aria-hidden="true" /><p>Rhythm game</p><h2>osu!</h2><span>Maps, scores, goals, and equipment <ArrowUpRight /></span></div>
           </Link>
         </section>
