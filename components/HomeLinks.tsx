@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SocialIcon from "@/components/SocialIcon";
 
 const profiles = [
   {
@@ -42,14 +43,14 @@ export default function HomeLinks() {
           <Image src={profile.image} alt="" fill sizes="(max-width: 800px) 92vw, 44vw" />
           <span className="home-linktree-shade" />
           <div className="home-linktree-content">
-            <p className="home-linktree-brand"><b>✱</b> Linktree</p>
+            <p className="home-linktree-brand"><SocialIcon platform="Linktree" size={22} /> Linktree</p>
             <h3>{profile.name}</h3>
-            <a className="home-linktree-handle" href={profile.href} target="_blank" rel="noopener noreferrer">{profile.handle} ↗</a>
-            <div className="home-linktree-links">{profile.links.map(([label, href]) => <a href={href} target="_blank" rel="noopener noreferrer" key={label}>{label} ↗</a>)}</div>
+            <a className="home-linktree-handle social-icon-link" href={profile.href} target="_blank" rel="noopener noreferrer"><SocialIcon platform="Linktree" />{profile.handle} ↗</a>
+            <div className="home-linktree-links">{profile.links.map(([label, href]) => <a className="social-icon-link" href={href} target="_blank" rel="noopener noreferrer" key={label}><SocialIcon platform={label} />{label} ↗</a>)}</div>
           </div>
         </article>
       ))}
-      <aside className="home-direct-links"><p>More artist links</p>{directLinks.map(([label, href]) => <a href={href} target="_blank" rel="noopener noreferrer" key={label}>{label}<span>YouTube ↗</span></a>)}</aside>
+      <aside className="home-direct-links"><p>More artist links</p>{directLinks.map(([label, href]) => <a href={href} target="_blank" rel="noopener noreferrer" key={label}>{label}<span><SocialIcon platform="YouTube" /> YouTube ↗</span></a>)}</aside>
     </div>
   );
 }

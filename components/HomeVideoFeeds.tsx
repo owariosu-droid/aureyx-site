@@ -1,5 +1,6 @@
 import Image from "next/image";
 import YouTubePlayer from "@/components/YouTubePlayer";
+import SocialIcon from "@/components/SocialIcon";
 import { getYouTubeVideos } from "@/lib/youtube-feed";
 
 const channels = [
@@ -9,16 +10,16 @@ const channels = [
   { name: "Dysto", handle: "@dystoftmusic23", id: "UCcKq5OXoC-guJU9hBcZjC3w", avatar: "/members/youtube-dysto.jpg" },
 ];
 
-export default async function HomeVideoFeeds() {
+export default async function HomeVideoFeeds({ compact = false }: { compact?: boolean }) {
   const feeds = await Promise.all(
     channels.map(async (channel) => ({
       ...channel,
-      videos: (await getYouTubeVideos(channel.id)).slice(0, 2),
+      videos: (await getYouTubeVideos(channel.id)).slice(0, compact ? 1 : 2),
     })),
   );
 
   return (
-    <div className="home-video-channels">
+    <div className={`home-video-channels${compact ? " home-video-channels-compact" : ""}`}>
       {feeds.map((channel) => (
         <section className="home-video-channel" key={channel.id} aria-labelledby={`channel-${channel.id}`}>
           <header>
@@ -26,7 +27,7 @@ export default async function HomeVideoFeeds() {
               <div className="home-video-identity"><Image src={channel.avatar} alt={`${channel.name} YouTube profile picture`} width={58} height={58} /><h3 id={`channel-${channel.id}`}>{channel.name}</h3></div>
               <span>{channel.handle}</span>
             </div>
-            <a href={`https://www.youtube.com/${channel.handle}`} target="_blank" rel="noopener noreferrer">Channel ↗</a>
+            <a className="social-icon-link" href={`https://www.youtube.com/${channel.handle}`} target="_blank" rel="noopener noreferrer"><SocialIcon platform="YouTube" /> Channel ↗</a>
           </header>
           {channel.videos.length ? (
             <div className="home-video-grid">
@@ -41,7 +42,7 @@ export default async function HomeVideoFeeds() {
               ))}
             </div>
           ) : (
-            <p className="home-video-empty">No recent uploads found. <a href={`https://www.youtube.com/${channel.handle}`} target="_blank" rel="noopener noreferrer">Open the channel ↗</a></p>
+            <p className="home-video-empty">No recent uploads found. <a className="social-icon-link" href={`https://www.youtube.com/${channel.handle}`} target="_blank" rel="noopener noreferrer"><SocialIcon platform="YouTube" /> Open the channel ↗</a></p>
           )}
         </section>
       ))}

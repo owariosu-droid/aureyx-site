@@ -1,10 +1,11 @@
 import Link from "next/link";
+import SocialIcon from "@/components/SocialIcon";
 
 const links = [
   { name: "Home", href: "/" },
   { name: "Artists", href: "/artists" },
-  { name: "Music", href: "/#releases" },
-  { name: "Videos", href: "/#videos" },
+  { name: "Music", href: "/music" },
+  { name: "Videos", href: "/videos", icon: "YouTube" },
   { name: "For Fun", href: "/for-fun" },
   { name: "Nocturna", href: "https://nocturnakits.gumroad.com/l/oeveok", external: true },
 ];
@@ -44,7 +45,7 @@ export default function Navbar() {
                   href={link.href}
                   className="inline-block py-2 text-white/60 no-underline transition-colors hover:text-white"
                 >
-                  {link.name}
+                  <span className="nav-link-label">{link.name}{link.icon && <SocialIcon platform={link.icon} size={15} />}</span>
                 </Link>
               )}
             </li>

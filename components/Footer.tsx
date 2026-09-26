@@ -1,3 +1,5 @@
+import SocialIcon from "@/components/SocialIcon";
+
 export default function Footer() {
     return (
         <footer
@@ -14,32 +16,36 @@ export default function Footer() {
       }}
           className="text-white/60"
 >
-          <a
+          <a className="social-icon-link"
             href="https://open.spotify.com/artist/1IwiBlGpQaMr8dV7u5LtjI"
             target="_blank"
+            rel="noopener noreferrer"
           >
-            Spotify
+            <SocialIcon platform="Spotify" /> Spotify
           </a>
   
-          <a
+          <a className="social-icon-link"
             href="https://dystofuturemusic.bandcamp.com/"
             target="_blank"
+            rel="noopener noreferrer"
           >
-            Bandcamp
+            <SocialIcon platform="Bandcamp" /> Bandcamp
           </a>
   
-          <a
+          <a className="social-icon-link"
             href="https://linktr.ee/dystofuturemusic"
             target="_blank"
+            rel="noopener noreferrer"
           >
-            Linktree
+            <SocialIcon platform="Linktree" /> Linktree
           </a>
   
-          <a
+          <a className="social-icon-link"
             href="https://www.youtube.com/watch?v=AcfS40ARYEc"
             target="_blank"
+            rel="noopener noreferrer"
           >
-            Youtube
+            <SocialIcon platform="YouTube" /> YouTube
           </a>
         </div>
   

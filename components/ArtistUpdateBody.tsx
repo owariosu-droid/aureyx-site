@@ -1,5 +1,29 @@
 import Markdown from "react-markdown";
 
+const trustedImageHosts = new Set([
+  "github.com",
+  "user-images.githubusercontent.com",
+  "private-user-images.githubusercontent.com",
+  "camo.githubusercontent.com",
+]);
+
+function safeHttpsUrl(value: string | undefined) {
+  if (!value) return undefined;
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" ? url.toString() : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function trustedArtistImage(value: string | undefined) {
+  const safe = safeHttpsUrl(value);
+  if (!safe) return undefined;
+  const hostname = new URL(safe).hostname.toLowerCase();
+  return trustedImageHosts.has(hostname) || hostname.endsWith(".githubusercontent.com") ? safe : undefined;
+}
+
 // GitHub's upload UI sometimes produces an HTML img tag. Convert only its
 // HTTPS source to Markdown; all remaining raw HTML is ignored by the renderer.
 export function normalizeUpdateImages(body: string) {
@@ -12,11 +36,11 @@ export function normalizeUpdateImages(body: string) {
 export default function ArtistUpdateBody({ body }: { body: string }) {
   return <Markdown skipHtml components={{
     p: ({ children }) => <div className="my-4 whitespace-pre-wrap leading-8 text-white/75">{children}</div>,
-    a: ({ href, children }) => <a href={href} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{children}</a>,
-    img: ({ src, alt }) => typeof src === "string" && src.startsWith("https://") ? (
+    a: ({ href, children }) => safeHttpsUrl(href) ? <a href={safeHttpsUrl(href)} target="_blank" rel="noopener noreferrer nofollow ugc" className="underline underline-offset-4">{children}</a> : <span>{children}</span>,
+    img: ({ src, alt }) => trustedArtistImage(typeof src === "string" ? src : undefined) ? (
       // Uploaded photos have arbitrary dimensions and are served directly.
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={src} alt={alt || "Artist update photo"} loading="lazy" referrerPolicy="no-referrer" className="my-6 h-auto max-h-[800px] max-w-full rounded-2xl object-contain" />
+      <img src={trustedArtistImage(typeof src === "string" ? src : undefined)} alt={alt || "Artist update photo"} loading="lazy" referrerPolicy="no-referrer" className="my-6 h-auto max-h-[800px] max-w-full rounded-2xl object-contain" />
     ) : null,
     ul: ({ children }) => <ul className="ml-6 list-disc">{children}</ul>,
     ol: ({ children }) => <ol className="ml-6 list-decimal">{children}</ol>,

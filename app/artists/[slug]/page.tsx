@@ -7,6 +7,7 @@ import "@/app/home.css";
 import "@/app/artists/artists.css";
 import YouTubeFeed from "@/components/YouTubeFeed";
 import ArtistUpdateBody from "@/components/ArtistUpdateBody";
+import SocialIcon from "@/components/SocialIcon";
 import { artists } from "@/data/artists";
 import { getArtistUpdates, submissionUrl } from "@/lib/artist-updates";
 
@@ -50,7 +51,7 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
               <a href={artist.youtubeChannelId ? "#videos" : "#updates"} className="rounded-full border border-white/30 px-6 py-3 text-sm hover:bg-white/10">{artist.youtubeChannelId ? "Videos ↓" : "Latest updates ↓"}</a>
               {artist.blog && <a href="#blog" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Blog ↓</a>}
               {artist.albums && <a href="#albums" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Albums ↓</a>}
-              {artist.links?.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">{link.label} ↗</a>)}
+              {artist.links?.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="social-icon-link rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10"><SocialIcon platform={link.label} />{link.label} ↗</a>)}
             </div>
           </div>
         </article>

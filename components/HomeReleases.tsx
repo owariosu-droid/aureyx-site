@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ArrowUpRight, AudioLines, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { albums } from "@/data/albums";
+import SocialIcon from "@/components/SocialIcon";
 
 const pageSize = 6;
 const releasePrices: Record<string, string> = {
@@ -46,7 +47,7 @@ export default function HomeReleases() {
           <a className="transmission-release" key={album.link} href={album.link} target="_blank" rel="noopener noreferrer">
             <div className="transmission-release-art">
               <Image src={album.image} alt={`${album.title} cover`} fill sizes="(max-width: 700px) 45vw, (max-width: 1000px) 45vw, 23vw" />
-              <span className="transmission-release-play"><AudioLines size={24} /> Listen now <ArrowUpRight size={18} /></span>
+              <span className="transmission-release-play"><SocialIcon platform={album.link.includes("spotify.com") ? "Spotify" : "Bandcamp"} size={22} /> Listen now <ArrowUpRight size={18} /></span>
             </div>
             <div className="transmission-release-title"><h3>{album.title}</h3><ArrowUpRight size={18} /></div>
             <p>AX / {String(start + index + 1).padStart(3, "0")} <span>{releasePrices[album.link] ?? "Listen"}</span></p>
