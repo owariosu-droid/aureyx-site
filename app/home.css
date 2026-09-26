@@ -109,11 +109,12 @@
 .transmission-wordmark.aureyx-animated-logo,
 .transmission-endmark.aureyx-animated-logo { display: block; width: min(100%,1100px); margin: 20px auto; font-size: inherit; line-height: 1; text-shadow: none; filter: drop-shadow(0 8px 0 #350b10) drop-shadow(0 0 22px #ff292f25); animation: aureyx-aura 7s ease-in-out infinite; }
 .aureyx-animated-logo::after { content: none; }
-.aureyx-gothic-mark { display: block; width: 100%; aspect-ratio: 2.12; background: linear-gradient(115deg,#a9a1a1 0%,#f8f5f1 20%,#fff 34%,#b6a3a3 43%,#ff303b 48%,#f9f6f4 54%,#fff 70%,#a59a9b 100%); background-size: 280% 100%; -webkit-mask-image: url('/aureyx-girl.png'); -webkit-mask-size: 156% 331%; -webkit-mask-position: 50% 50%; -webkit-mask-repeat: no-repeat; mask-image: url('/aureyx-girl.png'); mask-mode: luminance; mask-size: 156% 331%; mask-position: 50% 50%; mask-repeat: no-repeat; animation: aureyx-metal 9s ease-in-out infinite; }
+.aureyx-gothic-mark { display: block; width: 100%; aspect-ratio: 2.56; background: url('/aureyx-wordmark-transparent.png') center / contain no-repeat; filter: drop-shadow(8px 9px 0 #4a090d) drop-shadow(0 0 18px #ff303b22); animation: aureyx-wordmark-pulse 9s ease-in-out infinite; }
 .transmission-endmark .aureyx-gothic-mark { animation-delay: -4.5s; }
 .transmission-wordmark.aureyx-animated-logo:hover,.transmission-endmark.aureyx-animated-logo:hover { transform: none; filter: drop-shadow(0 8px 0 #350b10) drop-shadow(0 0 35px #ff292f60); }
 .transmission-release-grid { row-gap: 44px; }
 .transmission-section-heading > p a { display: inline-block; margin-top: 8px; border-bottom: 1px solid #8a5555; }
+@keyframes aureyx-wordmark-pulse { 0%,100% { filter: drop-shadow(8px 9px 0 #4a090d) drop-shadow(0 0 18px #ff303b22); } 50% { filter: drop-shadow(5px 7px 0 #650c12) drop-shadow(0 0 24px #ff303b38); } }
 @keyframes aureyx-metal { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 @keyframes aureyx-aura { 0%,100% { filter: drop-shadow(0 6px 0 #350b10) drop-shadow(0 0 15px #ff292f20); } 50% { filter: drop-shadow(0 8px 0 #350b10) drop-shadow(0 0 28px #ff292f50); } }
 @media(prefers-reduced-motion: reduce) { .aureyx-animated-logo,.aureyx-gothic-mark { animation: none !important; } }
