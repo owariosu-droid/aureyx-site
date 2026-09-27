@@ -95,9 +95,18 @@ body::before {
 
 body > *:not(.site-scroll-progress):not(.site-pointer-glow) { position: relative; z-index: 1; }
 
+.site-reveal { opacity: 0; transform: translateY(34px) scale(.985); filter: blur(4px); transition: opacity .75s cubic-bezier(.2,.75,.2,1) var(--reveal-delay,0ms),transform .85s cubic-bezier(.2,.75,.2,1) var(--reveal-delay,0ms),filter .75s ease var(--reveal-delay,0ms); }
+.site-reveal.is-visible { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+
+@media (hover:hover) and (pointer:fine) {
+  .artist-directory-card,.artist-video-card,.home-video-channel,.transmission-release,.home-linktree-card,.fun-card,.osu-panel { transform-style:preserve-3d; will-change:transform; }
+  .artist-video-card:hover,.home-video-channel:hover,.home-linktree-card:hover,.fun-card:hover { transform:translateY(-6px) scale(1.008); }
+}
+
 @media (pointer: coarse), (prefers-reduced-motion: reduce) {
   .site-pointer-glow { display: none; }
   .site-scroll-progress { transition: none; }
+  .site-reveal,.site-reveal.is-visible { opacity:1; transform:none; filter:none; transition:none; }
 }
 
 /* Prevent browser blue/purple link colors */

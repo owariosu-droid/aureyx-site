@@ -33,6 +33,7 @@ export default function Home() {
         <div className="transmission-ticker" aria-hidden="true"><span>INDEPENDENT ARTISTS</span><b>✳</b><span>UNFILTERED EXPRESSION</span><b>✳</b><span>AUREYX COLLECTIVE</span><b>✳</b><span>BEYOND THE EXPECTED</span></div>
 
         <section id="collective" className="transmission-section transmission-intro">
+          <Image src="/aureyx-youtube-banner.jpg" alt="" fill sizes="(max-width: 1320px) 100vw, 1320px" className="transmission-about-banner" />
           <div><p className="transmission-eyebrow">01 / The collective</p><h2>About Aureyx</h2></div>
           <div className="transmission-intro-copy"><p>Aureyx is an independent electronic music label and collective for growing artists.</p><p>Founded by iyune, built together by artists with their own worlds to share.</p><Link className="transmission-text-link" href="/artists">Explore the collective <ArrowUpRight size={18} /></Link></div>
         </section>
@@ -43,7 +44,7 @@ export default function Home() {
         </section>
 
         <section className="transmission-section home-music-gateway" aria-labelledby="music-heading">
-          <div className="home-music-copy"><p className="transmission-eyebrow">02 / Music</p><h2 id="music-heading">The catalog has its own room.</h2><p>{albums.length} releases, collaborations, and connected projects in one place.</p><Link className="transmission-button primary" href="/music">Open discography <ArrowUpRight size={17} /></Link></div>
+          <div className="home-music-copy"><p className="transmission-eyebrow">02 / Music</p><h2 id="music-heading">Aureyx discography</h2><p>{albums.length} releases, collaborations, and connected projects in one place.</p><Link className="transmission-button primary" href="/music">Open discography <ArrowUpRight size={17} /></Link></div>
           <Link href="/music" className="home-music-covers" aria-label="Open the Aureyx discography">{albums.slice(0, 3).map((album, index) => <span key={album.link} style={{ "--cover-index": index } as CSSProperties}><Image src={album.image} alt={`${album.title} cover`} fill sizes="240px" /></span>)}</Link>
         </section>
 
