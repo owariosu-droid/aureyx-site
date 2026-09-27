@@ -382,18 +382,32 @@
 /* Homepage-only Hanatekk JEDM feature. */
 .hanatekk-section { display:grid; grid-template-columns:minmax(280px,.82fr) minmax(0,1.18fr); align-items:center; gap:clamp(38px,7vw,100px); min-height:590px; overflow:hidden; isolation:isolate; }
 .hanatekk-section::before { content:''; position:absolute; inset:8% 2%; z-index:-2; border:1px solid #d9b6ee20; border-radius:42% 58% 52% 48%; background:radial-gradient(circle at 28% 50%,#b582d128,transparent 32%),radial-gradient(circle at 76% 30%,#4caac51c,transparent 34%),repeating-radial-gradient(circle at 30% 50%,transparent 0 42px,#ffffff08 43px 44px); animation:hanatekk-field 16s ease-in-out infinite alternate; }
-.hanatekk-logo-wrap { position:relative; display:grid; place-items:center; aspect-ratio:1; overflow:hidden; border:1px solid #ffffff1a; border-radius:34px; background:radial-gradient(circle,#412d4c52,transparent 55%),#050507; box-shadow:0 35px 100px #0009,0 0 70px #a66bc41b; }
+.hanatekk-player { min-width:0; }
+.hanatekk-logo-wrap { position:relative; display:grid; place-items:center; width:100%; padding:0; aspect-ratio:1; overflow:hidden; border:1px solid #ffffff1a; border-radius:34px; background:radial-gradient(circle,#412d4c52,transparent 55%),#050507; color:#fff; cursor:pointer; box-shadow:0 35px 100px #0009,0 0 70px #a66bc41b; appearance:none; transition:border-color .3s,box-shadow .3s,transform .35s; }
+.hanatekk-logo-wrap:hover,.hanatekk-logo-wrap:focus-visible { border-color:#d9a7eb70; box-shadow:0 38px 110px #0009,0 0 90px #b877db35; transform:translateY(-5px); }
+.hanatekk-logo-wrap:focus-visible { outline:2px solid #a9e9ef; outline-offset:5px; }
 .hanatekk-logo-wrap::after { content:''; position:absolute; inset:-20%; background:conic-gradient(from 90deg,transparent,#d59cec18,transparent 28%,#63c6d318,transparent 58%); animation:hanatekk-orbit 14s linear infinite; }
 .hanatekk-logo-wrap img { position:relative; z-index:1; width:100%; height:auto; object-fit:cover; filter:saturate(.88) contrast(1.05); animation:hanatekk-logo-breathe 6s ease-in-out infinite; }
+.hanatekk-play-state { position:absolute; z-index:3; display:grid; place-items:center; width:64px; height:64px; border:1px solid #ffffff4a; border-radius:50%; background:#08070bb8; opacity:0; transform:scale(.82); backdrop-filter:blur(14px); transition:opacity .25s,transform .25s; }
+.hanatekk-logo-wrap:hover .hanatekk-play-state,.hanatekk-logo-wrap:focus-visible .hanatekk-play-state { opacity:1; transform:scale(1); }
+.hanatekk-play-state svg { width:24px; }
+.hanatekk-preview-status { display:grid; grid-template-columns:auto auto minmax(0,1fr); align-items:center; gap:9px; margin-top:14px; color:#b98ed0; font:600 9px/1.4 var(--font-orbitron),sans-serif; letter-spacing:.12em; text-transform:uppercase; }
+.hanatekk-preview-status strong { overflow:hidden; color:#d9edf0; font-size:10px; text-overflow:ellipsis; white-space:nowrap; }
+.hanatekk-player audio { display:block; width:100%; height:42px; margin-top:10px; color-scheme:dark; accent-color:#bb79dc; }
+.hanatekk-player > p { margin-top:8px; color:#8f8395; font:8px var(--font-orbitron),sans-serif; letter-spacing:.1em; text-transform:uppercase; }
 .hanatekk-copy { position:relative; padding:clamp(28px,5vw,58px); border:1px solid #ffffff1b; border-radius:22px; background:linear-gradient(145deg,#15101cdb,#0d1519d4); box-shadow:inset 0 1px #ffffff10,0 28px 80px #0007; backdrop-filter:blur(16px); }
-.hanatekk-copy .transmission-eyebrow { color:#d8a9ed; }
-.hanatekk-copy h2 { margin-top:18px; font-size:clamp(56px,8vw,112px); line-height:.78; letter-spacing:-.065em; }
+.hanatekk-copy .transmission-eyebrow { color:#d8a9ed; font-family:var(--font-orbitron),sans-serif; }
+.hanatekk-copy h2 { margin-top:18px; font-family:var(--font-orbitron),sans-serif; font-size:clamp(52px,7vw,100px); font-weight:800; line-height:.82; letter-spacing:-.055em; text-transform:uppercase; text-shadow:3px 3px 0 #382044,0 0 26px #c07ce530; }
 .hanatekk-copy h2 em { color:#8bd4df; font-size:.62em; letter-spacing:.08em; }
 .hanatekk-copy > p:not(.transmission-eyebrow) { max-width:600px; margin-top:32px; color:#c3b9c4; font-size:15px; line-height:1.9; }
-.hanatekk-roster { display:flex; flex-wrap:wrap; gap:9px; margin-top:30px; }
-.hanatekk-roster span { padding:9px 12px; border:1px solid #ffffff1f; border-radius:999px; background:#ffffff08; color:#ddd4df; font:9px var(--font-geist-mono),monospace; letter-spacing:.12em; }
-.hanatekk-roster span:nth-child(2n) { border-color:#66bdc638; color:#9fdde3; }
-.hanatekk-roster span:nth-child(2n + 1) { border-color:#c889df3b; color:#ddb4ed; }
+.hanatekk-artist-row { display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin-top:30px; }
+.hanatekk-with { color:#9b8ca0; font:700 9px var(--font-orbitron),sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+.hanatekk-artist { display:flex; align-items:center; gap:8px; min-width:118px; padding:7px 9px; border:1px solid #ffffff19; background:#ffffff06; }
+.hanatekk-artist > img { width:31px; height:31px; object-fit:cover; border:1px solid #ffffff24; filter:saturate(.75); }
+.hanatekk-artist > span { display:flex; min-width:0; flex-direction:column; gap:3px; }
+.hanatekk-artist strong { color:#d9b0ea; font:700 9px var(--font-orbitron),sans-serif; letter-spacing:.04em; }
+.hanatekk-artist small { color:#7f9398; font:7px var(--font-orbitron),sans-serif; letter-spacing:.08em; text-transform:uppercase; }
+.hanatekk-id { width:fit-content; margin-top:22px; padding:8px 11px; border:1px solid #ffffff26; color:#b8a9bd; font:700 8px var(--font-orbitron),sans-serif; letter-spacing:.14em; }
 @keyframes hanatekk-field { to { transform:rotate(3deg) scale(1.035); border-radius:57% 43% 40% 60%; } }
 @keyframes hanatekk-orbit { to { transform:rotate(360deg); } }
 @keyframes hanatekk-logo-breathe { 50% { transform:scale(1.035); filter:saturate(1.05) contrast(1.08) drop-shadow(0 0 18px #d8b0e753); } }

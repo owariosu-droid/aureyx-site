@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HomeVideoFeeds from "@/components/HomeVideoFeeds";
 import HomeLinks from "@/components/HomeLinks";
+import HanatekkFeature from "@/components/HanatekkFeature";
 import SocialIcon from "@/components/SocialIcon";
 import { artists } from "@/data/artists";
 import { albums } from "@/data/albums";
@@ -50,10 +51,7 @@ export default function Home() {
 
         <section className="transmission-section home-artists-section" aria-labelledby="artists-heading"><div className="transmission-section-heading"><div><p className="transmission-eyebrow">03 / The people</p><h2 id="artists-heading">Artists</h2></div><Link className="transmission-text-link" href="/artists">All artist profiles <ArrowUpRight size={18} /></Link></div><div className="transmission-artists">{artists.map((artist, index) => <Link className="transmission-artist" href={`/artists/${artist.slug}`} key={artist.slug}><div className="transmission-artist-photo">{artist.image ? <Image src={artist.image} alt="" fill sizes="(max-width: 700px) 84vw, 28vw" /> : <span>{artist.name.charAt(0)}</span>}<span className="transmission-artist-number">0{index + 1}</span></div><div className="transmission-artist-info"><span>{artist.role}</span><h3>{artist.name}</h3><p>{artist.bio}</p></div><ArrowUpRight className="transmission-artist-arrow" size={24} /></Link>)}</div></section>
 
-        <section className="transmission-section hanatekk-section" aria-labelledby="hanatekk-heading">
-          <div className="hanatekk-logo-wrap" data-protected-image><Image src="/hanatekk-logo.png" alt="Hanatekk JEDM lotus logo" width={1254} height={1254} sizes="(max-width: 700px) 82vw, 470px" /></div>
-          <div className="hanatekk-copy"><p className="transmission-eyebrow">04 / Connected label</p><h2 id="hanatekk-heading">Hanatekk<br /><em>JEDM</em></h2><p>Hanatekk JEDM is a Japanese hardcore and EDM label featuring Japanese artists 0KAMI and luvnozomi, alongside American artists Dysto and iyune.</p><div className="hanatekk-roster" aria-label="Featured artists"><span>0KAMI</span><span>luvnozomi</span><span>Dysto</span><span>iyune</span></div></div>
-        </section>
+        <HanatekkFeature />
 
         <section id="videos" className="transmission-section transmission-videos" aria-labelledby="videos-heading">
           <div className="transmission-section-heading"><div><p className="transmission-eyebrow">05 / Watch</p><h2 className="heading-with-brand" id="videos-heading">Videos <SocialIcon platform="YouTube" size={38} /></h2></div><Link className="transmission-text-link" href="/videos">All videos <ArrowUpRight size={18} /></Link></div>
