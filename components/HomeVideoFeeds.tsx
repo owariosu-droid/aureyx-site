@@ -33,7 +33,7 @@ export default async function HomeVideoFeeds({ compact = false }: { compact?: bo
             <div className="home-video-grid">
               {channel.videos.map((video) => (
                 <article className="home-video-card" key={video.id}>
-                  <YouTubePlayer id={video.id} title={`${channel.name}: ${video.title}`} thumbnail={video.thumbnail} />
+                  <YouTubePlayer id={video.id} title={`${channel.name}: ${video.title}`} />
                   <div>
                     <h4><a href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer">{video.title}</a></h4>
                     <time dateTime={video.published}>{new Date(video.published).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}</time>

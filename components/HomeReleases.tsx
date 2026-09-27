@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Play, X } from "lucide-react";
 import { albums } from "@/data/albums";
@@ -53,6 +53,34 @@ const releaseEmbeds: Record<string, { platform: "Bandcamp" | "Spotify"; src: str
   "https://dystofuturemusic.bandcamp.com/track/lyrlvst-chasm-of-eternity": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/track=1143968467/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
 };
 
+const previewSeconds = 30;
+
+function ReleasePreview({ albumTitle, embed, releaseLink, onFinish }: { albumTitle: string; embed: { platform: "Bandcamp" | "Spotify"; src: string }; releaseLink: string; onFinish: () => void }) {
+  const [secondsLeft, setSecondsLeft] = useState(previewSeconds);
+
+  useEffect(() => {
+    const startedAt = Date.now();
+    const interval = window.setInterval(() => {
+      const remaining = Math.max(0, previewSeconds - Math.floor((Date.now() - startedAt) / 1000));
+      setSecondsLeft(remaining);
+      if (remaining === 0) onFinish();
+    }, 250);
+    return () => window.clearInterval(interval);
+  }, [onFinish]);
+
+  return (
+    <div className={`release-inline-player ${embed.platform.toLowerCase()}`}>
+      <div>
+        <SocialIcon platform={embed.platform} />
+        <span>30-second snippet · {secondsLeft}s</span>
+        <a href={releaseLink} target="_blank" rel="noopener noreferrer">Full release <ArrowUpRight size={13} /></a>
+      </div>
+      <div className="release-preview-progress" aria-hidden="true"><span /></div>
+      <iframe src={embed.src} title={`${albumTitle} ${embed.platform} 30-second preview`} allow="autoplay; encrypted-media" referrerPolicy="strict-origin-when-cross-origin" />
+    </div>
+  );
+}
+
 export default function HomeReleases() {
   const [page, setPage] = useState(0);
   const [query, setQuery] = useState("");
@@ -78,7 +106,7 @@ export default function HomeReleases() {
             </div>
             <div className="transmission-release-title"><h3>{album.title}</h3><a href={album.link} target="_blank" rel="noopener noreferrer" aria-label={`Open ${album.title} on ${embed.platform}`}><ArrowUpRight size={18} /></a></div>
             <p>AX / {String(start + index + 1).padStart(3, "0")} <span>{releasePrices[album.link] ?? "Listen"}</span></p>
-            {isPlaying && <div className={`release-inline-player ${embed.platform.toLowerCase()}`}><div><SocialIcon platform={embed.platform} /><span>Preview on {embed.platform}</span><a href={album.link} target="_blank" rel="noopener noreferrer">Open release <ArrowUpRight size={13} /></a></div><iframe src={embed.src} title={`${album.title} ${embed.platform} preview`} allow="autoplay; encrypted-media" referrerPolicy="strict-origin-when-cross-origin" /></div>}
+            {isPlaying && <ReleasePreview albumTitle={album.title} embed={embed} releaseLink={album.link} onFinish={() => setActivePreview(null)} />}
           </article>
         )})}
       </div>

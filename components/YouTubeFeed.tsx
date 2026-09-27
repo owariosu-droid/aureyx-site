@@ -20,7 +20,7 @@ export default async function YouTubeFeed({ channelId, fallbackChannelIds = [], 
       </div>
       {videos.length ? <div className="artist-video-grid mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {videos.map((video) => <article key={video.id} className="artist-video-card overflow-hidden rounded-2xl border border-white/10 bg-[#181618]">
-          <YouTubePlayer id={video.id} title={`${name}: ${video.title}`} thumbnail={video.thumbnail} />
+          <YouTubePlayer id={video.id} title={`${name}: ${video.title}`} />
           <div className="p-5"><h3 className="text-sm font-medium leading-6"><a href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer">{video.title}</a></h3><time dateTime={video.published} className="mt-3 block text-xs text-white/50">{new Date(video.published).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}</time></div>
         </article>)}
       </div> : <p className="mt-6 text-white/60">Videos couldn’t be loaded right now. You can still watch them on the YouTube channel.</p>}
