@@ -9,6 +9,7 @@ import YouTubeFeed from "@/components/YouTubeFeed";
 import ArtistUpdateBody from "@/components/ArtistUpdateBody";
 import SocialIcon from "@/components/SocialIcon";
 import { artists } from "@/data/artists";
+import type { CSSProperties } from "react";
 import { getArtistUpdates, submissionUrl } from "@/lib/artist-updates";
 
 export const revalidate = 300;
@@ -18,7 +19,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const artist = artists.find((item) => item.slug === slug);
-  return { title: artist ? `${artist.name} | Aureyx` : "Artist not found | Aureyx" };
+  return artist ? { title:`${artist.name} | Aureyx`, description:artist.bio, openGraph:{ title:`${artist.name} | Aureyx`,description:artist.bio,images:[artist.cover || artist.image || "/aureyx-youtube-banner.jpg"] } } : { title:"Artist not found | Aureyx" };
 }
 
 export default async function ArtistProfilePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -28,7 +29,7 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
   const { posts, unavailable } = await getArtistUpdates(slug);
 
   return (
-    <div className="transmission-home artists-theme relative min-h-screen">
+    <div className="transmission-home artists-theme relative min-h-screen" style={{ "--artist-page-accent": artist.accent || "#ff5967" } as CSSProperties}>
       {artist.cover && <div className="pointer-events-none fixed inset-0 z-0"><Image src={artist.cover} alt="" fill sizes="100vw" className="object-cover opacity-[0.12]" /><div className="absolute inset-0 bg-black/50" /></div>}
       <Navbar />
       <main className="relative z-10 mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">

@@ -2,6 +2,7 @@ export type Artist = {
   slug: string;
   name: string;
   role: string;
+  accent?: string;
   bio: string;
   image?: string;
   cover?: string;
@@ -19,6 +20,7 @@ export const artists: Artist[] = [
     slug: "lyrlvst",
     name: "Lyrlvst",
     role: "Artist · Producer",
+    accent: "#f05cae",
     bio: "Lyrlvst is a producer who makes breakcore and neo trance/house music.",
     image: "/members/lyrlvst.png",
     cover: "/members/lyrlvst-iliveinagony.png",
@@ -31,6 +33,7 @@ export const artists: Artist[] = [
     slug: "iyune",
     name: "iyune",
     role: "Founder · Artist · Producer",
+    accent: "#9c72e5",
     bio: "Founder of Aureyx. Electronic music shaped by rhythm-game energy and gothic atmospheres.",
     image: "/members/iyune.png",
     youtubeChannelId: "UCrNekfYIdOYln8PP1AcGWvA",
@@ -43,6 +46,7 @@ export const artists: Artist[] = [
     slug: "dysto",
     name: "Dysto",
     role: "Artist · Producer",
+    accent: "#43b9c7",
     bio: "Cyberpunk-inspired music and collaborations with Aureyx.",
     image: "/members/dysto.png",
     youtubeChannelId: "UCcKq5OXoC-guJU9hBcZjC3w",
@@ -53,6 +57,7 @@ export const artists: Artist[] = [
     slug: "yoru-zenaku",
     name: "Yoru Zenaku",
     role: "Artist",
+    accent: "#e34b59",
     bio: "Music and projects from Yoru Zenaku. More about this artist coming soon.",
     image: "/members/yoru-zenaku-pfp.png",
     cover: "/members/yoru-zenaku-cover.png",
@@ -69,6 +74,7 @@ export const artists: Artist[] = [
     slug: "grimvex",
     name: "GRiMVEX",
     role: "Artist",
+    accent: "#e9a44f",
     bio: "Music and projects from GRiMVEX. More about this artist coming soon.",
     videoFallbackChannelIds: ["UC2qP_-I9kcrSazQNUWNd6ag"],
     featuredVideos: [

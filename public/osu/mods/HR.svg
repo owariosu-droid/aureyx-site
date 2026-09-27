@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+  <defs><linearGradient id="g" x1="8" y1="8" x2="64" y2="62"><stop stop-color="#ff657e"/><stop offset="1" stop-color="#ff9b45"/></linearGradient></defs>
+  <path fill="#0b090c" stroke="url(#g)" stroke-width="3" d="M36 4 64 20v32L36 68 8 52V20Z"/>
+  <path fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="m18 42 8-16 10 10 10-10 8 16-18 9Z"/>
+  <path fill="#ff657e" d="m36 17 4 7-4 7-4-7Z"/>
+  <text x="36" y="62" fill="#fff" font-family="Arial,sans-serif" font-size="8" font-weight="700" text-anchor="middle">HR</text>
+</svg>

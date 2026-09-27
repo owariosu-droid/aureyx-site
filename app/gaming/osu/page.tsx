@@ -19,7 +19,7 @@ const profileUrl = "https://osu.ppy.sh/users/37255712";
 */
 const highlightImage: string | null = "/osu/sev26-practice.jpg";
 
-type OsuMod = "HD" | "HR" | "DT";
+type OsuMod = "HD" | "HR";
 
 const goals: { text: string; mods?: OsuMod[] }[] = [
   { text: "Mr. Kill Myself (Darkness) — FC", mods: ["HD", "HR"] },
@@ -46,13 +46,12 @@ const overview = [
 const modNames: Record<OsuMod, string> = {
   HD: "Hidden",
   HR: "Hard Rock",
-  DT: "Double Time",
 };
 
 function ModIcon({ mod, compact = false }: { mod: OsuMod; compact?: boolean }) {
   return (
     <span className={`osu-mod ${compact ? "is-compact" : ""}`} title={modNames[mod]}>
-      <Image src={`/osu/mods/${mod}.png`} alt={`${modNames[mod]} (${mod})`} width={68} height={66} />
+      <Image src={`/osu/mods/${mod}.svg`} alt={`${modNames[mod]} (${mod})`} width={68} height={66} />
       {!compact && <span>{modNames[mod]}</span>}
     </span>
   );
@@ -108,7 +107,7 @@ export default function OsuPage() {
         <header className="osu-header">
           <p className="transmission-eyebrow">For fun / osu!</p>
           <div className="osu-profile-row">
-            <Image src="https://a.ppy.sh/37255712" alt="osu! profile avatar" width={112} height={112} unoptimized className="osu-avatar" />
+            <Image src="/osu/profile-37255712.jpg" alt="osu! profile avatar" width={112} height={112} priority className="osu-avatar" />
             <div><h1>osu!</h1><p>A personal page for mapping projects, scores, and goals. This is separate from Aureyx.</p></div>
             <Image src="/osu/osu-logo.png" alt="" width={80} height={80} className="osu-badge" />
           </div>
@@ -117,7 +116,6 @@ export default function OsuPage() {
             <span>Mods</span>
             <ModIcon mod="HD" />
             <ModIcon mod="HR" />
-            <ModIcon mod="DT" />
           </div>
           <div className="osu-overview" aria-label="osu! page highlights">
             {overview.map(({ label, value, icon: Icon, href }) => (

@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 
 export default function SiteAtmosphere() {
   const progress = useRef<HTMLDivElement>(null);
-  const glow = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -18,15 +17,9 @@ export default function SiteAtmosphere() {
         progress.current?.style.setProperty("--scroll-progress", String(value));
       });
     };
-    const updateGlow = (event: PointerEvent) => {
-      if (event.pointerType === "touch") return;
-      glow.current?.style.setProperty("--pointer-x", `${event.clientX}px`);
-      glow.current?.style.setProperty("--pointer-y", `${event.clientY}px`);
-    };
     updateProgress();
     window.addEventListener("scroll", updateProgress, { passive: true });
     window.addEventListener("resize", updateProgress, { passive: true });
-    window.addEventListener("pointermove", updateGlow, { passive: true });
     const targets = document.querySelectorAll<HTMLElement>("main > header, main > section, .artist-directory-card, .artist-profile-card, .osu-panel, .home-video-channel, .transmission-release, .home-linktree-card, .fun-card");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const observer = new IntersectionObserver((entries) => {
@@ -47,10 +40,9 @@ export default function SiteAtmosphere() {
       cancelAnimationFrame(frame);
       window.removeEventListener("scroll", updateProgress);
       window.removeEventListener("resize", updateProgress);
-      window.removeEventListener("pointermove", updateGlow);
       observer.disconnect();
     };
   }, [pathname]);
 
-  return <><div ref={progress} className="site-scroll-progress" aria-hidden="true" /><div ref={glow} className="site-pointer-glow" aria-hidden="true" /></>;
+  return <div ref={progress} className="site-scroll-progress" aria-hidden="true" />;
 }

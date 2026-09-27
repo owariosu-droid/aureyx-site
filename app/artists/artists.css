@@ -11,7 +11,7 @@
 .artists-theme .artist-directory-card::after { content:''; position:absolute; inset:0; pointer-events:none; border-radius:inherit; background:linear-gradient(120deg,color-mix(in srgb,var(--artist-card-accent) 12%,transparent),transparent 32%); box-shadow:inset 0 2px var(--artist-card-accent); opacity:.7; }
 .artists-theme .artist-directory-card:hover { background: #21191b; border-color: #ff292f80; transform: translateY(-4px); box-shadow: 0 15px 40px #ff292f0c; }
 .artists-theme .artist-directory-card > div:first-child { background: linear-gradient(145deg,#32181c,#151415); }
-.artists-theme .artist-profile-card { background: radial-gradient(circle at 88% 15%,#7c399524,transparent 34%),radial-gradient(circle at 10% 85%,#16848e1b,transparent 38%),linear-gradient(145deg,#19151d,#111518); border-radius: 2px; }
+.artists-theme .artist-profile-card { background:radial-gradient(circle at 88% 15%,color-mix(in srgb,var(--artist-page-accent,#7c3995) 18%,transparent),transparent 34%),radial-gradient(circle at 10% 85%,#16848e1b,transparent 38%),linear-gradient(145deg,#19151d,#111518); border-radius:2px; border-top-color:color-mix(in srgb,var(--artist-page-accent,#ff5967) 55%,transparent); }
 .artists-theme .artist-profile-card > div:first-child { background: linear-gradient(145deg,#32181c,#151415); }
 .artists-theme .artist-profile-card > div:first-child > div { background: linear-gradient(to top,#171516,transparent); }
 .artists-theme .artist-profile-card .border-4 { border-color: #171516; border-radius: 2px; }
@@ -44,4 +44,12 @@
 .artists-theme main section article { border-radius: 14px; }
 @media(max-width:640px) {
   .artists-theme .artist-directory-card,.artists-theme .artist-profile-card,.artists-theme main section article { border-radius: 12px; }
+}
+
+@media(max-width:420px) {
+  .artists-theme main { padding-inline:16px; }
+  .artists-theme main > header { padding-bottom:24px; }
+  .artists-theme .artist-profile-card > div:last-child { padding-inline:18px; }
+  .artist-video-feed { margin-top:38px; }
+  .artist-video-heading h2 { font-size:clamp(28px,10vw,40px); }
 }

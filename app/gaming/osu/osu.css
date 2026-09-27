@@ -1,12 +1,12 @@
 .osu-theme { min-height: 100vh; position: relative; isolation: isolate; background: radial-gradient(circle at 10% 20%,#6d3da91f,transparent 30%),radial-gradient(circle at 90% 58%,#2a8bb01c,transparent 34%),#09090b; }
-.osu-page-art { position: fixed; z-index: -2; inset: 0; background-image: linear-gradient(180deg,rgba(8,8,11,.18),rgba(8,8,11,.62) 48%,#09090bd9 100%),linear-gradient(90deg,rgba(8,8,11,.66),rgba(8,8,11,.08) 55%,rgba(8,8,11,.54)),url('/osu/in-game-background-ariisha.png'); background-size: cover; background-position: center top; filter: brightness(1.16) saturate(1.08); }
+.osu-page-art { position:fixed; z-index:-2; inset:0; background-image:linear-gradient(180deg,rgba(8,8,11,.18),rgba(8,8,11,.62) 48%,#09090bd9 100%),linear-gradient(90deg,rgba(8,8,11,.66),rgba(8,8,11,.08) 55%,rgba(8,8,11,.54)),url('/osu/in-game-background-ariisha-optimized.jpg'); background-size:cover; background-position:center top; filter:brightness(1.16) saturate(1.08); }
 .osu-page-art::after { content: ''; position: absolute; inset: 0; opacity: .18; background-image: repeating-linear-gradient(0deg,transparent 0 3px,#fff 4px),radial-gradient(circle at 20% 24%,#ff5caa55,transparent 28%),radial-gradient(circle at 82% 62%,#4cbbdf42,transparent 34%); mix-blend-mode: screen; pointer-events: none; }
 .osu-theme main { padding-top: 48px; }
 .osu-header { position: relative; overflow: hidden; border: 1px solid #ffffff22; margin-bottom: 40px; padding: 35px 36px 0; background: radial-gradient(circle at 86% 8%,#bd3b9130,transparent 32%),radial-gradient(circle at 12% 92%,#347fb126,transparent 38%),repeating-linear-gradient(135deg,transparent 0 42px,#ffffff08 43px 44px),linear-gradient(120deg,#0b0b0ee8,#121014dc 68%,#7d193032); box-shadow: 0 35px 90px #0009; backdrop-filter: blur(13px); }
 .osu-profile-row { display: flex; align-items: center; gap: 30px; padding: 32px 0; }
 .osu-profile-row h1 { font-size: clamp(64px,9vw,110px); line-height: 1; font-weight: 800; letter-spacing: -.07em; }
 .osu-profile-row p { color: #b9aaa7; margin-top: 16px; font-size: 14px; }
-.osu-avatar { border: 1px solid #ff292f55; object-fit: cover; box-shadow: 0 10px 40px #ff292f15; }
+.osu-avatar { border:1px solid #ff6a9a80; border-radius:18px; object-fit:cover; box-shadow:0 10px 40px #ff292f24,0 0 0 5px #ffffff08; }
 .osu-badge { margin-left: auto; filter: brightness(0) saturate(100%) invert(48%) sepia(93%) saturate(1877%) hue-rotate(309deg) brightness(105%) contrast(101%) drop-shadow(0 0 14px #ff5b9388); opacity: .92; }
 .osu-profile-links { display: flex; align-items: center; flex-wrap: wrap; gap: 25px; margin-bottom: 40px; }
 .osu-profile-links > span { font-size: 12px; color: #ae9f9c; }
@@ -14,7 +14,8 @@
 .osu-mod-key { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: -18px 0 24px; }
 .osu-mod-key > span:first-child { margin-right: 4px; color: #8f8588; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; }
 .osu-mod { display: inline-flex; align-items: center; gap: 5px; color: #cfc7c9; font-size: 10px; }
-.osu-mod img { width: 30px; height: 29px; object-fit: contain; filter: drop-shadow(0 3px 7px #0009); }
+.osu-mod img { width:34px; height:34px; object-fit:contain; filter:drop-shadow(0 3px 7px #0009); transition:transform .25s,filter .25s; }
+.osu-mod:hover img { transform:translateY(-2px) rotate(-3deg); filter:drop-shadow(0 5px 10px #ff5f9670); }
 .osu-mod.is-compact { display: inline-flex; vertical-align: middle; margin: -7px 0 -6px 2px; }
 .osu-mod.is-compact img { width: 28px; height: 27px; }
 .osu-overview { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1px; margin: 0 0 26px; background: #ffffff1c; border: 1px solid #ffffff1c; }
@@ -64,4 +65,6 @@
 .osu-art-credit { margin: 28px 0 0; color: #ffffff57; text-align: right; font-size: 10px; letter-spacing: .08em; }
 .osu-art-credit a { color: #ffffff9c; }
 @media(max-width:700px) { .osu-theme main { padding: 25px 20px 50px; } .osu-header { padding: 28px 20px 0; } .osu-profile-row { gap: 14px; } .osu-profile-row h1 { font-size: clamp(52px,18vw,76px); } .osu-avatar { width: 68px; height: 68px; } .osu-badge { display: block; width: 48px; height: 48px; } .osu-overview { grid-template-columns: 1fr; } .osu-theme .osu-panel { padding: 22px 18px; } .osu-sections { gap: 20px; } .osu-sections a { font-size: 11px; } .osu-section-heading { align-items: start; flex-direction: column; gap: 10px; } .osu-filters { width: 100%; } }
+@media(max-width:480px) { .osu-theme main { padding-inline:15px; } .osu-header { padding-inline:16px; } .osu-profile-row { flex-wrap:wrap; } .osu-profile-row > div { min-width:0; flex:1; } .osu-profile-row h1 { font-size:clamp(46px,16vw,64px); } .osu-badge { margin-left:0; } .osu-profile-links { gap:14px; } .osu-profile-links > span { width:100%; } .osu-theme .osu-panel { padding-inline:16px; } .osu-map-tools { gap:14px; } }
+@media(pointer:coarse) { .osu-page-art { position:absolute; filter:brightness(1.08) saturate(1.03); } .osu-header,.osu-theme .osu-panel { backdrop-filter:none; } }
 @media(prefers-reduced-motion:reduce) { .osu-map-card:hover { transform: none; } }
