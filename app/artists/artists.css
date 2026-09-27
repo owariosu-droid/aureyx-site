@@ -16,4 +16,26 @@
 .artists-theme main section > div > div.rounded-2xl { border-radius: 2px; }
 .artists-theme #updates a.rounded-full { border-radius: 2px; }
 .artists-theme #updates a.rounded-full:hover { border-color: #ff292f80; }
+.youtube-player-shell { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; min-height: 1px; overflow: hidden; background: #20191b; }
+.youtube-player-shell iframe { position: absolute; inset: 0; display: block; width: 100%; height: 100%; border: 0; }
+.artist-video-card { min-width: 0; }
+@media(max-width:640px) {
+  .artist-video-feed { width: 100%; margin-top: 48px; scroll-margin-top: 180px; }
+  .artist-video-heading { align-items: flex-start; }
+  .artist-video-heading > a { width: 100%; justify-content: center; padding: 12px 14px; border: 1px solid #ffffff24; }
+  .artist-video-grid { display: grid !important; grid-template-columns: minmax(0,1fr) !important; gap: 18px !important; width: 100%; }
+  .artist-video-card { display: block; width: 100%; overflow: hidden; }
+  .artist-video-card > div:last-child { padding: 16px; }
+}
 @media(prefers-reduced-motion:reduce) { .artists-theme .artist-directory-card:hover { transform: none; } }
+
+/* Softer product-card geometry without losing the dark editorial theme. */
+.artists-theme .artist-directory-card { border-radius: 18px; box-shadow: 0 24px 60px #0004; }
+.artists-theme .artist-directory-card > div:first-child { overflow: hidden; }
+.artists-theme .artist-directory-card:hover { transform: translateY(-7px); box-shadow: 0 34px 80px #0008,0 0 0 1px #ff29301f; }
+.artists-theme .artist-profile-card { border-radius: 22px; box-shadow: 0 35px 90px #0007; }
+.artists-theme .artist-profile-card > div:first-child { overflow: hidden; }
+.artists-theme main section article { border-radius: 14px; }
+@media(max-width:640px) {
+  .artists-theme .artist-directory-card,.artists-theme .artist-profile-card,.artists-theme main section article { border-radius: 12px; }
+}

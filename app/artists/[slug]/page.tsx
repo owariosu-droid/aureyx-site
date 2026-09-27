@@ -48,7 +48,7 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
             <h1 className="break-words text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">{artist.name}</h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/65">{artist.bio}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href={artist.youtubeChannelId ? "#videos" : "#updates"} className="rounded-full border border-white/30 px-6 py-3 text-sm hover:bg-white/10">{artist.youtubeChannelId ? "Videos ↓" : "Latest updates ↓"}</a>
+              <a href={(artist.youtubeChannelId || artist.videoFallbackChannelIds) ? "#videos" : "#updates"} className="rounded-full border border-white/30 px-6 py-3 text-sm hover:bg-white/10">{(artist.youtubeChannelId || artist.videoFallbackChannelIds) ? "Videos ↓" : "Latest updates ↓"}</a>
               {artist.blog && <a href="#blog" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Blog ↓</a>}
               {artist.albums && <a href="#albums" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Albums ↓</a>}
               {artist.links?.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="social-icon-link rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10"><SocialIcon platform={link.label} />{link.label} ↗</a>)}
@@ -74,9 +74,9 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
           </article>)}</div>
         </section>}
 
-        {artist.youtubeChannelId && <YouTubeFeed channelId={artist.youtubeChannelId} name={artist.name} />}
+        {(artist.youtubeChannelId || artist.videoFallbackChannelIds) && <YouTubeFeed channelId={artist.youtubeChannelId} fallbackChannelIds={artist.videoFallbackChannelIds} featuredVideos={artist.featuredVideos} name={artist.name} />}
 
-        {(artist.blog || !artist.youtubeChannelId || posts.length > 0) &&
+        {(artist.blog || (!artist.youtubeChannelId && !artist.videoFallbackChannelIds) || posts.length > 0) &&
         <section id={artist.blog ? "blog" : "updates"} className="mt-16 scroll-mt-28" aria-labelledby="updates-heading">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div><p className="text-xs uppercase tracking-[0.25em] text-white/45">{artist.name}</p><h2 id="updates-heading" className="mt-3 text-3xl font-semibold">{artist.blog ? "Blog" : "Updates"}</h2><p className="mt-3 text-white/60">Notes, photos, and works in progress.</p></div>

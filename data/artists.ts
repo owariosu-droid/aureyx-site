@@ -6,6 +6,8 @@ export type Artist = {
   image?: string;
   cover?: string;
   youtubeChannelId?: string;
+  videoFallbackChannelIds?: string[];
+  featuredVideos?: { id: string; title: string; published: string; thumbnail: string }[];
   blog?: boolean;
   albums?: { title: string; image: string; href?: string }[];
   gallery?: { src: string; alt: string }[];
@@ -31,6 +33,9 @@ export const artists: Artist[] = [
     role: "Founder · Artist · Producer",
     bio: "Founder of Aureyx. Electronic music shaped by rhythm-game energy and gothic atmospheres.",
     image: "/members/iyune.png",
+    youtubeChannelId: "UCrNekfYIdOYln8PP1AcGWvA",
+    videoFallbackChannelIds: ["UC2qP_-I9kcrSazQNUWNd6ag", "UCcKq5OXoC-guJU9hBcZjC3w"],
+    featuredVideos: [{ id: "I_-ZQ3-H8LU", title: "iyune - Scarlet Oasis (lyrlvst remix)", published: "2026-09-19T07:41:17+00:00", thumbnail: "https://i2.ytimg.com/vi/I_-ZQ3-H8LU/hqdefault.jpg" }],
     links: [{ label: "YouTube", href: "https://www.youtube.com/@iyuneofficial" }],
 
   },
@@ -40,6 +45,8 @@ export const artists: Artist[] = [
     role: "Artist · Producer",
     bio: "Cyberpunk-inspired music and collaborations with Aureyx.",
     image: "/members/dysto.png",
+    youtubeChannelId: "UCcKq5OXoC-guJU9hBcZjC3w",
+    links: [{ label: "YouTube", href: "https://www.youtube.com/@dystoftmusic23" }],
 
   },
   {
@@ -63,5 +70,10 @@ export const artists: Artist[] = [
     name: "GRiMVEX",
     role: "Artist",
     bio: "Music and projects from GRiMVEX. More about this artist coming soon.",
+    videoFallbackChannelIds: ["UC2qP_-I9kcrSazQNUWNd6ag"],
+    featuredVideos: [
+      { id: "DjUsn5p1TD4", title: "GRiMVEX - PHAETHON | FANMADE", published: "2026-08-19T07:45:37+00:00", thumbnail: "https://i1.ytimg.com/vi/DjUsn5p1TD4/hqdefault.jpg" },
+      { id: "mRHNXEQZzbQ", title: "GRiMVEX - IONIZE | FANMADE", published: "2026-08-19T07:28:05+00:00", thumbnail: "https://i2.ytimg.com/vi/mRHNXEQZzbQ/hqdefault.jpg" },
+    ],
   },
 ];
