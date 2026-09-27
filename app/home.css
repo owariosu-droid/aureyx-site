@@ -322,8 +322,7 @@
 .release-inline-player { margin-top: 17px; overflow: hidden; border: 1px solid #ffffff22; border-radius: 12px; background: #151314; box-shadow: 0 20px 45px #0006; }
 .release-inline-player > div { display: flex; align-items: center; gap: 8px; padding: 10px 12px; color: #bdb2af; font: 9px var(--font-geist-mono),monospace; letter-spacing: .08em; text-transform: uppercase; }
 .release-inline-player > div > a { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; color: #eeeae6; }
-.release-inline-player .release-preview-progress { display: block; height: 2px; padding: 0; overflow: hidden; background: #ffffff12; }
-.release-preview-progress > span { display: block; width: 100%; height: 100%; background: linear-gradient(90deg,#ff2438,#ff7882); transform-origin: left; animation: release-preview-countdown 30s linear forwards; }
+.release-inline-player audio { display: block; width: calc(100% - 20px); height: 42px; margin: 0 10px 12px; color-scheme: dark; accent-color: var(--release-accent,#ff3944); }
 .release-inline-player iframe { display: block; width: 100%; height: 120px; border: 0; background: #151314; }
 .release-inline-player.spotify iframe { height: 152px; }
 
@@ -345,7 +344,6 @@
 @keyframes hero-image-drift { from { scale: 1.035; transform: translate3d(-.4%,0,0); } to { scale: 1.085; transform: translate3d(.5%,-.7%,0); } }
 @keyframes hero-content-enter { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes section-reveal { from { opacity: .15; transform: translateY(52px) scale(.985); filter: blur(5px); } to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); } }
-@keyframes release-preview-countdown { to { transform: scaleX(0); } }
 
 @media(max-width:700px) {
   .transmission-hero::after { inset-inline: 0; }
@@ -361,3 +359,50 @@
 @media(prefers-reduced-motion:reduce) {
   .transmission-backdrop,.transmission-center { animation: none; }
 }
+
+/* A wider spectrum, kept dark enough to preserve the Aureyx identity. */
+.transmission-intro { background: radial-gradient(circle at 8% 35%,#1c74b61c,transparent 34%); }
+.transmission-intro .transmission-eyebrow { color: #63b8e8; }
+.transmission-founder { background: radial-gradient(circle at 88% 42%,#9c4ddb18,transparent 38%); }
+.transmission-founder .transmission-eyebrow { color: #c391ef; }
+.home-music-gateway { background: radial-gradient(circle at 72% 48%,#f2933718,transparent 40%); }
+.home-music-gateway .transmission-eyebrow { color: #f5ad64; }
+.home-music-gateway .transmission-button.primary { background: linear-gradient(110deg,#ff3d4b,#e98735); border-color: transparent; color: #100808; }
+.home-artists-section { background: radial-gradient(circle at 12% 38%,#17b8aa14,transparent 36%); }
+.home-artists-section .transmission-eyebrow { color: #51d3c7; }
+.transmission-videos { background: radial-gradient(circle at 90% 25%,#d82d7414,transparent 36%); }
+.transmission-videos .transmission-eyebrow { color: #f06aa0; }
+.transmission-links { background: radial-gradient(circle at 8% 35%,#75b83d13,transparent 36%); }
+.transmission-links .transmission-eyebrow { color: #9ed866; }
+.transmission-explore { background: radial-gradient(circle at 50% 65%,#755bd018,transparent 45%); }
+.transmission-explore-card:first-child { border-color: #ae76de35; background-color: #25162b1f; }
+.transmission-explore-card:last-child { border-color: #4aaec535; background: radial-gradient(circle at right bottom,#2d9dbb15,transparent 65%); }
+
+.home-artists-section .transmission-artist:nth-child(5n + 1) { --artist-accent: #ff5360; }
+.home-artists-section .transmission-artist:nth-child(5n + 2) { --artist-accent: #b987ee; }
+.home-artists-section .transmission-artist:nth-child(5n + 3) { --artist-accent: #43c9c0; }
+.home-artists-section .transmission-artist:nth-child(5n + 4) { --artist-accent: #f0a454; }
+.home-artists-section .transmission-artist:nth-child(5n) { --artist-accent: #67aee8; }
+.home-artists-section .transmission-artist-info > span { color: var(--artist-accent,#d68d90); }
+.home-artists-section .transmission-artist:hover { border-color: color-mix(in srgb,var(--artist-accent,#ff3543) 55%,transparent); box-shadow: 0 32px 75px #0009,0 0 36px color-mix(in srgb,var(--artist-accent,#ff3543) 12%,transparent); }
+
+.home-video-channels-compact .home-video-channel:nth-child(4n + 1) { --channel-accent: #f23c4d; }
+.home-video-channels-compact .home-video-channel:nth-child(4n + 2) { --channel-accent: #bd74e7; }
+.home-video-channels-compact .home-video-channel:nth-child(4n + 3) { --channel-accent: #42bdb4; }
+.home-video-channels-compact .home-video-channel:nth-child(4n) { --channel-accent: #e6a24e; }
+.home-video-channels-compact .home-video-channel { border-top: 2px solid var(--channel-accent,#ff3944); background: radial-gradient(circle at 100% 0,color-mix(in srgb,var(--channel-accent,#ff3944) 12%,transparent),transparent 42%),linear-gradient(145deg,#171516,#111); }
+.home-video-channels-compact .home-video-channel header > a { border-color: var(--channel-accent,#ff3944); }
+
+.catalog-page { background: radial-gradient(circle at 12% 12%,#7549a018,transparent 28%),radial-gradient(circle at 85% 35%,#167e9415,transparent 32%),#101011; }
+.catalog-page .catalog-hero .transmission-eyebrow { color: #bc8be3; }
+.catalog-list .transmission-release:nth-child(6n + 1) { --release-accent: #ff4b5b; }
+.catalog-list .transmission-release:nth-child(6n + 2) { --release-accent: #b27ae7; }
+.catalog-list .transmission-release:nth-child(6n + 3) { --release-accent: #47c9bd; }
+.catalog-list .transmission-release:nth-child(6n + 4) { --release-accent: #e8a34f; }
+.catalog-list .transmission-release:nth-child(6n + 5) { --release-accent: #599bdc; }
+.catalog-list .transmission-release:nth-child(6n) { --release-accent: #dc6fa8; }
+.catalog-list .transmission-release:hover .transmission-release-art,
+.catalog-list .transmission-release.is-previewing .transmission-release-art { border-color: var(--release-accent); box-shadow: 0 18px 55px color-mix(in srgb,var(--release-accent) 18%,transparent); }
+.catalog-list .transmission-release-title > a:hover { color: var(--release-accent); }
+.catalog-list .release-preview-button:hover { border-color: var(--release-accent); background: color-mix(in srgb,var(--release-accent) 82%,#111); }
+.catalog-list .release-inline-player { border-color: color-mix(in srgb,var(--release-accent) 42%,transparent); background: linear-gradient(145deg,color-mix(in srgb,var(--release-accent) 9%,#151314),#151314 55%); }
