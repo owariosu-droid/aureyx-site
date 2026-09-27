@@ -35,13 +35,11 @@ body {
   margin: 0;
   min-height: 100vh;
 
-  background: linear-gradient(
-    180deg,
-    #292929 0%,
-    #242424 30%,
-    #202020 65%,
-    #1c1c1c 100%
-  );
+  background:
+    radial-gradient(circle at 8% 12%, rgba(120, 60, 170, .16), transparent 30rem),
+    radial-gradient(circle at 92% 32%, rgba(21, 145, 156, .12), transparent 32rem),
+    radial-gradient(circle at 46% 78%, rgba(190, 48, 79, .12), transparent 36rem),
+    linear-gradient(145deg, #17151c 0%, #101318 48%, #181113 100%);
 
   background-attachment: fixed;
 
@@ -53,6 +51,21 @@ body {
     Arial,
     Helvetica,
     sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .22;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px),
+    repeating-linear-gradient(118deg, transparent 0 76px, rgba(217,96,150,.025) 77px 78px);
+  background-size: 72px 72px,72px 72px,180px 180px;
+  mask-image: linear-gradient(to bottom,black,transparent 88%);
 }
 
 .site-scroll-progress {
@@ -75,7 +88,9 @@ body {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: radial-gradient(520px circle at var(--pointer-x) var(--pointer-y), rgba(255,40,52,.045), transparent 70%);
+  background:
+    radial-gradient(520px circle at var(--pointer-x) var(--pointer-y), rgba(94,195,207,.06), transparent 65%),
+    radial-gradient(420px circle at calc(var(--pointer-x) + 14vw) calc(var(--pointer-y) + 10vh), rgba(200,77,145,.05), transparent 72%);
 }
 
 body > *:not(.site-scroll-progress):not(.site-pointer-glow) { position: relative; z-index: 1; }
@@ -172,10 +187,25 @@ a:active {
   top: 0;
   z-index: 50;
   width: 100%;
-  background: rgba(36, 36, 36, 0.94);
+  background: linear-gradient(105deg,rgba(23,20,29,.94),rgba(18,25,29,.94) 50%,rgba(31,18,24,.94));
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(16px);
 }
+
+.aureyx-footer {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 110%,rgba(102,190,193,.14),transparent 35%),
+    radial-gradient(circle at 84% -20%,rgba(176,76,151,.16),transparent 38%),
+    repeating-linear-gradient(135deg,transparent 0 34px,rgba(255,255,255,.018) 35px 36px),
+    #0d0d11;
+}
+.aureyx-footer::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg,transparent,#ffffff09 50%,transparent); }
+.aureyx-footer .social-icon-link:nth-child(1) svg { color: #55cf87; }
+.aureyx-footer .social-icon-link:nth-child(2) svg { color: #63b6d4; }
+.aureyx-footer .social-icon-link:nth-child(3) svg { color: #c98be9; }
+.aureyx-footer .social-icon-link:nth-child(4) svg { color: #ff5968; }
 
 .aureyx-nav > div {
   max-width: 1200px;

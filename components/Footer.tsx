@@ -5,7 +5,7 @@ export default function Footer() {
         <footer
           id="links"
           style={{ marginTop: "48px", padding: "32px 24px" }}
-          className="border-t border-white/10"
+          className="aureyx-footer border-t border-white/10"
       >
         <div
           style={{

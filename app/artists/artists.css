@@ -1,18 +1,26 @@
-.artists-theme { min-height: 100vh; }
+.artists-theme { min-height: 100vh; position: relative; isolation: isolate; background: radial-gradient(circle at 12% 16%,#71328d26,transparent 30%),radial-gradient(circle at 88% 45%,#197f8b1f,transparent 34%),radial-gradient(circle at 34% 86%,#bb5b3218,transparent 30%),linear-gradient(155deg,#100e14,#0c1215 52%,#160e12); }
+.artists-theme::before { content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .28; background-image: radial-gradient(circle,#ffffff18 1px,transparent 1.5px),linear-gradient(125deg,transparent 0 48%,#bc79dd0a 49% 50%,transparent 51%); background-size: 31px 31px,210px 210px; mask-image: linear-gradient(black,transparent 92%); }
 .artists-theme main > header { text-align: left; border-bottom: 1px solid #ffffff20; padding-bottom: 32px; }
 .artists-theme main > header > p { margin-left: 0; }
 .artists-theme main > header > p:first-child { color: #ef888c; }
-.artists-theme .artist-directory-card { background: #171516; border-radius: 2px; transition: border-color .3s, transform .3s,box-shadow .3s; }
+.artists-theme .artist-directory-card { --artist-card-accent:#ff5967; position:relative; background: linear-gradient(145deg,color-mix(in srgb,var(--artist-card-accent) 10%,#171516),#111214 64%); border-radius: 2px; transition: border-color .3s, transform .3s,box-shadow .3s; }
+.artists-theme .artist-directory-card:nth-child(5n + 2) { --artist-card-accent:#b879e3; }
+.artists-theme .artist-directory-card:nth-child(5n + 3) { --artist-card-accent:#40c1b7; }
+.artists-theme .artist-directory-card:nth-child(5n + 4) { --artist-card-accent:#e9a04d; }
+.artists-theme .artist-directory-card:nth-child(5n) { --artist-card-accent:#559fdf; }
+.artists-theme .artist-directory-card::after { content:''; position:absolute; inset:0; pointer-events:none; border-radius:inherit; background:linear-gradient(120deg,color-mix(in srgb,var(--artist-card-accent) 12%,transparent),transparent 32%); box-shadow:inset 0 2px var(--artist-card-accent); opacity:.7; }
 .artists-theme .artist-directory-card:hover { background: #21191b; border-color: #ff292f80; transform: translateY(-4px); box-shadow: 0 15px 40px #ff292f0c; }
 .artists-theme .artist-directory-card > div:first-child { background: linear-gradient(145deg,#32181c,#151415); }
-.artists-theme .artist-profile-card { background: #171516; border-radius: 2px; }
+.artists-theme .artist-profile-card { background: radial-gradient(circle at 88% 15%,#7c399524,transparent 34%),radial-gradient(circle at 10% 85%,#16848e1b,transparent 38%),linear-gradient(145deg,#19151d,#111518); border-radius: 2px; }
 .artists-theme .artist-profile-card > div:first-child { background: linear-gradient(145deg,#32181c,#151415); }
 .artists-theme .artist-profile-card > div:first-child > div { background: linear-gradient(to top,#171516,transparent); }
 .artists-theme .artist-profile-card .border-4 { border-color: #171516; border-radius: 2px; }
 .artists-theme .artist-profile-card a { border-radius: 2px; }
 .artists-theme .artist-profile-card a:hover { background: #ff292f15; border-color: #ff292f80; }
 .artists-theme main section { scroll-margin-top: 140px; }
-.artists-theme main section article { background: #171516; border-radius: 2px; }
+.artists-theme main section article { background: radial-gradient(circle at 100% 0,#6c326d1c,transparent 42%),linear-gradient(145deg,#19161d,#111517); border-radius: 2px; }
+.artists-theme main section:nth-of-type(3n + 2) article { background: radial-gradient(circle at 0 100%,#147f8a1d,transparent 44%),linear-gradient(145deg,#141a1d,#121316); }
+.artists-theme main section:nth-of-type(3n) article { background: radial-gradient(circle at 100% 100%,#bd67301b,transparent 44%),linear-gradient(145deg,#1b1715,#121316); }
 .artists-theme main section > div > div.rounded-2xl { border-radius: 2px; }
 .artists-theme #updates a.rounded-full { border-radius: 2px; }
 .artists-theme #updates a.rounded-full:hover { border-color: #ff292f80; }
