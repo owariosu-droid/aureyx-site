@@ -33,7 +33,7 @@ export default function Footer() {
           </a>
   
           <a className="social-icon-link"
-            href="https://linktr.ee/dystofuturemusic"
+            href="https://linktr.ee/dystofuturemusic23"
             target="_blank"
             rel="noopener noreferrer"
           >

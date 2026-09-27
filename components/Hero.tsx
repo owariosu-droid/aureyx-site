@@ -27,7 +27,7 @@ const platforms = [
   {
     title: "Connect",
     subtitle: "All Links",
-    href: "https://linktr.ee/dystofuturemusic",
+    href: "https://linktr.ee/dystofuturemusic23",
     icon: ExternalLink,
   },
 ];

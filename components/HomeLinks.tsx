@@ -4,8 +4,8 @@ import SocialIcon from "@/components/SocialIcon";
 const profiles = [
   {
     name: "Aureyx",
-    handle: "linktr.ee/dystofuturemusic",
-    href: "https://linktr.ee/dystofuturemusic",
+    handle: "linktr.ee/dystofuturemusic23",
+    href: "https://linktr.ee/dystofuturemusic23",
     image: "/aureyx-space-background.jpg",
     links: [
       ["Instagram", "https://instagram.com/aureyx_music"],
