@@ -12,6 +12,7 @@ export type Artist = {
   blog?: boolean;
   albums?: { title: string; image: string; href?: string }[];
   gallery?: { src: string; alt: string }[];
+  conceptArt?: { src: string; alt: string; width: number; height: number }[];
   links?: { label: string; href: string }[];
 };
 
@@ -67,6 +68,13 @@ export const artists: Artist[] = [
     gallery: [
       { src: "/members/yoru-zenaku-cover.png", alt: "Yoru cyberpunk crew in a red-lit city" },
       { src: "/members/yoru-zenaku-gallery.png", alt: "Masked figures in black and red artwork selected by Yoru Zenaku" },
+    ],
+    conceptArt: [
+      { src: "/members/yoru-concept-01.jpg", alt: "Red and black Death Note and Tokyo Ghoul inspired concept artwork by Yoru Zenaku", width: 1536, height: 1024 },
+      { src: "/members/yoru-concept-02.jpg", alt: "Red and purple cyberpunk Berserk concept artwork by Yoru Zenaku", width: 1254, height: 1254 },
+      { src: "/members/yoru-concept-03.jpg", alt: "Cyber Berserk swordsman concept artwork by Yoru Zenaku", width: 1254, height: 1254 },
+      { src: "/members/yoru-concept-04.jpg", alt: "Red cybernetic Berserk character concept artwork by Yoru Zenaku", width: 1254, height: 1254 },
+      { src: "/members/yoru-concept-05.jpg", alt: "Purple Tokyo Ghoul and Berserk character concept artwork by Yoru Zenaku", width: 1254, height: 1254 },
     ],
 
   },

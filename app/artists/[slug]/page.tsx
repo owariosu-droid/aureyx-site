@@ -51,6 +51,7 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
             <div className="mt-8 flex flex-wrap gap-3">
               <a href={(artist.youtubeChannelId || artist.videoFallbackChannelIds) ? "#videos" : "#updates"} className="rounded-full border border-white/30 px-6 py-3 text-sm hover:bg-white/10">{(artist.youtubeChannelId || artist.videoFallbackChannelIds) ? "Videos ↓" : "Latest updates ↓"}</a>
               {artist.blog && <a href="#blog" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Blog ↓</a>}
+              {artist.conceptArt && <a href="#concept-art" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Concept art ↓</a>}
               {artist.albums && <a href="#albums" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Albums ↓</a>}
               {artist.links?.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="social-icon-link rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10"><SocialIcon platform={link.label} />{link.label} ↗</a>)}
             </div>
@@ -65,6 +66,11 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
               <Image src={photo.src} alt={photo.alt} width={1536} height={1176} sizes="(max-width: 768px) 100vw, 50vw" className="h-auto w-full" />
             </div>)}
           </div>
+        </section>}
+
+        {artist.conceptArt && <section id="concept-art" className="yoru-concept-section mt-16 scroll-mt-32" aria-labelledby="concept-art-heading">
+          <div className="yoru-concept-heading"><div><p className="text-xs uppercase tracking-[0.25em] text-white/45">Yoru Zenaku</p><h2 id="concept-art-heading" className="mt-3 text-3xl font-semibold">Concept Art</h2></div><p>Selected concept artwork by Yoru Zenaku.</p></div>
+          <div className="yoru-concept-grid">{artist.conceptArt.map((art, index) => <figure key={art.src} data-protected-image className={index === 0 ? "is-wide" : ""}><Image src={art.src} alt={art.alt} width={art.width} height={art.height} quality={82} sizes={index === 0 ? "(max-width: 900px) 100vw, 1200px" : "(max-width: 700px) 100vw, 50vw"} /><figcaption>Concept {String(index + 1).padStart(2,"0")}</figcaption></figure>)}</div>
         </section>}
 
         {artist.albums && <section id="albums" className="mt-16 scroll-mt-32" aria-labelledby="albums-heading">

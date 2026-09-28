@@ -53,3 +53,15 @@
   .artist-video-feed { margin-top:38px; }
   .artist-video-heading h2 { font-size:clamp(28px,10vw,40px); }
 }
+
+.yoru-concept-section { padding-top:38px; border-top:1px solid #ffffff19; }
+.yoru-concept-heading { display:flex; align-items:end; justify-content:space-between; gap:28px; margin-bottom:28px; }
+.yoru-concept-heading > p { max-width:320px; color:#9e939c; font-size:13px; line-height:1.7; }
+.yoru-concept-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+.yoru-concept-grid figure { position:relative; overflow:hidden; margin:0; border:1px solid #ffffff1d; border-radius:16px; background:#080809; box-shadow:0 22px 60px #0007; }
+.yoru-concept-grid figure.is-wide { grid-column:1/-1; }
+.yoru-concept-grid img { display:block; width:100%; height:auto; transition:transform .55s ease; }
+.yoru-concept-grid figure:hover img { transform:scale(1.015); }
+.yoru-concept-grid figcaption { position:absolute; right:12px; bottom:12px; padding:7px 9px; border:1px solid #ffffff25; border-radius:999px; background:#09090bc7; color:#d7cdd4; font:8px var(--font-geist-mono),monospace; letter-spacing:.14em; text-transform:uppercase; }
+@media(max-width:640px) { .yoru-concept-heading { align-items:start; flex-direction:column; gap:10px; } .yoru-concept-grid { grid-template-columns:1fr; gap:12px; } .yoru-concept-grid figure.is-wide { grid-column:auto; } .yoru-concept-grid figure { border-radius:11px; } }
+@media(pointer:coarse) { .yoru-concept-grid img { transition:none; } }
