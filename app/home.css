@@ -378,9 +378,9 @@
 .hanatekk-logo-wrap { position:relative; display:grid; place-items:center; width:100%; padding:0; aspect-ratio:1; overflow:hidden; border:1px solid #ffffff1a; border-radius:34px; background:radial-gradient(circle,#412d4c52,transparent 55%),#050507; color:#fff; cursor:pointer; box-shadow:0 35px 100px #0009,0 0 70px #a66bc41b; appearance:none; transition:border-color .3s,box-shadow .3s,transform .35s; }
 .hanatekk-logo-wrap:hover,.hanatekk-logo-wrap:focus-visible { border-color:#d9a7eb70; box-shadow:0 38px 110px #0009,0 0 90px #b877db35; transform:translateY(-5px); }
 .hanatekk-logo-wrap:focus-visible { outline:2px solid #a9e9ef; outline-offset:5px; }
-.hanatekk-logo-wrap::before { content:''; position:absolute; inset:7%; z-index:2; background:linear-gradient(110deg,transparent 32%,#ffffffbc 47%,#d7a5ee66 52%,transparent 66%); background-size:260% 100%; background-position:180% 0; mix-blend-mode:screen; -webkit-mask:url('/hanatekk-logo.png') center/contain no-repeat; mask:url('/hanatekk-logo.png') center/contain no-repeat; animation:hanatekk-logo-sweep 5.8s ease-in-out infinite; pointer-events:none; }
-.hanatekk-logo-wrap::after { content:''; position:absolute; inset:-20%; background:conic-gradient(from 90deg,transparent,#d59cec18,transparent 28%,#63c6d318,transparent 58%); animation:hanatekk-orbit 14s linear infinite; }
-.hanatekk-logo-wrap img { position:relative; z-index:1; width:100%; height:auto; object-fit:cover; filter:saturate(.88) contrast(1.05); animation:hanatekk-logo-breathe 6s ease-in-out infinite; }
+.hanatekk-logo-wrap::before { content:none; }
+.hanatekk-logo-wrap::after { content:''; position:absolute; inset:-20%; background:conic-gradient(from 90deg,transparent,#d59cec18,transparent 28%,#63c6d318,transparent 58%); }
+.hanatekk-logo-wrap img { position:relative; z-index:1; width:100%; height:auto; object-fit:cover; filter:saturate(.88) contrast(1.05); }
 .hanatekk-play-state { position:absolute; z-index:3; display:grid; place-items:center; width:64px; height:64px; border:1px solid #ffffff4a; border-radius:50%; background:#08070bb8; opacity:0; transform:scale(.82); backdrop-filter:blur(14px); transition:opacity .25s,transform .25s; }
 .hanatekk-logo-wrap:hover .hanatekk-play-state,.hanatekk-logo-wrap:focus-visible .hanatekk-play-state { opacity:1; transform:scale(1); }
 .hanatekk-play-state svg { width:24px; }
@@ -403,8 +403,8 @@
 .hanatekk-id { width:fit-content; margin-top:22px; padding:8px 11px; border:1px solid #ffffff26; color:#b8a9bd; font:700 8px var(--font-orbitron),sans-serif; letter-spacing:.14em; }
 @keyframes hanatekk-field { to { transform:rotate(3deg) scale(1.035); border-radius:57% 43% 40% 60%; } }
 @keyframes hanatekk-orbit { to { transform:rotate(360deg); } }
-@keyframes hanatekk-logo-breathe { 0%,100% { transform:scale(1) rotate(-.25deg); } 50% { transform:scale(1.035) rotate(.35deg); } }
-@keyframes hanatekk-logo-sweep { 0%,58% { background-position:180% 0; opacity:0; } 68% { opacity:.8; } 88%,100% { background-position:-80% 0; opacity:0; } }
+@keyframes hanatekk-logo-breathe { 0%,12%,100% { transform:scale(.91,.78); } 48%,78% { transform:scale(1.015,1.015); } 90% { transform:scale(.96,.9); } }
+@keyframes hanatekk-petal-open { 0%,12%,100% { opacity:.04; transform:scale(.74,.58); } 46% { opacity:.18; transform:scale(1.025,1.08); } 68%,78% { opacity:.1; transform:scale(1,1); } 90% { opacity:.05; transform:scale(.88,.8); } }
 @keyframes hero-fold-drift { from { transform:scale(1.02) translate3d(-.5%,0,0); } to { transform:scale(1.09) translate3d(.8%,-.7%,0); } }
 @keyframes hero-ribbon-left { to { transform:translate3d(6%,7%,0) rotate(16deg) scale(1.05); } }
 @keyframes hero-ribbon-right { to { transform:translate3d(-5%,-8%,0) rotate(-14deg) scale(1.08); } }
