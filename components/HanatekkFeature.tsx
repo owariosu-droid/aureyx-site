@@ -16,7 +16,7 @@ const artists = [
   { name: "0KAMI", image: "/hanatekk/okami.png", region: "Japan" },
   { name: "luvnozomi", image: "/hanatekk/luvnozomi.jpg", region: "Japan" },
   { name: "Dysto", image: "/hanatekk/dysto.jpg", region: "United States" },
-  { name: "iyune", image: "/members/iyune.png", region: "United States" },
+  { name: "iyune", image: "/members/iyune-optimized.jpg", region: "United States" },
 ];
 
 export default function HanatekkFeature() {

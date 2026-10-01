@@ -4,6 +4,7 @@ import "./globals.css";
 import ImageProtection from "@/components/ImageProtection";
 import SiteAtmosphere from "@/components/SiteAtmosphere";
 import AudioPlayerProvider from "@/components/AudioPlayerProvider";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -53,7 +54,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} ${pirataOne.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col"><AudioPlayerProvider><a className="skip-link" href="#main-content">Skip to content</a><ImageProtection /><SiteAtmosphere /><div id="main-content">{children}</div></AudioPlayerProvider></body>
+      <body className="min-h-full flex flex-col"><AudioPlayerProvider><a className="skip-link" href="#main-content">Skip to content</a><ImageProtection /><SiteAtmosphere /><div id="main-content">{children}</div></AudioPlayerProvider><Analytics /></body>
     </html>
   );
 }

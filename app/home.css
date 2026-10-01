@@ -578,3 +578,15 @@
   .release-detail > section { margin-top:70px; }
   .publish-grid { padding-inline:20px; }
 }
+
+/* Compact first screen and homepage rhythm. */
+.transmission-section { content-visibility:auto; contain-intrinsic-size:760px; }
+.transmission-release,.transmission-artist,.home-video-channel,.home-linktree-card { border-radius:18px; }
+@media(max-width:520px) {
+  .transmission-hero { min-height:calc(100svh - 68px); padding-top:clamp(42px,10vh,80px); padding-bottom:44px; }
+  .transmission-hero-content { width:100%; }
+  .transmission-hero .aureyx-gothic-mark { max-width:min(82vw,390px); }
+  .transmission-hero-subtitle { max-width:310px; margin-inline:auto; font-size:15px; line-height:1.65; }
+  .transmission-hero .transmission-buttons { margin-top:26px; }
+  .transmission-section { padding-block:58px; }
+}

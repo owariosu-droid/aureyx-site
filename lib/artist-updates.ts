@@ -4,7 +4,7 @@ export const artistLabel = (slug: string) => `artist:${slug}`;
 export function submissionUrl(slug: string, name: string) {
   const query = new URLSearchParams({
     title: `${name}: `,
-    body: `Write your update here and drag photos into this box.\n\nArtist: ${name}\nAsk a maintainer to publish this with the ${artistLabel(slug)} label.`,
+    body: `Category: Update\n\nWrite your update here and drag photos into this box.\n\nArtist: ${name}\nAsk a maintainer to publish this with the ${artistLabel(slug)} label. Categories can be Update, Release, Artwork, or Announcement.`,
   });
   return `https://github.com/${artistRepository}/issues/new?${query}`;
 }
@@ -15,6 +15,7 @@ export type ArtistUpdate = {
   body: string | null;
   html_url: string;
   created_at: string;
+  labels?: Array<{ name?: string }>;
   pull_request?: unknown;
 };
 
@@ -33,4 +34,11 @@ export async function getArtistUpdates(slug: string): Promise<{ posts: ArtistUpd
   } catch {
     return { posts: [], unavailable: true };
   }
+}
+
+export function artistUpdateCategory(post: ArtistUpdate) {
+  const labeled = post.labels?.map((label) => label.name || "").find((name) => name.toLowerCase().startsWith("type:"));
+  if (labeled) return labeled.slice(5).trim() || "Update";
+  const match = post.body?.match(/^Category:\s*(Update|Release|Artwork|Announcement)/im);
+  return match?.[1] || "Update";
 }

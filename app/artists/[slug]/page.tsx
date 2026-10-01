@@ -8,9 +8,10 @@ import "@/app/artists/artists.css";
 import YouTubeFeed from "@/components/YouTubeFeed";
 import ArtistUpdateBody from "@/components/ArtistUpdateBody";
 import SocialIcon from "@/components/SocialIcon";
+import GalleryLightbox from "@/components/GalleryLightbox";
 import { artists } from "@/data/artists";
 import type { CSSProperties } from "react";
-import { getArtistUpdates, submissionUrl } from "@/lib/artist-updates";
+import { artistUpdateCategory, getArtistUpdates, submissionUrl } from "@/lib/artist-updates";
 
 export const revalidate = 300;
 export function generateStaticParams() {
@@ -61,16 +62,12 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
         {artist.gallery && <section className="mt-16" aria-labelledby="gallery-heading">
           <p className="text-xs uppercase tracking-[0.25em] text-white/45">Selected visuals</p>
           <h2 id="gallery-heading" className="mt-3 text-3xl font-semibold">Gallery</h2>
-          <div className="mt-8 grid items-start gap-6 md:grid-cols-2">
-            {artist.gallery.map((photo) => <div key={photo.src} data-protected-image className="overflow-hidden rounded-2xl border border-white/10 bg-black/20">
-              <Image src={photo.src} alt={photo.alt} width={1536} height={1176} sizes="(max-width: 768px) 100vw, 50vw" className="h-auto w-full" />
-            </div>)}
-          </div>
+          <GalleryLightbox images={artist.gallery} />
         </section>}
 
         {artist.conceptArt && <section id="concept-art" className="yoru-concept-section mt-16 scroll-mt-32" aria-labelledby="concept-art-heading">
           <div className="yoru-concept-heading"><div><p className="text-xs uppercase tracking-[0.25em] text-white/45">Yoru Zenaku</p><h2 id="concept-art-heading" className="mt-3 text-3xl font-semibold">Concept Art</h2></div><p>Selected concept artwork by Yoru Zenaku.</p></div>
-          <div className="yoru-concept-grid">{artist.conceptArt.map((art, index) => <figure key={art.src} data-protected-image className={index === 0 ? "is-wide" : ""}><Image src={art.src} alt={art.alt} width={art.width} height={art.height} quality={82} sizes={index === 0 ? "(max-width: 900px) 100vw, 1200px" : "(max-width: 700px) 100vw, 50vw"} /><figcaption>Concept {String(index + 1).padStart(2,"0")}</figcaption></figure>)}</div>
+          <GalleryLightbox images={artist.conceptArt} variant="concept" />
         </section>}
 
         {artist.albums && <section id="albums" className="mt-16 scroll-mt-32" aria-labelledby="albums-heading">
@@ -92,7 +89,7 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
           <p className="mt-4 text-sm text-white/45">Artists: sign in to GitHub to write a post and attach photos. Updates appear after approval.</p>
           <div className="mt-8 space-y-6">
             {posts.map((post) => <article key={post.id} className="min-w-0 overflow-hidden rounded-3xl border border-white/10 bg-[#252525] p-6 [overflow-wrap:anywhere] sm:p-10">
-              <time dateTime={post.created_at} className="text-xs uppercase tracking-wider text-white/45">{new Date(post.created_at).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}</time>
+              <div className="artist-post-meta"><span>{artistUpdateCategory(post)}</span><time dateTime={post.created_at}>{new Date(post.created_at).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}</time></div>
               <h3 className="mt-3 text-2xl font-semibold sm:text-3xl">{post.title}</h3>
               <ArtistUpdateBody body={post.body || ""} />
               <a href={post.html_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-block text-sm text-white/50 hover:text-white">View post and comments ↗</a>

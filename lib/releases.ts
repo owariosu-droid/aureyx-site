@@ -5,6 +5,9 @@ export type Release = (typeof albums)[number] & {
   artist: string;
   format: "Album" | "Single" | "Pack";
   preview: string | null;
+  contributors: string[];
+  catalogNumber: string;
+  platform: "Bandcamp" | "Spotify";
 };
 
 export function releaseSlug(link: string) {
@@ -30,6 +33,9 @@ export const releases: Release[] = albums.map((album) => ({
   artist: releaseArtist(album.title),
   format: releaseFormat(album.title, album.link),
   preview: album.link.includes("bandcamp.com/") ? `/previews/${releaseSlug(album.link)}.m4a` : null,
+  contributors: ["iyune", "Lyrlvst", "Dysto", "GRiMVEX", "0KAMI", "prod. Jxzz"].filter((name) => album.title.toLowerCase().includes(name.toLowerCase())),
+  catalogNumber: `AUR-${String(albums.indexOf(album) + 1).padStart(3,"0")}`,
+  platform: album.link.includes("bandcamp.com/") ? "Bandcamp" : "Spotify",
 }));
 
 export function getRelease(slug: string) {

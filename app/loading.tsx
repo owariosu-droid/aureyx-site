@@ -1,0 +1,1 @@
+export default function Loading() { return <main className="site-state" aria-live="polite"><div><p className="transmission-eyebrow">Aureyx</p><div className="site-loading-lines" aria-label="Loading"><span/><span/><span/></div></div></main>; }

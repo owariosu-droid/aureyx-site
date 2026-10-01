@@ -19,7 +19,7 @@ const profiles = [
     name: "Lyrlvst",
     handle: "linktr.ee/lyrlvst",
     href: "https://linktr.ee/lyrlvst",
-    image: "/members/lyrlvst-iliveinagony.png",
+    image: "/members/lyrlvst-iliveinagony-optimized.jpg",
     links: [
       ["YouTube", "https://www.youtube.com/@lyrlvst"],
       ["Bandcamp", "https://lyrlvst.bandcamp.com"],

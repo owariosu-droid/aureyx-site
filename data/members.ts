@@ -35,7 +35,7 @@ export const members = [
     role: "Founder / Artist / Producer",
     description:
       "iyune is the founder of Aureyx and an electronic artist making music inspired by rhythm games and gothic atmospheres.",
-    image: "/members/iyune.png",
+    image: "/members/iyune-optimized.jpg",
     links: {
       spotify: "",
       youtube: "https://www.youtube.com/@iyuneofficial",
@@ -49,7 +49,7 @@ export const members = [
     role: "Producer",
     description:
       "GRiMVEX is a dubstep producer who makes heavy sounds mixed with leads.",
-    image: "/members/grimvex.png",
+    image: "/aureyx-girl.png",
     links: {
       spotify: "",
       youtube: "",

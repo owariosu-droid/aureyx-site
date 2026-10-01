@@ -2,12 +2,12 @@
 const earlierReleases = [
     {
       title: "GRiMVEX - Devourer",
-      image: "/devourer.png",
+      image: "/devourer-optimized.jpg",
       link: "https://dystofuturemusic.bandcamp.com/album/devourer",
     },
     {
       title: "iyune - Ouroboros",
-      image: "/ouroboros.png",
+      image: "/ouroboros-optimized.jpg",
       link: "https://open.spotify.com/album/6W9618MAoMyOgYcWgx6glU",
     },
     {
@@ -17,7 +17,7 @@ const earlierReleases = [
     },
     {
       title: "lyrlvst - 夢の結界 ~ Dream Barrier",
-      image: "/dream-barrier.png",
+      image: "/dream-barrier-optimized.jpg",
       link: "https://dystofuturemusic.bandcamp.com/track/dream-barrier",
     },
   ];

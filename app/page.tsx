@@ -40,7 +40,7 @@ export default function Home() {
         </section>
 
         <section className="transmission-section transmission-founder" aria-labelledby="founder-heading">
-          <Link href="/artists/iyune" className="transmission-founder-image"><Image src="/members/iyune.png" alt="iyune, founder of Aureyx" fill sizes="(max-width: 700px) 100vw, 45vw" /></Link>
+          <Link href="/artists/iyune" className="transmission-founder-image"><Image src="/members/iyune-optimized.jpg" alt="iyune, founder of Aureyx" fill sizes="(max-width: 700px) 100vw, 45vw" /></Link>
           <div className="transmission-founder-copy"><h2 id="founder-heading">iyune<span>Founder / Artist / Producer</span></h2><p>iyune makes gothic electronic music. they founded Aureyx to give artists a place to belong.</p><Link className="transmission-button" href="/artists/iyune">View iyune’s profile <ArrowUpRight size={17} /></Link><span className="transmission-founder-mark" aria-hidden="true">A / 01</span></div>
         </section>
 
