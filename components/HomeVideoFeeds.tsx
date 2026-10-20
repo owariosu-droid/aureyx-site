@@ -6,13 +6,14 @@ const channels = [
   { name: "Lyrlvst", handle: "@lyrlvst", id: "UC7xSxOfYmUlZ8jIp_567M6w", avatar: "/members/youtube-lyrlvst.jpg" },
   { name: "iyune", handle: "@iyuneofficial", id: "UCrNekfYIdOYln8PP1AcGWvA", avatar: "/members/youtube-iyune.jpg" },
   { name: "Dysto", handle: "@dystoftmusic23", id: "UCcKq5OXoC-guJU9hBcZjC3w", avatar: "/members/youtube-dysto.jpg" },
+  { name: "Yoru Zenaku", handle: "@Yoru_zenaku", id: "UCe5zNYSQ3xVyss4hET5j7Cw", avatar: "/members/yoru-zenaku-pfp.png" },
 ];
 
 export default async function HomeVideoFeeds({ compact = false }: { compact?: boolean }) {
   const feeds = await Promise.all(
     channels.map(async (channel) => ({
       ...channel,
-      videos: (await getYouTubeVideos(channel.id)).slice(0, compact ? 1 : 2),
+      videos: (await getYouTubeVideos(channel.id)).slice(0, compact ? 1 : 6),
     })),
   );
 

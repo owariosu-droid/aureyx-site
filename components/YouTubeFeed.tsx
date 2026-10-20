@@ -1,4 +1,5 @@
 import YouTubePlayer from "@/components/YouTubePlayer";
+import YouTubeChannelPlayer from "@/components/YouTubeChannelPlayer";
 import { getYouTubeVideos } from "@/lib/youtube-feed";
 import SocialIcon from "@/components/SocialIcon";
 import type { YouTubeVideo } from "@/lib/youtube-feed";
@@ -23,7 +24,7 @@ export default async function YouTubeFeed({ channelId, fallbackChannelIds = [], 
           <YouTubePlayer id={video.id} title={`${name}: ${video.title}`} />
           <div className="p-5"><h3 className="text-sm font-medium leading-6"><a href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer">{video.title}</a></h3><time dateTime={video.published} className="mt-3 block text-xs text-white/50">{new Date(video.published).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}</time></div>
         </article>)}
-      </div> : <p className="mt-6 text-white/60">Videos couldn’t be loaded right now. You can still watch them on the YouTube channel.</p>}
+      </div> : channelId ? <div className="mt-8"><YouTubeChannelPlayer channelId={channelId} name={name} /></div> : <p className="mt-6 text-white/60">Videos couldn’t be loaded right now. You can still watch them on the YouTube channel.</p>}
     </section>
   );
 }
