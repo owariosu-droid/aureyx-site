@@ -68,3 +68,13 @@
 @media(max-width:480px) { .osu-theme main { padding-inline:15px; } .osu-header { padding-inline:16px; } .osu-profile-row { flex-wrap:wrap; } .osu-profile-row > div { min-width:0; flex:1; } .osu-profile-row h1 { font-size:clamp(46px,16vw,64px); } .osu-badge { margin-left:0; } .osu-profile-links { gap:14px; } .osu-profile-links > span { width:100%; } .osu-theme .osu-panel { padding-inline:16px; } .osu-map-tools { gap:14px; } }
 @media(pointer:coarse) { .osu-page-art { position:absolute; filter:brightness(1.08) saturate(1.03); } .osu-header,.osu-theme .osu-panel { backdrop-filter:none; } }
 @media(prefers-reduced-motion:reduce) { .osu-map-card:hover { transform: none; } }
+
+.osu-overview > div { padding: 20px; border: 1px solid #ffffff1f; background: #ffffff06; }
+.osu-overview dt { color: #b9aaa7; font-size: 12px; }
+.osu-overview dd { margin-top: 8px; font-size: 24px; color: white; }
+.osu-synced-profile { color: #d5c8ce; line-height: 1.9; overflow-wrap: anywhere; }
+.osu-synced-profile h2 { margin-top: 2rem; color: white; }
+.osu-synced-profile h2:first-child { margin-top: 0; }
+.osu-synced-profile a { color: #ff9aae; text-decoration: underline; text-underline-offset: 4px; }
+.osu-synced-profile strong { color: white; }
+.osu-synced-profile img { display: block; width: 100%; height: auto; margin-top: 24px; }

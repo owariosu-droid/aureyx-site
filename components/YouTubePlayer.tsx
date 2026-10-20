@@ -7,7 +7,7 @@ import { Play } from "lucide-react";
 export default function YouTubePlayer({ id, title }: { id: string; title: string }) {
   const [playing, setPlaying] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
-  if (playing) return <div className="youtube-player-shell"><iframe src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=1`} title={title} allow="autoplay; encrypted-media; gyroscope; picture-in-picture" sandbox="allow-scripts allow-same-origin allow-presentation" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" /></div>;
+  if (playing) return <div><div className="youtube-player-shell"><iframe src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=1`} title={title} allow="autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" /></div><a className="transmission-text-link" href={`https://www.youtube.com/watch?v=${id}`} target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></div>;
   return (
     <button type="button" onClick={() => setPlaying(true)} aria-label={`Play ${title}`} data-protected-image className="youtube-player-shell group relative block w-full cursor-pointer overflow-hidden bg-[#20191b] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400">
       {!imageFailed && <Image src={`/api/youtube-thumbnail/${encodeURIComponent(id)}`} alt={`${title} thumbnail`} fill loading="lazy" quality={72} sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-105" onError={() => setImageFailed(true)} />}

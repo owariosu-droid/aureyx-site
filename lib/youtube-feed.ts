@@ -3,22 +3,26 @@ export type YouTubeVideo = { id: string; title: string; published: string; thumb
 function decodeXml(value: string) {
   const entities: Record<string, string> = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'" };
   return value.replace(/&(#x[0-9a-f]+|#\d+|amp|lt|gt|quot|apos);/gi, (match, entity: string) => {
-    if (!entity.startsWith("#")) return entities[entity] || match;
+    if (!entity.startsWith("#")) return entities[entity.toLowerCase()] || match;
     const code = entity[1].toLowerCase() === "x" ? parseInt(entity.slice(2), 16) : parseInt(entity.slice(1), 10);
-    return code <= 0x10ffff ? String.fromCodePoint(code) : match;
+    return code <= 0x10ffff && !(code >= 0xd800 && code <= 0xdfff) ? String.fromCodePoint(code) : match;
   });
 }
 
 export function parseYouTubeFeed(xml: string): YouTubeVideo[] {
-  return [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].flatMap(([, entry]) => {
+  const videos = [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].flatMap(([, entry]) => {
     const id = entry.match(/<yt:videoId>([^<]+)<\/yt:videoId>/)?.[1];
     const title = entry.match(/<title>([\s\S]*?)<\/title>/)?.[1];
     const rawThumbnail = entry.match(/<media:thumbnail[^>]*url="([^"]+)"/)?.[1];
     const thumbnail = rawThumbnail && /^https:\/\/[a-z0-9.-]+\.ytimg\.com\//i.test(rawThumbnail) ? decodeXml(rawThumbnail) : undefined;
     const published = entry.match(/<published>([^<]+)<\/published>/)?.[1];
     return id && /^[\w-]{11}$/.test(id) && title && published && !Number.isNaN(Date.parse(published))
-      ? [{ id, title: decodeXml(title), published, thumbnail }] : [];
-  }).slice(0, 6);
+      ? [{ id, title: decodeXml(title.replace(/^<!\[CDATA\[([\s\S]*)\]\]>$/, "$1")), published, thumbnail }] : [];
+  });
+  return videos
+    .filter((video, index, all) => all.findIndex((candidate) => candidate.id === video.id) === index)
+    .sort((a, b) => Date.parse(b.published) - Date.parse(a.published))
+    .slice(0, 6);
 }
 
 export async function getYouTubeVideos(channelId: string) {

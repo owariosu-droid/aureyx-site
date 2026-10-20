@@ -11,33 +11,11 @@ import SocialIcon from "@/components/SocialIcon";
 const pageSize = 6;
 import { releasePrices } from "@/data/release-prices";
 
-const releaseEmbeds: Record<string, { platform: "Bandcamp" | "Spotify"; src: string }> = {
-  "https://dystofuturemusic.bandcamp.com/album/devourer": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/album=49285777/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://open.spotify.com/album/6W9618MAoMyOgYcWgx6glU": { platform: "Spotify", src: "https://open.spotify.com/embed/album/6W9618MAoMyOgYcWgx6glU?utm_source=generator&theme=0" },
-  "https://dystofuturemusic.bandcamp.com/album/oblivion": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/album=554284494/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/track/dream-barrier": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/track=388655618/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/album/grimvex-prod-jxzz-hollow-zero-echoes-from-the-void-ft-prod-jxzz-album-mini-preview": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/album=3544674445/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/album/iyune-lyrlvst-reverent-blade-original-and-remastered-pack": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/album=2844996862/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/track/iyune-scarlet-oasis-lyrlvst-remix": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/track=3401585077/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/track/lyrlvst-nerv-failure-ft-dysto": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/track=2694153256/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/track/dysto-reverie-sonic-night-ii-daybreak-track-2": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/track=3643731840/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/track/reboot-ft-lyrlvst-0kami-replaced-track-3-for-kyouki-001": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/track=1374587952/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/track/dysto-retroverse-sonic-night-ii-daybreak-track-1": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/track=3886827717/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/track/dysto-2070-deluxe-edition-voxblade-opening-track": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/track=3961780529/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/track/iyune-ultimate-magic": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/track=1572231806/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/track/iyune-ultimate-magic-mythic-edition": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/track=1947828330/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/album/iyune-lyrlvst-dysto-nocturne-midnight": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/album=190471252/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/track/iyune-empyrean": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/track=1677371080/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/track/disassociation-lyrlvsts-kataklysm-remake-ft-dysto-from-voxblade": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/track=303681340/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/album/dysto-voxblade": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/album=590355496/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/track/iyune-lyrlvst-0kami-dyschronia": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/track=3329761273/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-  "https://dystofuturemusic.bandcamp.com/track/lyrlvst-chasm-of-eternity": { platform: "Bandcamp", src: "https://bandcamp.com/EmbeddedPlayer/v=2/track=1143968467/size=large/bgcol=151314/linkcol=ff3944/artwork=small/transparent=true/" },
-};
+const releaseEmbeds: Record<string, { platform: "Bandcamp" | "Spotify"; src: string }> = Object.fromEntries(
+  releases.map((release) => [release.link, { platform: release.platform, src: release.embed }]),
+);
 
 function ReleasePreview({ albumTitle, embed, releaseLink }: { albumTitle: string; embed: { platform: "Bandcamp" | "Spotify"; src: string }; releaseLink: string }) {
-  const bandcampPreview = releaseLink.includes("bandcamp.com/")
-    ? `/previews/${releaseLink.split("/").filter(Boolean).at(-1)}.m4a`
-    : null;
   return (
     <div className={`release-inline-player ${embed.platform.toLowerCase()}`}>
       <div>
@@ -45,9 +23,7 @@ function ReleasePreview({ albumTitle, embed, releaseLink }: { albumTitle: string
         <span>Excerpt preview</span>
         <a href={releaseLink} target="_blank" rel="noopener noreferrer">Full release <ArrowUpRight size={13} /></a>
       </div>
-      {bandcampPreview
-        ? <audio controls controlsList="nodownload noplaybackrate" preload="metadata" src={bandcampPreview} aria-label={`${albumTitle} excerpt preview`} />
-        : <iframe src={embed.src} title={`${albumTitle} ${embed.platform} excerpt preview`} allow="autoplay; encrypted-media" referrerPolicy="strict-origin-when-cross-origin" />}
+      <iframe src={embed.src} title={`${albumTitle} ${embed.platform} preview`} allow="autoplay; encrypted-media" referrerPolicy="strict-origin-when-cross-origin" />
     </div>
   );
 }
