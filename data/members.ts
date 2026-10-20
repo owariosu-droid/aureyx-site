@@ -20,8 +20,8 @@ export const members = [
     role: "Artist / Creative",
     description:
       "Yoru Zenaku is a music producer built around cyber aesthetics, and techno roots.",
-    image: "/members/yoru-zenaku.png",
-    profileImage: "/members/yoru-zenaku-pfp.png", // Artist page image
+    image: "/members/yoru-concept-01.jpg",
+    profileImage: "/members/yoru-concept-01.jpg", // Artist page image
     links: {
       spotify: "",
       youtube: "https://www.youtube.com/@Yoru_zenaku",

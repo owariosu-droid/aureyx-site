@@ -60,7 +60,7 @@ export const artists: Artist[] = [
     role: "Artist",
     accent: "#e34b59",
     bio: "Music and projects from Yoru Zenaku. More about this artist coming soon.",
-    image: "/members/yoru-zenaku-pfp.png",
+    image: "/members/yoru-concept-01.jpg",
     cover: "/members/yoru-zenaku-cover.png",
     youtubeChannelId: "UCe5zNYSQ3xVyss4hET5j7Cw",
     blog: true,
