@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: '23 17 * * *'
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Validate refreshes without committing content
+        type: boolean
+        default: false
 permissions:
   contents: write
 concurrency:
@@ -10,27 +15,60 @@ concurrency:
   cancel-in-progress: false
 jobs:
   refresh:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.12'
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: 22
           cache: npm
       - run: npm ci
       - run: python -m unittest discover -s scripts -p 'test_*.py'
-      - run: node --test scripts/youtube-feed.test.mjs
-      - run: python scripts/sync-external.py
+      - run: node --test scripts/*.test.mjs
+      - name: Refresh Bandcamp
+        id: bandcamp
+        continue-on-error: true
+        run: python scripts/sync-external.py --source bandcamp
+      - name: Refresh osu profile
+        id: osu
+        continue-on-error: true
+        run: python scripts/sync-external.py --source osu
+      - name: Report source results
+        env:
+          BANDCAMP_RESULT: ${{ steps.bandcamp.outcome }}
+          OSU_RESULT: ${{ steps.osu.outcome }}
+        run: |
+          echo '## Public content refresh' >> "$GITHUB_STEP_SUMMARY"
+          echo "Bandcamp: $BANDCAMP_RESULT" >> "$GITHUB_STEP_SUMMARY"
+          echo "osu!: $OSU_RESULT" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$BANDCAMP_RESULT" != success ]; then
+            echo '::warning title=Bandcamp refresh unavailable::Keeping the last verified Bandcamp catalog. See the Bandcamp step for the error.'
+            echo 'Bandcamp is unavailable; its last verified catalog is retained.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ "$OSU_RESULT" != success ]; then
+            echo '::warning title=osu refresh unavailable::Keeping the last verified osu profile. See the osu step for the error.'
+            echo 'osu! is unavailable; its last verified profile is retained.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ "$BANDCAMP_RESULT" != success ] && [ "$OSU_RESULT" != success ]; then
+            echo '::error::Neither source could be refreshed; no content will be committed.'
+            exit 1
+          fi
       - run: npm run check
       - name: Commit refreshed snapshots and artwork
+        if: github.event_name != 'workflow_dispatch' || !inputs.dry_run
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git add data/external public/external
           if git diff --cached --quiet; then exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'Refresh Bandcamp catalog and osu profile'
+          gh auth setup-git
           git push

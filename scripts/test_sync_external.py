@@ -5,6 +5,8 @@ import tempfile
 import unittest
 from unittest.mock import patch
 from urllib.error import HTTPError
+from urllib.request import Request
+import io
 
 spec = importlib.util.spec_from_file_location("sync_external", Path(__file__).with_name("sync-external.py"))
 sync = importlib.util.module_from_spec(spec)
@@ -12,6 +14,50 @@ spec.loader.exec_module(sync)
 
 
 class SyncTests(unittest.TestCase):
+    def test_rejects_source_controlled_path_traversal(self):
+        with patch.object(sync, "fetch") as fetch:
+            with self.assertRaisesRegex(ValueError, "filename"):
+                sync.image("https://f4.bcbits.com/img/test.jpg", "../outside.jpg", {})
+            fetch.assert_not_called()
+
+    def test_rejects_untrusted_urls_before_network_access(self):
+        for url in ["http://osu.ppy.sh/users/1", "https://127.0.0.1/", "https://osu.ppy.sh.evil.test/", "https://user:pass@osu.ppy.sh/", "https://osu.ppy.sh:8443/"]:
+            with self.subTest(url=url), patch.object(sync, "build_opener") as opener:
+                with self.assertRaises(ValueError):
+                    sync.fetch(url)
+                opener.assert_not_called()
+
+    def test_redirects_cannot_escape_trusted_https_hosts(self):
+        handler = sync.TrustedRedirects()
+        request = Request("https://osu.ppy.sh/users/37255712")
+        for target in ["http://osu.ppy.sh/", "https://169.254.169.254/latest/meta-data/", "https://evil.test/image"]:
+            with self.subTest(target=target), self.assertRaises(ValueError):
+                handler.redirect_request(request, None, 302, "Found", {}, target)
+
+    def test_caps_response_reads_without_trusting_content_length(self):
+        response = io.BytesIO(b"x" * 11)
+        response.headers = {}
+        with patch.object(sync, "build_opener") as opener:
+            opener.return_value.open.return_value = response
+            with self.assertRaisesRegex(ValueError, "size limit"):
+                sync.fetch("https://osu.ppy.sh/users/37255712", max_bytes=10)
+
+    def test_retries_transient_errors_but_not_access_denials(self):
+        response = io.BytesIO(b"valid")
+        response.headers = {}
+        unavailable = HTTPError("source", 503, "Unavailable", {}, None)
+        with patch.object(sync, "build_opener") as opener, patch.object(sync.time, "sleep") as sleep:
+            opener.return_value.open.side_effect = [unavailable, response]
+            self.assertEqual(sync.fetch("https://osu.ppy.sh/users/37255712"), b"valid")
+            self.assertEqual(opener.return_value.open.call_count, 2)
+            sleep.assert_called_once_with(1)
+        with patch.object(sync, "build_opener") as opener, patch.object(sync.time, "sleep") as sleep:
+            opener.return_value.open.side_effect = HTTPError("source", 403, "Denied", {}, None)
+            with self.assertRaises(HTTPError):
+                sync.fetch("https://osu.ppy.sh/users/37255712")
+            self.assertEqual(opener.return_value.open.call_count, 1)
+            sleep.assert_not_called()
+
     def test_embedded_json_decodes_html_entities(self):
         parsed = sync.Attributes('<div data-client-items="[{&quot;title&quot;:&quot;A &amp; B&quot;}]"></div>')
         self.assertEqual(parsed.json("data-client-items"), [{"title": "A & B"}])

@@ -1,5 +1,8 @@
 """Refresh public source snapshots without credentials or expiring stream URLs."""
 import argparse
+from http.client import IncompleteRead
+import socket
+import time
 from concurrent.futures import ThreadPoolExecutor
 from html import escape
 from html.parser import HTMLParser
@@ -8,18 +11,51 @@ from pathlib import Path
 import re
 import sys
 from urllib.parse import urlparse
-from urllib.request import Request, urlopen
-from urllib.error import HTTPError
+from urllib.request import Request, HTTPRedirectHandler, build_opener
+from urllib.error import HTTPError, URLError
 
 ROOT = Path(__file__).resolve().parents[1]
 BANDCAMP = "https://dystofuturemusic.bandcamp.com"
 PROFILE = "https://osu.ppy.sh/users/37255712"
+TRUSTED_HOSTS = {"dystofuturemusic.bandcamp.com", "f4.bcbits.com", "osu.ppy.sh", "a.ppy.sh", "i.ppy.sh", "assets.ppy.sh"}
+MAX_HTML_BYTES = 8 * 1024 * 1024
+MAX_IMAGE_BYTES = 12 * 1024 * 1024
 
 
-def fetch(url):
+def validate_url(url):
+    parsed = urlparse(url)
+    if (parsed.scheme != "https" or parsed.hostname not in TRUSTED_HOSTS
+            or parsed.username or parsed.password or parsed.port not in {None, 443}):
+        raise ValueError("Unexpected upstream URL or redirect")
+
+
+class TrustedRedirects(HTTPRedirectHandler):
+    def redirect_request(self, request, fp, code, message, headers, new_url):
+        validate_url(new_url)
+        return super().redirect_request(request, fp, code, message, headers, new_url)
+
+
+def fetch(url, max_bytes=MAX_HTML_BYTES):
+    validate_url(url)
     request = Request(url, headers={"User-Agent": "Aureyx-site-content-sync/1.0"})
-    with urlopen(request, timeout=30) as response:
-        return response.read()
+    # urllib's default HTTPS handler still verifies certificates and hostnames.
+    for attempt in range(3):
+        try:
+            with build_opener(TrustedRedirects()).open(request, timeout=30) as response:
+                length = response.headers.get("Content-Length")
+                if length and int(length) > max_bytes:
+                    raise ValueError("Upstream response exceeds the size limit")
+                data = response.read(max_bytes + 1)
+                if len(data) > max_bytes:
+                    raise ValueError("Upstream response exceeds the size limit")
+                return data
+        except HTTPError as error:
+            if error.code not in {429, 500, 502, 503, 504} or attempt == 2:
+                raise
+        except (URLError, TimeoutError, socket.timeout, IncompleteRead):
+            if attempt == 2:
+                raise
+        time.sleep(2 ** attempt)
 
 
 class Attributes(HTMLParser):
@@ -35,7 +71,7 @@ class Attributes(HTMLParser):
         for attrs in self.items:
             if key in attrs:
                 return json.loads(attrs[key])
-        raise ValueError(f"Source no longer contains {key}; keeping the saved snapshot")
+        raise ValueError(f"Source does not contain {key} (possibly an upstream challenge or changed markup); keeping the saved snapshot")
 
 
 def write_json(name, value):
@@ -48,10 +84,13 @@ def write_json(name, value):
 
 
 def image(url, name, assets):
+    if not re.fullmatch(r"[a-zA-Z0-9_.-]{1,120}", name) or name in {".", ".."}:
+        raise ValueError("Unexpected image filename")
     parsed = urlparse(url)
-    if parsed.scheme != "https" or parsed.hostname not in {"f4.bcbits.com", "a.ppy.sh", "i.ppy.sh", "assets.ppy.sh"}:
+    validate_url(url)
+    if parsed.hostname not in {"f4.bcbits.com", "a.ppy.sh", "i.ppy.sh", "assets.ppy.sh"}:
         raise ValueError("Unexpected image host")
-    data = fetch(url)
+    data = fetch(url, max_bytes=MAX_IMAGE_BYTES)
     if not (data.startswith(b"\xff\xd8\xff") or data.startswith(b"\x89PNG\r\n\x1a\n") or data.startswith(b"RIFF") or data.startswith(b"GIF8")):
         raise ValueError("Source returned an invalid image")
     assets[name] = data
