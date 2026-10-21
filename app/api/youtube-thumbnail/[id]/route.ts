@@ -1,4 +1,5 @@
 const VIDEO_ID = /^[A-Za-z0-9_-]{11}$/;
+const MAX_THUMBNAIL_BYTES = 5 * 1024 * 1024;
 
 const cacheHeaders = {
   "Cache-Control": "public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000",
@@ -22,13 +23,36 @@ export async function GET(
   for (const size of ["maxresdefault", "hqdefault", "mqdefault"]) {
     try {
       const response = await fetch(`https://i.ytimg.com/vi/${id}/${size}.jpg`, {
+        redirect: "error",
         signal: AbortSignal.timeout(4500),
         next: { revalidate: 604800 },
       });
       const contentType = response.headers.get("content-type") ?? "";
-      if (!response.ok || !contentType.startsWith("image/")) continue;
+      if (!response.ok || !/^image\/(jpeg|png|webp)(?:;|$)/i.test(contentType) || !response.body) {
+        await response.body?.cancel();
+        continue;
+      }
+      const length = response.headers.get("content-length");
+      if (length && Number(length) > MAX_THUMBNAIL_BYTES) {
+        await response.body.cancel();
+        continue;
+      }
+      const reader = response.body.getReader();
+      const chunks: Uint8Array[] = [];
+      let bytes = 0;
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        bytes += value.byteLength;
+        if (bytes > MAX_THUMBNAIL_BYTES) {
+          await reader.cancel();
+          break;
+        }
+        chunks.push(value);
+      }
+      if (bytes > MAX_THUMBNAIL_BYTES) continue;
 
-      return new Response(await response.arrayBuffer(), {
+      return new Response(Buffer.concat(chunks), {
         headers: { ...cacheHeaders, "Content-Type": contentType },
       });
     } catch {
