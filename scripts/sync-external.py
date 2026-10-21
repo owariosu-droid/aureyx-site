@@ -62,16 +62,29 @@ class Attributes(HTMLParser):
     def __init__(self, text):
         super().__init__()
         self.items = []
+        self.title = []
+        self.in_title = False
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
         self.items.append(dict(attrs))
+        if tag == "title":
+            self.in_title = True
+
+    def handle_endtag(self, tag):
+        if tag == "title":
+            self.in_title = False
+
+    def handle_data(self, data):
+        if self.in_title:
+            self.title.append(data)
 
     def json(self, key):
         for attrs in self.items:
             if key in attrs:
                 return json.loads(attrs[key])
-        raise ValueError(f"Source does not contain {key} (possibly an upstream challenge or changed markup); keeping the saved snapshot")
+        title = " ".join("".join(self.title).split())[:100]
+        raise ValueError(f"Source does not contain {key} (page title: {title!r}); keeping the saved snapshot")
 
 
 def write_json(name, value):

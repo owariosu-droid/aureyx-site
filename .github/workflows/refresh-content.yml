@@ -33,16 +33,24 @@ jobs:
       - run: node --test scripts/*.test.mjs
       - name: Refresh Bandcamp
         id: bandcamp
-        continue-on-error: true
-        run: python scripts/sync-external.py --source bandcamp
+        run: |
+          if python scripts/sync-external.py --source bandcamp; then
+            echo 'result=success' >> "$GITHUB_OUTPUT"
+          else
+            echo 'result=failure' >> "$GITHUB_OUTPUT"
+          fi
       - name: Refresh osu profile
         id: osu
-        continue-on-error: true
-        run: python scripts/sync-external.py --source osu
+        run: |
+          if python scripts/sync-external.py --source osu; then
+            echo 'result=success' >> "$GITHUB_OUTPUT"
+          else
+            echo 'result=failure' >> "$GITHUB_OUTPUT"
+          fi
       - name: Report source results
         env:
-          BANDCAMP_RESULT: ${{ steps.bandcamp.outcome }}
-          OSU_RESULT: ${{ steps.osu.outcome }}
+          BANDCAMP_RESULT: ${{ steps.bandcamp.outputs.result }}
+          OSU_RESULT: ${{ steps.osu.outputs.result }}
         run: |
           echo '## Public content refresh' >> "$GITHUB_STEP_SUMMARY"
           echo "Bandcamp: $BANDCAMP_RESULT" >> "$GITHUB_STEP_SUMMARY"

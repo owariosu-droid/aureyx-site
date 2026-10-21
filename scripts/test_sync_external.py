@@ -62,6 +62,11 @@ class SyncTests(unittest.TestCase):
         parsed = sync.Attributes('<div data-client-items="[{&quot;title&quot;:&quot;A &amp; B&quot;}]"></div>')
         self.assertEqual(parsed.json("data-client-items"), [{"title": "A & B"}])
 
+    def test_missing_catalog_reports_safe_page_diagnostics(self):
+        parsed = sync.Attributes('<html><title>  Access\n denied </title></html>')
+        with self.assertRaisesRegex(ValueError, "page title: 'Access denied'"):
+            parsed.json("data-client-items")
+
     def test_prices_use_purchase_rules(self):
         self.assertEqual(sync.price({"download_pref": 2, "minimum_price": .5, "set_price": 1.5}, "USD"), "$0.50")
         self.assertEqual(sync.price({"download_pref": 2, "minimum_price": 0}, "USD"), "Name your price")
