@@ -13,6 +13,7 @@ export type Release = {
   catalogNumber: string;
   platform: "Bandcamp" | "Spotify";
   embed: string;
+  tracks: { title: string; duration: number | null }[];
 };
 
 export function releaseSlug(link: string) {
@@ -37,6 +38,7 @@ export const releases: Release[] = albums.map((album) => ({
   artist: releaseArtist(album.title),
   format: releaseFormat(album.title, album.link),
   preview: album.preview,
+  tracks: bandcamp.find((item) => item.link === album.link)?.tracks ?? [],
   contributors: ["iyune", "Lyrlvst", "Dysto", "GRiMVEX", "0KAMI", "prod. Jxzz"].filter((name) => album.title.toLowerCase().includes(name.toLowerCase())),
   catalogNumber: `AUR-${String(albums.indexOf(album) + 1).padStart(3,"0")}`,
   platform: album.link.includes("bandcamp.com/") ? "Bandcamp" : "Spotify",

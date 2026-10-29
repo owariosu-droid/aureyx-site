@@ -3,30 +3,31 @@
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useDialogFocus } from "@/lib/use-dialog-focus";
 
 export type GalleryImage = { src: string; alt: string; width?: number; height?: number };
 
 export default function GalleryLightbox({ images, variant = "gallery" }: { images: GalleryImage[]; variant?: "gallery" | "concept" }) {
   const [active, setActive] = useState<number | null>(null);
-  const closeButton = useRef<HTMLButtonElement>(null);
-  const previousFocus = useRef<HTMLElement | null>(null);
+  const dialog = useRef<HTMLDivElement>(null);
+  const touchX = useRef<number | null>(null);
+  const isOpen = active !== null;
+  useDialogFocus(isOpen, dialog);
   const close = useCallback(() => setActive(null), []);
   const move = useCallback((step: number) => setActive((value) => value === null ? null : (value + step + images.length) % images.length), [images.length]);
 
   useEffect(() => {
-    if (active === null) return;
-    previousFocus.current = document.activeElement as HTMLElement;
+    if (!isOpen) return;
     const oldOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    closeButton.current?.focus();
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") close();
       if (event.key === "ArrowLeft") move(-1);
       if (event.key === "ArrowRight") move(1);
     };
     window.addEventListener("keydown", onKey);
-    return () => { document.body.style.overflow = oldOverflow; window.removeEventListener("keydown", onKey); previousFocus.current?.focus(); };
-  }, [active, close, move]);
+    return () => { document.body.style.overflow = oldOverflow; window.removeEventListener("keydown", onKey); };
+  }, [isOpen, close, move]);
 
   return <>
     <div className={variant === "concept" ? "yoru-concept-grid" : "artist-gallery-grid"}>
@@ -38,10 +39,10 @@ export default function GalleryLightbox({ images, variant = "gallery" }: { image
         {variant === "concept" && <figcaption>Concept {String(index + 1).padStart(2,"0")}</figcaption>}
       </figure>)}
     </div>
-    {active !== null && <div className="gallery-lightbox" role="dialog" aria-modal="true" aria-label={`Artwork viewer, image ${active + 1} of ${images.length}`} onMouseDown={(event) => { if (event.target === event.currentTarget) close(); }}>
-      <button ref={closeButton} type="button" className="gallery-close" onClick={close} aria-label="Close artwork viewer"><X /></button>
+    {active !== null && <div ref={dialog} className="gallery-lightbox" role="dialog" aria-modal="true" aria-label={`Artwork viewer, image ${active + 1} of ${images.length}`} onMouseDown={(event) => { if (event.target === event.currentTarget) close(); }}>
+      <button type="button" className="gallery-close" onClick={close} aria-label="Close artwork viewer"><X /></button>
       {images.length > 1 && <button type="button" className="gallery-previous" onClick={() => move(-1)} aria-label="Previous artwork"><ChevronLeft /></button>}
-      <figure><Image src={images[active].src} alt={images[active].alt} width={images[active].width || 1536} height={images[active].height || 1176} priority sizes="95vw" /><figcaption>{images[active].alt} · {active + 1} / {images.length}</figcaption></figure>
+      <figure onTouchStart={(event) => { touchX.current = event.touches.length === 1 ? event.touches[0]?.clientX ?? null : null; }} onTouchEnd={(event) => { const end = event.changedTouches[0]?.clientX; if (touchX.current !== null && end !== undefined && Math.abs(end - touchX.current) > 50) move(end < touchX.current ? 1 : -1); touchX.current = null; }}><Image src={images[active].src} alt={images[active].alt} width={images[active].width || 1536} height={images[active].height || 1176} priority sizes="95vw" /><figcaption>{images[active].alt} · {active + 1} / {images.length}</figcaption></figure>
       {images.length > 1 && <button type="button" className="gallery-next" onClick={() => move(1)} aria-label="Next artwork"><ChevronRight /></button>}
     </div>}
   </>;
