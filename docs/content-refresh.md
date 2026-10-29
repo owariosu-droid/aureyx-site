@@ -20,7 +20,7 @@ python -m unittest discover -s scripts -p 'test_*.py'
 npm run check
 ```
 
-The importer validates source identities, HTTPS hosts, redirects, filenames and image formats, caps response sizes, retries transient network errors, and removes executable markup from osu! profile HTML. Profile edits, including removing projects or goals, are reflected directly without manually duplicating them in components. Deleted or expired screenshot URLs show an availability message. Expiring Bandcamp audio URLs are never stored: existing local excerpts remain playable, and new releases use Bandcamp's official player. The Spotify-only release stays in `data/albums.ts`.
+The importer validates source identities, HTTPS hosts, redirects, filenames and image formats, caps response sizes, retries transient network errors, and removes executable markup from osu! profile HTML. Profile edits, including removing projects or goals, are reflected directly without manually duplicating them in components. Deleted or expired screenshot URLs show an availability message. Expiring Bandcamp audio URLs are never stored. Bandcamp releases use the official live player so replaced recordings are reflected without serving old local excerpts. The importer also saves current track titles and durations for release pages. Older local excerpts remain as assets but are no longer automatically selected by the catalog. The Spotify-only release stays in `data/albums.ts`.
 
 Connect deployments to commits on the default branch so content commits reach the live site. This workflow does not publish the current working copy. GitHub Actions workflows triggered by `GITHUB_TOKEN` commits do not start other push-triggered Actions workflows; an Actions-based deployment needs an explicit deployment step or a separate supported trigger. External hosting integrations must accept bot commits. The daily schedule is best effort; GitHub may delay scheduled runs.
 
@@ -46,3 +46,10 @@ The workflow now isolates source failures and reports retained data explicitly. 
 Security maintenance also updates Next.js within the 16.3 patch line and refreshes compatible image/source-map dependencies. Normal site markup, styling, content snapshots and successful player behavior are unchanged. Oversized, redirected, or non-raster upstream thumbnail responses are rejected using the existing fallback image.
 
 For a GitHub-runner verification without publishing content, use **Run workflow** with **dry_run** enabled, or `gh workflow run refresh-content.yml --ref BRANCH -f dry_run=true`. This fetches both sources and runs validation but skips the commit/push step.
+
+
+## New YouTube uploads and device support
+
+Public YouTube feeds discover uploads for the configured channel IDs; page requests refresh cached feeds approximately every 30 minutes. A new upload can appear after a successful refresh without editing the site. An already open tab needs a reload. When the feed is unavailable, the native uploads-playlist embed is maintained by YouTube and is refreshed when reloaded. These features update video sections; they do not import YouTube uploads as Bandcamp/Spotify music releases or download their audio.
+
+Device improvements preserve the gray theme and navigation structure: mobile navigation is inert when closed, scrolling unlocks when resizing to desktop, search and artwork dialogs contain keyboard focus and restore it on close, galleries support single-finger swipes, controls are larger on touch devices, and dialogs account for browser toolbars and safe-area insets. Device checks use Chromium emulation; they do not establish testing on physical iOS/Android devices or Safari.

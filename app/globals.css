@@ -803,3 +803,31 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible { 
   .player-track a { font-size:11px; }.player-timeline { grid-template-columns:30px minmax(0,1fr) 30px; }
 }
 @media(prefers-reduced-motion:reduce) { .gallery-open img,.aureyx-nav ul,.site-loading-lines span { animation:none!important; transition:none!important; } }
+
+/* Device support: touch controls, notches and changing browser toolbars. */
+.site-search-backdrop { max-height: 100vh; max-height: 100dvh; overflow-y: auto; overscroll-behavior: contain; padding-top: max(14vh,env(safe-area-inset-top)); padding-bottom: max(24px,env(safe-area-inset-bottom)); }
+.site-search-panel { max-height: calc(100vh - 48px); max-height: calc(100dvh - 48px); overflow-y: auto; }
+.gallery-lightbox { height: 100vh; height: 100dvh; padding-top: max(68px,env(safe-area-inset-top)); padding-bottom: max(24px,env(safe-area-inset-bottom)); }
+.gallery-lightbox figure { max-height: calc(100dvh - 92px); }
+.gallery-lightbox figure img { max-height: calc(100dvh - 145px); }
+.gallery-lightbox figure { touch-action: pan-y pinch-zoom; }
+@media (max-width:760px) {
+  .site-search-panel input,.release-tools input,.release-tools select,.osu-search input { font-size:16px; }
+  .aureyx-nav.is-open #main-menu { max-height: min(430px,calc(100dvh - 100px)); overflow-y:auto; overscroll-behavior:contain; }
+  .home-video-identity { min-width:0; }
+  .home-video-identity h3 { overflow-wrap:anywhere; }
+  .home-video-channel > header { flex-wrap:wrap; }
+}
+@media (pointer:coarse) {
+  .nav-search,.nav-menu,.site-search-panel button,.video-filters button,.release-pagination button,.player-controls button,.player-minimize,.player-close { min-width:44px; min-height:44px; }
+  .gallery-lightbox > button { min-width:44px; min-height:44px; }
+}
+@media (pointer:coarse) and (max-width:900px) {
+  .persistent-player { grid-template-columns:48px minmax(0,1fr) auto 44px 44px; }
+  .persistent-player.is-minimized { grid-template-columns:42px minmax(0,1fr) 44px 44px; }
+}
+@media (max-height:500px) and (orientation:landscape) {
+  .gallery-lightbox { padding-top:48px; padding-bottom:8px; }
+  .gallery-lightbox figure { max-height:calc(100dvh - 56px); }
+  .gallery-lightbox figure img { max-height:calc(100dvh - 90px); }
+}
