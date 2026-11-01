@@ -70,4 +70,11 @@ export const members = [
       soundcloud: "",
     },
   },
+  {
+    name: "prod. Jxzz",
+    slug: "prod-jxzz",
+    role: "Artist / Producer",
+    description: "Artist and producer with Aureyx, collaborating with GRiMVEX on Hollow Zero (Echoes from the Void).",
+    links: { spotify: "", youtube: "", soundcloud: "" },
+  },
 ];

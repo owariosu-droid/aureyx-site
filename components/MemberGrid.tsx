@@ -126,7 +126,7 @@ export default function MemberGrid({
                   backgroundColor: "#27272a",
                 }}
               >
-                <Image
+                {member.image ? <Image
                   src={member.image}
                   alt={member.name}
                   fill
@@ -136,7 +136,7 @@ export default function MemberGrid({
                     grayscale transition-all duration-500
                     group-hover:scale-105 group-hover:grayscale-0
                   "
-                />
+                /> : <span className="absolute inset-0 flex items-center justify-center text-7xl font-black text-white/15" aria-hidden="true">{member.name.charAt(0)}</span>}
 
                 <div
                   aria-hidden="true"
