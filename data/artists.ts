@@ -10,6 +10,8 @@ export type Artist = {
   videoFallbackChannelIds?: string[];
   featuredVideos?: { id: string; title: string; published: string; thumbnail: string }[];
   blog?: boolean;
+  showCatalogReleases?: boolean;
+  featuredRelease?: { youtubeVideoId: string; title?: string };
   albums?: { title: string; image: string; href?: string }[];
   gallery?: { src: string; alt: string }[];
   conceptArt?: { src: string; alt: string; width: number; height: number }[];
@@ -57,9 +59,11 @@ export const artists: Artist[] = [
   {
     slug: "yoru-zenaku",
     name: "Yoru Zenaku",
+    showCatalogReleases: true,
+    featuredRelease: { youtubeVideoId: "c0ed8NQsNNA" },
     role: "Artist",
     accent: "#e34b59",
-    bio: "Music and projects from Yoru Zenaku. More about this artist coming soon.",
+    bio: "Music, artwork, and releases from Yoru Zenaku, an artist in the Aureyx collective.",
     image: "/members/yoru-concept-01.jpg",
     cover: "/members/yoru-zenaku-cover.png",
     youtubeChannelId: "UCe5zNYSQ3xVyss4hET5j7Cw",
