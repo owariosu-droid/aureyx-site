@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { Menu, Search, X } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { useDialogFocus } from "@/lib/use-dialog-focus";
 import SocialIcon from "@/components/SocialIcon";
 import { artists } from "@/data/artists";
 import { releases } from "@/lib/releases";
@@ -15,23 +16,40 @@ const links = [
   { name: "Nocturna", href: "https://nocturnakits.gumroad.com/l/oeveok", external: true },
 ];
 
+const mobileQuery = "(max-width: 760px)";
+function subscribeMobile(callback: () => void) {
+  const media = window.matchMedia(mobileQuery);
+  media.addEventListener("change", callback);
+  return () => media.removeEventListener("change", callback);
+}
+
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [searching, setSearching] = useState(false);
   const [query, setQuery] = useState("");
+  const mobile = useSyncExternalStore(subscribeMobile, () => window.matchMedia(mobileQuery).matches, () => false);
+  const menuOpen = mobile && open;
+  const searchDialog = useRef<HTMLDivElement>(null);
+  useDialogFocus(searching, searchDialog);
+  useEffect(() => {
+    const media = window.matchMedia(mobileQuery);
+    const onChange = () => { if (!media.matches) setOpen(false); };
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, []);
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") { event.preventDefault(); setSearching(true); }
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") { event.preventDefault(); const dialog = document.querySelector('[role="dialog"][aria-modal="true"]'); if (!dialog || dialog === searchDialog.current) setSearching(true); }
       if (event.key === "Escape") { setSearching(false); setOpen(false); }
     };
     window.addEventListener("keydown", onKey); return () => window.removeEventListener("keydown", onKey);
   }, []);
   useEffect(() => {
     const previous = document.body.style.overflow;
-    if (open || searching) document.body.style.overflow = "hidden";
+    if (menuOpen || searching) document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = previous; };
-  }, [open, searching]);
+  }, [menuOpen, searching]);
   const results = useMemo(() => {
     const value = query.trim().toLowerCase(); if (!value) return [];
     const destinations = [
@@ -48,18 +66,18 @@ export default function Navbar() {
     ].slice(0,12);
   }, [query]);
   return <>
-    <nav aria-label="Main navigation" className={`aureyx-nav${open ? " is-open" : ""}`}>
+    <nav aria-label="Main navigation" className={`aureyx-nav${menuOpen ? " is-open" : ""}`}>
       <div>
         <Link href="/" aria-label="Aureyx home" className="nav-brand">AUREYX</Link>
         <button className="nav-search" type="button" onClick={() => setSearching(true)} aria-label="Search Aureyx"><Search /> <span>Search</span><kbd>⌘K</kbd></button>
-        <button className="nav-menu" type="button" aria-expanded={open} aria-controls="main-menu" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}<span>{open ? "Close" : "Menu"}</span></button>
-        <ul id="main-menu">
+        <button className="nav-menu" type="button" aria-expanded={menuOpen} aria-controls="main-menu" onClick={() => setOpen(!open)}>{menuOpen ? <X /> : <Menu />}<span>{menuOpen ? "Close" : "Menu"}</span></button>
+        <ul id="main-menu" inert={mobile && !menuOpen}>
           {links.map((link) => { const active = !link.external && (link.href === "/" ? pathname === "/" : pathname.startsWith(link.href)); return <li key={link.href}>{link.external ? <a href={link.href} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>{link.name} ↗</a> : <Link href={link.href} className={active ? "is-active" : undefined} aria-current={active ? "page" : undefined} onClick={() => setOpen(false)}><span className="nav-link-label">{link.name}{link.icon && <SocialIcon platform={link.icon} size={15} />}</span></Link>}</li>; })}
         </ul>
       </div>
     </nav>
-    {searching && <div className="site-search-backdrop" role="dialog" aria-modal="true" aria-label="Search Aureyx" onMouseDown={(event) => { if (event.target === event.currentTarget) setSearching(false); }}>
-      <div className="site-search-panel"><div><Search /><input autoFocus type="search" placeholder="Search Aureyx" value={query} onChange={(event) => setQuery(event.target.value)} /><button type="button" onClick={() => setSearching(false)} aria-label="Close search"><X /></button></div>
+    {searching && <div ref={searchDialog} className="site-search-backdrop" role="dialog" aria-modal="true" aria-label="Search Aureyx" onMouseDown={(event) => { if (event.target === event.currentTarget) setSearching(false); }}>
+      <div className="site-search-panel"><div><Search /><input type="search" placeholder="Search Aureyx" value={query} onChange={(event) => setQuery(event.target.value)} /><button type="button" onClick={() => setSearching(false)} aria-label="Close search"><X /></button></div>
       <ul>{query && !results.length ? <li className="site-search-empty">No matches</li> : results.map((result) => <li key={result.href}><Link href={result.href} onClick={() => { setSearching(false); setQuery(""); }}><span>{result.label}</span><small>{result.type}</small></Link></li>)}</ul><p>Press Esc to close</p></div>
     </div>}
   </>;

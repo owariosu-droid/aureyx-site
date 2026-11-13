@@ -14,6 +14,21 @@ spec.loader.exec_module(sync)
 
 
 class SyncTests(unittest.TestCase):
+    def test_updated_release_artwork_takes_priority_over_cached_catalog_tile(self):
+        item = {"page_url": "/track/test", "type": "track", "id": 1, "art_id": 1}
+        data = {"current": {"title": "Updated song", "minimum_price": 0, "download_pref": 2}, "item_type": "track", "id": 1, "art_id": 2}
+        catalog = '<div data-client-items="' + json.dumps([item]).replace('"', '&quot;') + '"></div>'
+        page = '<div data-tralbum="' + json.dumps(data).replace('"', '&quot;') + '"></div>'
+        with patch.object(sync, "fetch", side_effect=[catalog.encode(), page.encode()]), patch.object(sync, "image", return_value="/external/updated.jpg") as image, patch.object(sync, "save_assets"), patch.object(sync, "write_json") as write:
+            sync.sync_bandcamp()
+            self.assertEqual(image.call_args.args[0], "https://f4.bcbits.com/img/a2_16.jpg")
+            self.assertEqual(write.call_args.args[1][0]["image"], "/external/updated.jpg")
+            self.assertIsNone(write.call_args.args[1][0]["preview"])
+
+    def test_track_lists_use_current_titles_and_finite_durations(self):
+        data = {"trackinfo": [{"title": "Replaced recording", "duration": 123.4}, {"title": "New song", "duration": -1}, {"title": ""}]}
+        self.assertEqual(sync.tracks_from_release(data), [{"title": "Replaced recording", "duration": 123.4}, {"title": "New song", "duration": None}])
+
     def test_rejects_source_controlled_path_traversal(self):
         with patch.object(sync, "fetch") as fetch:
             with self.assertRaisesRegex(ValueError, "filename"):
