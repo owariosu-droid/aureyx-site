@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Orbitron, Pirata_One } from "next/font/google";
+import { Geist, Geist_Mono, Orbitron, Pirata_One, UnifrakturCook, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
+import "./gothic.css";
 import ImageProtection from "@/components/ImageProtection";
 import SiteAtmosphere from "@/components/SiteAtmosphere";
 import AudioPlayerProvider from "@/components/AudioPlayerProvider";
@@ -28,6 +29,9 @@ const pirataOne = Pirata_One({
   weight: "400",
 });
 
+const blackletter = UnifrakturCook({ subsets: ["latin"], weight: "700", variable: "--font-blackletter", display: "swap" });
+const editorial = Cormorant_Garamond({ subsets: ["latin"], variable: "--font-editorial", display: "swap" });
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.aureyx.xyz"),
   title: "AUREYX",
@@ -40,7 +44,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#101011",
+  themeColor: "#0d0d0f",
   colorScheme: "dark",
 };
 
@@ -52,9 +56,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} ${pirataOne.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} ${pirataOne.variable} ${blackletter.variable} ${editorial.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col"><AudioPlayerProvider><a className="skip-link" href="#main-content">Skip to content</a><ImageProtection /><SiteAtmosphere /><div id="main-content">{children}</div></AudioPlayerProvider><Analytics /></body>
+      <body className="aureyx-gothic-theme min-h-full flex flex-col"><AudioPlayerProvider><a className="skip-link" href="#main-content">Skip to content</a><ImageProtection /><SiteAtmosphere /><div id="main-content">{children}</div></AudioPlayerProvider><Analytics /></body>
     </html>
   );
 }

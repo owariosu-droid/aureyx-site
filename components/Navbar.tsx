@@ -50,7 +50,7 @@ export default function Navbar() {
   return <>
     <nav aria-label="Main navigation" className={`aureyx-nav${open ? " is-open" : ""}`}>
       <div>
-        <Link href="/" aria-label="Aureyx home" className="nav-brand">AUREYX</Link>
+        <Link href="/" aria-label="Aureyx home" className="nav-brand">Aureyx</Link>
         <button className="nav-search" type="button" onClick={() => setSearching(true)} aria-label="Search Aureyx"><Search /> <span>Search</span><kbd>⌘K</kbd></button>
         <button className="nav-menu" type="button" aria-expanded={open} aria-controls="main-menu" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}<span>{open ? "Close" : "Menu"}</span></button>
         <ul id="main-menu">
