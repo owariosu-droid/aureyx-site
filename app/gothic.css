@@ -1,0 +1,187 @@
+/* Gothic visual system. Artwork keeps its original colors. */
+.aureyx-gothic-theme {
+  --surface: #141415;
+  --surface-raised: #1c1c1d;
+  --line: #d7d2c329;
+  --radius-card: 3px;
+  --focus: #e4dfd3;
+  --signal: #d5d0c4;
+  background: #0d0d0f;
+  color: #e8e4dc;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+}
+.aureyx-gothic-theme::before {
+  opacity: .18;
+  background-image: repeating-linear-gradient(116deg, transparent 0 90px, #ffffff08 91px 92px);
+  background-size: auto;
+}
+.aureyx-gothic-theme ::selection { background: #d9d3c5; color: #111; }
+.aureyx-gothic-theme .skip-link { width: max-content; max-width: calc(100vw - 16px); }
+.aureyx-gothic-theme #main-content { animation: none; }
+.aureyx-gothic-theme .site-scroll-progress { background: #c8c3b8; box-shadow: none; height: 1px; }
+.aureyx-gothic-theme .transmission-home {
+  --signal: #d5d0c4;
+  background: radial-gradient(ellipse at 50% 0, #30303128, transparent 55rem), #0d0d0f;
+  color: #e8e4dc;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+}
+.aureyx-gothic-theme .transmission-home :is(h1,h2):not(.gothic-wordmark),
+.aureyx-gothic-theme .site-state h1 {
+  font-family: var(--font-editorial), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -.025em;
+}
+.aureyx-gothic-theme .transmission-section h2 { font-size: clamp(2.8rem,5.2vw,5rem); line-height: 1.05; }
+.aureyx-gothic-theme .transmission-section h2 em { font-family: var(--font-editorial), Georgia, serif; color: #aaa69e; }
+.aureyx-gothic-theme .transmission-eyebrow { color: #bab5a8; font-size: 9px; letter-spacing: .24em; }
+.aureyx-gothic-theme :is(a,button,input,select):focus-visible { outline: 2px solid #dfd9ca; outline-offset: 4px; }
+
+/* Navigation keeps the same destinations and responsive controls. */
+.aureyx-gothic-theme .aureyx-nav { background: #101011ed; border-color: var(--line); }
+.aureyx-gothic-theme .aureyx-nav > div { background: #101011ed; border: 1px solid #d7d2c326; border-radius: 3px; box-shadow: 0 12px 40px #0005; }
+.aureyx-gothic-theme .aureyx-nav .nav-brand,
+.aureyx-gothic-theme .aureyx-footer .footer-brand {
+  font-family: var(--font-blackletter), Georgia, serif;
+  font-weight: 700;
+  font-size: 34px;
+  letter-spacing: -.025em;
+  line-height: 1.2;
+  color: #ebe7dd;
+}
+.aureyx-gothic-theme .aureyx-nav li a::after { background: #d2ccbf; }
+.aureyx-gothic-theme .aureyx-nav li a.is-active { color: #fff; }
+.aureyx-gothic-theme :is(.nav-search,.nav-menu) { border-radius: 2px; border-color: #d7d2c32b; background: #ffffff04; }
+.aureyx-gothic-theme .site-search-panel { border-color: #d7d2c33d; border-radius: 3px; background: #121213; }
+.aureyx-gothic-theme .site-search-panel small { color: #c9c2b3; }
+
+/* A vaulted, monochrome stage for the new live-type wordmark. */
+.aureyx-gothic-theme .transmission-hero {
+  min-height: max(740px,100svh);
+  padding: 30px 5% 36px;
+  border-bottom-color: #d7d2c329;
+  background: #0c0c0e;
+}
+.aureyx-gothic-theme .transmission-backdrop { filter: grayscale(1) brightness(.35) contrast(1.15); opacity: .42; animation: none; scale: 1; }
+.aureyx-gothic-theme .transmission-hero::before { background: linear-gradient(0deg,#0d0d0f 0%,#0c0c0e18 48%,#0c0c0eaa 100%),radial-gradient(ellipse at 50% 45%,transparent,#07070899 75%); }
+.aureyx-gothic-theme .transmission-hero::after { content: none; background: none; box-shadow: none; filter: none; }
+.aureyx-gothic-theme .transmission-texture { animation: none; background: repeating-linear-gradient(90deg,transparent 0 119px,#ffffff04 120px 121px); opacity: .6; }
+.aureyx-gothic-theme .transmission-texture::before,
+.aureyx-gothic-theme .transmission-texture::after { content: none; }
+.aureyx-gothic-theme .gothic-vault { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.aureyx-gothic-theme .gothic-vault svg { width: 100%; height: 100%; stroke: #c4bfb1; stroke-width: .8; opacity: .18; }
+.aureyx-gothic-theme .transmission-center { position: relative; max-width: 1200px; margin: auto; padding: 80px 0 90px; animation: none; }
+.aureyx-gothic-theme .gothic-kicker { justify-content: center; gap: 24px; color: #aaa59a; font-size: 9px; letter-spacing: .3em; }
+.aureyx-gothic-theme .gothic-kicker span { color: #d8d1c2; font-size: 15px; }
+.aureyx-gothic-theme .gothic-wordmark {
+  display: block;
+  width: 100%;
+  margin: 24px auto 30px;
+  font-family: var(--font-blackletter), Georgia, serif;
+  font-size: clamp(5rem,22vw,21rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -.04em;
+  text-transform: none;
+  color: #e8e3d8;
+  text-shadow: none;
+  filter: none;
+  background: none;
+  animation: none;
+}
+.aureyx-gothic-theme .gothic-wordmark a { display: inline-block; color: inherit; }
+.aureyx-gothic-theme .gothic-wordmark span { display: inline; }
+.aureyx-gothic-theme .gothic-wordmark::before,
+.aureyx-gothic-theme .gothic-wordmark::after { content: none; }
+.aureyx-gothic-theme .gothic-wordmark:hover { color: #fffdf7; filter: none; text-shadow: none; transform: none; }
+.aureyx-gothic-theme .transmission-tagline { font-family: var(--font-editorial), Georgia, serif; font-size: clamp(21px,2.3vw,31px); font-style: italic; letter-spacing: .01em; color: #bcb7ac; }
+.aureyx-gothic-theme :is(.transmission-topline,.transmission-bottomline) { color: #918d85; font-size: 9px; }
+.aureyx-gothic-theme .transmission-topline i { background: #c6c0b1; }
+.aureyx-gothic-theme .transmission-bottomline a { border-color: #bdb6a54d; }
+.aureyx-gothic-theme .signal-dot { background: #c6c0b1; box-shadow: none; animation: none; }
+.aureyx-gothic-theme .transmission-ticker { background: #121213; border-color: #d7d2c329; color: #a9a499; animation: none; letter-spacing: .22em; }
+.aureyx-gothic-theme .transmission-ticker b { color: #d3cbbb; }
+
+/* Silver rules and stone-like surfaces replace colored light effects. */
+.aureyx-gothic-theme .transmission-home .transmission-button { border-radius: 2px; border-color: #d4cdbc4d; background: transparent; box-shadow: none; color: #d8d2c7; font-size: 11px; }
+.aureyx-gothic-theme .transmission-home .transmission-button.primary { background: #ddd7ca; border-color: #ddd7ca; color: #171615; }
+.aureyx-gothic-theme .transmission-home .transmission-button:hover { background: #d4cdbc12; border-color: #e2dac9; box-shadow: none; transform: translateY(-2px); }
+.aureyx-gothic-theme .transmission-home .transmission-button.primary:hover { background: #f1ece2; color: #121212; }
+.aureyx-gothic-theme .transmission-text-link { border-color: #bdb6a54d; color: #ded8cc; }
+.aureyx-gothic-theme .transmission-text-link:hover { color: #fff; }
+.aureyx-gothic-theme .transmission-home :is(.transmission-intro,.transmission-founder-copy,.home-music-gateway,.hanatekk-copy,.transmission-explore-card,.home-linktree-content) { background: linear-gradient(140deg,#1b1b1d,#111113); border-color: #c4bfb12e; border-radius: 3px; box-shadow: 0 24px 55px #0004; }
+.aureyx-gothic-theme .transmission-intro::before { background: linear-gradient(90deg,#101012ef,#101012c7); }
+.aureyx-gothic-theme .transmission-about-banner { filter: grayscale(1) brightness(.45); animation: none; }
+.aureyx-gothic-theme .transmission-intro > div { background: transparent; border: 0; box-shadow: none; backdrop-filter: none; border-radius: 0; }
+.aureyx-gothic-theme .transmission-intro-copy { color: #b6b2aa; }
+.aureyx-gothic-theme .transmission-founder-copy h2 span { color: #a8a297; }
+.aureyx-gothic-theme .transmission-founder-copy > p { color: #bab5ac; }
+.aureyx-gothic-theme .transmission-founder-image { border-radius: 3px; }
+.aureyx-gothic-theme .transmission-home :is(.home-artists-section .transmission-artist,.catalog-list .transmission-release,.home-video-channel,.home-linktree-card,.fun-card,.osu-panel) {
+  --artist-accent: #c6c0b3;
+  --release-accent: #c6c0b3;
+  --channel-accent: #c6c0b3;
+  --panel-accent: #c6c0b3;
+  background: linear-gradient(145deg,#1a1a1c,#111113);
+  border: 1px solid #c4bfb12d;
+  border-radius: 3px;
+  box-shadow: 0 20px 55px #0005;
+}
+.aureyx-gothic-theme .transmission-home :is(.home-artists-section .transmission-artist,.catalog-list .transmission-release,.home-video-channel,.home-linktree-card,.fun-card):hover { border-color: #d1c9b66b; box-shadow: 0 25px 60px #0008; }
+.aureyx-gothic-theme .transmission-artist-info h3 { font-family: var(--font-editorial), Georgia, serif; font-weight: 600; letter-spacing: -.015em; }
+.aureyx-gothic-theme .home-artists-section .transmission-artist-info > span { color: #b6afa1; }
+.aureyx-gothic-theme :is(.transmission-artist-photo img,.transmission-release-art img) { filter: none; }
+.aureyx-gothic-theme .transmission-home .transmission-release:hover .transmission-release-art { border-color: #d1c9b66b; box-shadow: 0 15px 40px #0005; }
+.aureyx-gothic-theme .transmission-release-art,.aureyx-gothic-theme .release-detail-art { border-radius: 3px; }
+.aureyx-gothic-theme :is(.home-video-channel header > a,.home-linktree-card,.release-inline-player) { border-color: #c6c0b33d; }
+.aureyx-gothic-theme .home-linktree-shade { background: linear-gradient(0deg,#0c0c0ff5,#0c0c0f40); }
+.aureyx-gothic-theme .home-music-covers > span { border-radius: 2px; box-shadow: 0 20px 65px #000b; }
+.aureyx-gothic-theme .catalog-hero { background: linear-gradient(145deg,#1d1d20,#0e0e10); border-color: #c6c0b329; }
+.aureyx-gothic-theme .catalog-hero::before,.aureyx-gothic-theme .fun-heading::after { content: none; }
+.aureyx-gothic-theme .fun-card-shade { background: linear-gradient(100deg,#0b0b0ef0,#0b0b0e70); }
+.aureyx-gothic-theme :is(.release-tools input,.release-tools select,.osu-search input):focus { border-color: #d1c9b6; box-shadow: 0 0 0 3px #d1c9b614; }
+.aureyx-gothic-theme :is(.video-filters button,.osu-filters button)[aria-pressed="true"] { background: #d8d1c2; color: #131313; border-color: #d8d1c2; }
+.aureyx-gothic-theme :is(.release-preview-button,.release-detail-actions button,.player-controls .player-primary) { background: #d8d1c2; color: #121212; border-color: #d8d1c2; }
+.aureyx-gothic-theme .youtube-player-shell { background: linear-gradient(135deg,#151518,#252528); }
+.aureyx-gothic-theme .youtube-player-shell:focus-within { outline-color: #d8d1c2; }
+
+/* Artist pages retain their artwork; their chrome shares the new palette. */
+.aureyx-gothic-theme .artists-theme::before { background-image: radial-gradient(circle,#ffffff14 1px,transparent 1.5px); }
+.aureyx-gothic-theme .artists-theme main { --artist-page-accent: #c6c0b3; }
+.aureyx-gothic-theme .artists-theme main > header > p:first-child { color: #bbb4a6; }
+.aureyx-gothic-theme .artists-theme main :is(.artist-directory-card,.artist-profile-card,section article) { background: linear-gradient(140deg,#1b1b1d,#111113); border-color: #c4bfb13d; border-radius: 3px; box-shadow: 0 22px 55px #0005; }
+.aureyx-gothic-theme .artists-theme main :is(.artist-directory-card,.artist-profile-card) a:hover { background: #ffffff08; border-color: #d8d1c260; }
+.aureyx-gothic-theme .artists-theme .artist-profile-card > div:first-child { background: #171719; }
+.aureyx-gothic-theme .artists-theme .artist-profile-card > div:first-child > div { background: linear-gradient(to top,#171719,transparent); }
+.aureyx-gothic-theme .artists-theme .artist-profile-card .border-4 { border-color: #171719; }
+.aureyx-gothic-theme .artist-post-meta span { color: #c2baaa; border-color: #c2baaa40; background: #c2baaa0a; }
+.aureyx-gothic-theme .persistent-player { background: #131315f2; border-color: #c6c0b345; border-radius: 3px; }
+.aureyx-gothic-theme .player-track span { color: #bcb4a5; }
+.aureyx-gothic-theme :is(.player-timeline input,.player-volume input) { accent-color: #d1c9b6; }
+
+/* A quiet closing mark echoes the hero. */
+.aureyx-gothic-theme .transmission-signoff { border-top: 1px solid #d7d2c329; padding-top: 90px; padding-bottom: 90px; background: #0d0d0f; }
+.aureyx-gothic-theme .transmission-signoff-art { filter: grayscale(1) brightness(.28); opacity: .28; }
+.aureyx-gothic-theme .gothic-wordmark--footer { font-size: clamp(4rem,11vw,10rem); width: 100%; }
+.aureyx-gothic-theme .aureyx-footer { background: #101012; border-top: 1px solid #d7d2c329; }
+.aureyx-gothic-theme .aureyx-footer::before { background: linear-gradient(90deg,transparent,#d7d2c30c,transparent); }
+.aureyx-gothic-theme .aureyx-footer .footer-brand { font-size: 46px; }
+
+@media (max-width:760px) {
+  .aureyx-gothic-theme .aureyx-nav > div { border-radius: 0; border-inline: 0; }
+  .aureyx-gothic-theme .transmission-hero { min-height: max(660px,calc(100svh - 70px)); padding: 24px 6% 30px; }
+  .aureyx-gothic-theme .transmission-center { padding: 72px 0; }
+  .aureyx-gothic-theme .gothic-kicker { font-size: 8px; letter-spacing: .16em; gap: 14px; }
+  .aureyx-gothic-theme .gothic-wordmark { font-size: clamp(5rem,22vw,10rem); margin-block: 24px; }
+  .aureyx-gothic-theme .gothic-wordmark--footer { font-size: clamp(4rem,19vw,8rem); }
+  .aureyx-gothic-theme .transmission-topline { font-size: 8px; letter-spacing: .08em; }
+  .aureyx-gothic-theme .transmission-bottomline { justify-content: center; flex-wrap: wrap; font-size: 8px; }
+  .aureyx-gothic-theme .transmission-tagline { max-width: 300px; margin-inline: auto; }
+  .aureyx-gothic-theme .transmission-actions { gap: 10px; }
+  .aureyx-gothic-theme .transmission-home .transmission-button { padding: 15px 18px; min-height: 46px; }
+  .aureyx-gothic-theme .transmission-section h2 { font-size: clamp(2.6rem,9vw,3.8rem); }
+  .aureyx-gothic-theme .transmission-intro { margin: 24px 5%; }
+  .aureyx-gothic-theme .transmission-signoff { padding-block: 60px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .aureyx-gothic-theme .gothic-wordmark,.aureyx-gothic-theme .gothic-vault { animation: none; transition: none; }
+}
