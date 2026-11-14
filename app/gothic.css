@@ -222,12 +222,40 @@
   .aureyx-gothic-theme .gothic-wordmark--original { margin-block: 32px; }
 }
 
-/* The space artwork belongs to the outer gutters, separate from the hero. */
+/* Custom layered atmosphere, kept below the top navigation. */
 .aureyx-gothic-theme::before {
-  opacity: 1;
   top: 160px;
-  background: linear-gradient(#080b1073, #080b1073), url('/aureyx-outer-space.jpg') center / min(100vw, 1920px) auto no-repeat;
-  mask-image: none;
+  opacity: .8;
+  background:
+    radial-gradient(ellipse at 0% 30%, #575b642e, transparent 55%),
+    radial-gradient(ellipse at 100% 75%, #88816d24, transparent 50%),
+    repeating-linear-gradient(115deg, transparent 0 140px, #d7d2c306 141px 142px),
+    #0a0a0d;
+  mask-image: linear-gradient(transparent, black 90px);
+  animation: gothic-atmosphere-breathe 24s ease-in-out infinite alternate;
+}
+.aureyx-gothic-theme::after {
+  content: "";
+  position: fixed;
+  inset: 160px -24px -48px;
+  z-index: 0;
+  pointer-events: none;
+  background: url('/gothic-tracery.svg') center top / 1920px 1080px repeat-y;
+  opacity: .22;
+  mask-image: linear-gradient(transparent, black 100px, black 85%, transparent);
+  animation: gothic-tracery-drift 36s ease-in-out infinite alternate;
+}
+@keyframes gothic-atmosphere-breathe {
+  from { opacity: .5; }
+  to { opacity: .9; }
+}
+@keyframes gothic-tracery-drift {
+  from { transform: translateY(0); opacity: .16; }
+  to { transform: translateY(-30px); opacity: .3; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aureyx-gothic-theme::before,
+  .aureyx-gothic-theme::after { animation: none; }
 }
 .aureyx-gothic-theme .transmission-home,
 .aureyx-gothic-theme .artists-theme {
@@ -242,7 +270,8 @@
   letter-spacing: .015em;
 }
 @media (max-width: 760px) {
-  .aureyx-gothic-theme::before { display: none; }
+  .aureyx-gothic-theme::before,
+  .aureyx-gothic-theme::after { display: none; }
 }
 
 .aureyx-gothic-theme .gothic-wordmark {
