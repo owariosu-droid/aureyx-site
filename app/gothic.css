@@ -279,3 +279,56 @@
   font-weight: 400;
   letter-spacing: -.025em;
 }
+
+/* Color follows the destination; text and icons still identify every action. */
+.aureyx-gothic-theme {
+  --action-gold: #e5c58b;
+  --action-violet: #cbb3ed;
+  --action-rose: #edafb9;
+  --action-teal: #9bd2c5;
+}
+.aureyx-gothic-theme .transmission-button { --action-color: var(--action-gold); }
+.aureyx-gothic-theme .transmission-button[href^="/artists"] { --action-color: var(--action-violet); }
+.aureyx-gothic-theme .transmission-button[href^="/videos"] { --action-color: var(--action-rose); }
+.aureyx-gothic-theme .transmission-button[href^="/gaming"],
+.aureyx-gothic-theme .transmission-button[href^="/for-fun"] { --action-color: var(--action-teal); }
+.aureyx-gothic-theme .transmission-home .transmission-button,
+.aureyx-gothic-theme .transmission-home .transmission-button.primary {
+  background: var(--action-color);
+  border-color: var(--action-color);
+  color: #18151d;
+  box-shadow: inset 0 1px #ffffff30;
+}
+.aureyx-gothic-theme .transmission-home .transmission-button:hover,
+.aureyx-gothic-theme .transmission-home .transmission-button.primary:hover {
+  background: color-mix(in srgb, var(--action-color) 82%, white);
+  border-color: #fff4;
+  color: #18151d;
+  box-shadow: 0 6px 20px #0005;
+}
+.aureyx-gothic-theme :is(.release-preview-button,.release-detail-actions button,.player-controls .player-primary) {
+  background: var(--action-gold);
+  border-color: var(--action-gold);
+  color: #18151d;
+}
+.aureyx-gothic-theme .release-detail-actions > a {
+  background: #30283d;
+  border-color: #cbb3ed80;
+  color: #e1cff8;
+}
+.aureyx-gothic-theme .home-video-channel header > a {
+  background: #38232b;
+  border-color: #edafb980;
+  color: #f5c9d0;
+}
+.aureyx-gothic-theme .video-filters button { border-color: #edafb94d; color: #f5c9d0; }
+.aureyx-gothic-theme .video-filters button[aria-pressed="true"] {
+  background: var(--action-rose); border-color: var(--action-rose); color: #18151d;
+}
+.aureyx-gothic-theme .osu-filters button { border-color: #9bd2c54d; color: #bde5db; }
+.aureyx-gothic-theme .osu-filters button[aria-pressed="true"] {
+  background: var(--action-teal); border-color: var(--action-teal); color: #18151d;
+}
+.aureyx-gothic-theme .nav-search { background: #292233; border-color: #cbb3ed66; color: #e1cff8; }
+.aureyx-gothic-theme .nav-menu { background: #30281d; border-color: #e5c58b66; color: #f0d9b0; }
+.aureyx-gothic-theme :is(.release-preview-button,.release-detail-actions button,.player-primary,.home-video-channel header > a,.release-detail-actions > a):hover { filter: brightness(1.12); }
