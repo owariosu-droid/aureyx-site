@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none" stroke="#c9c3b5" stroke-width=".7">
+  <defs>
+    <g id="lancet">
+      <path d="M40 1040V470Q40 250 240 100Q440 250 440 470V1040M68 1040V480Q68 280 240 143Q412 280 412 480V1040M110 1040V525Q110 370 240 240Q370 370 370 525V1040"/>
+      <path d="M40 650H440M68 675H412M240 240V1040M110 820Q175 700 240 650Q305 700 370 820"/>
+      <circle cx="240" cy="460" r="64"/>
+      <path d="M240 396Q280 460 240 524Q200 460 240 396M176 460Q240 420 304 460Q240 500 176 460M240 64V88M228 76H252"/>
+      <path d="M24 1040H456M24 1052H456"/>
+    </g>
+  </defs>
+  <use href="#lancet"/>
+  <use href="#lancet" x="1440"/>
+  <path d="M0 28H1920M0 40H1920" opacity=".35"/>
+</svg>
