@@ -10,6 +10,7 @@ import ArtistUpdateBody from "@/components/ArtistUpdateBody";
 import SocialIcon from "@/components/SocialIcon";
 import GalleryLightbox from "@/components/GalleryLightbox";
 import { artists } from "@/data/artists";
+import { releases } from "@/lib/releases";
 import type { CSSProperties } from "react";
 import { artistUpdateCategory, getArtistUpdates, submissionUrl } from "@/lib/artist-updates";
 
@@ -27,6 +28,13 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
   const { slug } = await params;
   const artist = artists.find((item) => item.slug === slug);
   if (!artist) notFound();
+  const catalogReleases = artist.showCatalogReleases ? releases.filter((release) => release.contributors.includes(artist.name)) : [];
+  const featuredVideoId = artist.featuredRelease?.youtubeVideoId;
+  const featuredRelease = featuredVideoId && /^[A-Za-z0-9_-]{11}$/.test(featuredVideoId) ? {
+    title: artist.featuredRelease?.title || "Featured release",
+    embed: `https://www.youtube-nocookie.com/embed/${featuredVideoId}?playsinline=1&rel=0`,
+    href: `https://www.youtube.com/watch?v=${featuredVideoId}`,
+  } : null;
   const { posts, unavailable } = await getArtistUpdates(slug);
 
   return (
@@ -50,14 +58,35 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
             <h1 className="break-words text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">{artist.name}</h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/65">{artist.bio}</p>
             <div className="mt-8 flex flex-wrap gap-3">
+              {featuredRelease && <a href="#featured-release" className="rounded-full border border-white/30 px-6 py-3 text-sm hover:bg-white/10">Featured release ↓</a>}
               <a href={(artist.youtubeChannelId || artist.videoFallbackChannelIds) ? "#videos" : "#updates"} className="rounded-full border border-white/30 px-6 py-3 text-sm hover:bg-white/10">{(artist.youtubeChannelId || artist.videoFallbackChannelIds) ? "Videos ↓" : "Latest updates ↓"}</a>
               {artist.blog && <a href="#blog" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Blog ↓</a>}
+              {catalogReleases.length > 0 && <a href="#releases" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Releases ↓</a>}
               {artist.conceptArt && <a href="#concept-art" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Concept art ↓</a>}
               {artist.albums && <a href="#albums" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Albums ↓</a>}
               {artist.links?.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="social-icon-link rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10"><SocialIcon platform={link.label} />{link.label} ↗</a>)}
             </div>
           </div>
         </article>
+
+        {featuredRelease && <section id="featured-release" className="mt-16 scroll-mt-32" aria-labelledby="featured-release-heading">
+          <p className="text-xs uppercase tracking-[0.25em] text-white/45">{artist.name}</p>
+          <h2 id="featured-release-heading" className="mt-3 text-3xl font-semibold">{featuredRelease.title}</h2>
+          <div className="mt-8 max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-[#181618]">
+            <div className="youtube-player-shell" style={{ minHeight: 200 }}>
+              <iframe src={featuredRelease.embed} title={`${artist.name}: ${featuredRelease.title}`} loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" />
+            </div>
+            <div className="p-5"><a href={featuredRelease.href} target="_blank" rel="noopener noreferrer" className="text-sm text-white/65 hover:text-white">Watch on YouTube ↗</a></div>
+          </div>
+        </section>}
+
+        {catalogReleases.length > 0 && <section id="releases" className="mt-16 scroll-mt-32" aria-labelledby="releases-heading">
+          <h2 id="releases-heading" className="text-3xl font-semibold">Releases</h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">{catalogReleases.map((release) => <article key={release.slug} className="overflow-hidden rounded-2xl border border-white/10 bg-[#181618]">
+            <Link href={`/music/${release.slug}`} className="relative block aspect-square"><Image src={release.image} alt={`${release.title} cover`} fill sizes="(max-width:768px) 100vw, 50vw" className="object-contain" /></Link>
+            <div className="flex flex-wrap items-center justify-between gap-4 p-6"><h3 className="text-xl font-medium"><Link href={`/music/${release.slug}`}>{release.title}</Link></h3><a href={release.link} target="_blank" rel="noopener noreferrer" className="text-sm text-white/65 hover:text-white">Listen ↗</a></div>
+          </article>)}</div>
+        </section>}
 
         {artist.gallery && <section className="mt-16" aria-labelledby="gallery-heading">
           <p className="text-xs uppercase tracking-[0.25em] text-white/45">Selected visuals</p>
