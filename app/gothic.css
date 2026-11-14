@@ -225,10 +225,28 @@
 /* The space artwork belongs to the outer gutters, separate from the hero. */
 .aureyx-gothic-theme::before {
   opacity: 1;
-  background: linear-gradient(#080b104d, #080b104d), url('/aureyx-outer-space.jpg') center / cover no-repeat;
+  top: 160px;
+  background: linear-gradient(#080b1073, #080b1073), url('/aureyx-outer-space.jpg') center / min(100vw, 1920px) auto no-repeat;
   mask-image: none;
 }
 .aureyx-gothic-theme .transmission-home,
 .aureyx-gothic-theme .artists-theme {
   background: linear-gradient(#0d0d0f, #0d0d0f) center top / min(100%, 1440px) 100% no-repeat;
+}
+
+/* A quieter gothic signature in the navigation and footer. */
+.aureyx-gothic-theme .aureyx-nav .nav-brand,
+.aureyx-gothic-theme .aureyx-footer .footer-brand {
+  font-family: var(--font-pirata-one), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: .015em;
+}
+@media (max-width: 760px) {
+  .aureyx-gothic-theme::before { display: none; }
+}
+
+.aureyx-gothic-theme .gothic-wordmark {
+  font-family: var(--font-pirata-one), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -.025em;
 }
