@@ -185,3 +185,39 @@
 @media (prefers-reduced-motion:reduce) {
   .aureyx-gothic-theme .gothic-wordmark,.aureyx-gothic-theme .gothic-vault { animation: none; transition: none; }
 }
+
+/* Original illustrated lettering, without added colored shadows or light. */
+.aureyx-gothic-theme .gothic-wordmark--original {
+  width: min(100%, 960px);
+  font-size: 0;
+  line-height: 0;
+  margin: 32px auto;
+}
+.aureyx-gothic-theme .gothic-wordmark--original a { display: block; width: 100%; }
+.aureyx-gothic-theme .gothic-original-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: none;
+  box-shadow: none;
+  animation: none;
+}
+.aureyx-gothic-theme .gothic-wordmark--original.gothic-wordmark--footer { width: min(80%, 560px); }
+.aureyx-gothic-theme .transmission-section-heading {
+  position: relative;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #d7d2c329;
+}
+.aureyx-gothic-theme .transmission-section-heading::after {
+  content: "✦";
+  position: absolute;
+  inset: auto 0 -9px auto;
+  padding-left: 16px;
+  background: #0d0d0f;
+  color: #bab5a8;
+  font-size: 12px;
+  line-height: 16px;
+}
+@media (max-width: 760px) {
+  .aureyx-gothic-theme .gothic-wordmark--original { margin-block: 32px; }
+}
