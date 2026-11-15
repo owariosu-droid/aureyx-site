@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Gamepad2 } from "lucide-react";
+import { ArrowUpRight, Gamepad2, Mic } from "lucide-react";
 
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -17,6 +17,7 @@ export default function ForFunPage() {
           <p>Personal projects and things we play. This section isn&apos;t part of Aureyx releases or artist work.</p>
         </header>
         <section className="fun-grid" aria-label="For fun projects">
+          <Link href="/for-fun/pitch-detector" className="fun-card"><div><Mic aria-hidden="true" /><p>Music tool</p><h2>Voice Pitch Detector</h2><span>Sing or hum to find your note <ArrowUpRight /></span></div></Link>
           <Link href="/gaming/osu" className="fun-card">
             <Image src="/osu/in-game-background-ariisha.png" alt="osu! seasonal artwork" fill sizes="(max-width: 800px) 92vw, 650px" />
             <span className="fun-card-shade" />

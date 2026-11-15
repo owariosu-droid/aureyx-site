@@ -35,6 +35,7 @@ export default function Navbar() {
   const results = useMemo(() => {
     const value = query.trim().toLowerCase(); if (!value) return [];
     const destinations = [
+      { label:"Voice Pitch Detector", type:"Music tool", href:"/for-fun/pitch-detector", terms:"microphone singing hum note tuner pitch frequency" },
       { label:"Aureyx videos", type:"Page", href:"/videos", terms:"youtube channels music videos" },
       { label:"Artist posts", type:"Publishing", href:"/publish", terms:"blog updates submit post" },
       { label:"Yoru Zenaku concept art", type:"Artwork", href:"/artists/yoru-zenaku#concept-art", terms:"gallery art yoru" },
