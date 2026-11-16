@@ -92,6 +92,22 @@ class SyncTests(unittest.TestCase):
         self.assertIn("My score", "".join(parser.output))
         self.assertIn("no longer available", "".join(parser.output))
 
+    def test_published_map_links_get_one_local_cover(self):
+        parser = sync.ProfileHTML({})
+        with patch.object(sync, "image", return_value="/external/osu-map-123.jpg") as download:
+            parser.feed('<a href="https://osu.ppy.sh/beatmapsets/123#osu/456">Map</a><a href="https://osu.ppy.sh/beatmapsets/123">Again</a><a href="https://evil.test/beatmapsets/999">Other</a>')
+        download.assert_called_once_with("https://assets.ppy.sh/beatmaps/123/covers/cover.jpg", "osu-map-123.jpg", {})
+        result = "".join(parser.output)
+        self.assertEqual(result.count('class="osu-map-cover"'), 1)
+        self.assertIn(">Map</a>", result)
+        self.assertNotIn("osu-map-999", result)
+
+    def test_unavailable_map_cover_keeps_link_and_text(self):
+        parser = sync.ProfileHTML({})
+        with patch.object(sync, "image", side_effect=HTTPError("image", 404, "Not found", {}, None)):
+            parser.feed('<a href="https://osu.ppy.sh/beatmapsets/123">My map</a>')
+        self.assertIn(">My map</a>", "".join(parser.output))
+
     def test_unexpected_source_shape_preserves_snapshot(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

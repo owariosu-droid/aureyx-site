@@ -35,6 +35,7 @@ export default function Navbar() {
   const results = useMemo(() => {
     const value = query.trim().toLowerCase(); if (!value) return [];
     const destinations = [
+      { label:"Nox — sound sanctuary", type:"Connected project", href:"https://aureyxneuralnetwork.vercel.app", terms:"nox vault audio visualizer private music" },
       { label:"Voice Pitch Detector", type:"Music tool", href:"/for-fun/pitch-detector", terms:"microphone singing hum note tuner pitch frequency" },
       { label:"Aureyx videos", type:"Page", href:"/videos", terms:"youtube channels music videos" },
       { label:"Artist posts", type:"Publishing", href:"/publish", terms:"blog updates submit post" },
@@ -61,7 +62,7 @@ export default function Navbar() {
     </nav>
     {searching && <div className="site-search-backdrop" role="dialog" aria-modal="true" aria-label="Search Aureyx" onMouseDown={(event) => { if (event.target === event.currentTarget) setSearching(false); }}>
       <div className="site-search-panel"><div><Search /><input autoFocus type="search" placeholder="Search Aureyx" value={query} onChange={(event) => setQuery(event.target.value)} /><button type="button" onClick={() => setSearching(false)} aria-label="Close search"><X /></button></div>
-      <ul>{query && !results.length ? <li className="site-search-empty">No matches</li> : results.map((result) => <li key={result.href}><Link href={result.href} onClick={() => { setSearching(false); setQuery(""); }}><span>{result.label}</span><small>{result.type}</small></Link></li>)}</ul><p>Press Esc to close</p></div>
+      <ul>{query && !results.length ? <li className="site-search-empty">No matches</li> : results.map((result) => <li key={result.href}>{result.href.startsWith("https://") ? <a href={result.href} target="_blank" rel="noopener noreferrer" onClick={() => { setSearching(false); setQuery(""); }}><span>{result.label} ↗</span><small>{result.type}</small></a> : <Link href={result.href} onClick={() => { setSearching(false); setQuery(""); }}><span>{result.label}</span><small>{result.type}</small></Link>}</li>)}</ul><p>Press Esc to close</p></div>
     </div>}
   </>;
 }

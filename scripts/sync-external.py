@@ -179,6 +179,7 @@ class ProfileHTML(HTMLParser):
         self.blocked = 0
         self.image_count = 0
         self.anchors = []
+        self.beatmap_covers = set()
 
     def handle_starttag(self, tag, attrs):
         if tag in {"script", "style", "iframe"}:
@@ -192,6 +193,17 @@ class ProfileHTML(HTMLParser):
             url = attrs.get("href", "")
             parsed = urlparse(url)
             if parsed.scheme == "https" and parsed.hostname and not parsed.username:
+                match = re.fullmatch(r"/beatmapsets/([1-9][0-9]{0,9})", parsed.path)
+                if parsed.hostname == "osu.ppy.sh" and match and match[1] not in self.beatmap_covers:
+                    self.beatmap_covers.add(match[1])
+                    name = f"osu-map-{match[1]}.jpg"
+                    try:
+                        local = image(f"https://assets.ppy.sh/beatmaps/{match[1]}/covers/cover.jpg", name, self.assets)
+                    except (HTTPError, URLError, OSError, ValueError) as error:
+                        print(f"osu!: cover for map {match[1]} unavailable ({type(error).__name__}); keeping map text", file=sys.stderr)
+                        local = f"/external/{name}" if (ROOT / "public" / "external" / name).is_file() else None
+                    if local:
+                        self.output.append(f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><img class="osu-map-cover" src="{local}" alt="osu! beatmap cover" loading="lazy" /></a>')
                 self.output.append(f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer">')
                 self.anchors.append("a")
             else:

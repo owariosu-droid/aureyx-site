@@ -54,6 +54,11 @@ export default function Home() {
 
         <HanatekkFeature />
 
+        <section className="transmission-section nox-feature" aria-labelledby="nox-heading">
+          <div><p className="transmission-eyebrow">Connected project / Nox</p><h2 id="nox-heading">A sanctuary for sound.</h2><p>Explore Nox: a space for listening, audio-reactive visuals, and your private music vault.</p><a className="transmission-button" href="https://aureyxneuralnetwork.vercel.app" target="_blank" rel="noopener noreferrer">Open Nox <ArrowUpRight size={17} /></a></div>
+          <div className="nox-feature-sigil" aria-hidden="true"><span>nox</span></div>
+        </section>
+
         <section id="videos" className="transmission-section transmission-videos" aria-labelledby="videos-heading">
           <div className="transmission-section-heading"><div><p className="transmission-eyebrow">05 / Watch</p><h2 className="heading-with-brand" id="videos-heading">Videos <SocialIcon platform="YouTube" size={38} /></h2></div><Link className="transmission-text-link" href="/videos">All videos <ArrowUpRight size={18} /></Link></div>
           <HomeVideoFeeds compact />

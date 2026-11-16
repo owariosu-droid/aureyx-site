@@ -78,3 +78,13 @@
 .osu-synced-profile a { color: #ff9aae; text-decoration: underline; text-underline-offset: 4px; }
 .osu-synced-profile strong { color: white; }
 .osu-synced-profile img { display: block; width: 100%; height: auto; margin-top: 24px; }
+
+.osu-synced-profile img.osu-map-cover {
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 900 / 250;
+  object-fit: cover;
+  margin: 24px 0 12px;
+  border: 1px solid #cbb3ed45;
+  border-radius: 3px;
+}
