@@ -347,3 +347,20 @@
 .nox-feature-sigil { display: grid; place-items: center; aspect-ratio: 1; width: min(100%,300px); margin: auto; border: 1px solid #cbb3ed45; border-radius: 50%; background: radial-gradient(circle, #54426438, #15131b 65%); box-shadow: inset 0 0 0 18px #cbb3ed06; }
 .nox-feature-sigil span { font: clamp(64px,8vw,110px) var(--font-pirata-one),serif; color: #ded0f0; }
 @media(max-width:760px) { .aureyx-gothic-theme .nox-feature { grid-template-columns: 1fr; } .nox-feature-sigil { width: 180px; } }
+
+/* Fine, static grain and inset highlights add depth without shifting geometry. */
+.aureyx-gothic-theme #main-content::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  background: url('/surface-grain.svg') repeat;
+  opacity: .035;
+}
+.aureyx-gothic-theme #main-content :is(.transmission-artist,.transmission-release,.home-video-channel,.home-linktree-card,.transmission-founder-copy,.transmission-explore-card,.artist-profile-card,.artist-directory-card,.pitch-tool,.osu-header,.osu-project-card) {
+  box-shadow: inset 0 1px 0 #ffffff0d, inset 0 -1px 0 #0004, 0 18px 45px #0005;
+}
+.aureyx-gothic-theme #main-content :is(.transmission-button,.pitch-start,.release-preview-button) {
+  box-shadow: inset 0 1px 0 #ffffff30, inset 0 -2px 0 #0002, 0 5px 14px #0003;
+}

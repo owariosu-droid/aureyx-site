@@ -198,3 +198,13 @@ body.aureyx-gothic-theme:has(.osu-theme)::after {
  .osu-jump-nav { gap:8px; padding:10px; }
  .osu-jump-nav a { padding:10px 12px; font-size:12px; }
 }
+
+/* The top brand matches the main site; the osu content retains its own theme. */
+.aureyx-gothic-theme .osu-theme .aureyx-nav .nav-brand {
+  font-family: var(--font-pirata-one), Georgia, serif;
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.2;
+  text-transform: none;
+  letter-spacing: .015em;
+}
