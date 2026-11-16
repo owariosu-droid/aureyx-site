@@ -2,6 +2,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { onsetEnvelope, type TempoEstimate } from "@/lib/bpm";
 
+const MAX_FILE_MB = 100;
+
 export default function AudioBpmFinder() {
   const [status, setStatus] = useState("");
   const [name, setName] = useState("");
@@ -21,7 +23,7 @@ export default function AudioBpmFinder() {
 
   async function analyze(file: File) {
     release(); setError(""); setResult(null); setSelected(null); setName(file.name);
-    if (file.size > 20 * 1024 * 1024) { setError("Choose an audio file smaller than 20 MB."); setStatus(""); return; }
+    if (file.size > MAX_FILE_MB * 1024 * 1024) { setError("Choose an audio file up to " + MAX_FILE_MB + " MB."); setStatus(""); return; }
     const version = generation.current;
     setStatus("Decoding audio…");
     try {
@@ -60,7 +62,7 @@ export default function AudioBpmFinder() {
   }
 
   return <section className="bpm-tool" aria-label="Audio BPM finder">
-    <label className="bpm-upload"><span>Choose an audio file</span><input type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg,.flac" onChange={event => { const file = event.target.files?.[0]; if (file) void analyze(file); event.target.value = ""; }} /><small>WAV, MP3, or a browser-supported audio format · up to 20 MB</small></label>
+    <label className="bpm-upload"><span>Choose an audio file</span><input type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg,.flac" onChange={event => { const file = event.target.files?.[0]; if (file) void analyze(file); event.target.value = ""; }} /><small>WAV, MP3, or a browser-supported audio format · up to {MAX_FILE_MB} MB</small></label>
     {name && <p className="bpm-filename">{name}</p>}
     <p className="bpm-status" role="status">{status || (result ? "Tempo estimate ready" : "Choose a song or loop to begin")}</p>
     {status && <button type="button" className="bpm-cancel" onClick={() => { release(); setStatus(""); }}>Cancel analysis</button>}
