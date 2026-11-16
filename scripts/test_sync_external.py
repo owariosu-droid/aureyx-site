@@ -102,6 +102,16 @@ class SyncTests(unittest.TestCase):
         self.assertIn(">Map</a>", result)
         self.assertNotIn("osu-map-999", result)
 
+    def test_selected_map_artwork_survives_refresh_without_fetching_generic_cover(self):
+        parser = sync.ProfileHTML({})
+        with patch.object(sync, "image") as download:
+            parser.feed('<a href="https://osu.ppy.sh/beatmapsets/2575406#osu/5735879">Cynthoni of Flames</a><strong>Death of the Endless</strong><strong>Dork After Dark</strong>')
+        download.assert_not_called()
+        result = "".join(parser.output)
+        for path in ["/osu/cynthoni-art.jpg", "/osu/deathoftheendless.png", "/osu/dork-after-dark.png"]:
+            self.assertEqual(result.count('src="' + path + '"'), 1)
+        self.assertEqual(result.count("osu-map-artwork"), 3)
+
     def test_unavailable_map_cover_keeps_link_and_text(self):
         parser = sync.ProfileHTML({})
         with patch.object(sync, "image", side_effect=HTTPError("image", 404, "Not found", {}, None)):

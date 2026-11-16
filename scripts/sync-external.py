@@ -168,6 +168,13 @@ def sync_bandcamp():
     print(f"Bandcamp: refreshed {len(releases)} releases")
 
 
+MAP_ARTWORK = {
+    "Cynthoni of Flames": ("/osu/cynthoni-art.jpg", "2575406"),
+    "Death of the Endless": ("/osu/deathoftheendless.png", None),
+    "Dork After Dark": ("/osu/dork-after-dark.png", None),
+}
+
+
 class ProfileHTML(HTMLParser):
     """Allow a small formatting subset; never persist source scripts or styles."""
     tags = {"div", "p", "br", "h2", "h3", "strong", "em", "ul", "ol", "li", "span"}
@@ -180,6 +187,7 @@ class ProfileHTML(HTMLParser):
         self.image_count = 0
         self.anchors = []
         self.beatmap_covers = set()
+        self.artwork_shown = set()
 
     def handle_starttag(self, tag, attrs):
         if tag in {"script", "style", "iframe"}:
@@ -197,13 +205,18 @@ class ProfileHTML(HTMLParser):
                 if parsed.hostname == "osu.ppy.sh" and match and match[1] not in self.beatmap_covers:
                     self.beatmap_covers.add(match[1])
                     name = f"osu-map-{match[1]}.jpg"
+                    selected = next(((title, path) for title, (path, map_id) in MAP_ARTWORK.items() if map_id == match[1]), None)
                     try:
-                        local = image(f"https://assets.ppy.sh/beatmaps/{match[1]}/covers/cover.jpg", name, self.assets)
+                        local = selected[1] if selected else image(f"https://assets.ppy.sh/beatmaps/{match[1]}/covers/cover.jpg", name, self.assets)
                     except (HTTPError, URLError, OSError, ValueError) as error:
                         print(f"osu!: cover for map {match[1]} unavailable ({type(error).__name__}); keeping map text", file=sys.stderr)
                         local = f"/external/{name}" if (ROOT / "public" / "external" / name).is_file() else None
                     if local:
-                        self.output.append(f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><img class="osu-map-cover" src="{local}" alt="osu! beatmap cover" loading="lazy" /></a>')
+                        artwork_class = "osu-map-cover osu-map-artwork" if selected else "osu-map-cover"
+                        label = f"{selected[0]} mapping artwork" if selected else "osu! beatmap cover"
+                        if selected:
+                            self.artwork_shown.add(selected[0])
+                        self.output.append(f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer"><img class="{artwork_class}" src="{local}" alt="{escape(label, quote=True)}" loading="lazy" /></a>')
                 self.output.append(f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener noreferrer">')
                 self.anchors.append("a")
             else:
@@ -239,6 +252,11 @@ class ProfileHTML(HTMLParser):
 
     def handle_data(self, data):
         if not self.blocked:
+            title = data.strip()
+            if title in MAP_ARTWORK and title not in self.artwork_shown:
+                self.artwork_shown.add(title)
+                path = MAP_ARTWORK[title][0]
+                self.output.append(f'<img class="osu-map-cover osu-map-artwork" src="{path}" alt="{escape(title, quote=True)} mapping artwork" loading="lazy" />')
             self.output.append(escape(data))
 
 

@@ -48,3 +48,5 @@ Security maintenance also updates Next.js within the 16.3 patch line and refresh
 For a GitHub-runner verification without publishing content, use **Run workflow** with **dry_run** enabled, or `gh workflow run refresh-content.yml --ref BRANCH -f dry_run=true`. This fetches both sources and runs validation but skips the commit/push step.
 
 Published osu! beatmap links in the synced profile also receive locally stored official covers from assets.ppy.sh. Each beatmap set is fetched once per refresh. Missing or unavailable covers preserve the map text and reuse a saved cover when available. Unsubmitted projects without beatmap-set links cannot receive official covers automatically.
+
+Selected artwork for Cynthoni of Flames, Death of the Endless, and Dork After Dark takes precedence over automatic covers. These local choices live in MAP_ARTWORK in the refresh script and retain their original aspect ratios on the profile.
