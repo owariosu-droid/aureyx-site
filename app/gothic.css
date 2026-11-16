@@ -401,3 +401,8 @@
 @media(prefers-reduced-motion:reduce) {
   .aureyx-gothic-theme #home-title .wordmark-echo { display: none; }
 }
+
+/* Light only the homepage lettering; preserve its carved shadows and echoes. */
+.aureyx-gothic-theme #home-title .wordmark-face {
+  text-shadow: 1px 1px 0 #bcb5a8, 2px 2px 0 #736e67, 3px 4px 0 #49474a, 5px 7px 0 #242428, 8px 12px 18px #0009, 0 -3px 18px #fff1d526, 0 0 42px #e9e2d914;
+}

@@ -1,0 +1,59 @@
+/* Each playground is its own visual world; these selectors never affect Home. */
+body:has(.tool-world,.fun-portal)::before,body:has(.tool-world,.fun-portal)::after{display:none}
+.aureyx-gothic-theme .tool-world,.aureyx-gothic-theme .fun-portal{font-family:var(--font-geist-sans),Arial,sans-serif;min-height:100vh}
+.aureyx-gothic-theme .tool-world :is(h1,h2,h3){font-family:var(--font-geist-sans),Arial,sans-serif;font-weight:700;letter-spacing:-.045em}
+.aureyx-gothic-theme .tool-world .aureyx-nav{background:var(--tool-nav);border:0}
+.aureyx-gothic-theme .tool-world .aureyx-nav>div{background:var(--tool-nav);border-color:var(--tool-border);border-radius:12px;box-shadow:none}
+.aureyx-gothic-theme .tool-world .aureyx-nav :is(a,button){color:var(--tool-ink)}
+.aureyx-gothic-theme .tool-world .nav-brand{font-family:var(--font-geist-mono),monospace;font-size:23px;font-weight:600;letter-spacing:.02em}
+.aureyx-gothic-theme .tool-world .aureyx-footer{background:var(--tool-nav);border-color:var(--tool-border);color:var(--tool-ink)}
+.aureyx-gothic-theme .tool-world .aureyx-footer :is(a,p){color:var(--tool-ink)}
+.aureyx-gothic-theme .tool-world .footer-brand{font-family:var(--font-geist-mono),monospace;font-size:30px}
+.aureyx-gothic-theme .tool-world :is(a,button,input):focus-visible{outline-color:var(--tool-accent)}
+.aureyx-gothic-theme .pitch-lab{--tool-nav:#101e2d;--tool-ink:#d8fff2;--tool-border:#59cdbb44;--tool-accent:#8df1d6;background:radial-gradient(ellipse at top right,#20557066,transparent 60%),repeating-linear-gradient(0deg,transparent 0 39px,#8df1d606 40px),#0a1422;color:#d8fff2}
+.aureyx-gothic-theme .pitch-lab .pitch-page{max-width:1100px}
+.aureyx-gothic-theme .pitch-lab .pitch-tool{background:linear-gradient(145deg,#152c3b,#0d1d2b);border:1px solid #83e8da55;border-radius:28px;box-shadow:0 30px 80px #0005,inset 0 1px #ffffff15}
+.aureyx-gothic-theme .pitch-lab .pitch-note{font-family:var(--font-geist-mono),monospace;font-weight:600;color:#b1ffe3}
+.aureyx-gothic-theme .pitch-lab :is(.pitch-status,.pitch-last,.pitch-feedback){color:#a1e9d9}
+.aureyx-gothic-theme .pitch-lab :is(.pitch-frequency,.pitch-scale,.pitch-privacy){color:#bad2df}
+.aureyx-gothic-theme .pitch-lab .pitch-start{border-radius:999px;background:#8df1d6;border-color:#8df1d6;color:#082525}
+.aureyx-gothic-theme .pitch-lab :is(header>a,.pitch-help a){color:#8df1d6}
+.aureyx-gothic-theme .pitch-lab :is(header>p:last-child,.pitch-help p){color:#bfd0dd}
+.aureyx-gothic-theme .pitch-lab .transmission-eyebrow{color:#82cbbf}
+.aureyx-gothic-theme .tempo-lab{--tool-nav:#ebe5d9;--tool-ink:#242a28;--tool-border:#242a282e;--tool-accent:#ad432e;background:repeating-linear-gradient(90deg,transparent 0 79px,#292b2306 80px),#f2eee4;color:#242a28}
+.aureyx-gothic-theme .tempo-lab .bpm-page{max-width:1100px}
+.aureyx-gothic-theme .tempo-lab .bpm-page h1{font-size:clamp(48px,9vw,106px);text-transform:uppercase;line-height:.95}
+.aureyx-gothic-theme .tempo-lab .transmission-eyebrow{color:#7d432f}
+.aureyx-gothic-theme .tempo-lab .bpm-tool{background:#263a37;color:#eef0d8;border:1px solid #1e2f2a;border-radius:4px;box-shadow:8px 8px 0 #263a3720}
+.aureyx-gothic-theme .tempo-lab .bpm-result strong{font-family:var(--font-geist-mono),monospace;color:#e6efad;font-size:clamp(72px,15vw,140px);font-weight:600}
+.aureyx-gothic-theme .tempo-lab .bpm-result>span{color:#dce7be}
+.aureyx-gothic-theme .tempo-lab .bpm-upload{border-color:#c6d5ae88;background:#152724}
+.aureyx-gothic-theme .tempo-lab .bpm-upload>span{color:#edf0d9;font-weight:600}
+.aureyx-gothic-theme .tempo-lab .bpm-upload input{background:#1d312c;color:#e7e9d1}
+.aureyx-gothic-theme .tempo-lab .bpm-upload input::file-selector-button{background:#edc5a0;color:#292a21;border-radius:0}
+.aureyx-gothic-theme .tempo-lab .bpm-options button[aria-pressed=true]{background:#e6efad;color:#152724;border-color:#e6efad}
+.aureyx-gothic-theme .tempo-lab :is(header>a,.bpm-help a){color:#963c28}
+.aureyx-gothic-theme .tempo-lab :is(header>p:last-child,.bpm-help p){color:#515a53}
+.aureyx-gothic-theme .tempo-lab :is(.nav-search,.nav-menu){background:#ddd3c2;border-color:#5d624644}
+.aureyx-gothic-theme .tempo-lab #main-content{background:none}
+.bpm-allowance,.bpm-read-progress{max-width:560px;margin:18px auto;color:#d9e5cc;font:12px/1.6 var(--font-geist-mono),monospace}
+.bpm-allowance meter,.bpm-read-progress progress{display:block;width:100%;height:12px;margin-top:8px;accent-color:#e6efad}
+.aureyx-gothic-theme .fun-portal{background:radial-gradient(ellipse at 80% 10%,#624aa755,transparent 55%),#11162b;color:#ede9ff}
+.aureyx-gothic-theme .fun-portal .fun-heading h1{font-family:var(--font-geist-sans),Arial,sans-serif;font-weight:800;letter-spacing:-.07em}
+.aureyx-gothic-theme .fun-portal .fun-card{background:linear-gradient(145deg,#252641,#191d34);border-radius:24px;border-color:#bca8ff40}
+.aureyx-gothic-theme .fun-portal .fun-card h2{font-family:var(--font-geist-sans),Arial,sans-serif;font-weight:700}
+.aureyx-gothic-theme .fun-portal .fun-card:hover{border-color:#d5c5ff;box-shadow:0 20px 50px #0004}
+.aureyx-gothic-theme .fun-portal .fun-section-title{font-family:var(--font-geist-sans),Arial,sans-serif;font-size:24px;font-weight:600;color:#c9baff}
+@media(max-width:600px){.pitch-lab .pitch-page,.tempo-lab .bpm-page{padding-inline:16px}.bpm-allowance,.bpm-read-progress{font-size:11px}}
+
+.aureyx-gothic-theme :is(.tool-world,.fun-portal){display:flow-root}
+.aureyx-gothic-theme .tool-world .aureyx-nav li a.is-active{color:var(--tool-ink)}
+.aureyx-gothic-theme .tool-world .aureyx-nav li a::after{background:var(--tool-accent)}
+@media(min-width:761px){
+ .aureyx-gothic-theme :is(.tool-world,.fun-portal) .aureyx-nav>div{max-width:1320px}
+ .aureyx-gothic-theme :is(.tool-world,.fun-portal) .aureyx-nav ul{gap:20px;align-items:center}
+}
+@media(min-width:761px) and (max-width:1100px){
+ .aureyx-gothic-theme :is(.tool-world,.fun-portal) .aureyx-nav>div{flex-wrap:wrap}
+ .aureyx-gothic-theme :is(.tool-world,.fun-portal) .aureyx-nav ul{width:100%;justify-content:center;flex-wrap:wrap}
+}
