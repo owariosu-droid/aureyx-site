@@ -88,3 +88,11 @@
   border: 1px solid #cbb3ed45;
   border-radius: 3px;
 }
+
+/* Artist-selected mapping artwork keeps its original proportions. */
+.osu-synced-profile img.osu-map-artwork {
+  max-width: 640px;
+  aspect-ratio: auto;
+  height: auto;
+  object-fit: contain;
+}
