@@ -20,7 +20,7 @@ function ReleasePreview({ albumTitle, embed, releaseLink }: { albumTitle: string
     <div className={`release-inline-player ${embed.platform.toLowerCase()}`}>
       <div>
         <SocialIcon platform={embed.platform} />
-        <span>Excerpt preview</span>
+        <span>Listen on {embed.platform}</span>
         <a href={releaseLink} target="_blank" rel="noopener noreferrer">Full release <ArrowUpRight size={13} /></a>
       </div>
       <iframe src={embed.src} title={`${albumTitle} ${embed.platform} preview`} allow="autoplay; encrypted-media" referrerPolicy="strict-origin-when-cross-origin" />

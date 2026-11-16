@@ -134,6 +134,17 @@ def price(current, currency):
     return f"{prefix}{amount:.2f}"
 
 
+def tracks_from_release(data):
+    tracks = []
+    for track in data.get("trackinfo", []):
+        title = track.get("title")
+        if not isinstance(title, str) or not title.strip():
+            continue
+        duration = track.get("duration")
+        tracks.append({"title": title, "duration": duration if isinstance(duration, (int, float)) and 0 <= duration < 86400 else None})
+    return tracks
+
+
 def sync_bandcamp():
     html = fetch(f"{BANDCAMP}/music").decode()
     items = Attributes(html).json("data-client-items")
@@ -152,11 +163,17 @@ def sync_bandcamp():
         if data["item_type"] != item["type"] or data["id"] != item["id"]:
             raise ValueError("Release identity changed during sync")
         currency = next((a["data-band-currency"] for a in page.items if "data-band-currency" in a), "USD")
-        art = image(f"https://f4.bcbits.com/img/a{item['art_id']}_16.jpg", f"bandcamp-{item['art_id']}.jpg", assets)
+        # A catalog tile can lag behind an edited release page's artwork.
+        art_id = data.get("art_id") or current.get("art_id") or item["art_id"]
+        if not isinstance(art_id, int) or isinstance(art_id, bool) or art_id <= 0:
+            raise ValueError("Unexpected release artwork identity")
+        art = image(f"https://f4.bcbits.com/img/a{art_id}_16.jpg", f"bandcamp-{art_id}.jpg", assets)
         return {"title": current["title"], "link": url, "image": art,
                 "price": price(current, currency), "id": item["id"], "type": item["type"],
                 "released": current.get("release_date"),
-                "preview": f"/previews/{path.rsplit('/', 1)[-1]}.m4a" if (ROOT / "public" / "previews" / f"{path.rsplit('/', 1)[-1]}.m4a").is_file() else None}
+                "tracks": tracks_from_release(data),
+                # The official player follows replaced recordings; saved excerpts do not.
+                "preview": None}
 
     # Preserve Bandcamp's ordering and publish only after every release succeeds.
     with ThreadPoolExecutor(max_workers=4) as pool:
