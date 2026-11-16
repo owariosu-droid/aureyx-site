@@ -11,7 +11,7 @@ const number = (value: number) => value.toLocaleString("en-US");
 export default function OsuPage() {
   const stats = profile.statistics;
   return (
-    <div className="transmission-home osu-theme">
+    <div className="osu-theme">
       <Navbar />
       <div className="osu-page-art" aria-hidden="true" />
       <main className="relative z-10 mx-auto min-h-screen max-w-6xl px-6 py-16 sm:py-24">

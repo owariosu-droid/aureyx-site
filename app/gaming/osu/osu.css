@@ -96,3 +96,74 @@
   height: auto;
   object-fit: contain;
 }
+
+/* Keep the personal osu! page independent of Aureyx's gothic visual system. */
+body.aureyx-gothic-theme:has(.osu-theme)::before,
+body.aureyx-gothic-theme:has(.osu-theme)::after {
+  display: none;
+}
+.aureyx-gothic-theme .osu-theme {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f4f4f5;
+}
+.aureyx-gothic-theme .osu-theme :is(h1,h2,h3) {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.aureyx-gothic-theme .osu-theme .transmission-eyebrow {
+  color: #ff9dbf;
+  letter-spacing: .18em;
+}
+.aureyx-gothic-theme .osu-theme .aureyx-nav {
+  background: #11121bdc;
+  border-color: #ffffff20;
+}
+.aureyx-gothic-theme .osu-theme .aureyx-nav > div {
+  background: linear-gradient(110deg,#20182aef,#101a25ef);
+  border-radius: 16px;
+  border-color: #ef9ac22e;
+}
+.aureyx-gothic-theme .osu-theme :is(.nav-brand,.footer-brand) {
+  font-family: var(--font-orbitron), Arial, sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.aureyx-gothic-theme .osu-theme :is(.nav-search,.nav-menu) {
+  background: #f58abb12;
+  border-color: #f58abb55;
+  color: #ffd2e7;
+  border-radius: 8px;
+}
+.aureyx-gothic-theme .osu-theme .aureyx-nav li a::after { background: #ff92c5; }
+.aureyx-gothic-theme .osu-theme .site-search-panel { background: #17151e; border-radius: 16px; border-color: #f58abb55; }
+.aureyx-gothic-theme .osu-theme .aureyx-footer {
+  background: linear-gradient(120deg,#1b1522f5,#101c25f5);
+  border-color: #ff92c52e;
+}
+.aureyx-gothic-theme .osu-theme .osu-profile-links > a {
+  background: #ef73aa24;
+  border-color: #ef73aa88;
+  color: #ffd4e6;
+  border-radius: 10px;
+}
+.aureyx-gothic-theme .osu-theme :is(a,button,input):focus-visible {
+  outline-color: #ff92c5;
+}
+.aureyx-gothic-theme .osu-theme .osu-synced-profile img { border-color: #ff92c550; }
+
+.aureyx-gothic-theme .osu-theme .osu-badge {
+  filter: drop-shadow(0 0 14px #ff5b9355);
+}
+@media(min-width:761px) {
+  .aureyx-gothic-theme .osu-theme .aureyx-nav > div { max-width: 1320px; }
+  .aureyx-gothic-theme .osu-theme .aureyx-nav ul { gap: 20px; align-items: center; }
+  .osu-overview { grid-template-columns: repeat(4,minmax(0,1fr)); }
+}
+@media(min-width:701px) and (max-width:1000px) {
+  .osu-overview { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media(min-width:761px) and (max-width:1100px) {
+  .aureyx-gothic-theme .osu-theme .aureyx-nav > div { flex-wrap: wrap; }
+  .aureyx-gothic-theme .osu-theme .aureyx-nav ul { width: 100%; justify-content: center; flex-wrap: wrap; }
+}
