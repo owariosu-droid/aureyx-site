@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import HeroWordmark from "@/components/HeroWordmark";
 import Footer from "@/components/Footer";
 import HomeVideoFeeds from "@/components/HomeVideoFeeds";
 import HomeLinks from "@/components/HomeLinks";
@@ -25,7 +26,7 @@ export default function Home() {
           <div className="transmission-topline"><span><i /> Independent producers</span><span>Electronic music collective</span></div>
           <div className="transmission-center">
             <p className="transmission-eyebrow gothic-kicker"><span aria-hidden="true">✦</span> Independent music &amp; art <span aria-hidden="true">✦</span></p>
-            <h1 id="home-title" className="transmission-wordmark gothic-wordmark" aria-label="Aureyx"><a href="https://linktr.ee/dystofuturemusic23" target="_blank" rel="noopener noreferrer" aria-label="Open the Aureyx Linktree"><span>Aureyx</span></a></h1>
+            <h1 id="home-title" className="transmission-wordmark gothic-wordmark" aria-label="Aureyx"><HeroWordmark /></h1>
             <p className="transmission-tagline">A home for the sounds that don’t fit in.</p>
             <div className="transmission-actions"><Link className="transmission-button primary" href="/music">Discography <ArrowUpRight size={17} /></Link><Link className="transmission-button" href="/artists">Aureyx Collaborators <ArrowUpRight size={17} /></Link></div>
           </div>
