@@ -5,11 +5,12 @@ import { ArrowUpRight, Gamepad2, Mic, AudioLines } from "lucide-react";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import "@/app/home.css";
+import "./tools.css";
 import "./bpm-finder/bpm.css";
 
 export default function ForFunPage() {
   return (
-    <div className="transmission-home fun-page">
+    <div className="fun-portal fun-page">
       <Navbar />
       <main>
         <header className="fun-heading">
