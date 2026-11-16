@@ -35,6 +35,7 @@ export default function Navbar() {
   const results = useMemo(() => {
     const value = query.trim().toLowerCase(); if (!value) return [];
     const destinations = [
+      { label:"Audio BPM Finder", type:"Music tool", href:"/for-fun/bpm-finder", terms:"tempo beat bpm audio song loop detector" },
       { label:"Nox — sound sanctuary", type:"Connected project", href:"https://aureyxneuralnetwork.vercel.app", terms:"nox vault audio visualizer private music" },
       { label:"Voice Pitch Detector", type:"Music tool", href:"/for-fun/pitch-detector", terms:"microphone singing hum note tuner pitch frequency" },
       { label:"Aureyx videos", type:"Page", href:"/videos", terms:"youtube channels music videos" },
