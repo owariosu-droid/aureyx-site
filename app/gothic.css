@@ -332,3 +332,18 @@
 .aureyx-gothic-theme .nav-search { background: #292233; border-color: #cbb3ed66; color: #e1cff8; }
 .aureyx-gothic-theme .nav-menu { background: #30281d; border-color: #e5c58b66; color: #f0d9b0; }
 .aureyx-gothic-theme :is(.release-preview-button,.release-detail-actions button,.player-primary,.home-video-channel header > a,.release-detail-actions > a):hover { filter: brightness(1.12); }
+
+.aureyx-gothic-theme .nox-feature {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+  align-items: center;
+  border: 1px solid #cbb3ed35;
+  background: radial-gradient(ellipse at 85% 50%, #55457322, transparent 65%), #141317;
+}
+.aureyx-gothic-theme .nox-feature h2 { max-width: 650px; }
+.aureyx-gothic-theme .nox-feature p:not(.transmission-eyebrow) { color: #c3b9ce; max-width: 560px; line-height: 1.8; margin: 24px 0; }
+.aureyx-gothic-theme .nox-feature .transmission-button { --action-color: var(--action-violet); }
+.nox-feature-sigil { display: grid; place-items: center; aspect-ratio: 1; width: min(100%,300px); margin: auto; border: 1px solid #cbb3ed45; border-radius: 50%; background: radial-gradient(circle, #54426438, #15131b 65%); box-shadow: inset 0 0 0 18px #cbb3ed06; }
+.nox-feature-sigil span { font: clamp(64px,8vw,110px) var(--font-pirata-one),serif; color: #ded0f0; }
+@media(max-width:760px) { .aureyx-gothic-theme .nox-feature { grid-template-columns: 1fr; } .nox-feature-sigil { width: 180px; } }

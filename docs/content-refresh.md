@@ -46,3 +46,5 @@ The workflow now isolates source failures and reports retained data explicitly. 
 Security maintenance also updates Next.js within the 16.3 patch line and refreshes compatible image/source-map dependencies. Normal site markup, styling, content snapshots and successful player behavior are unchanged. Oversized, redirected, or non-raster upstream thumbnail responses are rejected using the existing fallback image.
 
 For a GitHub-runner verification without publishing content, use **Run workflow** with **dry_run** enabled, or `gh workflow run refresh-content.yml --ref BRANCH -f dry_run=true`. This fetches both sources and runs validation but skips the commit/push step.
+
+Published osu! beatmap links in the synced profile also receive locally stored official covers from assets.ppy.sh. Each beatmap set is fetched once per refresh. Missing or unavailable covers preserve the map text and reuse a saved cover when available. Unsubmitted projects without beatmap-set links cannot receive official covers automatically.
