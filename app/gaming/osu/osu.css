@@ -167,3 +167,34 @@ body.aureyx-gothic-theme:has(.osu-theme)::after {
   .aureyx-gothic-theme .osu-theme .aureyx-nav > div { flex-wrap: wrap; }
   .aureyx-gothic-theme .osu-theme .aureyx-nav ul { width: 100%; justify-content: center; flex-wrap: wrap; }
 }
+
+/* Structured profile layout, using the same gaming palette and artwork. */
+.osu-theme .osu-header { margin-bottom: 24px; }
+.osu-jump-nav { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 28px; padding:14px; border:1px solid #ffffff20; border-radius:12px; background:#13131ddd; }
+.osu-jump-nav a { padding:10px 16px; border:1px solid #f58abb30; border-radius:8px; background:#f58abb0c; color:#ffd2e7; font-size:13px; }
+.osu-jump-nav a:hover { background:#f58abb24; }
+.osu-organized-sections { display:grid; gap:28px; }
+.osu-theme .osu-organized-section { border-radius:14px; padding:28px; scroll-margin-top:150px; }
+.osu-organized-heading { display:flex; align-items:center; justify-content:space-between; gap:20px; padding-bottom:20px; margin-bottom:24px; border-bottom:1px solid #ffffff20; }
+.osu-theme .osu-organized-heading h2 { margin:0; font-size:26px; font-weight:700; }
+.osu-organized-heading>span { color:#d2b8ce; font-size:12px; white-space:nowrap; }
+.osu-section-intro { margin-bottom:24px; color:#c5b5c4; }
+.osu-project-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; align-items:start; }
+.osu-project-card { min-width:0; border:1px solid #ffffff20; border-radius:12px; overflow:hidden; background:#16151ee8; }
+.osu-project-art { display:grid; place-items:center; padding:14px; border-bottom:1px solid #ffffff14; background:#0b0c12; }
+.osu-project-art img { display:block; width:100%; height:220px; object-fit:contain; border-radius:6px; }
+.osu-project-copy { padding:24px; }
+.osu-project-status { color:#ffa7cf; font-size:10px; text-transform:uppercase; letter-spacing:.12em; margin-bottom:10px; }
+.osu-theme .osu-project-copy h3 { font-size:22px; font-weight:700; line-height:1.35; margin:0 0 16px; }
+.osu-project-copy .osu-synced-profile { font-size:14px; line-height:1.8; }
+.osu-project-link { display:inline-flex; gap:8px; align-items:center; margin-top:22px; padding:11px 15px; border:1px solid #f58abb55; border-radius:8px; background:#f58abb15; color:#ffd2e7; font-size:12px; }
+.osu-organized-section>.osu-synced-profile { max-width:78ch; font-size:15px; }
+@media(max-width:700px) {
+ .osu-theme .osu-organized-section { padding:20px 16px; }
+ .osu-project-grid { grid-template-columns:1fr; }
+ .osu-project-copy { padding:20px; }
+ .osu-organized-heading { gap:10px; }
+ .osu-theme .osu-organized-heading h2 { font-size:22px; }
+ .osu-jump-nav { gap:8px; padding:10px; }
+ .osu-jump-nav a { padding:10px 12px; font-size:12px; }
+}
