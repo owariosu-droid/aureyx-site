@@ -8,6 +8,10 @@ import "@/app/home.css";
 import "./osu.css";
 
 const number = (value: number) => value.toLocaleString("en-US");
+const projectStatuses: Record<string, string> = {
+  "Death of the Endless": "Started",
+  "Dork After Dark": "Started",
+};
 
 export default function OsuPage() {
   const stats = profile.statistics;
@@ -47,7 +51,7 @@ export default function OsuPage() {
             {section.intro && <div className="osu-section-intro osu-synced-profile" dangerouslySetInnerHTML={{ __html: section.intro }} />}
             {section.cards.length > 0 ? <div className="osu-project-grid">{section.cards.map((card, index) => <article className="osu-project-card" key={index}>
               {card.image && <div className="osu-project-art"><Image src={card.image} alt={card.title + " mapping artwork"} width={800} height={800} sizes="(max-width:700px) 90vw, 500px" /></div>}
-              <div className="osu-project-copy"><p className="osu-project-status">{section.title === "Thinking of Mapping" ? "Mapping idea" : card.href ? "On osu!" : "In development"}</p><h3>{card.title}</h3><div className="osu-synced-profile" dangerouslySetInnerHTML={{ __html: card.html }} />{card.href && <a className="osu-project-link" href={card.href} target="_blank" rel="noopener noreferrer">View beatmap <ExternalLink size={15} /></a>}</div>
+              <div className="osu-project-copy"><p className="osu-project-status">{projectStatuses[card.title] ?? (section.title === "Thinking of Mapping" ? "Mapping idea" : card.href ? "On osu!" : "In development")}</p><h3>{card.title}</h3><div className="osu-synced-profile" dangerouslySetInnerHTML={{ __html: card.html }} />{card.href && <a className="osu-project-link" href={card.href} target="_blank" rel="noopener noreferrer">View beatmap <ExternalLink size={15} /></a>}</div>
             </article>)}</div> : <div className="osu-synced-profile" dangerouslySetInnerHTML={{ __html: section.html }} />}
           </section>)}</div>
         </> : <section className="osu-panel osu-synced-profile" aria-label="osu! profile content" dangerouslySetInnerHTML={{ __html: profile.html }} />}
