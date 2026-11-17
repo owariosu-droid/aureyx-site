@@ -6,7 +6,6 @@ import {
   Users,
   Gamepad2,
   Music2,
-  BookOpen,
   ArrowUpRight,
 } from "lucide-react";
 
@@ -34,14 +33,6 @@ const sections = [
       "Explore releases, projects, sound kits and music connected to Aureyx.",
     href: "/music",
     icon: Music2,
-  },
-  {
-    title: "Blog",
-    subtitle: "Thoughts & Interests",
-    description:
-      "Posts about games, music, technology, creative projects and whatever else I'm interested in.",
-    href: "/blog",
-    icon: BookOpen,
   },
 ];
 

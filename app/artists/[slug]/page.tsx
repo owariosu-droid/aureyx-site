@@ -6,12 +6,10 @@ import Footer from "@/components/Footer";
 import "@/app/home.css";
 import "@/app/artists/artists.css";
 import YouTubeFeed from "@/components/YouTubeFeed";
-import ArtistUpdateBody from "@/components/ArtistUpdateBody";
 import SocialIcon from "@/components/SocialIcon";
 import GalleryLightbox from "@/components/GalleryLightbox";
 import { artists } from "@/data/artists";
 import type { CSSProperties } from "react";
-import { artistUpdateCategory, getArtistUpdates, submissionUrl } from "@/lib/artist-updates";
 
 export const revalidate = 300;
 export function generateStaticParams() {
@@ -27,7 +25,6 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
   const { slug } = await params;
   const artist = artists.find((item) => item.slug === slug);
   if (!artist) notFound();
-  const { posts, unavailable } = await getArtistUpdates(slug);
 
   return (
     <div className="transmission-home artists-theme relative min-h-screen" style={{ "--artist-page-accent": artist.accent || "#ff5967" } as CSSProperties}>
@@ -50,8 +47,7 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
             <h1 className="break-words text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">{artist.name}</h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/65">{artist.bio}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href={(artist.youtubeChannelId || artist.videoFallbackChannelIds) ? "#videos" : "#updates"} className="rounded-full border border-white/30 px-6 py-3 text-sm hover:bg-white/10">{(artist.youtubeChannelId || artist.videoFallbackChannelIds) ? "Videos ↓" : "Latest updates ↓"}</a>
-              {artist.blog && <a href="#blog" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Blog ↓</a>}
+              {(artist.youtubeChannelId || artist.videoFallbackChannelIds) && <a href="#videos" className="rounded-full border border-white/30 px-6 py-3 text-sm hover:bg-white/10">Videos ↓</a>}
               {artist.conceptArt && <a href="#concept-art" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Concept art ↓</a>}
               {artist.albums && <a href="#albums" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Albums ↓</a>}
               {artist.links?.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="social-icon-link rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10"><SocialIcon platform={link.label} />{link.label} ↗</a>)}
@@ -80,23 +76,6 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
 
         {(artist.youtubeChannelId || artist.videoFallbackChannelIds) && <YouTubeFeed channelId={artist.youtubeChannelId} fallbackChannelIds={artist.videoFallbackChannelIds} featuredVideos={artist.featuredVideos} name={artist.name} />}
 
-        {(artist.blog || (!artist.youtubeChannelId && !artist.videoFallbackChannelIds) || posts.length > 0) &&
-        <section id={artist.blog ? "blog" : "updates"} className="mt-16 scroll-mt-28" aria-labelledby="updates-heading">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div><p className="text-xs uppercase tracking-[0.25em] text-white/45">{artist.name}</p><h2 id="updates-heading" className="mt-3 text-3xl font-semibold">{artist.blog ? "Blog" : "Updates"}</h2><p className="mt-3 text-white/60">Notes, photos, and works in progress.</p></div>
-            <a href={submissionUrl(slug, artist.name)} target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/20 px-6 py-3 text-sm hover:bg-white/10">{artist.blog ? "Write a post ↗" : "Submit an update ↗"}</a>
-          </div>
-          <p className="mt-4 text-sm text-white/45">Artists: sign in to GitHub to write a post and attach photos. Updates appear after approval.</p>
-          <div className="mt-8 space-y-6">
-            {posts.map((post) => <article key={post.id} className="min-w-0 overflow-hidden rounded-3xl border border-white/10 bg-[#252525] p-6 [overflow-wrap:anywhere] sm:p-10">
-              <div className="artist-post-meta"><span>{artistUpdateCategory(post)}</span><time dateTime={post.created_at}>{new Date(post.created_at).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" })}</time></div>
-              <h3 className="mt-3 text-2xl font-semibold sm:text-3xl">{post.title}</h3>
-              <ArtistUpdateBody body={post.body || ""} />
-              <a href={post.html_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-block text-sm text-white/50 hover:text-white">View post and comments ↗</a>
-            </article>)}
-            {!posts.length && <div className="rounded-3xl border border-dashed border-white/15 px-6 py-14 text-center"><h3 className="text-xl">{unavailable ? "Updates are temporarily unavailable" : "No posts yet"}</h3><p className="mt-3 text-white/50">{unavailable ? "Please check back shortly." : `Posts from ${artist.name} will appear here.`}</p></div>}
-          </div>
-        </section>}
       </main>
       <Footer />
     </div>

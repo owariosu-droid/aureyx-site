@@ -208,3 +208,11 @@ body.aureyx-gothic-theme:has(.osu-theme)::after {
   text-transform: none;
   letter-spacing: .015em;
 }
+
+.osu-theme .osu-local-scores{margin-top:28px;border-radius:14px}
+.osu-score-recording{overflow:hidden;border:1px solid #ffffff25;border-radius:12px;background:#15141e}
+.osu-score-recording video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#090b12}
+.osu-score-recording>div{padding:22px}
+.osu-score-recording h3{font-size:21px;font-weight:700;line-height:1.4}
+.osu-score-recording p{color:#c7b7ca;margin-top:10px;font-size:14px}
+.osu-score-recording a{display:inline-block;color:#ffc1dc;font-size:13px;margin-top:16px}
