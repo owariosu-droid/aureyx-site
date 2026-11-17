@@ -50,3 +50,7 @@ For a GitHub-runner verification without publishing content, use **Run workflow*
 Published osu! beatmap links in the synced profile also receive locally stored official covers from assets.ppy.sh. Each beatmap set is fetched once per refresh. Missing or unavailable covers preserve the map text and reuse a saved cover when available. Unsubmitted projects without beatmap-set links cannot receive official covers automatically.
 
 Selected artwork for Cynthoni of Flames, Death of the Endless, and Dork After Dark takes precedence over automatic covers. These local choices live in MAP_ARTWORK in the refresh script and retain their original aspect ratios on the profile.
+
+## Geometry Dash channel
+
+A separate daily workflow checks the official @naga-gd channel and saves its verified channel ID and latest six videos in data/external/geometry-dash.json. Unchanged feeds do not create commits. Failed fetches preserve the existing snapshot and fail the workflow visibly. The Geometry Dash page uses the saved videos as a fallback to the public feed. Scheduled GitHub jobs are best effort; they do not require the owner's computer to remain on.

@@ -562,21 +562,14 @@
 .release-detail > section a { display:grid; grid-template-columns:76px 1fr; align-items:center; gap:15px; padding:10px; border:1px solid #ffffff17; border-radius:12px; background:#ffffff04; }
 .release-detail > section img { width:76px; height:76px; border-radius:8px; object-fit:cover; }
 .release-detail > section span { font-size:11px; line-height:1.5; }
-.publish-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; max-width:1200px; margin:auto; padding:65px 5% 110px; }
-.publish-grid article { padding:32px; border:1px solid #ffffff1c; border-radius:16px; background:linear-gradient(145deg,#19151d,#111518); }
-.publish-grid article > span { color:#bd86d9; font:8px var(--font-geist-mono),monospace; letter-spacing:.14em; text-transform:uppercase; }
-.publish-grid h2 { margin-top:12px; font-size:34px; }
-.publish-grid p { margin:18px 0 24px; color:#aaa; font-size:13px; line-height:1.8; }
-.publish-grid a { display:inline-flex; margin:4px 10px 0 0; padding:11px 14px; border:1px solid #ffffff20; border-radius:999px; font-size:10px; }
 @media(max-width:700px) {
   .release-tools { grid-template-columns:1fr 1fr; }
   .release-search { grid-column:1/-1; }
   .release-detail { padding:40px 20px 80px; }
   .release-detail > article { grid-template-columns:1fr; gap:34px; }
   .release-detail-copy h1 { font-size:clamp(38px,13vw,60px); }
-  .release-detail > section > div,.publish-grid { grid-template-columns:1fr; }
+  .release-detail > section > div { grid-template-columns:1fr; }
   .release-detail > section { margin-top:70px; }
-  .publish-grid { padding-inline:20px; }
 }
 
 /* Compact first screen and homepage rhythm. */

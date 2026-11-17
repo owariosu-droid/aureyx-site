@@ -35,11 +35,11 @@ export default function Navbar() {
   const results = useMemo(() => {
     const value = query.trim().toLowerCase(); if (!value) return [];
     const destinations = [
+      { label:"Geometry Dash", type:"Personal showcase", href:"/gaming/geometry-dash", terms:"geometry dash game progress videos" },
       { label:"Audio BPM Finder", type:"Music tool", href:"/for-fun/bpm-finder", terms:"tempo beat bpm audio song loop detector" },
       { label:"Nox — sound sanctuary", type:"Connected project", href:"https://aureyxneuralnetwork.vercel.app", terms:"nox vault audio visualizer private music" },
       { label:"Voice Pitch Detector", type:"Music tool", href:"/for-fun/pitch-detector", terms:"microphone singing hum note tuner pitch frequency" },
       { label:"Aureyx videos", type:"Page", href:"/videos", terms:"youtube channels music videos" },
-      { label:"Artist posts", type:"Publishing", href:"/publish", terms:"blog updates submit post" },
       { label:"Yoru Zenaku concept art", type:"Artwork", href:"/artists/yoru-zenaku#concept-art", terms:"gallery art yoru" },
       { label:"osu! mapping projects", type:"For fun", href:"/gaming/osu", terms:"gaming maps rhythm" },
       { label:"Nocturna sound kits", type:"Sound design", href:"/#nocturna", terms:"samples sounds iyune" },

@@ -1,0 +1,19 @@
+body:has(.geometry-theme)::before,body:has(.geometry-theme)::after{display:none}
+.geometry-theme{display:flow-root;min-height:100vh;background:repeating-linear-gradient(90deg,transparent 0 59px,#8caaff08 60px),linear-gradient(#0d1742,#0b1025);color:#e4f5ff;font-family:var(--font-geist-sans),Arial,sans-serif}
+.geometry-theme main{max-width:1100px;margin:auto;padding:60px 24px 90px}
+.geometry-theme header>a{color:#b7ee72;font-size:13px}.geometry-kicker{margin-top:32px;color:#98e6f3;font:11px var(--font-geist-mono),monospace;letter-spacing:.16em;text-transform:uppercase}
+.geometry-theme h1{font-size:clamp(40px,8vw,85px);font-weight:800;letter-spacing:-.04em;line-height:1.1;margin:18px 0}
+.geometry-theme header>p:last-of-type{color:#becae9;line-height:1.8}
+.geometry-theme header>img{display:block;width:100%;height:auto;margin-top:32px;border:1px solid #6dd5ff55;border-radius:12px}
+.geometry-theme main>section{margin-top:32px;border:1px solid #97b8ff35;border-radius:12px;padding:28px;background:#17264b}
+.geometry-theme h2{font-size:28px;font-weight:700;margin-bottom:16px}.geometry-theme section>p{color:#c2cceb;line-height:1.8}
+.aureyx-gothic-theme .geometry-theme .aureyx-nav,.aureyx-gothic-theme .geometry-theme .aureyx-nav>div{background:#0b1431ed;border-color:#97b8ff35}
+.aureyx-gothic-theme .geometry-theme .aureyx-footer{background:#0b1431;border-color:#97b8ff35}
+@media(min-width:761px){.geometry-theme .aureyx-nav ul{gap:20px}}
+@media(min-width:761px) and (max-width:1100px){.aureyx-gothic-theme .geometry-theme .aureyx-nav>div{flex-wrap:wrap}.geometry-theme .aureyx-nav ul{width:100%;justify-content:center;flex-wrap:wrap}}
+.geometry-theme section a{color:#b7ee72;text-decoration:underline;text-underline-offset:3px}
+.geometry-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:28px}
+.geometry-video-grid article{min-width:0;border:1px solid #97b8ff35;border-radius:10px;overflow:hidden;background:#101a35}
+.geometry-video-grid h3{padding:18px 18px 8px;font-size:16px;font-weight:600;line-height:1.5;overflow-wrap:anywhere}
+.geometry-video-grid time{display:block;padding:0 18px 18px;color:#aebde3;font-size:12px}
+@media(max-width:700px){.geometry-video-grid{grid-template-columns:1fr}}

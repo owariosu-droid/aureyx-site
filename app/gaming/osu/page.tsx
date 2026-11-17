@@ -3,6 +3,9 @@ import { ExternalLink } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import profile from "@/data/external/osu.json";
+import sideChannel from "@/data/external/osu-side-channel.json";
+import LinkedYouTubeChannel from "@/components/LinkedYouTubeChannel";
+import { favoriteScores } from "@/data/osu-scores";
 import { organizeOsuProfile } from "@/lib/osu-profile";
 import "@/app/home.css";
 import "./osu.css";
@@ -15,7 +18,7 @@ const projectStatuses: Record<string, string> = {
 
 export default function OsuPage() {
   const stats = profile.statistics;
-  const sections = organizeOsuProfile(profile.html);
+  const sections = organizeOsuProfile(profile.html).filter(section => !section.title.startsWith("Unranked Scores"));
   return (
     <div className="osu-theme">
       <Navbar />
@@ -45,7 +48,7 @@ export default function OsuPage() {
         {/* HTML is reduced to a formatting allowlist by scripts/sync-external.py.
             Images are verified and stored locally; source scripts/styles are discarded. */}
         {sections.length > 0 ? <>
-          <nav className="osu-jump-nav" aria-label="osu! page sections">{sections.map(section => <a href={"#" + section.id} key={section.id}>{section.title === "Thinking of Mapping" ? "Mapping ideas" : section.title.startsWith("Unranked Scores") ? "Scores" : section.title}</a>)}</nav>
+          <nav className="osu-jump-nav" aria-label="osu! page sections"><a href="#favorite-scores">Favorite scores</a><a href="#side-channel">Side channel</a>{sections.map(section => <a href={"#" + section.id} key={section.id}>{section.title === "Thinking of Mapping" ? "Mapping ideas" : section.title.startsWith("Unranked Scores") ? "Scores" : section.title}</a>)}</nav>
           <div className="osu-organized-sections">{sections.map(section => <section className="osu-panel osu-organized-section" id={section.id} key={section.id} aria-labelledby={section.id + "-heading"}>
             <div className="osu-organized-heading"><h2 id={section.id + "-heading"}>{section.title.startsWith("Unranked Scores") ? "Unranked scores" : section.title}</h2>{section.cards.length > 0 && <span>{section.cards.length} {section.cards.length === 1 ? "project" : "projects"}</span>}</div>
             {section.intro && <div className="osu-section-intro osu-synced-profile" dangerouslySetInnerHTML={{ __html: section.intro }} />}
@@ -55,6 +58,11 @@ export default function OsuPage() {
             </article>)}</div> : <div className="osu-synced-profile" dangerouslySetInnerHTML={{ __html: section.html }} />}
           </section>)}</div>
         </> : <section className="osu-panel osu-synced-profile" aria-label="osu! profile content" dangerouslySetInnerHTML={{ __html: profile.html }} />}
+        <section id="favorite-scores" className="osu-panel osu-local-scores" aria-labelledby="favorite-scores-heading">
+          <div className="osu-organized-heading"><div><p className="osu-project-status">Personal best moments</p><h2 id="favorite-scores-heading">Favorite scores</h2></div><span>Local recordings</span></div>
+          {favoriteScores.map(score => <article className="osu-score-recording" key={score.id}><video controls playsInline preload="none" poster={score.poster} aria-label={score.title} width={1280} height={720}><source src={score.video} type="video/mp4" /><p>Your browser cannot play this recording. <a href={score.video}>Download the video</a>.</p></video><div><h3>{score.title}</h3><p>{score.details}</p><a href={score.video} download>Download recording ↗</a></div></article>)}
+        </section>
+        <section id="side-channel" className="osu-panel osu-side-channel" aria-label="osu side channel"><LinkedYouTubeChannel channel={sideChannel} /></section>
         <p className="osu-art-credit">In-game seasonal artwork by <a href="https://osu.ppy.sh/community/forums/topics/641984" target="_blank" rel="noopener noreferrer">Ariisha ↗</a></p>
       </main>
       <Footer />
