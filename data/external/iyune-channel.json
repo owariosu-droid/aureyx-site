@@ -2,6 +2,25 @@
   "name": "iyune",
   "handle": "@iyune2",
   "url": "https://www.youtube.com/@iyune2",
-  "channelId": null,
-  "videos": []
+  "channelId": "UCrNekfYIdOYln8PP1AcGWvA",
+  "videos": [
+    {
+      "id": "jSScWl2Rbp8",
+      "title": "iyune, Lyrlvst - Chasm of Eternity",
+      "published": "2026-10-14T04:00:27+00:00",
+      "thumbnail": "https://i3.ytimg.com/vi/jSScWl2Rbp8/hqdefault.jpg"
+    },
+    {
+      "id": "GEriw5hnLFg",
+      "title": "iyune - Fractal Dreams",
+      "published": "2026-10-12T10:00:20+00:00",
+      "thumbnail": "https://i4.ytimg.com/vi/GEriw5hnLFg/hqdefault.jpg"
+    },
+    {
+      "id": "ftxdpfQY5HE",
+      "title": "REVERENT BLADE",
+      "published": "2026-10-11T09:48:34+00:00",
+      "thumbnail": "https://i3.ytimg.com/vi/ftxdpfQY5HE/hqdefault.jpg"
+    }
+  ]
 }

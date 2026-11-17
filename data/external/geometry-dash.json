@@ -2,6 +2,31 @@
   "name": "naga",
   "handle": "@naga-gd",
   "url": "https://www.youtube.com/@naga-gd",
-  "channelId": null,
-  "videos": []
+  "channelId": "UCo6BYKU0XdAu3tTkNcFCklw",
+  "videos": [
+    {
+      "id": "Uo63djYN6Mc",
+      "title": "Butiti III Progress Video",
+      "published": "2026-11-09T20:40:29+00:00",
+      "thumbnail": "https://i2.ytimg.com/vi/Uo63djYN6Mc/hqdefault.jpg"
+    },
+    {
+      "id": "Mcqz2_2f8H4",
+      "title": "The Eschaton Boss 1 and 2 1.5x speed clear",
+      "published": "2026-04-28T04:00:19+00:00",
+      "thumbnail": "https://i2.ytimg.com/vi/Mcqz2_2f8H4/hqdefault.jpg"
+    },
+    {
+      "id": "PRWzcKZJ8NU",
+      "title": "Bloodbath Progress",
+      "published": "2026-04-20T06:35:21+00:00",
+      "thumbnail": "https://i1.ytimg.com/vi/PRWzcKZJ8NU/hqdefault.jpg"
+    },
+    {
+      "id": "hw05f12KtII",
+      "title": "Experiment 204 100% twice in a row. Dream clear for a while now. + Small clips",
+      "published": "2026-04-18T01:35:06+00:00",
+      "thumbnail": "https://i1.ytimg.com/vi/hw05f12KtII/hqdefault.jpg"
+    }
+  ]
 }
