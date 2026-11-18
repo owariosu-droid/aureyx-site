@@ -90,4 +90,12 @@ export const artists: Artist[] = [
       { id: "mRHNXEQZzbQ", title: "GRiMVEX - IONIZE | FANMADE", published: "2026-08-19T07:28:05+00:00", thumbnail: "https://i2.ytimg.com/vi/mRHNXEQZzbQ/hqdefault.jpg" },
     ],
   },
+  {
+    slug: "prod-jxzz",
+    name: "prod. Jxzz",
+    role: "Producer",
+    accent: "#83a9b5",
+    bio: "prod. Jxzz is a producer and member of Aureyx. Music and projects will be added here as they become available.",
+    image: "/members/prod-jxzz.svg",
+  },
 ];
