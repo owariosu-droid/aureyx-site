@@ -39,6 +39,10 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: "/for-fun/bpm-finder",
+        headers: [{ key: "Permissions-Policy", value: "camera=(), microphone=(self), geolocation=(), payment=(), usb=(), browsing-topics=()" }],
+      },
+      {
         source: "/for-fun/pitch-detector",
         headers: [{ key: "Permissions-Policy", value: "camera=(), microphone=(self), geolocation=(), payment=(), usb=(), browsing-topics=()" }],
       },
