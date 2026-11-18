@@ -6,8 +6,16 @@ import { usePathname } from "next/navigation";
 export default function SiteAtmosphere() {
   const progress = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const allowsMicrophone = (path: string) => path === "/for-fun/pitch-detector" || path === "/for-fun/bpm-finder";
+  const documentMicrophonePolicy = useRef(allowsMicrophone(pathname));
 
   useEffect(() => {
+    // Permissions-Policy belongs to the document, not an RSC/navigation response.
+    // Reload only when crossing this boundary; never globally enable the microphone.
+    if (documentMicrophonePolicy.current !== allowsMicrophone(pathname)) {
+      window.location.replace(window.location.href);
+      return;
+    }
     let frame = 0;
     const updateProgress = () => {
       cancelAnimationFrame(frame);

@@ -1,11 +1,13 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { onsetEnvelope, type TempoEstimate } from "@/lib/bpm";
+import LiveBpmDetector from "@/components/LiveBpmDetector";
 
 import { AUDIO_LIMIT_MB, WAV_LIMIT_MB, audioLimitMB, planAudioRead, assembleAudio } from "@/lib/audio-file";
 
 export default function AudioBpmFinder() {
   const [status, setStatus] = useState("");
+  const [mode, setMode] = useState<"file" | "microphone">("file");
   const [name, setName] = useState("");
   const [allowance, setAllowance] = useState<{ size: number; limit: number } | null>(null);
   const [readPercent, setReadPercent] = useState<number | null>(null);
@@ -80,7 +82,9 @@ export default function AudioBpmFinder() {
     }
   }
 
-  return <section className="bpm-tool" aria-label="Audio BPM finder">
+  const modes = <div className="bpm-source-modes" aria-label="Audio source">{(["file", "microphone"] as const).map(value => <button type="button" key={value} aria-pressed={mode === value} onClick={() => { release(); setStatus(""); setReadPercent(null); setMode(value); }}>{value === "file" ? "Audio file" : "Live microphone"}</button>)}</div>;
+  if (mode === "microphone") return <section className="bpm-tool" aria-label="Audio BPM finder">{modes}<LiveBpmDetector /></section>;
+  return <section className="bpm-tool" aria-label="Audio BPM finder">{modes}
     <label className="bpm-upload"><span>Choose an audio file</span><input type="file" accept="audio/*,.wav,.mp3,.m4a,.ogg,.flac" onChange={event => { const file = event.target.files?.[0]; if (file) void analyze(file); event.target.value = ""; }} /><small>WAV, MP3, or a browser-supported audio format · WAV up to {WAV_LIMIT_MB} MB · other formats up to {AUDIO_LIMIT_MB} MB</small></label>
     {name && <p className="bpm-filename">{name}</p>}
     {allowance && <div className="bpm-allowance"><p>{allowance.size.toFixed(1)} MB / {allowance.limit} MB · {(allowance.size / allowance.limit * 100).toFixed(1)}% of file allowance</p><meter min={0} max={100} value={Math.min(100, allowance.size / allowance.limit * 100)} aria-label="File size allowance used" /></div>}
