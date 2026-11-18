@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640">
+  <defs>
+    <radialGradient id="background">
+      <stop stop-color="#34434a"/>
+      <stop offset="1" stop-color="#17191c"/>
+    </radialGradient>
+  </defs>
+  <path fill="url(#background)" d="M0 0h640v640H0z"/>
+  <path fill="none" stroke="#83a9b5" stroke-opacity=".3" d="M64 64h512v512H64zM80 80h480v480H80z"/>
+  <text x="320" y="358" fill="#dce5e7" font-family="Georgia,serif" font-size="132" text-anchor="middle" letter-spacing="8">JX</text>
+  <text x="320" y="426" fill="#83a9b5" font-family="sans-serif" font-size="20" text-anchor="middle" letter-spacing="6">PROD. JXZZ</text>
+</svg>

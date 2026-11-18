@@ -1,5 +1,14 @@
 export const members = [
   {
+    name: "prod. Jxzz",
+    slug: "prod-jxzz",
+    role: "Producer",
+    description:
+      "prod. Jxzz is a producer and member of Aureyx. Music and projects coming soon.",
+    image: "/members/prod-jxzz.svg",
+    links: {},
+  },
+  {
     name: "Lyrlvst",
     slug: "lyrlvst",
     role: "Artist / Producer",
