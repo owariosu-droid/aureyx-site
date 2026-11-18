@@ -90,4 +90,12 @@ export const artists: Artist[] = [
       { id: "mRHNXEQZzbQ", title: "GRiMVEX - IONIZE | FANMADE", published: "2026-08-19T07:28:05+00:00", thumbnail: "https://i2.ytimg.com/vi/mRHNXEQZzbQ/hqdefault.jpg" },
     ],
   },
+  {
+    slug: "prod-jxzz",
+    name: "prod. Jxzz",
+    role: "Artist · Producer",
+    accent: "#a8a8b8",
+    bio: "Artist and producer with the Aureyx collective. Collaborated with GRiMVEX on Hollow Zero (Echoes from the Void).",
+    links: [{ label: "Bandcamp", href: "https://dystofuturemusic.bandcamp.com/album/grimvex-prod-jxzz-hollow-zero-echoes-from-the-void-ft-prod-jxzz-album-mini-preview" }],
+  },
 ];
