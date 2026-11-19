@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import profile from "@/data/external/osu.json";
 import sideChannel from "@/data/external/osu-side-channel.json";
 import LinkedYouTubeChannel from "@/components/LinkedYouTubeChannel";
+import OsuMods from "@/components/OsuMods";
+import OsuScoreShowcase from "@/components/OsuScoreShowcase";
 import { favoriteScores } from "@/data/osu-scores";
 import { organizeOsuProfile } from "@/lib/osu-profile";
 import "@/app/home.css";
@@ -48,7 +50,7 @@ export default function OsuPage() {
         {/* HTML is reduced to a formatting allowlist by scripts/sync-external.py.
             Images are verified and stored locally; source scripts/styles are discarded. */}
         {sections.length > 0 ? <>
-          <nav className="osu-jump-nav" aria-label="osu! page sections"><a href="#favorite-scores">Favorite scores</a><a href="#side-channel">Side channel</a>{sections.map(section => <a href={"#" + section.id} key={section.id}>{section.title === "Thinking of Mapping" ? "Mapping ideas" : section.title.startsWith("Unranked Scores") ? "Scores" : section.title}</a>)}</nav>
+          <nav className="osu-jump-nav" aria-label="osu! page sections"><a href="#best-scores">Top scores</a><a href="#pinned-scores">Pinned scores</a><a href="#favorite-scores">Favorite scores</a><a href="#side-channel">Side channel</a>{sections.map(section => <a href={"#" + section.id} key={section.id}>{section.title === "Thinking of Mapping" ? "Mapping ideas" : section.title.startsWith("Unranked Scores") ? "Scores" : section.title}</a>)}</nav>
           <div className="osu-organized-sections">{sections.map(section => <section className="osu-panel osu-organized-section" id={section.id} key={section.id} aria-labelledby={section.id + "-heading"}>
             <div className="osu-organized-heading"><h2 id={section.id + "-heading"}>{section.title.startsWith("Unranked Scores") ? "Unranked scores" : section.title}</h2>{section.cards.length > 0 && <span>{section.cards.length} {section.cards.length === 1 ? "project" : "projects"}</span>}</div>
             {section.intro && <div className="osu-section-intro osu-synced-profile" dangerouslySetInnerHTML={{ __html: section.intro }} />}
@@ -58,6 +60,7 @@ export default function OsuPage() {
             </article>)}</div> : <div className="osu-synced-profile" dangerouslySetInnerHTML={{ __html: section.html }} />}
           </section>)}</div>
         </> : <section className="osu-panel osu-synced-profile" aria-label="osu! profile content" dangerouslySetInnerHTML={{ __html: profile.html }} />}
+        <OsuScoreShowcase />
         <section id="favorite-scores" className="osu-panel osu-local-scores" aria-labelledby="favorite-scores-heading">
           <div className="osu-organized-heading"><div><p className="osu-project-status">Personal best moments</p><h2 id="favorite-scores-heading">Favorite scores</h2></div><span>{favoriteScores.length} plays · {favoriteScores.filter(score => score.video).length} playable</span></div>
           <p className="osu-scores-intro">Favorite plays and personal milestones. Scroll through the recordings below.</p>
@@ -65,7 +68,7 @@ export default function OsuPage() {
             <ol className="osu-scores-list">
               {favoriteScores.map((score, index) => <li key={score.id}><article className="osu-score-recording">
                 {score.video ? <video controls playsInline preload="none" poster={score.poster} aria-label={score.title} width={1280} height={720}><source src={score.video} type="video/mp4" /><p>Your browser cannot play this recording. <a href={score.video}>Download the video</a>.</p></video> : <div className="osu-score-pending" aria-label="Recording not available"><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><span>Recording not available yet</span></div>}
-                <div className="osu-score-copy"><h3>{score.title}</h3><p>{score.details}</p>{score.video ? <a href={score.video} download>Download recording ↗</a> : <p className="osu-score-availability">This play is listed; its video has not been added yet.</p>}</div>
+                <div className="osu-score-copy"><h3>{score.title}</h3><p>{score.details}</p><OsuMods mods={score.mods ?? []} unknown={!score.mods} />{score.video ? <a href={score.video} download>Download recording ↗</a> : <p className="osu-score-availability">This play is listed; its video has not been added yet.</p>}</div>
               </article></li>)}
             </ol>
           </div>

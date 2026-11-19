@@ -2,6 +2,7 @@ type FavoriteScore = {
   id: string;
   title: string;
   details: string;
+  mods?: { acronym: string }[];
   video?: string;
   poster?: string;
 };
@@ -9,6 +10,7 @@ type FavoriteScore = {
 export const favoriteScores: FavoriteScore[] = [
   {
     id: "girls-rondo-first-dt-a",
+    mods: [{"acronym": "DT"}],
     title: "Girls Rondo — my first DT A rank",
     details: "8.53★ · Double Time · A rank",
     video: "/osu/scores/girls-rondo-first-dt-a.mp4",
@@ -16,11 +18,13 @@ export const favoriteScores: FavoriteScore[] = [
   },
   {
     id: "reality-distortion-hdhrnf-b",
+    mods: [{"acronym": "HD"}, {"acronym": "HR"}, {"acronym": "NF"}],
     title: "Reality Distortion",
     details: "Hidden · Hard Rock · No Fail · B rank",
   },
   {
     id: "arche-vertex-first-hr-b",
+    mods: [{"acronym": "HR"}, {"acronym": "NF"}],
     title: "Arche (Vertex) — my first HR B rank",
     details: "Hard Rock · No Fail · B rank",
   },
@@ -31,6 +35,7 @@ export const favoriteScores: FavoriteScore[] = [
   },
   {
     id: "image-material-scorpiour-hd-a",
+    mods: [{"acronym": "HD"}],
     title: "Image Material Scorpiour",
     details: "Hidden · A rank",
   },

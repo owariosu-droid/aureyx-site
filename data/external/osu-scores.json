@@ -1,0 +1,458 @@
+{
+  "userId": 37255712,
+  "best": [
+    {
+      "id": 6380020620,
+      "beatmapId": 4567074,
+      "beatmapsetId": 2018522,
+      "title": "L'erisia (Primary Logic)",
+      "artist": "Zektbach",
+      "difficulty": "Roll_Pan's SPECIAL",
+      "rank": "A",
+      "accuracy": 0.982471,
+      "pp": 491.953,
+      "combo": 464,
+      "misses": 3,
+      "playedAt": "2026-03-17T10:57:37Z",
+      "mods": [
+        {
+          "acronym": "HR",
+          "settings": {}
+        },
+        {
+          "acronym": "HD",
+          "settings": {}
+        },
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-2018522.jpg"
+    },
+    {
+      "id": 6255448639,
+      "beatmapId": 1402392,
+      "beatmapsetId": 662526,
+      "title": "Hades: The rise",
+      "artist": "Yousei Teikoku",
+      "difficulty": "Hardest",
+      "rank": "A",
+      "accuracy": 0.985175,
+      "pp": 432.473,
+      "combo": 1232,
+      "misses": 4,
+      "playedAt": "2026-02-21T08:59:01Z",
+      "mods": [
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-662526.jpg"
+    },
+    {
+      "id": 6362222971,
+      "beatmapId": 2447121,
+      "beatmapsetId": 1173332,
+      "title": "083 - nekomimi",
+      "artist": "saradisk",
+      "difficulty": "Nya Nya",
+      "rank": "A",
+      "accuracy": 0.981523,
+      "pp": 402.309,
+      "combo": 486,
+      "misses": 1,
+      "playedAt": "2026-03-14T00:42:54Z",
+      "mods": [
+        {
+          "acronym": "HR",
+          "settings": {}
+        },
+        {
+          "acronym": "HD",
+          "settings": {}
+        },
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-1173332.jpg"
+    },
+    {
+      "id": 7165886572,
+      "beatmapId": 4831782,
+      "beatmapsetId": 2268756,
+      "title": "Fake out",
+      "artist": "Last Note. feat. mirin",
+      "difficulty": "Frustration",
+      "rank": "A",
+      "accuracy": 0.982843,
+      "pp": 379.179,
+      "combo": 386,
+      "misses": 4,
+      "playedAt": "2026-07-28T09:50:02Z",
+      "mods": [
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-2268756.jpg"
+    },
+    {
+      "id": 5441308896,
+      "beatmapId": 1663107,
+      "beatmapsetId": 792964,
+      "title": "Black Swallowtail (TV Size)",
+      "artist": "UROBOROS",
+      "difficulty": "Catastrophe",
+      "rank": "S",
+      "accuracy": 0.993041,
+      "pp": 378.756,
+      "combo": 515,
+      "misses": 0,
+      "playedAt": "2025-09-12T00:06:20Z",
+      "mods": [
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-792964.jpg"
+    },
+    {
+      "id": 6362316852,
+      "beatmapId": 5547377,
+      "beatmapsetId": 2445629,
+      "title": "BPM210 no Shanghai Alice (Instrumental)",
+      "artist": "Unlucky Morpheus",
+      "difficulty": "EZGI'S EXTREME",
+      "rank": "S",
+      "accuracy": 0.980535,
+      "pp": 378.641,
+      "combo": 498,
+      "misses": 0,
+      "playedAt": "2026-03-14T01:10:59Z",
+      "mods": [
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-2445629.jpg"
+    },
+    {
+      "id": 5994272392,
+      "beatmapId": 3223955,
+      "beatmapsetId": 1578922,
+      "title": "Sweetest Bitterness (Short Ver.)",
+      "artist": "Shiki Natsume (CV: Kanako)",
+      "difficulty": "Insane",
+      "rank": "SH",
+      "accuracy": 0.973389,
+      "pp": 372.885,
+      "combo": 621,
+      "misses": 0,
+      "playedAt": "2026-01-02T00:09:49Z",
+      "mods": [
+        {
+          "acronym": "DT",
+          "settings": {}
+        },
+        {
+          "acronym": "HD",
+          "settings": {}
+        },
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-1578922.jpg"
+    },
+    {
+      "id": 6228488999,
+      "beatmapId": 2673453,
+      "beatmapsetId": 1269899,
+      "title": "Mou Ii kai?",
+      "artist": "THE ORAL CIGARETTES",
+      "difficulty": "Nevo's Rain",
+      "rank": "S",
+      "accuracy": 0.978865,
+      "pp": 365.187,
+      "combo": 1034,
+      "misses": 0,
+      "playedAt": "2026-02-16T04:41:10Z",
+      "mods": [
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-1269899.jpg"
+    },
+    {
+      "id": 6358261089,
+      "beatmapId": 1569904,
+      "beatmapsetId": 744593,
+      "title": "Happppy song",
+      "artist": "SOOOO",
+      "difficulty": "happy birthday to me.",
+      "rank": "A",
+      "accuracy": 0.973075,
+      "pp": 356.18,
+      "combo": 414,
+      "misses": 10,
+      "playedAt": "2026-03-13T09:06:07Z",
+      "mods": [
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-744593.jpg"
+    },
+    {
+      "id": 7166129435,
+      "beatmapId": 1289926,
+      "beatmapsetId": 611004,
+      "title": "Daisuki, Evolution",
+      "artist": "Minazuki Airi with Atsushi",
+      "difficulty": "Extreme",
+      "rank": "S",
+      "accuracy": 0.98541,
+      "pp": 347.467,
+      "combo": 704,
+      "misses": 0,
+      "playedAt": "2026-07-28T10:48:47Z",
+      "mods": [
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-611004.jpg"
+    }
+  ],
+  "pinned": [
+    {
+      "id": 7507429567,
+      "beatmapId": 5558461,
+      "beatmapsetId": 2511820,
+      "title": "SEV-26",
+      "artist": "Laur",
+      "difficulty": "Abnormal Severe Neural Decay",
+      "rank": "B",
+      "accuracy": 0.835413,
+      "pp": 36.1289,
+      "combo": 382,
+      "misses": 204,
+      "playedAt": "2026-09-18T07:00:14Z",
+      "mods": [
+        {
+          "acronym": "HD",
+          "settings": {}
+        },
+        {
+          "acronym": "NF",
+          "settings": {}
+        },
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-2511820.jpg"
+    },
+    {
+      "id": 7507182903,
+      "beatmapId": 5567029,
+      "beatmapsetId": 2521751,
+      "title": "AugoEidEs",
+      "artist": "DystopiaGround",
+      "difficulty": "Fantasia",
+      "rank": "B",
+      "accuracy": 0.892208,
+      "pp": null,
+      "combo": 151,
+      "misses": 90,
+      "playedAt": "2026-09-18T05:50:50Z",
+      "mods": [
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-2521751.jpg"
+    },
+    {
+      "id": 5974523889,
+      "beatmapId": 2069841,
+      "beatmapsetId": 985788,
+      "title": "Wizard's Tower",
+      "artist": "Loki",
+      "difficulty": "Ultimate Magic",
+      "rank": "B",
+      "accuracy": 0.800538,
+      "pp": 220.263,
+      "combo": 115,
+      "misses": 34,
+      "playedAt": "2025-12-29T03:17:01Z",
+      "mods": [
+        {
+          "acronym": "DT",
+          "settings": {}
+        },
+        {
+          "acronym": "HD",
+          "settings": {}
+        },
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-985788.jpg"
+    },
+    {
+      "id": 6255115298,
+      "beatmapId": 2223963,
+      "beatmapsetId": 1029620,
+      "title": "Shadow Corps",
+      "artist": "Yousei Teikoku",
+      "difficulty": "Undead Empress of the Fairy Empire",
+      "rank": "A",
+      "accuracy": 0.942645,
+      "pp": 256.339,
+      "combo": 596,
+      "misses": 17,
+      "playedAt": "2026-02-21T07:09:43Z",
+      "mods": [
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-1029620.jpg"
+    },
+    {
+      "id": 7290865384,
+      "beatmapId": 2940928,
+      "beatmapsetId": 1318074,
+      "title": "Makka na Sora o Mita Darou ka",
+      "artist": "BUMP OF CHICKEN",
+      "difficulty": "Extra",
+      "rank": "A",
+      "accuracy": 0.907503,
+      "pp": 116.188,
+      "combo": 162,
+      "misses": 35,
+      "playedAt": "2026-08-17T08:57:38Z",
+      "mods": [
+        {
+          "acronym": "DT",
+          "settings": {}
+        },
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-1318074.jpg"
+    },
+    {
+      "id": 6379823129,
+      "beatmapId": 3793495,
+      "beatmapsetId": 1846714,
+      "title": "Higher's High",
+      "artist": "Nanawo Akari",
+      "difficulty": "Counterattack",
+      "rank": "A",
+      "accuracy": 0.978809,
+      "pp": 339.964,
+      "combo": 376,
+      "misses": 14,
+      "playedAt": "2026-03-17T09:43:45Z",
+      "mods": [
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-1846714.jpg"
+    },
+    {
+      "id": 7392888071,
+      "beatmapId": 5417174,
+      "beatmapsetId": 2443939,
+      "title": "Cyberia Lyr3",
+      "artist": "Sewerslvt",
+      "difficulty": "present day, present time hahaha",
+      "rank": "A",
+      "accuracy": 0.928105,
+      "pp": 203.628,
+      "combo": 143,
+      "misses": 21,
+      "playedAt": "2026-09-01T22:57:14Z",
+      "mods": [
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-2443939.jpg"
+    },
+    {
+      "id": 6358261089,
+      "beatmapId": 1569904,
+      "beatmapsetId": 744593,
+      "title": "Happppy song",
+      "artist": "SOOOO",
+      "difficulty": "happy birthday to me.",
+      "rank": "A",
+      "accuracy": 0.973075,
+      "pp": 356.18,
+      "combo": 414,
+      "misses": 10,
+      "playedAt": "2026-03-13T09:06:07Z",
+      "mods": [
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-744593.jpg"
+    },
+    {
+      "id": 5943783102,
+      "beatmapId": 412288,
+      "beatmapsetId": 100348,
+      "title": "Sentimental Skyscraper",
+      "artist": "Halozy",
+      "difficulty": "Myouren Hijiri",
+      "rank": "A",
+      "accuracy": 0.941151,
+      "pp": 217.178,
+      "combo": 339,
+      "misses": 24,
+      "playedAt": "2025-12-23T07:01:50Z",
+      "mods": [
+        {
+          "acronym": "HR",
+          "settings": {}
+        },
+        {
+          "acronym": "HD",
+          "settings": {}
+        },
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-100348.jpg"
+    }
+  ]
+}
