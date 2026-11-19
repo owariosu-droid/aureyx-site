@@ -260,6 +260,57 @@ class ProfileHTML(HTMLParser):
             self.output.append(escape(data))
 
 
+def normalize_osu_score(score):
+    """Keep only display fields; derive trusted links from numeric IDs."""
+    import math
+    if score.get("user_id") != 37255712 or score.get("ruleset_id") != 0:
+        raise ValueError("Unexpected osu! score owner or ruleset")
+    beatmap, beatmapset = score["beatmap"], score["beatmapset"]
+    ids = [score["id"], beatmap["id"], beatmapset["id"]]
+    if any(type(value) is not int or value <= 0 for value in ids):
+        raise ValueError("Invalid osu! score IDs")
+    accuracy = float(score["accuracy"])
+    pp = None if score.get("pp") is None else float(score["pp"])
+    if not math.isfinite(accuracy) or not 0 <= accuracy <= 1 or (pp is not None and (not math.isfinite(pp) or pp < 0)):
+        raise ValueError("Invalid osu! score statistics")
+    mods = []
+    for mod in score.get("mods", []):
+        acronym = mod["acronym"]
+        if not re.fullmatch(r"[A-Z0-9]{1,8}", acronym):
+            raise ValueError("Invalid osu! mod acronym")
+        mods.append({"acronym": acronym, "settings": mod.get("settings", {})})
+    return {"id": ids[0], "beatmapId": ids[1], "beatmapsetId": ids[2],
+            "title": str(beatmapset["title"])[:300], "artist": str(beatmapset["artist"])[:300],
+            "difficulty": str(beatmap["version"])[:300], "rank": str(score["rank"])[:3],
+            "accuracy": accuracy, "pp": pp, "combo": int(score["max_combo"]),
+            "misses": int(score.get("statistics", {}).get("miss", 0)),
+            "playedAt": score["ended_at"], "mods": mods}
+
+
+def sync_osu_scores():
+    # Fetch both lists before replacing the last verified snapshot.
+    lists = {}
+    for kind, limit in [("best", 10), ("pinned", 100)]:
+        rows = json.loads(fetch(f"{PROFILE}/scores/{kind}?mode=osu&limit={limit}").decode())
+        if not isinstance(rows, list) or (kind == "best" and not rows):
+            raise ValueError("Unexpected osu! scores response; retaining saved scores")
+        lists[kind] = [normalize_osu_score(row) for row in rows]
+    assets = {}
+    for score in lists["best"] + lists["pinned"]:
+        name = f"osu-score-map-{score['beatmapsetId']}.jpg"
+        try:
+            if name not in assets:
+                image(f"https://assets.ppy.sh/beatmaps/{score['beatmapsetId']}/covers/card@2x.jpg", name, assets)
+            score["cover"] = f"/external/{name}"
+        except Exception as error:
+            print(f"osu!: score artwork unavailable ({type(error).__name__})", file=sys.stderr)
+            saved = ROOT / "public" / "external" / name
+            score["cover"] = f"/external/{name}" if saved.exists() else ""
+    save_assets(assets)
+    write_json("osu-scores", {"userId": 37255712, "best": lists["best"], "pinned": lists["pinned"]})
+    print(f"osu!: refreshed {len(lists['best'])} top and {len(lists['pinned'])} pinned scores")
+
+
 def sync_osu():
     data = Attributes(fetch(PROFILE).decode()).json("data-initial-data")
     user = data["user"]
@@ -278,6 +329,7 @@ def sync_osu():
                 "mode": data["current_mode"], "country": user["country"]["name"],
                 "statistics": {k: stats[k] for k in ["global_rank", "country_rank", "pp", "hit_accuracy", "play_count"]},
                 "html": "".join(parser.output)}
+    sync_osu_scores()
     save_assets(assets)
     write_json("osu", snapshot)
     print(f"osu!: refreshed {user['username']}'s profile")

@@ -14,6 +14,34 @@ spec.loader.exec_module(sync)
 
 
 class SyncTests(unittest.TestCase):
+    def score_fixture(self):
+        return {"id": 123, "user_id": 37255712, "ruleset_id": 0,
+                "beatmap": {"id": 456, "version": "Test difficulty"},
+                "beatmapset": {"id": 789, "title": "Test song", "artist": "Artist"},
+                "rank": "A", "accuracy": .9876, "pp": None, "max_combo": 100,
+                "statistics": {"miss": 2}, "ended_at": "2026-03-17T10:57:37Z",
+                "mods": [{"acronym": "DT", "settings": {"speed_change": 1.2}}]}
+
+    def test_score_snapshot_preserves_mod_settings_and_nullable_pp(self):
+        score = sync.normalize_osu_score(self.score_fixture())
+        self.assertEqual(score["mods"][0]["settings"]["speed_change"], 1.2)
+        self.assertIsNone(score["pp"])
+        self.assertEqual(score["accuracy"], .9876)
+        self.assertEqual(score["misses"], 2)
+
+    def test_score_snapshot_rejects_wrong_owner_invalid_ids_and_statistics(self):
+        for key, value in [("user_id", 1), ("ruleset_id", 3), ("id", "../"), ("accuracy", float("nan")), ("pp", -1)]:
+            score = self.score_fixture()
+            score[key] = value
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                sync.normalize_osu_score(score)
+
+    def test_failed_score_fetch_keeps_previous_snapshot(self):
+        with patch.object(sync, "fetch", side_effect=[json.dumps([self.score_fixture()]).encode(), b"{\"error\":\"unavailable\"}"]), patch.object(sync, "write_json") as write:
+            with self.assertRaises(ValueError):
+                sync.sync_osu_scores()
+            write.assert_not_called()
+
     def test_rejects_source_controlled_path_traversal(self):
         with patch.object(sync, "fetch") as fetch:
             with self.assertRaisesRegex(ValueError, "filename"):
