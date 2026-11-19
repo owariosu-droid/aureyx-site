@@ -59,8 +59,16 @@ export default function OsuPage() {
           </section>)}</div>
         </> : <section className="osu-panel osu-synced-profile" aria-label="osu! profile content" dangerouslySetInnerHTML={{ __html: profile.html }} />}
         <section id="favorite-scores" className="osu-panel osu-local-scores" aria-labelledby="favorite-scores-heading">
-          <div className="osu-organized-heading"><div><p className="osu-project-status">Personal best moments</p><h2 id="favorite-scores-heading">Favorite scores</h2></div><span>Local recordings</span></div>
-          {favoriteScores.map(score => <article className="osu-score-recording" key={score.id}><video controls playsInline preload="none" poster={score.poster} aria-label={score.title} width={1280} height={720}><source src={score.video} type="video/mp4" /><p>Your browser cannot play this recording. <a href={score.video}>Download the video</a>.</p></video><div><h3>{score.title}</h3><p>{score.details}</p><a href={score.video} download>Download recording ↗</a></div></article>)}
+          <div className="osu-organized-heading"><div><p className="osu-project-status">Personal best moments</p><h2 id="favorite-scores-heading">Favorite scores</h2></div><span>{favoriteScores.length} plays · {favoriteScores.filter(score => score.video).length} playable</span></div>
+          <p className="osu-scores-intro">Favorite plays and personal milestones. Scroll through the recordings below.</p>
+          <div className="osu-scores-scroll" role="region" aria-label="Favorite play recordings" tabIndex={0}>
+            <ol className="osu-scores-list">
+              {favoriteScores.map((score, index) => <li key={score.id}><article className="osu-score-recording">
+                {score.video ? <video controls playsInline preload="none" poster={score.poster} aria-label={score.title} width={1280} height={720}><source src={score.video} type="video/mp4" /><p>Your browser cannot play this recording. <a href={score.video}>Download the video</a>.</p></video> : <div className="osu-score-pending" aria-label="Recording not available"><span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><span>Recording not available yet</span></div>}
+                <div className="osu-score-copy"><h3>{score.title}</h3><p>{score.details}</p>{score.video ? <a href={score.video} download>Download recording ↗</a> : <p className="osu-score-availability">This play is listed; its video has not been added yet.</p>}</div>
+              </article></li>)}
+            </ol>
+          </div>
         </section>
         <section id="side-channel" className="osu-panel osu-side-channel" aria-label="osu side channel"><LinkedYouTubeChannel channel={sideChannel} /></section>
         <p className="osu-art-credit">In-game seasonal artwork by <a href="https://osu.ppy.sh/community/forums/topics/641984" target="_blank" rel="noopener noreferrer">Ariisha ↗</a></p>

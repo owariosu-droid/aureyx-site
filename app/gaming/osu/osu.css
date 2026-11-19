@@ -216,3 +216,13 @@ body.aureyx-gothic-theme:has(.osu-theme)::after {
 .osu-score-recording h3{font-size:21px;font-weight:700;line-height:1.4}
 .osu-score-recording p{color:#c7b7ca;margin-top:10px;font-size:14px}
 .osu-score-recording a{display:inline-block;color:#ffc1dc;font-size:13px;margin-top:16px}
+.osu-scores-intro{margin:0 0 20px;color:#c7b7ca;font-size:14px}
+.osu-scores-scroll{max-height:760px;max-height:min(760px,75svh);overflow-y:auto;scrollbar-gutter:stable;padding:4px 10px 4px 4px;scroll-padding:8px;border-radius:12px}
+.osu-scores-scroll:focus-visible{outline:2px solid #ffc1dc;outline-offset:4px}
+.osu-scores-list{list-style:none;padding:0;margin:0;display:grid;gap:16px}
+.osu-score-recording{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center}
+.osu-score-recording .osu-score-pending{min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,#302439,#141821);color:#c7b7ca;padding:20px;text-align:center;font-size:13px}
+.osu-score-pending span:first-child{font-size:40px;color:#ffc1dc80;font-weight:700}
+.osu-score-recording .osu-score-availability{font-size:12px;color:#b4a6bd}
+.osu-score-copy{min-width:0;overflow-wrap:anywhere}
+@media(max-width:640px){.osu-score-recording{grid-template-columns:minmax(0,1fr)}.osu-score-recording>div{padding:18px}.osu-score-recording h3{font-size:18px}.osu-scores-scroll{max-height:70svh}.osu-score-recording .osu-score-pending{min-height:120px}}
