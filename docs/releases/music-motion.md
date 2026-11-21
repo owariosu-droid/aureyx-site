@@ -4,24 +4,24 @@ Status: prepared for review; not deployed to production.
 
 ## Included
 
-- A layered cover-art hero on `/music`, linked to real release pages.
-- Scroll-driven parallax and a vinyl motif.
-- Animated archive strip, waveform decoration, and staggered release cards.
-- Pause/resume control for ongoing motion and reduced-motion support.
+- A six-cover, rotating 3D merry-go-round on `/music`, linked to real release pages.
+- Scroll-driven depth, sleeve backs, a glowing turntable platform, and previous/next controls.
+- Animated archive strip and staggered release cards.
+- Pause/resume controls, hover/focus handling, offscreen/hidden-tab suspension, and reduced-motion support.
 - Responsive layouts; homepage styling and catalog behavior remain separate.
 
 ## Validation
 
 - `npm run check`: lint, TypeScript, asset references, and production build.
 - 24 Node tests and 18 Python tests passed.
-- Production-build Chromium checks: parallax changes with scrolling; pause/resume and reduced-motion behavior; search, artist/format filters, pagination, and preview opening.
+- Production-build Chromium checks: auto rotation, hover pause, keyboard focus bringing a sleeve forward, previous/next selection, hidden-tab/offscreen suspension, reduced-motion navigation, real release links, search, artist filters, pagination, and preview opening.
 - No horizontal overflow at widths 320, 390, 768, and 1440 pixels.
 - Desktop/mobile screenshots visually reviewed. Physical Safari/iOS was not tested.
 
 ## Excluded / pending
 
 - Geometry Dash banner: original supplied image is not available in the execution workspace; reattachment is needed.
-- Owner-only pencil editor: discussed as a future feature; authentication, save authorization, and content storage are not implemented here.
+- Owner-only pencil editor: implemented separately in draft PR #31 and requires private account/storage setup; it is not part of this visual update.
 - The pre-existing iyune art scaffold is preserved separately.
 
 ## Release and rollback
