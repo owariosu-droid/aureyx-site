@@ -11,12 +11,14 @@ import HomeVideoFeeds from "@/components/HomeVideoFeeds";
 import HomeLinks from "@/components/HomeLinks";
 import HanatekkFeature from "@/components/HanatekkFeature";
 import SocialIcon from "@/components/SocialIcon";
-import { artists } from "@/data/artists";
+import { getPublishedArtists, getPublishedContent } from "@/lib/published-content";
+import OwnerEditLink from "@/components/OwnerEditControl";
 import { albums } from "@/data/albums";
 import "./home.css";
 
 
-export default function Home() {
+export default async function Home() {
+  const [artists, content] = await Promise.all([getPublishedArtists(), getPublishedContent()]);
   return (
     <div className="transmission-home">
       <Navbar />
@@ -40,7 +42,7 @@ export default function Home() {
         <section id="collective" className="transmission-section transmission-intro">
           <Image src="/aureyx-youtube-banner.jpg" alt="" fill sizes="(max-width: 1320px) 100vw, 1320px" className="transmission-about-banner" />
           <div><p className="transmission-eyebrow">01 / The collective</p><h2>About Aureyx</h2></div>
-          <div className="transmission-intro-copy"><p>Aureyx is an independent electronic music label and collective for growing artists.</p><p>Founded by iyune, built together by artists with their own worlds to share.</p><Link className="transmission-text-link" href="/artists">Explore the collective <ArrowUpRight size={18} /></Link></div>
+          <div className="transmission-intro-copy"><p>{content.pages.home.intro}</p><p>{content.pages.home.about}</p><OwnerEditLink /><Link className="transmission-text-link" href="/artists">Explore the collective <ArrowUpRight size={18} /></Link></div>
         </section>
 
         <section className="transmission-section transmission-founder" aria-labelledby="founder-heading">
