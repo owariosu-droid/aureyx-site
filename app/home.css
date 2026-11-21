@@ -583,3 +583,5 @@
   .transmission-hero .transmission-buttons { margin-top:26px; }
   .transmission-section { padding-block:58px; }
 }
+
+.owner-edit-link{display:inline-flex;align-items:center;gap:8px;margin:14px 0;padding:9px 14px;border:1px solid #bdabcf80;border-radius:999px;background:#201b28;color:#eee4f5;font:12px Arial,sans-serif}.owner-edit-link:focus-visible{outline:2px solid #c5b3da;outline-offset:4px}
