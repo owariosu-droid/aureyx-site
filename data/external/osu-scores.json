@@ -238,6 +238,35 @@
   ],
   "pinned": [
     {
+      "id": 7932687308,
+      "beatmapId": 2309955,
+      "beatmapsetId": 1105241,
+      "title": "Mr. Kill Myself",
+      "artist": "Sewerslvt",
+      "difficulty": "Darkness",
+      "rank": "A",
+      "accuracy": 0.960719,
+      "pp": 246.299,
+      "combo": 684,
+      "misses": 9,
+      "playedAt": "2026-11-21T11:00:30Z",
+      "mods": [
+        {
+          "acronym": "HR",
+          "settings": {}
+        },
+        {
+          "acronym": "HD",
+          "settings": {}
+        },
+        {
+          "acronym": "CL",
+          "settings": {}
+        }
+      ],
+      "cover": "/external/osu-score-map-1105241.jpg"
+    },
+    {
       "id": 7507429567,
       "beatmapId": 5558461,
       "beatmapsetId": 2511820,
@@ -403,27 +432,6 @@
         }
       ],
       "cover": "/external/osu-score-map-2443939.jpg"
-    },
-    {
-      "id": 6358261089,
-      "beatmapId": 1569904,
-      "beatmapsetId": 744593,
-      "title": "Happppy song",
-      "artist": "SOOOO",
-      "difficulty": "happy birthday to me.",
-      "rank": "A",
-      "accuracy": 0.973075,
-      "pp": 356.18,
-      "combo": 414,
-      "misses": 10,
-      "playedAt": "2026-03-13T09:06:07Z",
-      "mods": [
-        {
-          "acronym": "CL",
-          "settings": {}
-        }
-      ],
-      "cover": "/external/osu-score-map-744593.jpg"
     },
     {
       "id": 5943783102,
