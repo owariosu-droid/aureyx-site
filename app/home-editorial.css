@@ -102,6 +102,6 @@
 #main-content .home-editorial .site-search-panel{color:#eae6df}
 
 /* Geometric, synth-inspired typography for the connected electronic label. */
-#main-content .home-editorial .home-paper .hanatekk-copy h2{font-family:var(--font-orbitron),Arial,sans-serif;font-size:clamp(30px,4.2vw,60px);font-weight:600;letter-spacing:.015em;line-height:1.2;text-transform:uppercase}
-#main-content .home-editorial .home-paper .hanatekk-copy h2 em{font-family:inherit;font-size:.7em;font-style:normal;font-weight:400;letter-spacing:.16em;color:#52606d}
+#main-content .home-editorial .home-paper .hanatekk-copy h2{font-family:var(--font-orbitron),Arial,sans-serif;font-size:clamp(30px,4.2vw,60px);font-weight:600;letter-spacing:.015em;line-height:1.2;text-transform:uppercase;color:#5ff2ff;-webkit-text-stroke:.8px #07546a;text-shadow:1px 2px 0 #07546a,0 0 9px #00cfe58c,0 0 24px #00cfe547}
+#main-content .home-editorial .home-paper .hanatekk-copy h2 em{font-family:inherit;font-size:.7em;font-style:normal;font-weight:400;letter-spacing:.16em;color:#ff74df;-webkit-text-stroke:.6px #7a205e;text-shadow:1px 2px 0 #7a205e,0 0 8px #ff36c67a,0 0 22px #ff36c638}
 @media(max-width:700px){#main-content .home-editorial .home-paper .hanatekk-copy h2{font-size:clamp(30px,8vw,42px)}}
