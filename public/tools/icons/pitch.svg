@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+<defs>
+ <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#55416c"/><stop offset=".48" stop-color="#1c1c2c"/><stop offset="1" stop-color="#080c17"/></linearGradient>
+ <radialGradient id="aura"><stop stop-color="#c3a0fa" stop-opacity=".5"/><stop offset="1" stop-color="#c3a0fa" stop-opacity="0"/></radialGradient>
+ <linearGradient id="metal" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#fff"/><stop offset=".35" stop-color="#f8edff"/><stop offset=".68" stop-color="#c3a0fa"/><stop offset="1" stop-color="#735799"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff" stop-opacity=".14"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+ <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5"/></filter>
+ <clipPath id="clip"><rect x="5" y="5" width="246" height="246" rx="58"/></clipPath>
+</defs>
+<rect x="5" y="5" width="246" height="246" rx="58" fill="url(#shell)"/>
+<g clip-path="url(#clip)"><ellipse cx="128" cy="116" rx="110" ry="108" fill="url(#aura)"/>
+<path d="M-20 72 277-9M-20 123 277 42M-20 174 277 93M-20 225 277 144M-20 276 277 195" stroke="#fff" stroke-opacity=".025"/>
+<circle cx="128" cy="124" r="91" fill="none" stroke="#c3a0fa" stroke-opacity=".13"/>
+<circle cx="128" cy="124" r="77" fill="none" stroke="#c3a0fa" stroke-opacity=".08"/>
+<path d="M40 127v-12m13 32V95m13 66V82m124 79V82m13 65V95m13 32v-12" stroke="#d6baff" stroke-opacity=".4" stroke-width="3" stroke-linecap="round"/>
+<rect x="100" y="49" width="56" height="106" rx="28" fill="#a77fff" opacity=".55" filter="url(#glow)"/>
+<path d="M128 51a27 27 0 0 1 27 27v49a27 27 0 0 1-54 0V78a27 27 0 0 1 27-27Z" fill="url(#metal)"/>
+<rect x="111" y="62" width="34" height="80" rx="17" fill="#211d38" stroke="#f5eaff" stroke-opacity=".4"/>
+<path d="M119 77h18m-18 11h18m-18 11h18m-18 11h18m-18 11h18" stroke="#bba1ed" stroke-width="3" stroke-linecap="round"/>
+<path d="M84 116v12a44 44 0 0 0 88 0v-12M128 173v22m-20 4h40" fill="none" stroke="url(#metal)" stroke-width="7" stroke-linecap="round"/>
+<circle cx="128" cy="132" r="3" fill="#e4cfff"/>
+<path d="M5 77V63A58 58 0 0 1 63 5h130a58 58 0 0 1 58 58v13C172 56 86 57 5 77Z" fill="url(#glass)"/>
+</g>
+<rect x="5.7" y="5.7" width="244.6" height="244.6" rx="57" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="1.4"/>
+<rect x="13" y="13" width="230" height="230" rx="50" fill="none" stroke="#c3a0fa" stroke-opacity=".08"/>
+<path d="M34 218h22m144 0h22" stroke="#c3a0fa" stroke-opacity=".65" stroke-width="2" stroke-linecap="round"/>
+<circle cx="128" cy="224" r="2" fill="#f8edff"/>
+</svg>
