@@ -100,3 +100,8 @@
 #main-content .home-editorial .aureyx-nav a{color:#dcd8d2}
 #main-content .home-editorial .aureyx-nav a.is-active{color:#fff}
 #main-content .home-editorial .site-search-panel{color:#eae6df}
+
+/* Geometric, synth-inspired typography for the connected electronic label. */
+#main-content .home-editorial .home-paper .hanatekk-copy h2{font-family:var(--font-orbitron),Arial,sans-serif;font-size:clamp(30px,4.2vw,60px);font-weight:600;letter-spacing:.015em;line-height:1.2;text-transform:uppercase}
+#main-content .home-editorial .home-paper .hanatekk-copy h2 em{font-family:inherit;font-size:.7em;font-style:normal;font-weight:400;letter-spacing:.16em;color:#52606d}
+@media(max-width:700px){#main-content .home-editorial .home-paper .hanatekk-copy h2{font-size:clamp(30px,8vw,42px)}}
