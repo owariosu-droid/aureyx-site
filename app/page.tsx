@@ -14,11 +14,12 @@ import SocialIcon from "@/components/SocialIcon";
 import { artists } from "@/data/artists";
 import { albums } from "@/data/albums";
 import "./home.css";
+import "./home-editorial.css";
 
 
 export default function Home() {
   return (
-    <div className="transmission-home">
+    <div className="transmission-home home-editorial">
       <Navbar />
       <main>
         <section className="transmission-hero" aria-labelledby="home-title">
@@ -35,6 +36,7 @@ export default function Home() {
           <div className="transmission-bottomline"><span>Founded by <Link href="/artists/iyune">iyune ↗</Link></span><a href="#collective">Scroll to discover <ArrowDown size={14} /></a><span>Sound without boundaries.</span></div>
         </section>
 
+        <div className="home-paper">
         <div className="transmission-ticker" aria-hidden="true"><span>INDEPENDENT ARTISTS</span><b>✦</b><span>UNFILTERED EXPRESSION</span><b>✦</b><span>AUREYX COLLECTIVE</span><b>✦</b><span>BEYOND THE EXPECTED</span></div>
 
         <section id="collective" className="transmission-section transmission-intro">
@@ -74,6 +76,7 @@ export default function Home() {
 
         <section className="transmission-section transmission-explore" aria-label="More from Aureyx"><a className="transmission-explore-card nocturna-card" href="https://nocturnakits.gumroad.com/l/oeveok" target="_blank" rel="noopener noreferrer"><Image src="/nocturna-cover.png" alt="" fill sizes="(max-width: 700px) 92vw, 45vw" className="nocturna-card-art" /><span className="nocturna-card-shade" /><div><p className="transmission-eyebrow">07 / For the creators</p><ArrowUpRight className="transmission-explore-arrow" /><span className="nocturna-moon" role="img" aria-label="Nocturna crescent moon logo from the cover" /><h2>Nocturna</h2><p>Sounds created by iyune, used interchangeably throughout Aureyx.</p><strong>$2</strong><span>Explore sound kits ↗</span></div></a><Link className="transmission-explore-card" href="/artists"><p className="transmission-eyebrow">08 / The collective</p><ArrowUpRight className="transmission-explore-arrow" /><h2>Meet the<br /><em>artists.</em></h2><p>Explore the people, music, and artwork behind Aureyx.</p><span>Explore artist profiles ↗</span></Link></section>
         <div className="transmission-signoff"><Image src="/aureyx-space-background.jpg" alt="" fill sizes="(max-width: 1200px) 100vw, 1200px" className="transmission-signoff-art" /><h2 className="transmission-endmark gothic-wordmark gothic-wordmark--footer"><a href="https://linktr.ee/dystofuturemusic23" target="_blank" rel="noopener noreferrer" aria-label="Open the Aureyx Linktree"><span>Aureyx</span></a></h2><p>Independent electronic music.</p><div><a className="social-icon-link" href="https://open.spotify.com/artist/1IwiBlGpQaMr8dV7u5LtjI" target="_blank" rel="noopener noreferrer"><SocialIcon platform="Spotify" />Spotify</a><a className="social-icon-link" href="https://dystofuturemusic.bandcamp.com/" target="_blank" rel="noopener noreferrer"><SocialIcon platform="Bandcamp" />Bandcamp</a><a className="social-icon-link" href="https://linktr.ee/dystofuturemusic23" target="_blank" rel="noopener noreferrer"><SocialIcon platform="Linktree" />Connect</a></div></div>
+        </div>
       </main>
       <Footer />
     </div>
