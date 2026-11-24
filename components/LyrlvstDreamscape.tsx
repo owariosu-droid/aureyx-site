@@ -20,6 +20,13 @@ export default function LyrlvstDreamscape() {
       <div className="dream-mist mist-violet" aria-hidden="true" /><div className="dream-mist mist-rose" aria-hidden="true" />
       <svg className="dream-constellation" viewBox="0 0 1000 680" preserveAspectRatio="none" fill="none" aria-hidden="true">
         <defs><linearGradient id="lyrlvst-dream-thread" x1="200" y1="80" x2="800" y2="520" gradientUnits="userSpaceOnUse"><stop stopColor="#b8ddf8" /><stop offset=".5" stopColor="#c5b4f0" /><stop offset="1" stopColor="#e9b6d2" /></linearGradient></defs>
+        <g className="dream-tracery" stroke="#c7b2e3" strokeWidth="1" strokeOpacity=".18">
+          <path d="M244 590V290C244 170 391 112 500 30C609 112 756 170 756 290V590M275 586V300C275 192 407 134 500 65C593 134 725 192 725 300V586" />
+          <path d="M315 565V315C315 230 425 173 500 111C575 173 685 230 685 315V565M500 30V7M244 290H275M725 290H756" />
+          <path d="m500 7-7 12 7 12 7-12Zm-256 546-6 11 6 11 6-11Zm512 0-6 11 6 11 6-11Z" />
+          <circle cx="500" cy="186" r="31" /><circle cx="500" cy="186" r="23" strokeDasharray="1 7" />
+          <path d="M500 155C478 170 478 202 500 217C522 202 522 170 500 155ZM469 186C484 164 516 164 531 186C516 208 484 208 469 186Z" />
+        </g>
         <g className="dream-orbits" stroke="#c7b8eb" strokeOpacity=".14"><ellipse cx="500" cy="350" rx="285" ry="182" transform="rotate(-15 500 350)" /><ellipse cx="500" cy="350" rx="330" ry="211" strokeDasharray="1 14" transform="rotate(12 500 350)" /></g>
         <g stroke="url(#lyrlvst-dream-thread)" strokeLinecap="round">{links.map(link => <g key={link.light}><path className={`dream-thread thread-${link.light}`} d={link.path} pathLength={1} strokeWidth="1.5" /><path className="dream-current" d={link.path} pathLength={1} strokeWidth="2.5" style={{ animationDelay: `${links.indexOf(link) * -1.8}s` }} /></g>)}</g>
         <g className="dream-stars" fill="#e9ddff">{Array.from({ length: 42 }, (_, i) => <circle key={i} cx={85 + ((i * 149) % 830)} cy={30 + ((i * 83) % 575)} r={i % 7 === 0 ? 2.1 : 1} style={{ animationDelay: `${i * -.43}s` }} />)}</g>
