@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Orbitron, Pirata_One, UnifrakturCook, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import "./gothic.css";
+import "./visitor-themes.css";
+import { themeBootstrap } from "@/lib/visitor-theme";
 import ImageProtection from "@/components/ImageProtection";
 import SiteAtmosphere from "@/components/SiteAtmosphere";
 import AudioPlayerProvider from "@/components/AudioPlayerProvider";
@@ -45,7 +47,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: "#0d0d0f",
-  colorScheme: "dark",
+  colorScheme: "dark light",
 };
 
 export default function RootLayout({
@@ -56,8 +58,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} ${pirataOne.variable} ${blackletter.variable} ${editorial.variable} h-full antialiased`}
     >
+      <head><script dangerouslySetInnerHTML={{ __html: themeBootstrap }} /></head>
       <body className="aureyx-gothic-theme min-h-full flex flex-col"><AudioPlayerProvider><a className="skip-link" href="#main-content">Skip to content</a><ImageProtection /><SiteAtmosphere /><div id="main-content">{children}</div></AudioPlayerProvider><Analytics /></body>
     </html>
   );

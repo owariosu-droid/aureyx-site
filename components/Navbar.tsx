@@ -5,6 +5,7 @@ import { Menu, Search, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import SocialIcon from "@/components/SocialIcon";
+import ThemePicker from "@/components/ThemePicker";
 import { artists } from "@/data/artists";
 import { releases } from "@/lib/releases";
 
@@ -55,6 +56,7 @@ export default function Navbar() {
       <div>
         <Link href="/" aria-label="Aureyx home" className="nav-brand">Aureyx</Link>
         <button className="nav-search" type="button" onClick={() => setSearching(true)} aria-label="Search Aureyx"><Search /> <span>Search</span><kbd>⌘K</kbd></button>
+        <ThemePicker />
         <button className="nav-menu" type="button" aria-expanded={open} aria-controls="main-menu" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}<span>{open ? "Close" : "Menu"}</span></button>
         <ul id="main-menu">
           {links.map((link) => { const active = !link.external && (link.href === "/" ? pathname === "/" : pathname.startsWith(link.href)); return <li key={link.href}>{link.external ? <a href={link.href} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>{link.name} ↗</a> : <Link href={link.href} className={active ? "is-active" : undefined} aria-current={active ? "page" : undefined} onClick={() => setOpen(false)}><span className="nav-link-label">{link.name}{link.icon && <SocialIcon platform={link.icon} size={15} />}</span></Link>}</li>; })}
