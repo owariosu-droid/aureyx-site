@@ -8,7 +8,7 @@ import "@/app/artists/artists.css";
 import YouTubeFeed from "@/components/YouTubeFeed";
 import SocialIcon from "@/components/SocialIcon";
 import GalleryLightbox from "@/components/GalleryLightbox";
-import LyrlvstWorldTree from "@/components/LyrlvstWorldTree";
+import LyrlvstDreamscape from "@/components/LyrlvstDreamscape";
 import { artists } from "@/data/artists";
 import type { CSSProperties } from "react";
 
@@ -56,7 +56,7 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
           </div>
         </article>
 
-        {artist.slug === "lyrlvst" && <LyrlvstWorldTree />}
+        {artist.slug === "lyrlvst" && <LyrlvstDreamscape />}
 
         {artist.gallery && <section className="mt-16" aria-labelledby="gallery-heading">
           <p className="text-xs uppercase tracking-[0.25em] text-white/45">Selected visuals</p>

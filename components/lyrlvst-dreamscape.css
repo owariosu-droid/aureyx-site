@@ -1,0 +1,45 @@
+.lyrlvst-dream-section{position:relative;isolation:isolate;margin-top:65px;overflow:hidden;border:1px solid #c4b2e440;border-radius:22px;background:radial-gradient(ellipse at 50% 55%,#5d477c3b,transparent 55%),linear-gradient(160deg,#161527,#0c101f 65%,#1d172a);box-shadow:0 24px 65px #0004;color:#ede5f8}
+.lyrlvst-dream-section>header{position:relative;z-index:2;text-align:center;padding:44px 24px 0}
+.lyrlvst-dream-section>header>p:first-child{font:9px var(--font-geist-mono),monospace;letter-spacing:.21em;text-transform:uppercase;color:#c8b9e3}
+.aureyx-gothic-theme .lyrlvst-dream-section>header>h2{font:clamp(35px,4.8vw,62px)/1.05 var(--font-editorial),Georgia,serif;font-weight:400;letter-spacing:-.025em;margin:20px 0;color:#f0e9ff}
+.lyrlvst-dream-section>header h2 em{color:#d7b9dc;font-weight:400}
+.lyrlvst-dream-section>header>p:last-child{font-size:13px;line-height:1.8;color:#c2b9d4;max-width:470px;margin:auto}
+.lyrlvst-dreamscape{position:relative;width:100%;height:680px;isolation:isolate}
+.dream-mist{position:absolute;width:67%;height:40%;border-radius:50%;filter:blur(30px);pointer-events:none;opacity:.55;animation:dream-mist 17s ease-in-out infinite alternate;z-index:-1}
+.mist-violet{left:-8%;top:21%;background:radial-gradient(ellipse,#8175ba42,transparent 70%)}.mist-rose{right:-9%;bottom:8%;background:radial-gradient(ellipse,#c07eac38,transparent 70%);animation-delay:-9s}
+.dream-constellation{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.dream-thread{stroke-opacity:.32;transition:stroke-opacity .3s,stroke-width .3s}
+.dream-current{stroke-dasharray:.04 .96;stroke-opacity:.65;animation:dream-current 12s linear infinite}
+.dream-stars circle{animation:dream-star 6s ease-in-out infinite alternate}
+.dream-orbits{transform-origin:500px 350px;animation:dream-orbit 22s ease-in-out infinite alternate}
+.dream-water{transform-origin:500px 590px;animation:dream-water 8s ease-in-out infinite alternate}
+.dream-portal{position:absolute;left:50%;top:51.5%;width:190px;height:190px;transform:translate(-50%,-50%);border-radius:50%;border:1px solid #d4bce53b;display:flex;align-items:center;justify-content:center;flex-direction:column;background:radial-gradient(circle,#76618f2b,#27223e42 55%,transparent 72%);box-shadow:0 0 60px #b096de17,inset 0 0 30px #c8b4e30c;pointer-events:none;animation:dream-portal 8s ease-in-out infinite alternate}
+.dream-portal::before,.dream-portal::after{content:"";position:absolute;inset:-13px;border-radius:50%;border:1px solid #c3a9e51a;transform:rotate(-20deg) scaleX(1.12)}.dream-portal::after{inset:-27px;border-style:dashed;opacity:.6;transform:rotate(25deg) scaleY(.9)}
+.dream-moon{width:26px;height:26px;border-radius:50%;box-shadow:inset -7px -2px 0 #e5d6fa,0 0 25px #c3a8e529;margin-bottom:12px;rotate:-24deg}
+.dream-portal>span{font:italic 42px/1.1 var(--font-editorial),Georgia,serif;color:#f1e8fc;letter-spacing:-.02em}
+.dream-portal>small{font:8px var(--font-geist-mono),monospace;color:#c8b9dd;margin-top:14px;letter-spacing:.08em}
+.dream-anchor{position:absolute;z-index:3;width:clamp(155px,20vw,210px);transform:translate(-50%,-50%)}
+.dream-link{display:flex;align-items:center;gap:12px;min-height:72px;padding:14px 16px;border:1px solid #c6b0e455;border-radius:16px;background:linear-gradient(135deg,#423854d9,#1e2035ed);box-shadow:0 14px 40px #0004,inset 0 1px #f0e5ff12;backdrop-filter:blur(14px);color:#f0e7fc;animation:dream-link 7s ease-in-out infinite alternate;transition:border-color .25s,box-shadow .25s,background .25s}
+.dream-link>span:not(.sr-only){display:flex;flex-direction:column;gap:6px;min-width:0}
+.dream-link strong{font-size:15px;font-weight:500;line-height:1.2}
+.dream-link small{font:9px/1.5 var(--font-geist-mono),monospace;color:#c5b8d8}
+.dream-link>svg{flex-shrink:0;color:#dbc7f4}.dream-link>svg:last-of-type{width:13px;margin-left:auto;opacity:.7}
+.dream-link:hover,.dream-link:focus-visible{animation-play-state:paused;background:#49395b;border-color:#e8ccf7;box-shadow:0 8px 35px #0004,0 0 38px #cfb3ef29}
+.dream-link:focus-visible{outline:2px solid #ead0ff;outline-offset:5px}
+.light-zenith{left:50%;top:12%}.light-dawn{left:18%;top:35%}.light-dusk{left:82%;top:35%}.light-echo{left:24%;top:70%}.light-tide{left:76%;top:70%}
+.lyrlvst-dreamscape:has(.light-zenith a:is(:hover,:focus-visible)) .thread-zenith,.lyrlvst-dreamscape:has(.light-dawn a:is(:hover,:focus-visible)) .thread-dawn,.lyrlvst-dreamscape:has(.light-dusk a:is(:hover,:focus-visible)) .thread-dusk,.lyrlvst-dreamscape:has(.light-echo a:is(:hover,:focus-visible)) .thread-echo,.lyrlvst-dreamscape:has(.light-tide a:is(:hover,:focus-visible)) .thread-tide{stroke-opacity:1;stroke-width:3}
+.dream-caption{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);width:90%;text-align:center;color:#c1b4d2;font:9px var(--font-geist-mono),monospace;letter-spacing:.12em}.dream-caption>span{display:block;color:#e1ccee;font-size:20px;margin-top:14px}
+.lyrlvst-dream-section>footer{position:relative;display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap;border-top:1px solid #c4b2e429;padding:22px 28px;color:#bdb0cf;font-size:11px;line-height:1.5}
+.lyrlvst-dream-section>footer>a{display:inline-flex;align-items:center;gap:8px;color:#e4ccef}
+.dream-motion-toggle{border:1px solid #c6b0e455;border-radius:999px;padding:8px 13px;color:#e4ccef;background:#262036;cursor:pointer;font-size:10px}.dream-motion-toggle:focus-visible{outline:2px solid #ead0ff;outline-offset:4px}
+.lyrlvst-dream-section[data-motion=paused] *{animation-play-state:paused}
+@keyframes dream-mist{from{translate:-12px 3px;opacity:.4}to{translate:18px -10px;opacity:.8}}
+@keyframes dream-current{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes dream-star{from{opacity:.2}to{opacity:.8}}
+@keyframes dream-orbit{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+@keyframes dream-water{from{transform:scaleX(.91);opacity:.45}to{transform:scaleX(1.04);opacity:.85}}
+@keyframes dream-portal{from{translate:0 3px}to{translate:0 -5px}}
+@keyframes dream-link{from{translate:0 -3px}to{translate:0 4px}}
+@media(max-width:700px){.lyrlvst-dreamscape{height:590px}.lyrlvst-dream-section>header{padding:32px 18px 0}.dream-anchor{width:min(40%,148px)}.light-dawn{left:23%}.light-dusk{left:77%}.light-echo{left:23%}.light-tide{left:77%}.dream-link{padding:12px 10px;gap:8px;min-height:70px}.dream-link strong{font-size:13px}.dream-link small{font-size:8px}.dream-link>svg:first-child{width:18px;height:18px}.dream-link>svg:last-of-type{display:none}.dream-portal{width:130px;height:130px}.dream-portal>span{font-size:32px}.dream-portal>small{font-size:7px}.lyrlvst-dream-section>footer{padding:20px;flex-direction:column;align-items:flex-start}.dream-caption{font-size:8px}}
+@media(max-width:360px){.dream-link{padding:11px 8px;gap:6px}.dream-link strong{font-size:12px}.dream-portal{width:116px;height:116px}.dream-portal>small{letter-spacing:0}}
+@media(prefers-reduced-motion:reduce){.lyrlvst-dream-section *{animation:none!important;transition:none!important}.dream-motion-toggle{display:none}}

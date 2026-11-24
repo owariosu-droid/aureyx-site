@@ -20,7 +20,7 @@ html[data-theme=light] #main-content .artist-profile-card [class*="bg-zinc-800"]
 html[data-theme=light] #main-content .artists-theme main>header{border-color:#d8d7df}
 html[data-theme=light] #main-content .artist-profile-card a{border-color:#bdb4c9}
 html[data-theme=light] #main-content .artist-directory-card h2{color:#25242a}
-html[data-theme=light] #main-content .lyrlvst-tree-section :is(h2,h3,h4){color:#e2eddd}
+html[data-theme=light] #main-content .lyrlvst-dream-section :is(h2,h3,h4){color:#f0e9ff}
 html[data-theme=light] #main-content :is(.catalog-hero>p,.transmission-release>p,.release-detail-back,.release-detail-copy>p,.release-detail-copy dt,.release-credits,.release-pagination,.release-no-results){color:#625969}
 html[data-theme=light] #main-content .release-detail-copy :is(h1,dd){color:#29242f}
 html[data-theme=light] #main-content .release-detail-copy dl>div{border-color:#d8d7df}
