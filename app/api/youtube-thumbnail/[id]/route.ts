@@ -52,7 +52,12 @@ export async function GET(
       }
       if (bytes > MAX_THUMBNAIL_BYTES) continue;
 
-      return new Response(Buffer.concat(chunks), {
+      const image = Buffer.concat(chunks);
+      const valid = contentType.toLowerCase().startsWith("image/jpeg") ? image[0] === 255 && image[1] === 216 && image[2] === 255
+        : contentType.toLowerCase().startsWith("image/png") ? image.subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10]))
+        : image.subarray(0, 4).toString() === "RIFF" && image.subarray(8, 12).toString() === "WEBP";
+      if (!valid) continue;
+      return new Response(image, {
         headers: { ...cacheHeaders, "Content-Type": contentType },
       });
     } catch {

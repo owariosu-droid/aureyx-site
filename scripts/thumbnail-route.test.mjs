@@ -4,6 +4,12 @@ import { GET } from "../app/api/youtube-thumbnail/[id]/route.ts";
 
 const context = (id = "EN6TLOaZOMo") => ({ params: Promise.resolve({ id }) });
 
+test("rejects HTML disguised with an image MIME type", async (t) => {
+  t.mock.method(globalThis, "fetch", async () => new Response("<script>alert(1)</script>", { headers: { "content-type": "image/jpeg" } }));
+  const response = await GET(new Request("https://example.test/"), context());
+  assert.ok((await response.text()).includes("AUREYX VIDEO"));
+});
+
 test("rejects invalid video IDs before making an upstream request", async (t) => {
   const fetch = t.mock.method(globalThis, "fetch", () => { throw new Error("Should not fetch"); });
   const response = await GET(new Request("https://example.test/"), context("../../admin"));
