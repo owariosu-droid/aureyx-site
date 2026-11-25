@@ -102,6 +102,19 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(sync.price({"download_pref": 1}, "USD"), "Free download")
         self.assertEqual(sync.price({"download_pref": 0}, "USD"), "Listen on Bandcamp")
 
+    def test_release_access_distinguishes_paid_free_and_streaming(self):
+        for current, expected in [
+            ({"download_pref": 2, "minimum_price": .5}, "paid"),
+            ({"download_pref": 2, "minimum_price": 0}, "free"),
+            ({"download_pref": 2, "is_set_price": 1, "set_price": 5, "minimum_price": 0}, "paid"),
+            ({"download_pref": 1}, "free"),
+            ({"download_pref": 0}, "streaming"),
+            ({"download_pref": 2}, "paid"),
+            ({"download_pref": 2, "minimum_price": float("nan")}, "paid"),
+        ]:
+            with self.subTest(current=current):
+                self.assertEqual(sync.release_access(current), expected)
+
     def test_profile_sanitizer_drops_executable_content(self):
         parser = sync.ProfileHTML({})
         parser.feed('<script>alert(1)</script><iframe src="https://evil.test"></iframe><h2 onclick="evil()">Maps &amp; scores</h2><a href="javascript:alert(1)">bad</a><a href="https://osu.ppy.sh/users/37255712" onmouseover="evil()">profile</a>')

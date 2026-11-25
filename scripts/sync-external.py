@@ -7,6 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 from html import escape
 from html.parser import HTMLParser
 import json
+import math
 from pathlib import Path
 import re
 import sys
@@ -138,6 +139,17 @@ def price(current, currency):
     return f"{prefix}{amount:.2f}"
 
 
+def release_access(current):
+    if current.get("download_pref") == 1:
+        return "free"
+    if current.get("download_pref") != 2:
+        return "streaming"
+    amount = current.get("set_price") if current.get("is_set_price") else current.get("minimum_price")
+    if not isinstance(amount, (int, float)) or not math.isfinite(amount) or amount < 0:
+        return "paid"
+    return "paid" if amount > 0 else "free"
+
+
 class BandcampGrid(HTMLParser):
     """Read the public grid used by artist pages without data-client-items."""
     def __init__(self, html):
@@ -208,6 +220,7 @@ def sync_bandcamp(source="bandcamp"):
         preview_name = config["preview_prefix"] + path.rsplit("/", 1)[-1] + ".m4a"
         result = {"title": current["title"], "link": url, "image": art,
                 "price": price(current, currency), "id": item["id"], "type": item["type"],
+                "access": release_access(current),
                 "released": current.get("release_date"),
                 "preview": f"/previews/{preview_name}" if (ROOT / "public" / "previews" / preview_name).is_file() else None}
         if "artist" in config:

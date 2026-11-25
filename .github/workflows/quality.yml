@@ -15,6 +15,12 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Install audio preview tools
+        run: |
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install --no-install-recommends -y ffmpeg
+          fi
       - run: python3 -m unittest discover -s scripts -p 'test_*.py'
       - run: node --test scripts/*.test.mjs
       - run: npm run lint

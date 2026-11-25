@@ -11,6 +11,7 @@ export type BandcampRelease = {
   released: string | null;
   preview: string | null;
   artist?: string;
+  access?: string;
 };
 
 export const bandcampCatalog: BandcampRelease[] = [...aureyx, ...lyrlvst];

@@ -11,7 +11,7 @@ const profiles = [
       ["Instagram", "https://instagram.com/aureyx_music"],
       ["TikTok", "https://tiktok.com/@aureyxmusic"],
       ["YouTube", "https://www.youtube.com/@Aureyx-u6c"],
-      ["SoundCloud", "https://soundcloud.com/dystomusic23"],
+      ["SoundCloud", "https://soundcloud.com/dysto-music-318311836"],
       ["Spotify", "https://open.spotify.com/artist/1IwiBlGpQaMr8dV7u5LtjI"],
     ],
   },

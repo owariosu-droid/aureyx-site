@@ -10,7 +10,7 @@ const contentSecurityPolicy = [
   "img-src 'self' data: blob: https://*.ytimg.com",
   "font-src 'self' data:",
   "connect-src 'self'",
-  "frame-src https://www.youtube-nocookie.com https://bandcamp.com https://open.spotify.com",
+  "frame-src https://www.youtube-nocookie.com https://bandcamp.com https://open.spotify.com https://w.soundcloud.com",
   "media-src 'self'",
   "object-src 'none'",
   "base-uri 'self'",

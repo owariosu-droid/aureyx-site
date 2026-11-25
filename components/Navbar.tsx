@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { Menu, Search, X } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import SocialIcon from "@/components/SocialIcon";
 import ThemePicker from "@/components/ThemePicker";
 import { artists } from "@/data/artists";
 import { releases } from "@/lib/releases";
+import { buttonSoundsSnapshot, setButtonSounds, subscribeButtonSounds } from "@/lib/interaction-sounds";
 
 const links = [
   { name: "Home", href: "/" }, { name: "Artists", href: "/artists" },
@@ -17,6 +18,7 @@ const links = [
 ];
 
 export default function Navbar() {
+  const buttonSounds = useSyncExternalStore(subscribeButtonSounds, buttonSoundsSnapshot, () => true);
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [searching, setSearching] = useState(false);
@@ -38,7 +40,7 @@ export default function Navbar() {
     const destinations = [
       { label:"Geometry Dash", type:"Personal showcase", href:"/gaming/geometry-dash", terms:"geometry dash game progress videos" },
       { label:"Audio BPM Finder", type:"Music tool", href:"/for-fun/bpm-finder", terms:"tempo beat bpm audio song loop detector" },
-      { label:"Nox — sound sanctuary", type:"Connected project", href:"https://aureyxneuralnetwork.vercel.app", terms:"nox vault audio visualizer private music" },
+      { label:"Nox — music player", type:"Connected project", href:"https://aureyxneuralnetwork.vercel.app", terms:"nox vault audio visualizer private music" },
       { label:"Voice Pitch Detector", type:"Music tool", href:"/for-fun/pitch-detector", terms:"microphone singing hum note tuner pitch frequency" },
       { label:"Aureyx videos", type:"Page", href:"/videos", terms:"youtube channels music videos" },
       { label:"Yoru Zenaku concept art", type:"Artwork", href:"/artists/yoru-zenaku#concept-art", terms:"gallery art yoru" },
@@ -65,7 +67,7 @@ export default function Navbar() {
     </nav>
     {searching && <div className="site-search-backdrop" role="dialog" aria-modal="true" aria-label="Search Aureyx" onMouseDown={(event) => { if (event.target === event.currentTarget) setSearching(false); }}>
       <div className="site-search-panel"><div><Search /><input autoFocus type="search" placeholder="Search Aureyx" value={query} onChange={(event) => setQuery(event.target.value)} /><button type="button" onClick={() => setSearching(false)} aria-label="Close search"><X /></button></div>
-      <ul>{query && !results.length ? <li className="site-search-empty">No matches</li> : results.map((result) => <li key={result.href}>{(result.href.startsWith("https://") || result.href === "/for-fun/pitch-detector" || result.href === "/for-fun/bpm-finder") ? <a href={result.href} target={result.href.startsWith("https://") ? "_blank" : undefined} rel={result.href.startsWith("https://") ? "noopener noreferrer" : undefined} onClick={() => { setSearching(false); setQuery(""); }}><span>{result.label} ↗</span><small>{result.type}</small></a> : <Link href={result.href} onClick={() => { setSearching(false); setQuery(""); }}><span>{result.label}</span><small>{result.type}</small></Link>}</li>)}</ul><p>Press Esc to close</p></div>
+      <ul>{query && !results.length ? <li className="site-search-empty">No matches</li> : results.map((result) => <li key={result.href}>{(result.href.startsWith("https://") || result.href === "/for-fun/pitch-detector" || result.href === "/for-fun/bpm-finder") ? <a href={result.href} target={result.href.startsWith("https://") ? "_blank" : undefined} rel={result.href.startsWith("https://") ? "noopener noreferrer" : undefined} onClick={() => { setSearching(false); setQuery(""); }}><span>{result.label} ↗</span><small>{result.type}</small></a> : <Link href={result.href} onClick={() => { setSearching(false); setQuery(""); }}><span>{result.label}</span><small>{result.type}</small></Link>}</li>)}</ul><p>Press Esc to close <span aria-hidden="true">· </span><button type="button" role="switch" aria-label="Button sounds" aria-checked={buttonSounds} data-no-click-sound onClick={() => setButtonSounds(!buttonSounds)} style={{ display: "inline", color: "#c9c2d2", textDecoration: "underline", textUnderlineOffset: "3px" }}>Button sounds: {buttonSounds ? "On" : "Off"}</button></p></div>
     </div>}
   </>;
 }
