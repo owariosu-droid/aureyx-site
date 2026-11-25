@@ -16,7 +16,7 @@ export default function MusicPage() {
           <p className="transmission-eyebrow"><span className="signal-dot" /> Aureyx catalog</p>
           <h1>Music</h1>
           <p>{albums.length} releases from Aureyx and its collaborators.</p>
-          <div><a className="social-icon-link" href="https://dystofuturemusic.bandcamp.com/music" target="_blank" rel="noopener noreferrer"><SocialIcon platform="Bandcamp" />Bandcamp catalog <ArrowUpRight size={16} /></a><Link href="/artists">Browse artists <ArrowUpRight size={16} /></Link></div>
+          <div><a className="social-icon-link" href="https://dystofuturemusic.bandcamp.com/music" target="_blank" rel="noopener noreferrer"><SocialIcon platform="Bandcamp" />Aureyx Bandcamp <ArrowUpRight size={16} /></a><a className="social-icon-link" href="https://lyrlvst.bandcamp.com/music" target="_blank" rel="noopener noreferrer"><SocialIcon platform="Bandcamp" />Lyrlvst Bandcamp <ArrowUpRight size={16} /></a><Link href="/artists">Browse artists <ArrowUpRight size={16} /></Link></div>
         </header>
         <section className="transmission-section catalog-list" aria-label="Release catalog"><HomeReleases /></section>
       </main>

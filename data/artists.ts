@@ -28,7 +28,7 @@ export const artists: Artist[] = [
     youtubeChannelId: "UC7xSxOfYmUlZ8jIp_567M6w",
     blog: true,
     albums: [{ title: "iliveinagony", image: "/members/lyrlvst-profile-optimized.jpg", href: "https://www.youtube.com/watch?v=EN6TLOaZOMo" }],
-    links: [{ label: "YouTube", href: "https://www.youtube.com/@lyrlvst" }, { label: "Linktree", href: "https://linktr.ee/lyrlvst" }],
+    links: [{ label: "Bandcamp", href: "https://lyrlvst.bandcamp.com" }, { label: "YouTube", href: "https://www.youtube.com/@lyrlvst" }, { label: "Linktree", href: "https://linktr.ee/lyrlvst" }],
   },
   {
     slug: "iyune",

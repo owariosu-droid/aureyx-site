@@ -1,4 +1,5 @@
 import bandcamp from "@/data/external/bandcamp.json";
+import lyrlvst from "@/data/external/lyrlvst-bandcamp.json";
 
 // The daily content workflow refreshes Bandcamp's public catalog and artwork.
 // Keep this Spotify-only release alongside the catalog.
@@ -10,4 +11,5 @@ export const albums = [
     image: "/ouroboros-optimized.jpg",
     link: "https://open.spotify.com/album/6W9618MAoMyOgYcWgx6glU",
   },
+  ...lyrlvst,
 ];

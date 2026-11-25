@@ -16,8 +16,12 @@ from urllib.error import HTTPError, URLError
 
 ROOT = Path(__file__).resolve().parents[1]
 BANDCAMP = "https://dystofuturemusic.bandcamp.com"
+BANDCAMP_SOURCES = {
+    "bandcamp": {"url": BANDCAMP, "label": "Aureyx Bandcamp", "preview_prefix": ""},
+    "lyrlvst-bandcamp": {"url": "https://lyrlvst.bandcamp.com", "label": "Lyrlvst Bandcamp", "artist": "Lyrlvst", "preview_prefix": "lyrlvst-"},
+}
 PROFILE = "https://osu.ppy.sh/users/37255712"
-TRUSTED_HOSTS = {"dystofuturemusic.bandcamp.com", "f4.bcbits.com", "osu.ppy.sh", "a.ppy.sh", "i.ppy.sh", "assets.ppy.sh"}
+TRUSTED_HOSTS = {"dystofuturemusic.bandcamp.com", "lyrlvst.bandcamp.com", "f4.bcbits.com", "osu.ppy.sh", "a.ppy.sh", "i.ppy.sh", "assets.ppy.sh"}
 MAX_HTML_BYTES = 8 * 1024 * 1024
 MAX_IMAGE_BYTES = 12 * 1024 * 1024
 
@@ -134,9 +138,57 @@ def price(current, currency):
     return f"{prefix}{amount:.2f}"
 
 
-def sync_bandcamp():
-    html = fetch(f"{BANDCAMP}/music").decode()
-    items = Attributes(html).json("data-client-items")
+class BandcampGrid(HTMLParser):
+    """Read the public grid used by artist pages without data-client-items."""
+    def __init__(self, html):
+        super().__init__()
+        self.in_grid = False
+        self.current = None
+        self.items = []
+        self.feed(html)
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "ol" and attrs.get("id") == "music-grid":
+            self.in_grid = True
+        if not self.in_grid:
+            return
+        if tag == "li" and "music-grid-item" in attrs.get("class", "").split():
+            identity = re.fullmatch(r"(album|track)-(\d+)", attrs.get("data-item-id", ""))
+            if self.current is not None or not identity:
+                raise ValueError("Unexpected Bandcamp grid item")
+            self.current = {"type": identity[1], "id": int(identity[2])}
+        elif self.current is not None:
+            if tag == "a" and "page_url" not in self.current:
+                self.current["page_url"] = attrs.get("href", "")
+            if tag == "img":
+                art = re.fullmatch(r"https://f4\.bcbits\.com/img/a(\d+)_\d+\.jpg", attrs.get("data-original", attrs.get("src", "")))
+                if art:
+                    self.current["art_id"] = int(art[1])
+
+    def handle_endtag(self, tag):
+        if tag == "li" and self.current is not None:
+            if set(self.current) != {"type", "id", "page_url", "art_id"}:
+                raise ValueError("Incomplete Bandcamp grid item; keeping the saved snapshot")
+            self.items.append(self.current)
+            self.current = None
+        if tag == "ol":
+            self.in_grid = False
+
+
+def sync_bandcamp(source="bandcamp"):
+    # Only configured sources can choose a host, snapshot, or preview namespace.
+    config = BANDCAMP_SOURCES[source]
+    html = fetch(f"{config['url']}/music").decode()
+    page = Attributes(html)
+    if any("data-client-items" in attrs for attrs in page.items):
+        items = page.json("data-client-items")
+    else:
+        grid = BandcampGrid(html)
+        if not grid.items or grid.current is not None:
+            # Include the safe page-title diagnostic when the source is blocked.
+            page.json("data-client-items")
+        items = grid.items
     if not isinstance(items, list) or not items:
         raise ValueError("Empty catalog; keeping the saved snapshot")
     assets = {}
@@ -145,7 +197,7 @@ def sync_bandcamp():
         path = item["page_url"]
         if not re.fullmatch(r"/(album|track)/[a-z0-9-]+", path):
             raise ValueError("Unexpected release URL")
-        url = BANDCAMP + path
+        url = config["url"] + path
         page = Attributes(fetch(url).decode())
         data = page.json("data-tralbum")
         current = data["current"]
@@ -153,10 +205,14 @@ def sync_bandcamp():
             raise ValueError("Release identity changed during sync")
         currency = next((a["data-band-currency"] for a in page.items if "data-band-currency" in a), "USD")
         art = image(f"https://f4.bcbits.com/img/a{item['art_id']}_16.jpg", f"bandcamp-{item['art_id']}.jpg", assets)
-        return {"title": current["title"], "link": url, "image": art,
+        preview_name = config["preview_prefix"] + path.rsplit("/", 1)[-1] + ".m4a"
+        result = {"title": current["title"], "link": url, "image": art,
                 "price": price(current, currency), "id": item["id"], "type": item["type"],
                 "released": current.get("release_date"),
-                "preview": f"/previews/{path.rsplit('/', 1)[-1]}.m4a" if (ROOT / "public" / "previews" / f"{path.rsplit('/', 1)[-1]}.m4a").is_file() else None}
+                "preview": f"/previews/{preview_name}" if (ROOT / "public" / "previews" / preview_name).is_file() else None}
+        if "artist" in config:
+            result["artist"] = config["artist"]
+        return result
 
     # Preserve Bandcamp's ordering and publish only after every release succeeds.
     with ThreadPoolExecutor(max_workers=4) as pool:
@@ -164,8 +220,8 @@ def sync_bandcamp():
     if len({r["link"] for r in releases}) != len(releases):
         raise ValueError("Duplicate release URLs")
     save_assets(assets)
-    write_json("bandcamp", releases)
-    print(f"Bandcamp: refreshed {len(releases)} releases")
+    write_json(source, releases)
+    print(f"{config['label']}: refreshed {len(releases)} releases")
 
 
 MAP_ARTWORK = {
@@ -337,10 +393,10 @@ def sync_osu():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source", choices=["bandcamp", "osu", "all"], default="all")
+    parser.add_argument("--source", choices=[*BANDCAMP_SOURCES, "osu", "all"], default="all")
     args = parser.parse_args()
     failed = False
-    for name, sync in [("bandcamp", sync_bandcamp), ("osu", sync_osu)]:
+    for name, sync in [("bandcamp", sync_bandcamp), ("lyrlvst-bandcamp", lambda: sync_bandcamp("lyrlvst-bandcamp")), ("osu", sync_osu)]:
         if args.source in {name, "all"}:
             try:
                 sync()

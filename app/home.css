@@ -540,6 +540,8 @@
 
 /* Catalog filters, release rooms, and artist publishing. */
 .release-tools { display:grid; grid-template-columns:minmax(220px,1fr) minmax(150px,.45fr) minmax(140px,.4fr); gap:12px; margin-bottom:38px; }
+.release-tools.artist-scoped { grid-template-columns:minmax(0,1fr) minmax(140px,.4fr); }
+.transmission-release > .release-attribution { flex-wrap:wrap; gap:6px 12px; line-height:1.6; letter-spacing:.04em; }
 .release-tools label { color:#8f858c; font:8px var(--font-geist-mono),monospace; letter-spacing:.13em; text-transform:uppercase; }
 .release-tools input,.release-tools select { display:block; width:100%; margin-top:8px; padding:13px 14px; border:1px solid #ffffff20; border-radius:9px; outline:0; background:#101012; color:#eee; font:12px Arial,sans-serif; }
 .release-tools input:focus,.release-tools select:focus { border-color:#ff5b68; box-shadow:0 0 0 3px #ff394414; }
@@ -549,7 +551,7 @@
 .release-detail-art { position:relative; aspect-ratio:1; overflow:hidden; border:1px solid #ffffff20; border-radius:24px; box-shadow:0 38px 100px #000a; }
 .release-detail-art img { object-fit:cover; }
 .release-detail-copy h1 { margin-top:20px; font-size:clamp(42px,6vw,82px); line-height:1.02; letter-spacing:-.05em; }
-.release-detail-copy dl { display:flex; gap:45px; margin:34px 0; }
+.release-detail-copy dl { display:flex; flex-wrap:wrap; gap:24px 35px; margin:34px 0; }
 .release-detail-copy dt { color:#8e8588; font:8px var(--font-geist-mono),monospace; letter-spacing:.15em; text-transform:uppercase; }
 .release-detail-copy dd { margin:8px 0 0; font-size:14px; }
 .release-detail-actions { display:flex; flex-wrap:wrap; gap:10px; }

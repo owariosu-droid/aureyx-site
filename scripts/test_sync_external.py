@@ -165,6 +165,64 @@ class SyncTests(unittest.TestCase):
                 sync.sync_bandcamp()
             write.assert_not_called()
 
+    def test_artist_grid_preserves_order_and_decodes_release_urls(self):
+        html = '''<ol id="music-grid"><li class="music-grid-item" data-item-id="album-12">
+        <a href="/album/dreams"><img src="https://f4.bcbits.com/img/a34_2.jpg"></a></li>
+        <li class="music-grid-item" data-item-id="track-56"><a href="/track/song">
+        <img src="/placeholder.jpg" data-original="https://f4.bcbits.com/img/a78_2.jpg"></a></li></ol>
+        <li class="music-grid-item" data-item-id="album-999"><a href="/album/not-in-catalog"></a></li>'''
+        self.assertEqual(sync.BandcampGrid(html).items, [
+            {"type": "album", "id": 12, "page_url": "/album/dreams", "art_id": 34},
+            {"type": "track", "id": 56, "page_url": "/track/song", "art_id": 78},
+        ])
+
+    def test_incomplete_artist_grid_does_not_publish_partial_catalog(self):
+        html = '''<ol id="music-grid"><li class="music-grid-item" data-item-id="album-12">
+        <a href="/album/dreams"><img src="https://evil.test/a34_2.jpg"></a></li></ol>'''
+        with patch.object(sync, "fetch", return_value=html.encode()), patch.object(sync, "write_json") as write:
+            with self.assertRaisesRegex(ValueError, "Incomplete"):
+                sync.sync_bandcamp("lyrlvst-bandcamp")
+            write.assert_not_called()
+
+    def test_lyrlvst_sync_keeps_artist_snapshot_and_previews_separate(self):
+        items = [{"page_url": "/track/test", "type": "track", "id": 1, "art_id": 2}]
+        catalog = '<div data-client-items="' + json.dumps(items).replace('"', '&quot;') + '"></div>'
+        release = {"item_type": "track", "id": 1, "current": {"title": "No artist in title", "download_pref": 2, "minimum_price": .5, "release_date": "01 Nov 2026 00:00:00 GMT"}}
+        page = '<script data-tralbum="' + json.dumps(release).replace('"', '&quot;') + '"></script>'
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data/external").mkdir(parents=True)
+            original = root / "data/external/bandcamp.json"
+            original.write_text('[{"title":"Aureyx release"}]\n')
+            (root / "public/previews").mkdir(parents=True)
+            # Same slug in the older Aureyx catalog must not select its audio.
+            (root / "public/previews/test.m4a").write_bytes(b"audio")
+            with patch.object(sync, "ROOT", root), patch.object(sync, "fetch", side_effect=[catalog.encode(), page.encode()]) as fetch, patch.object(sync, "image", return_value="/external/bandcamp-2.jpg"):
+                sync.sync_bandcamp("lyrlvst-bandcamp")
+            rows = json.loads((root / "data/external/lyrlvst-bandcamp.json").read_text())
+            self.assertEqual(json.loads(original.read_text()), [{"title": "Aureyx release"}])
+            self.assertEqual(rows[0]["artist"], "Lyrlvst")
+            self.assertEqual(rows[0]["link"], "https://lyrlvst.bandcamp.com/track/test")
+            self.assertEqual(rows[0]["price"], "$0.50")
+            self.assertEqual(rows[0]["released"], "01 Nov 2026 00:00:00 GMT")
+            self.assertIsNone(rows[0]["preview"])
+            self.assertEqual([call.args[0] for call in fetch.call_args_list], ["https://lyrlvst.bandcamp.com/music", "https://lyrlvst.bandcamp.com/track/test"])
+
+    def test_failed_lyrlvst_sync_retains_both_catalogs(self):
+        items = [{"page_url": "/track/test", "type": "track", "id": 1, "art_id": 2}]
+        catalog = '<div data-client-items="' + json.dumps(items).replace('"', '&quot;') + '"></div>'
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data/external").mkdir(parents=True)
+            for name in ["bandcamp", "lyrlvst-bandcamp"]:
+                (root / f"data/external/{name}.json").write_text(f'[{{"title":"Saved {name}"}}]\n')
+            with patch.object(sync, "ROOT", root), patch.object(sync, "fetch", side_effect=[catalog.encode(), OSError("network down")]), patch.object(sync, "save_assets") as save:
+                with self.assertRaises(OSError):
+                    sync.sync_bandcamp("lyrlvst-bandcamp")
+                save.assert_not_called()
+            for name in ["bandcamp", "lyrlvst-bandcamp"]:
+                self.assertEqual(json.loads((root / f"data/external/{name}.json").read_text()), [{"title": f"Saved {name}"}])
+
 
 if __name__ == "__main__":
     unittest.main()
