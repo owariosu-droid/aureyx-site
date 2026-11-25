@@ -117,6 +117,21 @@ class BandcampPreviewTests(unittest.TestCase):
                 generate.assert_called_once_with(release, cached, refresh=True)
             self.assertEqual(json.loads(manifest.read_text()), {release["link"]: cached})
 
+    def test_invalid_cached_manifest_is_cleared_when_all_refreshes_fail(self):
+        release = self.release()
+        invalid = {"src": "/previews/bandcamp/bandcamp-" + "a" * 24 + ".m4a", "duration": 20}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data/external").mkdir(parents=True)
+            (root / "data/external/bandcamp.json").write_text(json.dumps([release]))
+            (root / "data/external/lyrlvst-bandcamp.json").write_text("[]")
+            manifest = root / "data/external/bandcamp-previews.json"
+            manifest.write_text(json.dumps({release["link"]: invalid}))
+            with patch.object(sync, "ROOT", root), patch.object(sync, "generate_clip", side_effect=OSError("unavailable")), patch.object(sync, "probe", side_effect=ValueError("invalid cached audio")), patch("sys.stderr", new_callable=io.StringIO):
+                self.assertEqual(sync.sync(refresh=True), 1)
+            self.assertEqual(json.loads(manifest.read_text()), {})
+            self.assertFalse(manifest.with_suffix(".tmp").exists())
+
     @unittest.skipUnless(shutil.which("ffmpeg") and shutil.which("ffprobe"), "ffmpeg and ffprobe required")
     def test_real_transcode_trims_long_audio_to_validated_aac(self):
         with tempfile.TemporaryDirectory() as directory:

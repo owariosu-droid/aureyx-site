@@ -223,10 +223,10 @@ def sync(refresh=False):
             # Never log an exception message: upstream errors can contain signed URLs.
             print(f"Bandcamp excerpt unavailable for {release['title']} ({type(error).__name__}); "
                   + ("retaining verified clip" if cached else "full release link remains available"), file=sys.stderr)
-    if manifest:
-        staging = manifest_path.with_suffix(".tmp")
-        staging.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
-        staging.replace(manifest_path)
+    # Invalid cached entries must not survive when every source is unavailable.
+    staging = manifest_path.with_suffix(".tmp")
+    staging.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n")
+    staging.replace(manifest_path)
     print(f"Bandcamp excerpts: {len(manifest)}/{len(releases)} available; "
           f"{counts['generated']} generated, {counts['cached']} cached, {counts['retained']} retained")
     return 1 if failed else 0
