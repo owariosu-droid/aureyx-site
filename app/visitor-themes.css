@@ -109,3 +109,7 @@ html[data-theme=light] #main-content .release-credits span{color:#51495b}
 html[data-theme=light] #main-content .aureyx-nav .nav-search kbd{color:#c7bcd2}
 html[data-theme=light] #main-content .site-state :is(p,.transmission-eyebrow){color:#51495b}
 html[data-theme=light] body.aureyx-gothic-theme #main-content .videos-page .catalog-hero>p{color:#f4edf8}
+/* Artist cards retain dark image overlays in both themes. */
+html[data-theme=light] body.aureyx-gothic-theme #main-content .home-editorial .home-paper .home-artists-section .transmission-artist-info h3{color:#fff;text-shadow:0 2px 8px #000}
+html[data-theme=light] body.aureyx-gothic-theme #main-content .home-editorial .home-paper .home-artists-section .transmission-artist-info>p{color:#f2edf6;text-shadow:0 1px 5px #000}
+html[data-theme=light] body.aureyx-gothic-theme #main-content .home-editorial .home-paper .home-artists-section .transmission-artist-info>span{color:#e4bfd8;text-shadow:0 1px 5px #000}
