@@ -10,6 +10,8 @@ import SocialIcon from "@/components/SocialIcon";
 import GalleryLightbox from "@/components/GalleryLightbox";
 import IyuneDreamscape from "@/components/IyuneDreamscape";
 import { artists } from "@/data/artists";
+import { getPublishedArtists } from "@/lib/published-content";
+import OwnerEditLink from "@/components/OwnerEditControl";
 import type { CSSProperties } from "react";
 
 export const revalidate = 300;
@@ -18,13 +20,13 @@ export function generateStaticParams() {
 }
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const artist = artists.find((item) => item.slug === slug);
+  const artist = (await getPublishedArtists()).find((item) => item.slug === slug);
   return artist ? { title:`${artist.name} | Aureyx`, description:artist.bio, openGraph:{ title:`${artist.name} | Aureyx`,description:artist.bio,images:[artist.cover || artist.image || "/aureyx-youtube-banner.jpg"] } } : { title:"Artist not found | Aureyx" };
 }
 
 export default async function ArtistProfilePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const artist = artists.find((item) => item.slug === slug);
+  const artist = (await getPublishedArtists()).find((item) => item.slug === slug);
   if (!artist) notFound();
 
   return (
@@ -45,6 +47,7 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
               </div>
               <p className="pb-2 text-xs uppercase tracking-[0.25em] text-white/55">Aureyx Collective / {artist.role}</p>
             </div>
+            <OwnerEditLink artist={artist.slug} />
             <h1 className="break-words text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">{artist.name}</h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/65">{artist.bio}</p>
             <div className="mt-8 flex flex-wrap gap-3">

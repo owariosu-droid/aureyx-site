@@ -5,9 +5,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "@/app/home.css";
 import "@/app/artists/artists.css";
-import { artists } from "@/data/artists";
+import { getPublishedArtists } from "@/lib/published-content";
 
-export default function ArtistsPage() {
+export default async function ArtistsPage() {
+  const artists = await getPublishedArtists();
   return (
     <div className="transmission-home artists-theme relative min-h-screen">
       <Navbar />
