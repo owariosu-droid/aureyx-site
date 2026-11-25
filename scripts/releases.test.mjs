@@ -15,7 +15,7 @@ async function moduleUrl(path) {
   return `data:text/javascript;base64,${Buffer.from(outputText).toString("base64")}`;
 }
 
-const { releases, releaseSlug, matchesReleaseArtist, releaseDateLabel, getRelease } = await import(await moduleUrl("lib/releases.ts"));
+const { releases, releaseSlug, matchesReleaseArtist, releaseDateLabel, getRelease, bandcampAccess, shortBandcampPreview } = await import(await moduleUrl("lib/releases.ts"));
 const { releasePrices } = await import(await moduleUrl("data/release-prices.ts"));
 const original = JSON.parse(await readFile(new URL("../data/external/bandcamp.json", import.meta.url)));
 const lyrlvst = JSON.parse(await readFile(new URL("../data/external/lyrlvst-bandcamp.json", import.meta.url)));
@@ -28,13 +28,14 @@ test("every Lyrlvst release has its own artist, artwork, price, player and detai
     assert.equal(release.artist, "Lyrlvst");
     assert.ok(release.contributors.includes("Lyrlvst"));
     assert.equal(release.platform, "Bandcamp");
-    assert.ok(release.embed.includes(`/${item.type}=${item.id}/`));
-    assert.ok(release.embed.includes("/tracklist=false/"));
+    assert.equal(release.access, bandcampAccess(item));
+    if (release.access === "supporter") assert.equal(release.embed, "");
+    else assert.ok(release.embed.includes(`/${item.type}=${item.id}/`));
     assert.equal(releasePrices[item.link], item.price);
     assert.equal(getRelease(release.slug), release);
     assert.ok(releaseDateLabel(release.released));
     await access(new URL(`../public${release.image}`, import.meta.url));
-    assert.ok(!release.preview || release.preview.startsWith("/previews/lyrlvst-"));
+    assert.ok(!release.preview || release.preview.startsWith("/previews/bandcamp/"));
   }
 });
 
@@ -65,4 +66,30 @@ test("catalog sorts newest first and handles missing dates without inventing one
   assert.equal(releaseDateLabel(null), null);
   assert.equal(releaseDateLabel("invalid"), null);
   assert.equal(releaseDateLabel("24 Oct 2026 00:00:00 GMT"), "Oct 24, 2026");
+});
+
+test("paid releases can only use verified local excerpts, never full Bandcamp players", async () => {
+  const saved = JSON.parse(await readFile(new URL("../data/external/bandcamp-previews.json", import.meta.url)));
+  const paid = releases.filter((release) => release.access === "supporter");
+  assert.ok(paid.length > 0);
+  for (const release of paid) {
+    assert.equal(release.embed, "");
+    if (release.preview) {
+      assert.equal(shortBandcampPreview(release.link), release.preview);
+      assert.ok(saved[release.link].duration > 0 && saved[release.link].duration <= 30);
+      await access(new URL(`../public${release.preview}`, import.meta.url));
+    }
+  }
+  assert.equal(shortBandcampPreview("https://unlisted.example/track"), null);
+});
+
+test("supporter and free sections use purchase rules rather than treating all music as paid", () => {
+  assert.equal(bandcampAccess({ price: "$5.99" }), "supporter");
+  assert.equal(bandcampAccess({ price: "EUR 1.50" }), "supporter");
+  assert.equal(bandcampAccess({ price: "Name your price" }), "free");
+  assert.equal(bandcampAccess({ price: "Free download" }), "free");
+  assert.equal(bandcampAccess({ price: "Listen on Bandcamp" }), "streaming");
+  assert.equal(bandcampAccess({ price: "$5.99", access: "free" }), "free");
+  assert.equal(bandcampAccess({ price: "View price on Bandcamp", access: "paid" }), "supporter");
+  assert.equal(bandcampAccess({ price: "$5.99", access: "unexpected" }), "supporter");
 });

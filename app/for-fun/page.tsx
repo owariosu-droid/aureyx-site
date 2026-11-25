@@ -10,7 +10,7 @@ import "./bpm-finder/bpm.css";
 const apps = [
   { name: "Voice Pitch", description: "Sing or hum to find your note", href: "/for-fun/pitch-detector", image: "/tools/icons/pitch.svg" },
   { name: "BPM Finder", description: "Find the tempo of an audio file", href: "/for-fun/bpm-finder", image: "/tools/icons/bpm.svg" },
-  { name: "Nox", description: "Open the sound sanctuary", href: "https://aureyxneuralnetwork.vercel.app", image: "/tools/icons/nox.svg" },
+  { name: "Nox", description: "Listen to music in Nox", href: "https://aureyxneuralnetwork.vercel.app", image: "/tools/icons/nox.svg" },
 ];
 export default function ForFunPage() {
   return <div className="fun-portal fun-page"><Navbar /><main><header className="fun-heading"><p className="transmission-eyebrow">Outside the label</p><h1>For Fun</h1><p>Music tools, personal projects, and games.</p></header>

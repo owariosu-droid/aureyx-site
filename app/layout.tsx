@@ -5,6 +5,7 @@ import "./gothic.css";
 import "./visitor-themes.css";
 import { themeBootstrap } from "@/lib/visitor-theme";
 import ImageProtection from "@/components/ImageProtection";
+import InteractionSounds from "@/components/InteractionSounds";
 import SiteAtmosphere from "@/components/SiteAtmosphere";
 import AudioPlayerProvider from "@/components/AudioPlayerProvider";
 import { Analytics } from "@vercel/analytics/next";
@@ -62,7 +63,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} ${pirataOne.variable} ${blackletter.variable} ${editorial.variable} h-full antialiased`}
     >
       <head><script dangerouslySetInnerHTML={{ __html: themeBootstrap }} /></head>
-      <body className="aureyx-gothic-theme min-h-full flex flex-col"><AudioPlayerProvider><a className="skip-link" href="#main-content">Skip to content</a><ImageProtection /><SiteAtmosphere /><div id="main-content">{children}</div></AudioPlayerProvider><Analytics /></body>
+      <body className="aureyx-gothic-theme min-h-full flex flex-col"><AudioPlayerProvider><a className="skip-link" href="#main-content">Skip to content</a><ImageProtection /><InteractionSounds /><SiteAtmosphere /><div id="main-content">{children}</div></AudioPlayerProvider><Analytics /></body>
     </html>
   );
 }

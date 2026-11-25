@@ -15,7 +15,7 @@ const links = [
 export default function IyuneDreamscape() {
   const [paused, setPaused] = useState(false);
   return <section className="iyune-dream-section" data-motion={paused ? "paused" : "playing"} aria-labelledby="iyune-dream-heading">
-    <header><p>iyune / After the waking world</p><h2 id="iyune-dream-heading">Somewhere between<br /><em>sound and sleep.</em></h2><p>Drift into iyune’s music. Follow a light to find your next world.</p></header>
+    <header><p>iyune / Music &amp; links</p><h2 id="iyune-dream-heading">Somewhere between<br /><em>sound and sleep.</em></h2><p>Follow the lights to iyune’s music, videos, and links.</p></header>
     <div className="iyune-dreamscape">
       <div className="dream-mist mist-violet" aria-hidden="true" /><div className="dream-mist mist-rose" aria-hidden="true" />
       <svg className="dream-constellation" viewBox="0 0 1000 680" preserveAspectRatio="none" fill="none" aria-hidden="true">
@@ -37,6 +37,6 @@ export default function IyuneDreamscape() {
       <nav className="dream-links" aria-label="iyune’s music platforms">{links.map((link, index) => <div key={link.name} className={`dream-anchor light-${link.light}`}><a className="dream-link" href={link.href} target="_blank" rel="noopener noreferrer" style={{ animationDelay: `${index * -.7}s` }}><SocialIcon platform={link.name} size={22} /><span><small>{link.label}</small><strong>{link.name}</strong></span><ArrowUpRight size={14} /><span className="sr-only">(opens in a new tab)</span></a></div>)}</nav>
       <p className="dream-caption" aria-hidden="true">a small constellation of sound <span>✧</span></p>
     </div>
-    <footer><span>Five lights. Endless sound.</span><button className="dream-motion-toggle" type="button" aria-pressed={paused} onClick={() => setPaused(!paused)}>{paused ? "Resume dream motion" : "Pause dream motion"}</button><a href="https://linktr.ee/dystofuturemusic23" target="_blank" rel="noopener noreferrer">Open Aureyx’s Linktree <ArrowUpRight size={14} /></a></footer>
+    <footer><span>Find iyune on these platforms.</span><button className="dream-motion-toggle" type="button" aria-pressed={paused} onClick={() => setPaused(!paused)}>{paused ? "Resume dream motion" : "Pause dream motion"}</button><a href="https://linktr.ee/dystofuturemusic23" target="_blank" rel="noopener noreferrer">Open Aureyx’s Linktree <ArrowUpRight size={14} /></a></footer>
   </section>;
 }

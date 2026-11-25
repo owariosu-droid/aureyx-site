@@ -29,6 +29,12 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - name: Install audio preview tools
+        run: |
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update
+            sudo apt-get install --no-install-recommends -y ffmpeg
+          fi
       - run: python -m unittest discover -s scripts -p 'test_*.py'
       - name: Refresh Aureyx Bandcamp
         id: bandcamp
@@ -54,16 +60,30 @@ jobs:
           else
             echo 'result=failure' >> "$GITHUB_OUTPUT"
           fi
+      - name: Refresh short Bandcamp previews
+        id: previews
+        run: |
+          if python scripts/sync-bandcamp-previews.py --refresh; then
+            echo 'result=success' >> "$GITHUB_OUTPUT"
+          else
+            echo 'result=failure' >> "$GITHUB_OUTPUT"
+          fi
       - name: Report source results
         env:
           BANDCAMP_RESULT: ${{ steps.bandcamp.outputs.result }}
           LYRLVST_RESULT: ${{ steps.lyrlvst.outputs.result }}
           OSU_RESULT: ${{ steps.osu.outputs.result }}
+          PREVIEWS_RESULT: ${{ steps.previews.outputs.result }}
         run: |
           echo '## Public content refresh' >> "$GITHUB_STEP_SUMMARY"
           echo "Aureyx Bandcamp: $BANDCAMP_RESULT" >> "$GITHUB_STEP_SUMMARY"
           echo "Lyrlvst Bandcamp: $LYRLVST_RESULT" >> "$GITHUB_STEP_SUMMARY"
           echo "osu!: $OSU_RESULT" >> "$GITHUB_STEP_SUMMARY"
+          echo "Bandcamp excerpts: $PREVIEWS_RESULT" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$PREVIEWS_RESULT" != success ]; then
+            echo '::warning title=Some previews could not be refreshed::Keeping verified short excerpts. Releases without an excerpt link to Bandcamp.'
+            echo 'Some excerpts could not be refreshed; verified saved previews are retained.' >> "$GITHUB_STEP_SUMMARY"
+          fi
           if [ "$BANDCAMP_RESULT" != success ]; then
             echo '::warning title=Bandcamp refresh unavailable::Keeping the last verified Bandcamp catalog. See the Bandcamp step for the error.'
             echo 'Bandcamp is unavailable; its last verified catalog is retained.' >> "$GITHUB_STEP_SUMMARY"
@@ -87,7 +107,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git add data/external public/external
+          git add data/external public/external public/previews/bandcamp
           if git diff --cached --quiet; then exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
