@@ -296,27 +296,6 @@
       "cover": "/external/osu-score-map-2511820.jpg"
     },
     {
-      "id": 7507182903,
-      "beatmapId": 5567029,
-      "beatmapsetId": 2521751,
-      "title": "AugoEidEs",
-      "artist": "DystopiaGround",
-      "difficulty": "Fantasia",
-      "rank": "B",
-      "accuracy": 0.892208,
-      "pp": null,
-      "combo": 151,
-      "misses": 90,
-      "playedAt": "2026-09-18T05:50:50Z",
-      "mods": [
-        {
-          "acronym": "CL",
-          "settings": {}
-        }
-      ],
-      "cover": "/external/osu-score-map-2521751.jpg"
-    },
-    {
       "id": 5974523889,
       "beatmapId": 2069841,
       "beatmapsetId": 985788,
