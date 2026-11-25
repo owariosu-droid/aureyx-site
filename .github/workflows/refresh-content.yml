@@ -30,11 +30,18 @@ jobs:
           cache: npm
       - run: npm ci
       - run: python -m unittest discover -s scripts -p 'test_*.py'
-      - run: node --test scripts/*.test.mjs
-      - name: Refresh Bandcamp
+      - name: Refresh Aureyx Bandcamp
         id: bandcamp
         run: |
           if python scripts/sync-external.py --source bandcamp; then
+            echo 'result=success' >> "$GITHUB_OUTPUT"
+          else
+            echo 'result=failure' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Refresh Lyrlvst Bandcamp
+        id: lyrlvst
+        run: |
+          if python scripts/sync-external.py --source lyrlvst-bandcamp; then
             echo 'result=success' >> "$GITHUB_OUTPUT"
           else
             echo 'result=failure' >> "$GITHUB_OUTPUT"
@@ -50,23 +57,30 @@ jobs:
       - name: Report source results
         env:
           BANDCAMP_RESULT: ${{ steps.bandcamp.outputs.result }}
+          LYRLVST_RESULT: ${{ steps.lyrlvst.outputs.result }}
           OSU_RESULT: ${{ steps.osu.outputs.result }}
         run: |
           echo '## Public content refresh' >> "$GITHUB_STEP_SUMMARY"
-          echo "Bandcamp: $BANDCAMP_RESULT" >> "$GITHUB_STEP_SUMMARY"
+          echo "Aureyx Bandcamp: $BANDCAMP_RESULT" >> "$GITHUB_STEP_SUMMARY"
+          echo "Lyrlvst Bandcamp: $LYRLVST_RESULT" >> "$GITHUB_STEP_SUMMARY"
           echo "osu!: $OSU_RESULT" >> "$GITHUB_STEP_SUMMARY"
           if [ "$BANDCAMP_RESULT" != success ]; then
             echo '::warning title=Bandcamp refresh unavailable::Keeping the last verified Bandcamp catalog. See the Bandcamp step for the error.'
             echo 'Bandcamp is unavailable; its last verified catalog is retained.' >> "$GITHUB_STEP_SUMMARY"
           fi
+          if [ "$LYRLVST_RESULT" != success ]; then
+            echo '::warning title=Lyrlvst Bandcamp refresh unavailable::Keeping the last verified Lyrlvst catalog. See the Lyrlvst Bandcamp step for the error.'
+            echo 'Lyrlvst Bandcamp is unavailable; its last verified catalog is retained.' >> "$GITHUB_STEP_SUMMARY"
+          fi
           if [ "$OSU_RESULT" != success ]; then
             echo '::warning title=osu refresh unavailable::Keeping the last verified osu profile. See the osu step for the error.'
             echo 'osu! is unavailable; its last verified profile is retained.' >> "$GITHUB_STEP_SUMMARY"
           fi
-          if [ "$BANDCAMP_RESULT" != success ] && [ "$OSU_RESULT" != success ]; then
-            echo '::error::Neither source could be refreshed; no content will be committed.'
+          if [ "$BANDCAMP_RESULT" != success ] && [ "$LYRLVST_RESULT" != success ] && [ "$OSU_RESULT" != success ]; then
+            echo '::error::No source could be refreshed; no content will be committed.'
             exit 1
           fi
+      - run: node --test scripts/*.test.mjs
       - run: npm run check
       - name: Commit refreshed snapshots and artwork
         if: github.event_name != 'workflow_dispatch' || !inputs.dry_run

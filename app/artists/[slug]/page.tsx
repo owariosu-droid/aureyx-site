@@ -9,6 +9,7 @@ import YouTubeFeed from "@/components/YouTubeFeed";
 import SocialIcon from "@/components/SocialIcon";
 import GalleryLightbox from "@/components/GalleryLightbox";
 import IyuneDreamscape from "@/components/IyuneDreamscape";
+import HomeReleases from "@/components/HomeReleases";
 import { artists } from "@/data/artists";
 import type { CSSProperties } from "react";
 
@@ -26,6 +27,7 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
   const { slug } = await params;
   const artist = artists.find((item) => item.slug === slug);
   if (!artist) notFound();
+  const hasSyncedCatalog = artist.slug === "lyrlvst";
 
   return (
     <div className="transmission-home artists-theme relative min-h-screen" style={{ "--artist-page-accent": artist.accent || "#ff5967" } as CSSProperties}>
@@ -50,7 +52,7 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
             <div className="mt-8 flex flex-wrap gap-3">
               {(artist.youtubeChannelId || artist.videoFallbackChannelIds) && <a href="#videos" className="rounded-full border border-white/30 px-6 py-3 text-sm hover:bg-white/10">Videos ↓</a>}
               {artist.conceptArt && <a href="#concept-art" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Concept art ↓</a>}
-              {artist.albums && <a href="#albums" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">Albums ↓</a>}
+              {(hasSyncedCatalog || artist.albums) && <a href="#albums" className="rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10">{hasSyncedCatalog ? "Music releases" : "Albums"} ↓</a>}
               {artist.links?.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="social-icon-link rounded-full border border-white/15 px-6 py-3 text-sm hover:bg-white/10"><SocialIcon platform={link.label} />{link.label} ↗</a>)}
             </div>
           </div>
@@ -69,7 +71,14 @@ export default async function ArtistProfilePage({ params }: { params: Promise<{ 
           <GalleryLightbox images={artist.conceptArt} variant="concept" />
         </section>}
 
-        {artist.albums && <section id="albums" className="mt-16 scroll-mt-32" aria-labelledby="albums-heading">
+        {hasSyncedCatalog && <section id="albums" className="catalog-list mt-16 scroll-mt-32" aria-labelledby="albums-heading">
+          <p className="text-xs uppercase tracking-[0.25em] text-white/45">Discography</p>
+          <h2 id="albums-heading" className="mt-3 text-3xl font-semibold">Music releases</h2>
+          <p className="mt-4 mb-8 text-sm text-white/65">Releases from Lyrlvst’s Bandcamp and Aureyx collaborations.</p>
+          <HomeReleases artistName={artist.name} />
+        </section>}
+
+        {!hasSyncedCatalog && artist.albums && <section id="albums" className="mt-16 scroll-mt-32" aria-labelledby="albums-heading">
           <h2 id="albums-heading" className="text-3xl font-semibold">Albums</h2>
           <div className="mt-8 grid gap-6 md:grid-cols-2">{artist.albums.map((album) => <article key={album.title} className="overflow-hidden rounded-2xl border border-white/10 bg-[#181618]">
             <div data-protected-image><Image src={album.image} alt={`${album.title} cover`} width={2561} height={1440} sizes="(max-width: 768px) 100vw, 50vw" className="h-auto w-full" /></div>

@@ -88,3 +88,8 @@ html[data-theme=light] #main-content .osu-theme .osu-organized-heading{border-co
 html[data-theme=light] #main-content .osu-theme .osu-score-recording a{color:#754a7f}
 html[data-theme=light] #main-content .geometry-theme section>p{color:#536b88}
 html[data-theme=light] #main-content .geometry-theme section>p a{color:#2f577f}
+/* The music masthead keeps its dark surface in either visitor theme. */
+html[data-theme=light] #main-content .catalog-page .catalog-hero h1{color:#f0e9f3}
+html[data-theme=light] #main-content .catalog-page .catalog-hero>p:not(.transmission-eyebrow){color:#c2b7ca}
+html[data-theme=light] #main-content .catalog-page .catalog-hero .transmission-eyebrow{color:#c2a0dc}
+html[data-theme=light] #main-content .catalog-page .catalog-hero>div a{color:#e6dcef;border-color:#b9b0c766}
