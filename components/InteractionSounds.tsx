@@ -22,7 +22,7 @@ export default function InteractionSounds() {
       if (!enabled) stopTaps();
     });
 
-    function startTap(audio: AudioContext) {
+    function startTap(audio: AudioContext, typing = false) {
       if (!enabled || audio.state !== "running") return;
       if (!buffer) {
         const samples = makeTapWave(audio.sampleRate);
@@ -32,7 +32,8 @@ export default function InteractionSounds() {
       const source = audio.createBufferSource();
       const gain = audio.createGain();
       source.buffer = buffer;
-      gain.gain.value = TAP_VOLUME;
+      source.playbackRate.value = typing ? 1.5 + Math.random() * .25 : 1;
+      gain.gain.value = TAP_VOLUME * (typing ? .45 : 1);
       source.connect(gain);
       gain.connect(audio.destination);
       sources.add(source);
@@ -40,8 +41,8 @@ export default function InteractionSounds() {
       source.start();
     }
 
-    function click(event: MouseEvent) {
-      if (!enabled || !clickSoundTarget(event)) return;
+    function playTap(typing = false) {
+      if (!enabled) return;
       try {
         if (!context || context.state === "closed") {
           const Audio = window.AudioContext || (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
@@ -51,15 +52,27 @@ export default function InteractionSounds() {
         }
         const audio = context;
         if (audio.state !== "running") {
-          void audio.resume().then(() => { try { startTap(audio); } catch { /* Audio may be unavailable on this device. */ } }).catch(() => {});
-        } else startTap(audio);
+          void audio.resume().then(() => { try { startTap(audio, typing); } catch { /* Audio may be unavailable on this device. */ } }).catch(() => {});
+        } else startTap(audio, typing);
       } catch { /* Browsers can decline audio without interrupting the button action. */ }
+    }
+    function click(event: MouseEvent) { if (clickSoundTarget(event)) playTap(); }
+    let lastKey = 0;
+    function typing(event: KeyboardEvent) {
+      if (!event.isTrusted || event.repeat || event.isComposing || event.ctrlKey || event.metaKey || event.altKey || !(event.target instanceof HTMLInputElement)
+        || !event.target.matches('.site-search-panel input[type="search"]') || !(event.key.length === 1 || ["Backspace", "Delete"].includes(event.key))) return;
+      const now = performance.now();
+      if (now - lastKey < 40) return;
+      lastKey = now;
+      playTap(true);
     }
 
     // Click also covers keyboard activation, with no second pointer/key listener.
     document.addEventListener("click", click, true);
+    document.addEventListener("keydown", typing, true);
     return () => {
       document.removeEventListener("click", click, true);
+      document.removeEventListener("keydown", typing, true);
       unsubscribe();
       stopTaps();
       if (context && context.state !== "closed") void context.close().catch(() => {});
