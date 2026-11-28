@@ -539,6 +539,8 @@
 }
 
 /* Catalog filters, release rooms, and artist publishing. */
+.release-save{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:7px 10px;border:1px solid #8b7f9c66;border-radius:8px;color:inherit;background:transparent;font-size:11px;cursor:pointer}
+.release-save[aria-pressed=true]{background:#a080bb22}
 .release-tools { display:grid; grid-template-columns:minmax(220px,1fr) minmax(150px,.45fr) minmax(140px,.4fr); gap:12px; margin-bottom:38px; }
 .release-tools.artist-scoped { grid-template-columns:minmax(0,1fr) minmax(140px,.4fr); }
 .transmission-release > .release-attribution { flex-wrap:wrap; gap:6px 12px; line-height:1.6; letter-spacing:.04em; }
