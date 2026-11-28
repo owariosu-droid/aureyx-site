@@ -16,6 +16,7 @@ export default function MusicPage() {
     <div className="transmission-home catalog-page">
       <Navbar />
       <main>
+        <nav className="music-shortcuts" aria-label="Music sections"><Link href="#supporter-releases">Release previews</Link><Link href="#free-listening">Free listening</Link><Link href="/music/saved">Your listening list</Link><Link href="/for-fun/pitch-detector">Find a note</Link></nav>
         <header className="catalog-hero">
           <p className="transmission-eyebrow"><span className="signal-dot" /> Aureyx catalog</p>
           <h1>Music</h1>

@@ -1,4 +1,6 @@
 .music-collection{scroll-margin-top:110px}
+.music-shortcuts{display:flex;flex-wrap:wrap;gap:12px;max-width:1320px;margin:0 auto;padding:30px 5% 0}
+.music-shortcuts a{padding:9px 13px;border:1px solid #8b7f9c66;border-radius:8px;font-size:12px;color:inherit}
 .music-collection-heading{display:flex;align-items:end;justify-content:space-between;gap:32px;margin-bottom:38px}
 .music-collection-heading h2{margin-top:12px}
 .music-collection-heading>p{max-width:380px;color:#b9b2c0;font-size:13px;line-height:1.8}
